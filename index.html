@@ -641,17 +641,12 @@
 <pre><code class="lang-TypeScript"> import { LoginComponent } from &#39;./login/login.component&#39;;
 </code></pre>
 </li>
-<li><p>In the routes array, we need to add another array item to be able to route to the LoginComponent. Add the following at the end of line 9</p>
-<pre><code class="lang-TypeScript"> ,
- { path: &#39;login&#39;, children: [], component: LoginComponent }
+<li><p>In the routes array, we need to add a route to the LoginComponent to the routes const variable. </p>
+<pre><code class="lang-TypeScript"> { path: &#39;login&#39;, children: [], component: LoginComponent }
 </code></pre>
 </li>
 <li><p>Your routes should look like the following</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
-     {
-         path: &#39;&#39;,
-         children: []
-     },
      { path: &#39;login&#39;, children: [], component: LoginComponent }
  ];
 </code></pre>
@@ -1239,7 +1234,6 @@
 </li>
 </ol>
 <div class="exercise-end"></div>
-
 				</div>
 				<hr>
 
