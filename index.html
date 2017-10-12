@@ -3104,7 +3104,7 @@ canActivate: [IsLoggedInGuard]
 </ol>
 
 				</div>
-	
+
 				<hr>
 				<div class="chapter">
 					<h2 id="deploying">Deploying</h2>
@@ -3144,7 +3144,7 @@ Note that this will remove the dist directory before build.
 <div class="exercise-end"></div>
 
 				</div>
-				
+
 				<hr>
 				<div class="chapter">
 					<h2 id="bonus-additional-todo-features">Bonus: Additional Todo Features</h2>
@@ -3720,15 +3720,184 @@ Note that this will remove the dist directory before build.
 </ol>
 <div class="exercise-end"></div>
 
+				</div>
+				<div class="chapter">
+
+					<h2 id="unit-testing">Unit Testing</h2>
+<p>Unit testing with Jasmine and Karma is now 1st class citizen when you generate a project using the Angular CLI.  Included with the Angular CLI generated project are spec files which contain the unit tests for the given component, services, pipe, etc.  Since the focus of the workshop is not on unit testing, we have not been keeping the unit tests up to date and they currently do not pass. We are going to fix that in this chapter though.  </p>
+<p>Jasmine is the assertion framework and includes asserts for equal, to be true, to be false, contains, plus many more.  </p>
+<p>Karma is the test runner that will be used to execute our test.</p>
+<h3 id="sample-passing-test">Sample Passing Test</h3>
+<p>Jasmine tests are grouped together within a <code>describe</code> function and each test is contained an <code>it</code> function.  Let&#39;s take a look at an example.  </p>
+<pre><code class="lang-javascript">describe(&#39;First spec&#39;, () =&gt; {
+    it(&#39;should pass&#39;, () =&gt; {
+        expect(true).toBeTruthy();
+    });
+});
+</code></pre>
+<p>In the above example, we create a group of tests called <code>First spec</code> and a single test called <code>should pass</code>.  Our test checks that true is truthy (true).  This is a passing test since true is equal to true.</p>
+<p><img src="images/testing/first-spec-pass.png" alt="sample pass output"></p>
+<h3 id="sample-failing-output">Sample Failing Output</h3>
+<p>To see a sample of a failure, we can change the expect statement to check that false is equal to truthy (true) which obviously is not true..</p>
+<pre><code class="lang-javascript">expect(false).toBeTruthy();
+</code></pre>
+<p><img src="images/testing/first-spec-fail.png" alt="sample fail output"></p>
+<h3 id="excuting-test">Excuting Test</h3>
+<p>To execute the test you run <code>ng test</code> or <code>npm run test</code></p>
+<h3 id="angular-testing-utilities">Angular Testing Utilities</h3>
+<p>Angular comes with several testing utilities to make it easier to test Angular components.  These components do things like setup a testing module, abstract the Angular routing, and running change detection.</p>
+<h4 id="testing-module">Testing Module</h4>
+<p>The first utlities we will be looking at is the TestBed module.  The TestBed allows you to create a testing module that contains just the needed components to run the unit test and not have to include the whole module like you would when you are running the application.  There are 2 ways to configure the TestBed:  1.) syncronous 2.) asyncronous.  When testing a component with an external template you will use the async method since the loading of the templates is an asyncronous function.  Everything else you can use the syncronous way.  </p>
+<p>Regardless of the way to configure the TestBed, you will do the configuration inside of a beforeEach function that is contained within a describe function.  The beforeEach will run before each test.  This will ensure that the testing module is reset before each test so that previous test do not cause issues with the currente test.  </p>
+<p>To configure the TestBed you use the <code>configureTestingModule</code> function and configure it just like you would a normal module with declarations, imports, exports, providers, etc.</p>
+<p><strong>Component with External Template</strong></p>
+<pre><code class="lang-javascript">import { async, ComponentFixture, TestBed } from &#39;@angular/core/testing&#39;;
+import { SimpleComponent } from &#39;./simple.component&#39;;
+
+describe(&#39;SimpleComponent&#39;, () =&gt; {
+    beforeEach(async(() =&gt; {
+        TestBed.configureTestingModule({
+            declarations: [ SimpleComponent ]
+        })
+        .compileComponents();
+    }));
+});
+</code></pre>
+<ul>
+<li>Within the beforeEach we run the confguration within the async function</li>
+<li>Once we are done configuring the module we need to call the compileComponents function to load the template.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Calling the compileComponents does not trigger a change detection so that ngOnInit has not run yet. </p>
+<p><strong>Note:</strong> If the component has any dependencies those need to be loaded or mocked out as well.  In this case we did not have dependencies.  Later on we will see how to mock out our dependencies.</p>
+</blockquote>
+<p><strong>Non-Component Test</strong></p>
+<p>Below we are testing a service.  Notice that unlike the Component test, we do not need to configure the TestBed within an async function nor do we need to call the compileComponents since we don&#39;t need to load a template.  We do however have to include the providers configuration to load up the service called GreetingService.    </p>
+<pre><code class="lang-javascript">beforeEach(() =&gt; {
+    TestBed.configureTestingModule({
+        providers: [GreetingService]
+    });
+});
+</code></pre>
+<h3 id="jasmine-goodies">Jasmine Goodies</h3>
+<h4 id="run-only-these-tests">Run Only These Tests</h4>
+<p>By default Jasmine runs all of the unit tests that it finds but you can restrict the running to only tests that you are currently working on by starting either the describe or it with a f.  You can do this for multiple describe or it functions.</p>
+<p><strong>Run The Whole Describe</strong></p>
+<pre><code class="lang-javascript">fdescribe(&#39;run only these test&#39;, () =&gt; {
+
+})
+</code></pre>
+<p><strong>Run Only 1 or more tests</strong></p>
+<pre><code class="lang-javascript">describe(&#39;run some tests&#39;, () =&gt; {
+    it(&#39;dont run this one&#39;, () =&gt; {
+
+    });
+
+    fit(&#39;run this one&#39;, () =&gt; {
+
+    });
+})
+</code></pre>
+<h4 id="don-t-run-these-tests">Don&#39;t Run These Tests</h4>
+<p>If you need to exclude a test for whatever reason, you can do it just like above but starting the describe or it with a x.  You can do this for multiple describe or it functions.</p>
+<p><strong>Run The Whole Describe</strong></p>
+<pre><code class="lang-javascript">xdescribe(&#39;dont run these test&#39;, () =&gt; {
+
+})
+</code></pre>
+<p><strong>Run Only 1 or more tests</strong></p>
+<pre><code class="lang-javascript">describe(&#39;run some tests&#39;, () =&gt; {
+    xit(&#39;dont run this one&#39;, () =&gt; {
+
+    });
+
+    it(&#39;run this one&#39;, () =&gt; {
+
+    });
+})
+</code></pre>
+<h4 id="multiple-groups-of-tests">Multiple Groups of  Tests</h4>
+<p>If you want to break your tests down further into multiple groups, you can do that as well by nesting a describe within a describe.  The reasons you might do this is to group tests by the functionality that they are testing as well when a group of test needs a specific configuration but the rest of the tests in the spec file do not need that configuration.</p>
+<p>Within each describe level you can also have a beforeEach setup function.  The beforeEach functions are also run in order of level starting with the top level describe in the group.  </p>
+<p>For ease of reading, I like to also have my describe groups call a function versus inlining the function.  This just makes it much easier to at a glance see all of the describes that will be run.</p>
+<pre><code class="lang-javascript">describe(&#39;Top Level` () =&gt; {
+    setup();
+    describe(&#39;Some Group&#39;, someGroupTests);
+    describe(&#39;Another Group&#39;, anotherGroupTests);
+    describe(&#39;3rd Group&#39;, thirdGroupTests);
+});
+
+function setup() {
+    beforeEach(async(() =&gt; {
+    }));
+
+    beforeEach(() =&gt; {
+    });
+}
+
+function someGroupTestsTests() {
+    beforeEach(() =&gt; {
+    });
+}
+</code></pre>
+<p>Now that we have our overview of how to test, lets dive into actually testing our components and services.  </p>
+<h3 id="app-component-tests">App Component Tests</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: 
+</h4>
+
+<div class="exercise-end"></div>
+
+<h3 id="login-tests">Login Tests</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: 
+</h4>
+
+<div class="exercise-end"></div>
+
+<h3 id="signup-tests">Signup Tests</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: 
+</h4>
+
+<div class="exercise-end"></div>
+
+<h3 id="todo-form-tests">Todo Form Tests</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: 
+</h4>
+
+<div class="exercise-end"></div>
+
+<h3 id="auth-service-tests">Auth Service Tests</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: 
+</h4>
+
+<div class="exercise-end"></div>
+
+<h3 id="todo-service-tests">Todo Service Tests</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: 
+</h4>
+
+<div class="exercise-end"></div>
+
+<h3 id="navigation-tests">Navigation Tests</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: 
+</h4>
+
+<div class="exercise-end"></div>
+
+<h3 id="not-found-tests">Not Found Tests</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: 
+</h4>
+
+<div class="exercise-end"></div>
 
 				</div>
-				<h4>
-					<div class="chapter">
-
-							<h2 id="unit-testing">Unit Testing</h2>
-<p>Unit testing with Jasmine and Karma is now 1st class citizen when you generate a project using the Angular CLI.</p>
-
-					</div>
 				<hr>
 				<div class="chapter">
 					<h3 id="completed-code">Completed Code</h3>

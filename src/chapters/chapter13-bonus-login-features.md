@@ -319,4 +319,3 @@ We are going to implement the logout button in the header.
 1. You are now ready to test it.
 
 <div class="exercise-end"></div>
-
