@@ -854,8 +854,8 @@
 <li><p>Next we need to create our login function within the AuthService class that will call our API.  Place the login function after the constructor.</p>
  <div class="alert alert-warning" role="alert">For now we are hard coding the API url into the service.  In the &quot;Environment Configuration&quot; chapter we will change this to pull from a configuration file</div>
 
-<pre><code class="lang-TypeScript"> login(email: string, password: string): Observable&lt;boolean&gt; {
-     let loginInfo = { &quot;email&quot;: email, &quot;password&quot;: password };
+<pre><code class="lang-TypeScript"> login(email: string, password: string): Observable&lt;boolean | Response&gt; {
+     const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
      return this.http.put(&quot;https://dj-sails-todo.azurewebsites.net/user/login&quot;, loginInfo, this.options)
          .do((res: Response) =&gt; {
              if (res){
@@ -1069,8 +1069,8 @@
 </code></pre>
 </li>
 <li><p>Add the following method to allow an account to be created</p>
-<pre><code class="lang-TypeScript">signup(email: string, password: string): Observable&lt;boolean&gt; {
- let loginInfo = { &quot;email&quot;: email, &quot;password&quot;: password };
+<pre><code class="lang-TypeScript">signup(email: string, password: string): Observable&lt;boolean | Response&gt; {
+ const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
  return this.http.post(&quot;https://dj-sails-todo.azurewebsites.net/user/&quot;, loginInfo, this.options)
    .do((res: Response) =&gt; {
      if (res) {
@@ -1239,6 +1239,7 @@
 </li>
 </ol>
 <div class="exercise-end"></div>
+
 				</div>
 				<hr>
 
