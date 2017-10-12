@@ -228,7 +228,7 @@ Now we need to configure the angular cli to import the bootstrap libraries.
     * Open the src\app\app.component.ts file
     
         ```bash
-        app.cmponent.ts
+        app.component.ts
         ``` 
         
     * On line 9, change the title variable to
