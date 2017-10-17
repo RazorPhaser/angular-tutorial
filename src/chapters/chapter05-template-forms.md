@@ -93,22 +93,17 @@ Before we can view our Login component, we need to tell Angular how to route to 
     import { LoginComponent } from './login/login.component';
     ```
 
-1. In the routes array, we need to add another array item to be able to route to the LoginComponent. Add the following at the end of line 9
+1. In the routes array, we need to add a route to the LoginComponent to the routes const variable. 
 
     ```TypeScript
-    ,
-    { path: 'login', children: [], component: LoginComponent }   
+    { path: 'login', children: [], component: LoginComponent },   
     ```
 
 1. Your routes should look like the following
 
     ```TypeScript
     const routes: Routes = [
-        {
-            path: '',
-            children: []
-        },
-        { path: 'login', children: [], component: LoginComponent }
+        { path: 'login', children: [], component: LoginComponent },
     ];
     ```
 
@@ -195,7 +190,8 @@ Before we can interact with our form using Angular, we need to import the FormsM
     imports: [
         BrowserModule,
         FormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgbModule.forRoot()
     ],
 
     ```
@@ -272,7 +268,7 @@ Now that we have our form done, we are going to implement our login service.
 1. Run the ng generate command below to create the Authorization service.  I like to store my services under a shared\services folder.
 
     ```bash
-    ng generate service shared/services/auth --module App
+    ng generate service shared/services/auth --module app
     ```
 
 1. The generate command will create 2 files and update app.module.ts: 
@@ -319,7 +315,7 @@ The first thing we are going to do is create our login function
     auth.service.ts
     ```
 
-1. Import the following so that we can make our HTTP calls and get a response back.  
+1. Import the following so that we can make our HTTP calls and get a response back.
 
     ```TypeScript
     import { Http, Response, RequestOptions } from '@angular/http';
@@ -335,7 +331,7 @@ The first thing we are going to do is create our login function
     ```
 
 
-1. For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven't logged in.  
+1. For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven't logged in.
 
     ```TypeScript
     private options = new RequestOptions({ withCredentials: true });
@@ -346,8 +342,8 @@ The first thing we are going to do is create our login function
     <div class="alert alert-warning" role="alert">For now we are hard coding the API url into the service.  In the "Environment Configuration" chapter we will change this to pull from a configuration file</div>
 
     ```TypeScript
-    login(email: string, password: string): Observable<boolean> {
-        let loginInfo = { "email": email, "password": password };
+    login(email: string, password: string): Observable<boolean | Response> {
+        const loginInfo = { 'email': email, 'password': password };
         return this.http.put("https://dj-sails-todo.azurewebsites.net/user/login", loginInfo, this.options)
             .do((res: Response) => {
                 if (res){
@@ -433,7 +429,7 @@ Up to this point, we have been using the console to output when the login failed
 1. Create a new variable inside of the LoginComponent class called invalidLogin, is of type boolean and the default value is false.
 
     ```TypeScript
-    invalidLogin: boolean = false;
+    invalidLogin = false;
     ```
 
 1. Now in the login method replace the console.log line and set the invalidLogin variable to true.  Make sure in the else statement that you set the invalidLogin to false.
@@ -599,8 +595,8 @@ We are first going to create the signup function in the AuthService.
 1. Add the following method to allow an account to be created
 
   ```TypeScript
-  signup(email: string, password: string): Observable<boolean> {
-    let loginInfo = { "email": email, "password": password };
+  signup(email: string, password: string): Observable<boolean | Response> {
+    const loginInfo = { 'email': email, 'password': password };
     return this.http.post("https://dj-sails-todo.azurewebsites.net/user/", loginInfo, this.options)
       .do((res: Response) => {
         if (res) {
@@ -623,7 +619,7 @@ We are first going to create the signup function in the AuthService.
 <h4 class="exercise-start">
     <b>Exercise</b>: Create Signup Component
 </h4>
-  
+
 1. Open terminal and run the ng generate to create the signup component
 
   ```TypeScript
@@ -658,10 +654,6 @@ We are first going to create the signup function in the AuthService.
 
     ```TypeScript
     const routes: Routes = [
-        {
-            path: '',
-            children: [],
-        },
         { path: 'login', children: [], component: LoginComponent },
         { path: 'signup', component: SignupComponent},
     ];
@@ -742,7 +734,7 @@ We are first going to create the signup function in the AuthService.
         styleUrls: ['./signup.component.scss']
     })
     export class SignupComponent implements OnInit {
-        loginInvalid: boolean = false;
+        loginInvalid = false;
         constructor(private authService: AuthService, private router: Router) { }
 
         ngOnInit() {
@@ -783,4 +775,3 @@ We are first going to create the signup function in the AuthService.
 
 
 <div class="exercise-end"></div>
-

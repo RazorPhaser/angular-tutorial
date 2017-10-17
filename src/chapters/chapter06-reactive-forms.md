@@ -88,14 +88,14 @@ Before we can view our todo component, we need to tell Angular how to route to t
     import { TodoComponent } from './todo/todo.component';
     ```
 
-1. We want to make the Todo component the home page.  We can do this by adding a component field to the `path: ''` route 
+1. We want to make the Todo component the home page.  We can do this by creating a `path: ''` route and making it go to the TodoComponent
 
     ```TypeScript
     {
         path: '',
         children: [],
         component: TodoComponent
-    }   
+    },
     ```
 
 1. You routes should look like
@@ -124,7 +124,6 @@ Before we can view our todo component, we need to tell Angular how to route to t
 ### Create Form
 
 Next we are going to create the form without any validation logic at all.  Our form will have 1 input field for the todo item and an add button.
-
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Import ReactiveFormsModule
@@ -420,18 +419,22 @@ We are going to create a function that will be called each time the form values 
 
     ```TypeScript
     onValueChanged(data?: any) {
-        if (!this.addForm) { return }
+        if (!this.addForm) { return; }
         const form = this.addForm;
 
         for (const field in this.formErrors) {
-            // clear previous error message (if any)
-            this.formErrors[field] = '';
-            const control = form.get(field);
+            if (this.formErrors.hasOwnProperty(field)) {
+                // clear previous error message (if any)
+                this.formErrors[field] = '';
+                const control = form.get(field);
 
-            if (control && control.dirty && !control.valid) {
-                const messages = this.validationMessages[field];
-                for (const key in control.errors) {
-                    this.formErrors[field] += messages[key] + ' ';
+                if (control && control.dirty && !control.valid) {
+                    const messages = this.validationMessages[field];
+                    for (const key in control.errors) {
+                        if (control.errors.hasOwnProperty(key)) {
+                            this.formErrors[field] += messages[key] + ' ';
+                        }
+                    }
                 }
             }
         }
@@ -463,6 +466,11 @@ We are going to create a function that will be called each time the form values 
 The last thing we need to do is up the UI to display the form error messages.    
 
 1. Open the todo.component.html file
+
+    ```bash
+    todo.component.html
+    ```
+
 1. Replace the validation messages that you added in the previous section with the one below.
 
     ```html

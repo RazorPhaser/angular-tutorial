@@ -641,18 +641,13 @@
 <pre><code class="lang-TypeScript"> import { LoginComponent } from &#39;./login/login.component&#39;;
 </code></pre>
 </li>
-<li><p>In the routes array, we need to add another array item to be able to route to the LoginComponent. Add the following at the end of line 9</p>
-<pre><code class="lang-TypeScript"> ,
- { path: &#39;login&#39;, children: [], component: LoginComponent }
+<li><p>In the routes array, we need to add a route to the LoginComponent to the routes const variable. </p>
+<pre><code class="lang-TypeScript"> { path: &#39;login&#39;, children: [], component: LoginComponent },
 </code></pre>
 </li>
 <li><p>Your routes should look like the following</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
-     {
-         path: &#39;&#39;,
-         children: []
-     },
-     { path: &#39;login&#39;, children: [], component: LoginComponent }
+     { path: &#39;login&#39;, children: [], component: LoginComponent },
  ];
 </code></pre>
 </li>
@@ -726,7 +721,8 @@
 <pre><code class="lang-TypeScript"> imports: [
      BrowserModule,
      FormsModule,
-     AppRoutingModule
+     AppRoutingModule,
+     NgbModule.forRoot()
  ],
 </code></pre>
 </li>
@@ -792,7 +788,7 @@
 <ol>
 <li>Within VS Code, open up the integrated terminal (ctrl+`) or view menu and then &quot;Integrated Terminal&quot;</li>
 <li><p>Run the ng generate command below to create the Authorization service.  I like to store my services under a shared\services folder.</p>
-<pre><code class="lang-bash"> ng generate service shared/services/auth --module App
+<pre><code class="lang-bash"> ng generate service shared/services/auth --module app
 </code></pre>
 </li>
 <li><p>The generate command will create 2 files and update app.module.ts: </p>
@@ -832,7 +828,7 @@
 <pre><code class="lang-bash"> auth.service.ts
 </code></pre>
 </li>
-<li><p>Import the following so that we can make our HTTP calls and get a response back.  </p>
+<li><p>Import the following so that we can make our HTTP calls and get a response back.</p>
 <pre><code class="lang-TypeScript"> import { Http, Response, RequestOptions } from &#39;@angular/http&#39;;
  import { Observable } from &#39;rxjs/Rx&#39;;
 </code></pre>
@@ -846,15 +842,15 @@
 </li>
 </ol>
 <ol>
-<li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in.  </p>
+<li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in.</p>
 <pre><code class="lang-TypeScript"> private options = new RequestOptions({ withCredentials: true });
 </code></pre>
 </li>
 <li><p>Next we need to create our login function within the AuthService class that will call our API.  Place the login function after the constructor.</p>
  <div class="alert alert-warning" role="alert">For now we are hard coding the API url into the service.  In the &quot;Environment Configuration&quot; chapter we will change this to pull from a configuration file</div>
 
-<pre><code class="lang-TypeScript"> login(email: string, password: string): Observable&lt;boolean&gt; {
-     let loginInfo = { &quot;email&quot;: email, &quot;password&quot;: password };
+<pre><code class="lang-TypeScript"> login(email: string, password: string): Observable&lt;boolean | Response&gt; {
+     const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
      return this.http.put(&quot;https://dj-sails-todo.azurewebsites.net/user/login&quot;, loginInfo, this.options)
          .do((res: Response) =&gt; {
              if (res){
@@ -933,7 +929,7 @@
 </code></pre>
 </li>
 <li><p>Create a new variable inside of the LoginComponent class called invalidLogin, is of type boolean and the default value is false.</p>
-<pre><code class="lang-TypeScript"> invalidLogin: boolean = false;
+<pre><code class="lang-TypeScript"> invalidLogin = false;
 </code></pre>
 </li>
 <li><p>Now in the login method replace the console.log line and set the invalidLogin variable to true.  Make sure in the else statement that you set the invalidLogin to false.</p>
@@ -1068,8 +1064,8 @@
 </code></pre>
 </li>
 <li><p>Add the following method to allow an account to be created</p>
-<pre><code class="lang-TypeScript">signup(email: string, password: string): Observable&lt;boolean&gt; {
- let loginInfo = { &quot;email&quot;: email, &quot;password&quot;: password };
+<pre><code class="lang-TypeScript">signup(email: string, password: string): Observable&lt;boolean | Response&gt; {
+ const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
  return this.http.post(&quot;https://dj-sails-todo.azurewebsites.net/user/&quot;, loginInfo, this.options)
    .do((res: Response) =&gt; {
      if (res) {
@@ -1121,10 +1117,6 @@
 </li>
 <li><p>You routes should look like</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
-     {
-         path: &#39;&#39;,
-         children: [],
-     },
      { path: &#39;login&#39;, children: [], component: LoginComponent },
      { path: &#39;signup&#39;, component: SignupComponent},
  ];
@@ -1199,7 +1191,7 @@
      styleUrls: [&#39;./signup.component.scss&#39;]
  })
  export class SignupComponent implements OnInit {
-     loginInvalid: boolean = false;
+     loginInvalid = false;
      constructor(private authService: AuthService, private router: Router) { }
 
      ngOnInit() {
@@ -1238,8 +1230,6 @@
 </li>
 </ol>
 <div class="exercise-end"></div>
-
-
 				</div>
 				<hr>
 
@@ -1320,12 +1310,12 @@
 <pre><code class="lang-TypeScript"> import { TodoComponent } from &#39;./todo/todo.component&#39;;
 </code></pre>
 </li>
-<li><p>We want to make the Todo component the home page.  We can do this by adding a component field to the <code>path: &#39;&#39;</code> route </p>
+<li><p>We want to make the Todo component the home page.  We can do this by creating a <code>path: &#39;&#39;</code> route and making it go to the TodoComponent</p>
 <pre><code class="lang-TypeScript"> {
      path: &#39;&#39;,
      children: [],
      component: TodoComponent
- }
+ },
 </code></pre>
 </li>
 <li><p>You routes should look like</p>
@@ -1605,18 +1595,22 @@
 </li>
 <li><p>Now that we the look up for the validation error messages and a place to store the form field error we are ready to create our generic function to determine the actual error message.</p>
 <pre><code class="lang-TypeScript"> onValueChanged(data?: any) {
-     if (!this.addForm) { return }
+     if (!this.addForm) { return; }
      const form = this.addForm;
 
      for (const field in this.formErrors) {
-         // clear previous error message (if any)
-         this.formErrors[field] = &#39;&#39;;
-         const control = form.get(field);
+         if (this.formErrors.hasOwnProperty(field)) {
+             // clear previous error message (if any)
+             this.formErrors[field] = &#39;&#39;;
+             const control = form.get(field);
 
-         if (control &amp;&amp; control.dirty &amp;&amp; !control.valid) {
-             const messages = this.validationMessages[field];
-             for (const key in control.errors) {
-                 this.formErrors[field] += messages[key] + &#39; &#39;;
+             if (control &amp;&amp; control.dirty &amp;&amp; !control.valid) {
+                 const messages = this.validationMessages[field];
+                 for (const key in control.errors) {
+                     if (control.errors.hasOwnProperty(key)) {
+                         this.formErrors[field] += messages[key] + &#39; &#39;;
+                     }
+                 }
              }
          }
      }
@@ -1645,7 +1639,10 @@
 
 <p>The last thing we need to do is up the UI to display the form error messages.    </p>
 <ol>
-<li>Open the todo.component.html file</li>
+<li><p>Open the todo.component.html file</p>
+<pre><code class="lang-bash"> todo.component.html
+</code></pre>
+</li>
 <li><p>Replace the validation messages that you added in the previous section with the one below.</p>
 <pre><code class="lang-html"> &lt;div *ngIf=&quot;formErrors.item&quot; class=&quot;alert alert-danger&quot;&gt;
      {{ formErrors.item }}
