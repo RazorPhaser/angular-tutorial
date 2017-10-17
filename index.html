@@ -642,12 +642,12 @@
 </code></pre>
 </li>
 <li><p>In the routes array, we need to add a route to the LoginComponent to the routes const variable. </p>
-<pre><code class="lang-TypeScript"> { path: &#39;login&#39;, children: [], component: LoginComponent }
+<pre><code class="lang-TypeScript"> { path: &#39;login&#39;, children: [], component: LoginComponent },
 </code></pre>
 </li>
 <li><p>Your routes should look like the following</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
-     { path: &#39;login&#39;, children: [], component: LoginComponent }
+     { path: &#39;login&#39;, children: [], component: LoginComponent },
  ];
 </code></pre>
 </li>
@@ -828,7 +828,7 @@
 <pre><code class="lang-bash"> auth.service.ts
 </code></pre>
 </li>
-<li><p>Import the following so that we can make our HTTP calls and get a response back.  </p>
+<li><p>Import the following so that we can make our HTTP calls and get a response back.</p>
 <pre><code class="lang-TypeScript"> import { Http, Response, RequestOptions } from &#39;@angular/http&#39;;
  import { Observable } from &#39;rxjs/Rx&#39;;
 </code></pre>
@@ -842,7 +842,7 @@
 </li>
 </ol>
 <ol>
-<li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in.  </p>
+<li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in.</p>
 <pre><code class="lang-TypeScript"> private options = new RequestOptions({ withCredentials: true });
 </code></pre>
 </li>
@@ -929,7 +929,7 @@
 </code></pre>
 </li>
 <li><p>Create a new variable inside of the LoginComponent class called invalidLogin, is of type boolean and the default value is false.</p>
-<pre><code class="lang-TypeScript"> invalidLogin: boolean = false;
+<pre><code class="lang-TypeScript"> invalidLogin = false;
 </code></pre>
 </li>
 <li><p>Now in the login method replace the console.log line and set the invalidLogin variable to true.  Make sure in the else statement that you set the invalidLogin to false.</p>
@@ -1117,10 +1117,6 @@
 </li>
 <li><p>You routes should look like</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
-     {
-         path: &#39;&#39;,
-         children: [],
-     },
      { path: &#39;login&#39;, children: [], component: LoginComponent },
      { path: &#39;signup&#39;, component: SignupComponent},
  ];
@@ -1195,7 +1191,7 @@
      styleUrls: [&#39;./signup.component.scss&#39;]
  })
  export class SignupComponent implements OnInit {
-     loginInvalid: boolean = false;
+     loginInvalid = false;
      constructor(private authService: AuthService, private router: Router) { }
 
      ngOnInit() {
@@ -1234,7 +1230,6 @@
 </li>
 </ol>
 <div class="exercise-end"></div>
-
 				</div>
 				<hr>
 
