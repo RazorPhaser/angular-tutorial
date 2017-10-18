@@ -412,17 +412,18 @@
    <div class="alert alert-info" role="alert">Note that the list of included files outside of the variables file is the same as the ones in the  node_modules\bootstrap\scss\bootstrap.scss file with a ~bootstrap/scss prefix so that the scss compiler is able to find the included file in the node_modules\bootstrap\scss directory.</div>
 
 <pre><code class="lang-scss"> @import &quot;variables&quot;;
+ /*!
+ * Bootstrap v4.0.0-beta (https://getbootstrap.com)
+ * Copyright 2011-2017 The Bootstrap Authors
+ * Copyright 2011-2017 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
 
+ @import &quot;~bootstrap/scss/functions&quot;;
  @import &quot;~bootstrap/scss/variables&quot;;
  @import &quot;~bootstrap/scss/mixins&quot;;
- @import &quot;~bootstrap/scss/custom&quot;;
-
- // Reset and dependencies
- @import &quot;~bootstrap/scss/normalize&quot;;
  @import &quot;~bootstrap/scss/print&quot;;
-
- // Core CSS
- @import &quot;~bootstrap/scss/reboot&quot;;   
+ @import &quot;~bootstrap/scss/reboot&quot;;
  @import &quot;~bootstrap/scss/type&quot;;
  @import &quot;~bootstrap/scss/images&quot;;
  @import &quot;~bootstrap/scss/code&quot;;
@@ -430,8 +431,6 @@
  @import &quot;~bootstrap/scss/tables&quot;;
  @import &quot;~bootstrap/scss/forms&quot;;
  @import &quot;~bootstrap/scss/buttons&quot;;
-
- // Components
  @import &quot;~bootstrap/scss/transitions&quot;;
  @import &quot;~bootstrap/scss/dropdown&quot;;
  @import &quot;~bootstrap/scss/button-group&quot;;
@@ -448,16 +447,11 @@
  @import &quot;~bootstrap/scss/progress&quot;;
  @import &quot;~bootstrap/scss/media&quot;;
  @import &quot;~bootstrap/scss/list-group&quot;;
- @import &quot;~bootstrap/scss/responsive-embed&quot;;
  @import &quot;~bootstrap/scss/close&quot;;
-
- // Components w/ JavaScript
  @import &quot;~bootstrap/scss/modal&quot;;
  @import &quot;~bootstrap/scss/tooltip&quot;;
  @import &quot;~bootstrap/scss/popover&quot;;
  @import &quot;~bootstrap/scss/carousel&quot;;
-
- // Utility classes
  @import &quot;~bootstrap/scss/utilities&quot;;
 
  /*
