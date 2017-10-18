@@ -1830,7 +1830,7 @@
 </code></pre>
 </li>
 <li><p>Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.  </p>
-<pre><code class="lang-TypeScript"> save(item: string): Observable&lt;Todo&gt; {
+<pre><code class="lang-TypeScript"> save(item: string): Observable&lt;Todo | {}&gt; {
      return this.http.post(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, new Todo(item), this.options)
      .map((res: Response) =&gt; {
          return &lt;Todo&gt;res.json();
@@ -1915,7 +1915,7 @@
 </code></pre>
 </li>
 <li><p>Add the following function to make an http get call to our Todo API and return back an array of Todo items.</p>
-<pre><code class="lang-TypeScript"> getAll(): Observable&lt;Array&lt;Todo&gt;&gt;{
+<pre><code class="lang-TypeScript"> getAll(): Observable&lt;Array&lt;Todo&gt; | {}&gt;{
      let url = &quot;https://dj-sails-todo.azurewebsites.net/todo&quot;;
      return this.http.get(url, this.options)
      .map((res: Response) =&gt; {
@@ -2031,7 +2031,7 @@
 </code></pre>
 </li>
 <li><p>We are going to create an update method that will take in a Todo item and make an  http put call to our API to update the one record with the new completion state.</p>
-<pre><code class="lang-TypeScript"> updateTodo(todo: Todo): Observable&lt;Todo&gt; {
+<pre><code class="lang-TypeScript"> updateTodo(todo: Todo): Observable&lt;Todo | {}&gt; {
      let url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
 
      return this.http.put(url, todo, this.options)
@@ -2121,7 +2121,7 @@
 </code></pre>
 </li>
 <li><p>We need to create a delete method that will call our API using http.delete</p>
-<pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;Response&gt; {
+<pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;Response | {}&gt; {
      let url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
      return this.http.delete(url, this.options)
      .catch(error =&gt; {
