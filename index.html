@@ -1652,14 +1652,14 @@
     <b>Exercise</b>: Add Border On Invalid
 </h4>
 
-<p>You can also add a border around the Bootstrap form-group for the item form field by adding the has-danger css class when the formErrors.item has a value.</p>
+<p>You can also add a border around the Bootstrap form-group for the item form field by adding the is-valid css class when the formErrors.item has a value.</p>
 <ol>
 <li><p>Open the todo.component.html file</p>
 <pre><code class="lang-html"> todo.component.html
 </code></pre>
 </li>
-<li><p>To the form-group div tag, add an <code>[ngClass]</code> attribute that checks that formErrors.item has a value and if so then adds the has-danger css to the div tag</p>
-<pre><code class="lang-html"> [ngClass]=&quot;{&#39;has-danger&#39;: formErrors.item}&quot;
+<li><p>To the input field, add an <code>[ngClass]</code> attribute that checks that formErrors.item has a value and if so then adds the has-danger css to the div tag</p>
+<pre><code class="lang-html"> [ngClass]=&quot;{&#39;is-invalid&#39;: formErrors.item}&quot;
 </code></pre>
 </li>
 </ol>
