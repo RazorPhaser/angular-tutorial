@@ -19,10 +19,10 @@ I prefer to solve this problem by creating a "Not Found" component and then redi
 If you have not completed the previous chapter you can get the completed code by downloading the code from Github.
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
-1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip) 
+1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip)
 1. After you get the code, run npm install to get all of the NPM dependencies.
 
     ```bash
@@ -46,7 +46,7 @@ If you have not completed the previous chapter you can get the completed code by
     <b>Exercise</b>: Redirecting User to "Not Found" component
 </h4>
 
-1. Open the integrated terminal and generate the notFound component 
+1. Open the integrated terminal and generate the notFound component
 
     ```bash
     ng generate component notFound
@@ -59,10 +59,10 @@ If you have not completed the previous chapter you can get the completed code by
 1. Open src\app\app-routing.module.ts
 
     ```bash
-    app-routing.module.ts 
+    app-routing.module.ts
      ```
-     
-1. add an import statement for the NotFoundComponent 
+
+1. add an import statement for the NotFoundComponent
 
     ```TypeScript
     import { NotFoundComponent } from './not-found/not-found.component';
@@ -80,18 +80,17 @@ If you have not completed the previous chapter you can get the completed code by
     const routes: Routes = [
         {
             path: '',
-            children: [],
             component: TodoComponent,
             canActivate: [IsLoggedInGuard]
         },
-        { path: 'login', children: [], component: LoginComponent },
+        { path: 'login', component: LoginComponent },
         { path: 'signup', component: SignupComponent },
         { path: '**', component: NotFoundComponent }
     ];
     ```
-    
-1. If you now try to navigate to [http://localhost:4200/unknown](http://localhost:4200/unknown) you will be shown the NotFoundComponent 
+
+1. If you now try to navigate to [http://localhost:4200/unknown](http://localhost:4200/unknown) you will be shown the NotFoundComponent
 
     ![Not Found View](images/view-route-unknown.png)
-    
-The only thing left for you to do is to design what you want your not found page to actually say.  
+
+The only thing left for you to do is to design what you want your not found page to actually say.

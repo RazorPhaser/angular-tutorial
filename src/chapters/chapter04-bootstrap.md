@@ -21,7 +21,7 @@ For our styling we are going to use [Bootstrap 4](https://v4-alpha.getbootstrap.
     npm install --save bootstrap@next font-awesome @ng-bootstrap/ng-bootstrap
     ```
 
-    * This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.  
+    * This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.
 
 Before we can use ng-bootstrap we need to add it to the AppModule
 
@@ -42,7 +42,7 @@ Before we can use ng-bootstrap we need to add it to the AppModule
     ```TypeScript
     NgbModule.forRoot()
     ```
-    
+
 <div class="exercise-end"></div>
 
 ### Add Bootstrap to Project
@@ -51,7 +51,7 @@ Before we can use ng-bootstrap we need to add it to the AppModule
     <b>Exercise</b>: Add  Bootstrap to Project
 </h4>
 
-First we need to create our own custom Bootstrap stylesheet so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.  
+First we need to create our own custom Bootstrap stylesheet so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.
 
 1. In the src\assets folder, create a new folder named **bootstrap**
 
@@ -112,7 +112,7 @@ First we need to create our own custom Bootstrap stylesheet so that we can overr
     bootstrap.scss
     ```
 
-1. Add the following contents to the bootstrap.scss file. 
+1. Add the following contents to the bootstrap.scss file.
 
       <div class="alert alert-info" role="alert">Note that the list of included files outside of the variables file is the same as the ones in the  node_modules\bootstrap\scss\bootstrap.scss file with a ~bootstrap/scss prefix so that the scss compiler is able to find the included file in the node_modules\bootstrap\scss directory.</div>
 
@@ -128,7 +128,7 @@ First we need to create our own custom Bootstrap stylesheet so that we can overr
     @import "~bootstrap/scss/print";
 
     // Core CSS
-    @import "~bootstrap/scss/reboot";   
+    @import "~bootstrap/scss/reboot";
     @import "~bootstrap/scss/type";
     @import "~bootstrap/scss/images";
     @import "~bootstrap/scss/code";
@@ -174,10 +174,9 @@ First we need to create our own custom Bootstrap stylesheet so that we can overr
 
     ```
 
+Now we need to configure the angular cli to import the bootstrap libraries.
 
-Now we need to configure the angular cli to import the bootstrap libraries.  
-
-1. Open the **.angular-cli.json** file that is in the root of the project.  This file  is the configuration file for our project for the Angular CLI 
+1. Open the **.angular-cli.json** file that is in the root of the project.  This file  is the configuration file for our project for the Angular CLI
 
     <div class="alert alert-info" role="alert">In Visual Studio Code you can quickly open a file by using ctrl+p to open the "Go To File" prompt and typing in the file name</div>
 
@@ -185,7 +184,7 @@ Now we need to configure the angular cli to import the bootstrap libraries.
     .angular-cli.json
     ```
 
-1. Find the apps\styles section and replace the section with:  
+1. Find the apps\styles section and replace the section with:
 
     ```TypeScript
       "styles": [
@@ -209,7 +208,7 @@ Now we need to configure the angular cli to import the bootstrap libraries.
     ```bash
     app.component.html
     ```
-    
+
 1. Replace the contents with:
 
     ```html
@@ -223,14 +222,14 @@ Now we need to configure the angular cli to import the bootstrap libraries.
     </div>
     ```
 
-2. Lets change the title to something better than "App Works!"
+1. Lets change the title to something better than "App Works!"
 
     * Open the src\app\app.component.ts file
-    
+
         ```bash
         app.component.ts
-        ``` 
-        
+        ```
+
     * On line 9, change the title variable to
 
         ```TypeScript
@@ -265,7 +264,7 @@ Now we need to configure the angular cli to import the bootstrap libraries.
 
 ### Review
 
-In this chapter we learned how to use Bootstrap for our project.  
+In this chapter we learned how to use Bootstrap for our project.
 
 Learned:
 

@@ -2,7 +2,7 @@
 
 ### Overview
 
-So far we have been hard coding our API url into our services which means we have the base url in multiple places.  Instead we should be using a configuration file that stores the API in one place and allows us to use it anywhere in the application.  Luckily, Angular comes with environment configuration files that allow us to do just that.  
+So far we have been hard coding our API url into our services which means we have the base url in multiple places.  Instead we should be using a configuration file that stores the API in one place and allows us to use it anywhere in the application.  Luckily, Angular comes with environment configuration files that allow us to do just that.
 
 The different environment configurations are stored in the src\environments folder.
 
@@ -18,10 +18,10 @@ The different environment configurations are stored in the src\environments fold
 If you have not completed the previous chapter you can get the completed code by downloading the code from Github.
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
-1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip) 
+1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip)
 1. After you get the code, run npm install to get all of the NPM dependencies.
 
     ```bash
@@ -55,7 +55,7 @@ In the environment.ts we need to add the environmentName and apiBaseUrl values. 
     environment.ts
     ```
 
-1. Add the environmentName and apiBaseUrl values to the environment object.  
+1. Add the environmentName and apiBaseUrl values to the environment object.
 
     ```TypeScript
     environmentName: 'Development',
@@ -73,10 +73,9 @@ In the environment.ts we need to add the environmentName and apiBaseUrl values. 
 
 <div class="exercise-end"></div>
 
-
 ### Production Configuration
 
-The src\environments\environment.prod.ts file is the production configuration.  We need to add in the environmentName and apiBaseUrl that we added to the default configuration.  
+The src\environments\environment.prod.ts file is the production configuration.  We need to add in the environmentName and apiBaseUrl that we added to the default configuration.
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Update Production Configuration
@@ -88,7 +87,7 @@ The src\environments\environment.prod.ts file is the production configuration.  
     environment.prod.ts
     ```
 
-1. Add the environmentName and apiBaseUrl values to the environment object.  
+1. Add the environmentName and apiBaseUrl values to the environment object.
 
     ```TypeScript
     environmentName: 'Development',
@@ -108,7 +107,7 @@ The src\environments\environment.prod.ts file is the production configuration.  
 
 ### Local Development
 
-The other environment that is typically created is for local development on your machine.  For this tutorial the environment.ts and local.ts have the same values but once you go from development to production they will differ.   
+The other environment that is typically created is for local development on your machine.  For this tutorial the environment.ts and local.ts have the same values but once you go from development to production they will differ.
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Create Local Configuration
@@ -130,7 +129,7 @@ The other environment that is typically created is for local development on your
     };
     ```
 
-1. In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the .angular-cli.json that is in the root of the project.  
+1. In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the .angular-cli.json that is in the root of the project.
 
     ```bash
     .angular-cli.json
@@ -180,7 +179,7 @@ Now that we have the API url in the environments file, we need update the TodoSe
       private url: string = `${environment.apiBaseUrl}/todo`;
     ```
 
-1. For the save and getAll function update the hard coded url to use the class level url variable.  Don't forget due to scoping that you need to access the variable by using this.url 
+1. For the save and getAll function update the hard coded url to use the class level url variable.  Don't forget due to scoping that you need to access the variable by using this.url
 
     ```TypeScript
     this.url
@@ -221,7 +220,7 @@ If an environment is not passed into the ng serve command, then it will default 
 
 #### Local
 
-If you want to run the local configuration we need to pass in the environment command line argument.  The environment argument value is the name of the environment name in the angular-cli.json file.  Note that you can only have 1 ng serve running at a time.    
+If you want to run the local configuration we need to pass in the environment command line argument.  The environment argument value is the name of the environment name in the angular-cli.json file.  Note that you can only have 1 ng serve running at a time.
 
 1. Go to the terminal that is running `ng serve` and do a ctrol+c to stop it
 1. Run the `ng serve` command with the -e and specify the local environment
