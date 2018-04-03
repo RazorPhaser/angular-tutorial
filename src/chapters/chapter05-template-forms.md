@@ -346,19 +346,21 @@ The first thing we are going to do is create our login function
         const loginInfo = { 'email': email, 'password': password };
 
         return this.http.put("https://dj-sails-todo.azurewebsites.net/user/login", loginInfo, requestOptions)
-            .tap((res: Response) => {
-                if (res) {
-                    console.log('logged in');
-                    return of(true);
-                }
+            .pipe(
+                tap((res: Response) => {
+                    if (res) {
+                        console.log('logged in');
+                        return of(true);
+                    }
 
-                console.log('not logged in');
-                return of(false);
-            }),
-            catchError((error) => {
-                console.log('login error', error);
-                return of(false);
-            })
+                    console.log('not logged in');
+                    return of(false);
+                }),
+                catchError((error) => {
+                    console.log('login error', error);
+                    return of(false);
+                })
+            )
         );
     }
     ```
