@@ -30,15 +30,15 @@
 			<div id="book">
 				<div class="chapter">
 					<h2 id="overview">Overview</h2>
-<p>Welcome to the Up and Running with Angular Workshop.  Angular 2 was released in September 2016 and was a full re-write of the framework.  With the re-write a lot has changed.   In this workshop, you will learn how to build an Angular UI from the ground up.  </p>
-<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 4.2.3</div>
+<p>Welcome to the Up and Running with Angular Workshop.  Angular 2 was released in September 2016 and was a full re-write of the framework.  With the re-write a lot has changed.   In this workshop, you will learn how to build an Angular UI from the ground up.</p>
+<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 5.2.9</div>
 
 <h3 id="goal">Goal</h3>
-<p>The goal of this tutorial is to walk you through creating an application with the common features that a web application would have (headers, footers, forms, calls to API services, authentication, etc).  </p>
-<p>The tutorial is designed to be gone through from start to finish to build the application as the chapters build on each other.  </p>
-<p>For each chapter there is a start and complete branch in Github that you can pull down if you need it.  </p>
+<p>The goal of this tutorial is to walk you through creating an application with the common features that a web application would have (headers, footers, forms, calls to API services, authentication, etc).</p>
+<p>The tutorial is designed to be gone through from start to finish to build the application as the chapters build on each other.</p>
+<p>For each chapter there is a start and complete branch in Github that you can pull down if you need it.</p>
 <h3 id="new-naming-convention">New Naming Convention</h3>
-<p>The first thing is what to call Angular.  Angular 1 is now referred to as AngularJS.  Angular 2 and above is referred to as just Angular.  From here on out, we will just call it Angular.  The only time to refer to Angular with a version number is when you are talking about a feature that it specific to that version.  For example, in Angular 4, they add the TitleCase Pipe and an email validator.</p>
+<p>The first thing is what to call Angular.  Angular 1 is now referred to as AngularJS.  Angular 2 and above is referred to as just Angular.  From here on out, we will just call it Angular.  The only time to refer to Angular with a ver sion number is when you are talking about a feature that it specific to that version.  For example, in Angular 4, they add the TitleCase Pipe and an email validator.</p>
 <h3 id="release-schedule">Release Schedule</h3>
 <p>The second thing is that they are now following SemVer for the versioning of Angular and have a release schedule.  For example, here is how version 2.3.1 would break down.</p>
 <p><img src="images/semver.png" alt="SemVer"></p>
@@ -49,7 +49,7 @@
 <li>Patch: Every week</li>
 </ul>
 <h3 id="coming-from-angular-1">Coming from Angular 1</h3>
-<p>Third, if you are coming from an AngularJS background, it is best if you do not try to compare the concepts between AngularJS and Angular.  Just treat Angular as a whole new framework.  </p>
+<p>Third, if you are coming from an AngularJS background, it is best if you do not try to compare the concepts between AngularJS and Angular.  Just treat Angular as a whole new framework.</p>
 <h3 id="using-this-tutorial">Using This Tutorial</h3>
 <h4 id="collapse-chapter-list">Collapse Chapter List</h4>
 <p>If you click on the hamburger icon in the header (left icon with the 3 lines), it will toggle the view of the chapters so that you have more room to view the tutorial.</p>
@@ -69,7 +69,7 @@
 <li>Supported Platforms: Windows, Mac, or Linux computer</li>
 <li>Editor: Visual Studio Code (can use any text editor but workshop tested with Visual Studio Code)</li>
 <li>Software:<ul>
-<li>Node 6.9+</li>
+<li>Node 8</li>
 <li>Angular CLI</li>
 </ul>
 </li>
@@ -80,11 +80,11 @@
 </ul>
 <h3 id="windows-showing-file-extensions">Windows Showing File Extensions</h3>
 <div class="alert alert-danger" role="alert">
-<strong>Windows Only</strong> 
+<strong>Windows Only</strong>
 </div>
 
 <p><strong>Non-Windows users can <a href="#chapter2.4">skip to next section</a></strong></p>
-<p>By default Windows is set to not show file extensions for known files which causes files such as .gitconfig and .npmrc to show up as just a period with no file extension which makes it extremely difficult to figure out what the file actually is.  To fix this we need to turn set Windows Explorer to show file extensions.</p>
+<p>By default Windows is set to not show file extensions for known files which causes files such as .gitconfig and .npmrc to show up as just a period with no file extension which makes it extremely difficult to figure out what the file actually is. To fix this we need to turn set Windows Explorer to show file extensions.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Turn On Windows Showing File Extensions
 </h4>
@@ -95,7 +95,7 @@
 <p> <img src="images/chapter1/windows-explorer-ribbon.png" style="height:147px;width:759px;margin-left: 10px"></p>
 </li>
 </ol>
-<p>Once the &quot;Folder Options&quot; dialog is open: </p>
+<p>Once the &quot;Folder Options&quot; dialog is open:</p>
 <ol>
 <li>Click on the View Tab</li>
 <li>Uncheck the &quot;Hide extensions for known file types&quot;</li>
@@ -106,17 +106,17 @@
 <div class="exercise-end"></div>
 
 <h3 id="visual-studio-code">Visual Studio Code</h3>
-<p>Visual Studio Code is Microsoft lightweight cross platform IDE.  </p>
+<p>Visual Studio Code is Microsoft lightweight cross platform IDE.</p>
 <ol>
 <li>Download Visual Studio Code at <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
 <li>Once the download finishes, launch the installer except all of the defaults.</li>
 </ol>
 <h3 id="node-js">Node.js</h3>
-<p>NodeJS is used to power the Angular CLI as well as install all of our dependencies.  The Angular CLI requires Node version 6.9 or greater.</p>
+<p>NodeJS is used to power the Angular CLI as well as install all of our dependencies. The Angular CLI requires Node version 8.</p>
 <ol>
-<li>Download the latest stable version (LTS) of <a href="http://nodejs.org">NodeJS</a> which as of this writing is 6.11.0.    </li>
+<li>Download the latest stable version (LTS) of <a href="http://nodejs.org">NodeJS</a> which as of this writing is 8.11.1.</li>
 <li>Run the installer and accept all defaults.</li>
-<li>Verify that Node installed.  Start a command prompt or terminal window and run: </li>
+<li>Verify that Node installed. Start a command prompt or terminal window and run:</li>
 </ol>
 <h4 class="exercise-start">
     <b>Exercise</b>: Verify Node Install
@@ -127,14 +127,14 @@
 <div class="exercise-end"></div>
 
 <h3 id="angular-cli-install">Angular CLI Install</h3>
-<p>The Angular CLI (Command Line Interface) makes it so that you do not have to worry about the Angular tooling and can focus instead on your code. You can create new projects, components, modules, services, guards, pipes and routes.  As well it has commands for linting, testing and running our code.  </p>
-<p>All of the code that is generated by the Angular CLI following the Angular Style Guide.  </p>
-<p>While you do not have to use the Angular CLI, it is highly recommended, will increase your productivity, and this workshop only gives the instructions for developing with the Angular CLI.  </p>
+<p>The Angular CLI (Command Line Interface) makes it so that you do not have to worry about the Angular tooling and can focus instead on your code. You can create new projects, components, modules, services, guards, pipes and routes. As well it has commands for linting, testing and running our code.</p>
+<p>All of the code that is generated by the Angular CLI following the Angular Style Guide.</p>
+<p>While you do not have to use the Angular CLI, it is highly recommended, will increase your productivity, and this workshop only gives the instructions for developing with the Angular CLI.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Install Angular CLI
 </h4>
 
-<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 1.2.0</div>
+<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 1.7.3</div>
 
 <ol>
 <li><p>Open a command prompt or terminal and run the following command</p>
@@ -142,8 +142,9 @@
 </code></pre>
 </li>
 <li><p>Verify Angular CLI</p>
-<pre><code> ng --version
-</code></pre><p> <img src="images/chapter1/ng-version.png" alt="ng version output"></p>
+<pre><code class="lang-shell"> ng --version
+</code></pre>
+<p> <img src="images/chapter1/ng-version.png" alt="ng version output"></p>
 </li>
 </ol>
 <div class="exercise-end"></div>
@@ -162,14 +163,14 @@
 <li>Understand how to run the project</li>
 </ul>
 <h3 id="generate-new-project">Generate New Project</h3>
-<p>The project that the Angular CLI create for you follows all of the suggested standards and has webpack for bundling built-in to it.    </p>
+<p>The project that the Angular CLI create for you follows all of the suggested standards and has webpack for bundling built-in to it.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Create Angular Project
 </h4>
 
 <ol>
 <li>Open a command prompt</li>
-<li><p>Navigate to where you want to store your project files.  I use c:\projects on Windows and ~/projects on OSx.  You are free to use anywhere that you want. </p>
+<li><p>Navigate to where you want to store your project files.  I use c:\projects on Windows and ~/projects on OSx.  You are free to use anywhere that you want.</p>
 <ul>
 <li><p>Windows:</p>
 <pre><code class="lang-bash">  cd \
@@ -202,12 +203,11 @@
 </ol>
 <div class="exercise-end"></div>
 
-
 <h3 id="opening-project-in-visual-studio-code">Opening Project in Visual Studio Code</h3>
 <ol>
 <li>Open Visual Studio Code</li>
 <li>Click File -&gt; Open Folder...</li>
-<li>Navigate to angular-tutorial directory and click Select Folder </li>
+<li>Navigate to angular-tutorial directory and click Select Folder</li>
 <li><p>Your project should now be opened in Visual Studio Code</p>
 <p> <img src="images/project-layout.png" alt="Project Layout"></p>
 </li>
@@ -278,7 +278,7 @@
 <div class="alert alert-info" role="alert"> I also split my screen in half with the tutorial on one side and the editor on the other side.  On Windows you can do this by using the win key + left arrow for the one you want on the left and then select the other for the right when windows prompts you.  You can also use win key + right arrow to make a Windows use half the screen on the right.</div>
 
 <h3 id="visual-studio-settings">Visual Studio Settings</h3>
-<p>In Visual Studio Code, you will notice that there is a map looking thing showing in the upper right corner.  This is called the mini map and it is a layout of your source code file.  I typically hide the mini map to give myself more editing space.  </p>
+<p>In Visual Studio Code, you will notice that there is a map looking thing showing in the upper right corner.  This is called the mini map and it is a layout of your source code file.  I typically hide the mini map to give myself more editing space.</p>
 <h4 class="exercise-start">
   <b>Exercise</b>: Hide Mini Map
 </h4>
@@ -287,8 +287,6 @@
 <pre><code class="lang-bash">&quot;editor.minimap.enabled&quot;: false,
 </code></pre>
 <div class="exercise-end"></div>
-
-
 
 <h4 class="exercise-start">
   <b>Exercise</b>: Turn On Word Wrap
@@ -329,7 +327,7 @@
 <pre><code class="lang-bash"> npm install --save bootstrap@next font-awesome @ng-bootstrap/ng-bootstrap
 </code></pre>
 <ul>
-<li>This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.  </li>
+<li>This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.</li>
 </ul>
 </li>
 </ol>
@@ -355,7 +353,7 @@
     <b>Exercise</b>: Add  Bootstrap to Project
 </h4>
 
-<p>First we need to create our own custom Bootstrap stylesheet so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.  </p>
+<p>First we need to create our own custom Bootstrap stylesheet so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.</p>
 <ol>
 <li><p>In the src\assets folder, create a new folder named <strong>bootstrap</strong></p>
    <div class="alert alert-info" role="alert">You can create folder right in Visual Studio Code by right-click on the src\assets folder</div>
@@ -408,21 +406,20 @@
 <pre><code class="lang-bash"> bootstrap.scss
 </code></pre>
 </li>
-<li><p>Add the following contents to the bootstrap.scss file. </p>
+<li><p>Add the following contents to the bootstrap.scss file.</p>
    <div class="alert alert-info" role="alert">Note that the list of included files outside of the variables file is the same as the ones in the  node_modules\bootstrap\scss\bootstrap.scss file with a ~bootstrap/scss prefix so that the scss compiler is able to find the included file in the node_modules\bootstrap\scss directory.</div>
 
 <pre><code class="lang-scss"> @import &quot;variables&quot;;
- /*!
- * Bootstrap v4.0.0-beta (https://getbootstrap.com)
- * Copyright 2011-2017 The Bootstrap Authors
- * Copyright 2011-2017 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
 
- @import &quot;~bootstrap/scss/functions&quot;;
  @import &quot;~bootstrap/scss/variables&quot;;
  @import &quot;~bootstrap/scss/mixins&quot;;
+ @import &quot;~bootstrap/scss/custom&quot;;
+
+ // Reset and dependencies
+ @import &quot;~bootstrap/scss/normalize&quot;;
  @import &quot;~bootstrap/scss/print&quot;;
+
+ // Core CSS
  @import &quot;~bootstrap/scss/reboot&quot;;
  @import &quot;~bootstrap/scss/type&quot;;
  @import &quot;~bootstrap/scss/images&quot;;
@@ -431,6 +428,8 @@
  @import &quot;~bootstrap/scss/tables&quot;;
  @import &quot;~bootstrap/scss/forms&quot;;
  @import &quot;~bootstrap/scss/buttons&quot;;
+
+ // Components
  @import &quot;~bootstrap/scss/transitions&quot;;
  @import &quot;~bootstrap/scss/dropdown&quot;;
  @import &quot;~bootstrap/scss/button-group&quot;;
@@ -447,11 +446,16 @@
  @import &quot;~bootstrap/scss/progress&quot;;
  @import &quot;~bootstrap/scss/media&quot;;
  @import &quot;~bootstrap/scss/list-group&quot;;
+ @import &quot;~bootstrap/scss/responsive-embed&quot;;
  @import &quot;~bootstrap/scss/close&quot;;
+
+ // Components w/ JavaScript
  @import &quot;~bootstrap/scss/modal&quot;;
  @import &quot;~bootstrap/scss/tooltip&quot;;
  @import &quot;~bootstrap/scss/popover&quot;;
  @import &quot;~bootstrap/scss/carousel&quot;;
+
+ // Utility classes
  @import &quot;~bootstrap/scss/utilities&quot;;
 
  /*
@@ -459,18 +463,19 @@
  */
  $fa-font-path: &quot;~font-awesome/fonts&quot;;
  @import &quot;~font-awesome/scss/font-awesome&quot;;
+
 </code></pre>
 </li>
 </ol>
-<p>Now we need to configure the angular cli to import the bootstrap libraries.  </p>
+<p>Now we need to configure the angular cli to import the bootstrap libraries.</p>
 <ol>
-<li><p>Open the <strong>.angular-cli.json</strong> file that is in the root of the project.  This file  is the configuration file for our project for the Angular CLI </p>
+<li><p>Open the <strong>.angular-cli.json</strong> file that is in the root of the project.  This file  is the configuration file for our project for the Angular CLI</p>
  <div class="alert alert-info" role="alert">In Visual Studio Code you can quickly open a file by using ctrl+p to open the &quot;Go To File&quot; prompt and typing in the file name</div>
 
 <pre><code class="lang-bash"> .angular-cli.json
 </code></pre>
 </li>
-<li><p>Find the apps\styles section and replace the section with:  </p>
+<li><p>Find the apps\styles section and replace the section with:</p>
 <pre><code class="lang-TypeScript">   &quot;styles&quot;: [
      &quot;assets/bootstrap/bootstrap.scss&quot;,
       &quot;styles.scss&quot;
@@ -542,7 +547,7 @@
 <div class="exercise-end"></div>
 
 <h3 id="review">Review</h3>
-<p>In this chapter we learned how to use Bootstrap for our project.  </p>
+<p>In this chapter we learned how to use Bootstrap for our project.</p>
 <p>Learned:</p>
 <ol>
 <li>How to install Bootstrap 4 and font-awesome</li>
@@ -574,11 +579,11 @@
 
 <p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-bootstrap.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-bootstrap.zip</a> </li>
+<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-bootstrap.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-bootstrap.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -595,9 +600,9 @@
 <div class="exercise-end"></div>
 
 <h3 id="create-login-component">Create Login Component</h3>
-<p>The first thing we need to do is to create our login component using the Angular CLI.  We will use the <code>ng generate component</code> command to do this.  </p>
+<p>The first thing we need to do is to create our login component using the Angular CLI.  We will use the <code>ng generate component</code> command to do this.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Create Login  Component 
+    <b>Exercise</b>: Create Login  Component
 </h4>
 
 <ol>
@@ -606,7 +611,7 @@
 <pre><code class="lang-bash"> ng generate component login
 </code></pre>
 </li>
-<li><p>The generate command will create 4 files: </p>
+<li><p>The generate command will create 4 files:</p>
 <p> <img src="images/login-generate.png" alt="output of generate"></p>
 <ul>
 <li>scss (styles)</li>
@@ -622,7 +627,7 @@
 <h3 id="add-route">Add Route</h3>
 <p>In order to view our Login component we need to tell Angular how to route to it.  We are going to add a route at &#39;/login&#39; to the LoginComponent.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Login Routing 
+    <b>Exercise</b>: Login Routing
 </h4>
 
 <p>Before we can view our Login component, we need to tell Angular how to route to the component</p>
@@ -635,13 +640,13 @@
 <pre><code class="lang-TypeScript"> import { LoginComponent } from &#39;./login/login.component&#39;;
 </code></pre>
 </li>
-<li><p>In the routes array, we need to add a route to the LoginComponent to the routes const variable. </p>
-<pre><code class="lang-TypeScript"> { path: &#39;login&#39;, children: [], component: LoginComponent },
+<li><p>In the routes array, we need to add a route to the LoginComponent to the routes const variable.</p>
+<pre><code class="lang-TypeScript"> { path: &#39;login&#39;, component: LoginComponent },
 </code></pre>
 </li>
 <li><p>Your routes should look like the following</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
-     { path: &#39;login&#39;, children: [], component: LoginComponent },
+     { path: &#39;login&#39;, component: LoginComponent },
  ];
 </code></pre>
 </li>
@@ -652,7 +657,6 @@
 </li>
 </ol>
 <div class="exercise-end"></div>
-
 
 <h3 id="create-form">Create Form</h3>
 <p>Next we are going to create the form without any validation logic at all.  Our form will have 2 input fields:  email and password and 2 buttons: submit and cancel.  We will use Bootstrap for the styling and Angular for the validation.</p>
@@ -718,6 +722,7 @@
      AppRoutingModule,
      NgbModule.forRoot()
  ],
+
 </code></pre>
 </li>
 </ol>
@@ -732,46 +737,45 @@
 <pre><code class="lang-bash"> login.component.html
 </code></pre>
 </li>
-<li><p>On the <code>&lt;form&gt;</code> tag we need to add 2 additional attributes to create a reference variable to the form and handle the form submit.  </p>
+<li><p>On the <code>&lt;form&gt;</code> tag we need to add 2 additional attributes to create a reference variable to the form and handle the form submit.</p>
 <pre><code class="lang-html"> #loginForm=&quot;ngForm&quot; (ngSubmit)=&quot;login(loginForm.value)&quot;
 </code></pre>
 <ul>
-<li>The #loginForm creates a variable called loginForm that reference ngForm.  This will allow us to reference the loginForm in the login.component.ts file. </li>
+<li>The #loginForm creates a variable called loginForm that reference ngForm.  This will allow us to reference the loginForm in the login.component.ts file.</li>
 <li>The ngSubmit upon form submit event will call the login function in the login.component.ts file and pass the loginForm.value into it.  The loginForm.value holds the values for the form fields.</li>
 </ul>
 </li>
 </ol>
-<p>In order to be able to access all of the form field values by using <code>loginForm.value</code> we need tdo add an <code>(ngModel)=&quot;NAME&quot;</code> attribute onto each field, replacing &quot;NAME&quot; with the name that we want to refer to the field as.</p>
+<p>In order to be able to access all of the form field values by using <code>loginForm.value</code> we need to add an <code>(ngModel)=&quot;NAME&quot;</code> attribute onto each field, replacing &quot;NAME&quot; with the name that we want to refer to the field as.</p>
 <ol>
 <li><p>On the email input field we need to add an attribute to tell Angular to implement 1 way binding on the field by using the <code>(ngModel)</code> attribute</p>
 <pre><code class="lang-html"> (ngModel)=&quot;email&quot;
 </code></pre>
 </li>
-<li><p>On the password field we are going to do the same thing that we just did to the email field.  </p>
+<li><p>On the password field we are going to do the same thing that we just did to the email field.</p>
 <pre><code class="lang-html"> (ngModel)=&quot;password&quot;
 </code></pre>
 </li>
 </ol>
-<p>Now that the basics of the form have been created, we are ready handle the form submit event and implement the login function that <code>(ngSubmit)</code> is calling.  </p>
+<p>Now that the basics of the form have been created, we are ready handle the form submit event and implement the login function that <code>(ngSubmit)</code> is calling.</p>
 <ol>
 <li><p>Open the login.component.ts file</p>
 <pre><code class="lang-bash"> login.component.ts
 </code></pre>
 </li>
-<li><p>Inside of the LoginComponent class after the ngOnInit, add the following function.  For now we are just going to output the form values to the Developer Tools console in the browser. </p>
+<li><p>Inside of the LoginComponent class after the ngOnInit, add the following function.  For now we are just going to output the form values to the Developer Tools console in the browser.</p>
 <pre><code class="lang-TypeScript"> login(formValues) {
      console.log(formValues);
  }
 </code></pre>
 </li>
-<li><p>In your browser, while viewing the login form at <a href="http://localhost:4200/login">http://localhost:4200/login</a> open the developer tools and click the console tab so that you can see the console output.    </p>
+<li><p>In your browser, while viewing the login form at <a href="http://localhost:4200/login">http://localhost:4200/login</a> open the developer tools and click the console tab so that you can see the console output.</p>
 </li>
-<li><p>Now enter a value into the email and password fields and click the submit button.  You will see output similar to the below image where I entered the email of email@gmail.com and password of 123456</p>
+<li><p>Now enter a value into the email and password fields and click the submit button.  You will see output similar to the below image where I entered the email of <a href="mailto:email@gmail.com">email@gmail.com</a> and password of 123456</p>
 <p> <img src="images/login-submit-console.png" alt="login console output"></p>
 </li>
 </ol>
 <div class="exercise-end"></div>
-
 
 <h3 id="implement-login-service">Implement Login Service</h3>
 <p>Now that we have our form done, we are going to implement our login service.</p>
@@ -785,7 +789,7 @@
 <pre><code class="lang-bash"> ng generate service shared/services/auth --module app
 </code></pre>
 </li>
-<li><p>The generate command will create 2 files and update app.module.ts: </p>
+<li><p>The generate command will create 2 files and update app.module.ts:</p>
 <p> <img src="images/login-service-generate.png" alt="output of generate"></p>
 <ul>
 <li>spec file (test)</li>
@@ -794,18 +798,18 @@
 </ul>
 </li>
 </ol>
-<p>Before we can make HTTP calls in our AuthService, we need to import the HttpModule into your AppModule</p>
+<p>Before we can make HTTP calls in our AuthService, we need to import the HttpClientModule into your AppModule</p>
 <ol>
 <li><p>Open the app.module.ts file</p>
 <pre><code class="lang-bash"> app.module.ts
 </code></pre>
 </li>
-<li><p>Add an import statement for the HttpModule that comes from @angular/http</p>
-<pre><code class="lang-TypeScript"> import { HttpModule } from &#39;@angular/http&#39;;
+<li><p>Add an import statement for the HttpClientModule that comes from @angular/http</p>
+<pre><code class="lang-TypeScript"> import { HttpClientModule } from &#39;@angular/common/http&#39;;
 </code></pre>
 </li>
 <li><p>In the @NgModule imports array add the HttpModule</p>
-<pre><code class="lang-TypeScript"> HttpModule,
+<pre><code class="lang-TypeScript"> HttpClientModule,
 </code></pre>
 </li>
 </ol>
@@ -815,7 +819,7 @@
     <b>Exercise</b>: Implement Auth Service Login Function
 </h4>
 
-<p>For this tutorial, I have created an API for us to use.  </p>
+<p>For this tutorial, I have created an API for us to use.</p>
 <p>The first thing we are going to do is create our login function</p>
 <ol>
 <li><p>Open the src\app\shared\services\auth.service.ts file</p>
@@ -823,44 +827,50 @@
 </code></pre>
 </li>
 <li><p>Import the following so that we can make our HTTP calls and get a response back.</p>
-<pre><code class="lang-TypeScript"> import { Http, Response, RequestOptions } from &#39;@angular/http&#39;;
+<pre><code class="lang-TypeScript"> import { HttpClient,  } from &#39;@angular/common/http&#39;;
  import { Observable } from &#39;rxjs/Rx&#39;;
+ import { tap, catchError } from &#39;rxjs/operators&#39;;
+ import { of } from &#39;rxjs/observable/of&#39;;
 </code></pre>
 </li>
-</ol>
-<ol>
 <li><p>In order to use the HTTP module, we need to inject it into our constructor</p>
-<pre><code class="lang-TypeScript"> constructor(private http: Http) {
+<pre><code class="lang-TypeScript"> constructor(private http: HttpClient) {
  }
 </code></pre>
 </li>
-</ol>
-<ol>
-<li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in.</p>
-<pre><code class="lang-TypeScript"> private options = new RequestOptions({ withCredentials: true });
+<li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in.  Add this line of code above the <code>@Injectable()</code> statement.</p>
+<pre><code class="lang-TypeScript"> const requestOptions = {
+     withCredentials: true,
+ };
 </code></pre>
 </li>
 <li><p>Next we need to create our login function within the AuthService class that will call our API.  Place the login function after the constructor.</p>
  <div class="alert alert-warning" role="alert">For now we are hard coding the API url into the service.  In the &quot;Environment Configuration&quot; chapter we will change this to pull from a configuration file</div>
 
 <pre><code class="lang-TypeScript"> login(email: string, password: string): Observable&lt;boolean | Response&gt; {
+     console.log(&#39;auth.service login&#39;);
+
      const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
-     return this.http.put(&quot;https://dj-sails-todo.azurewebsites.net/user/login&quot;, loginInfo, this.options)
-         .do((res: Response) =&gt; {
-             if (res){
-                 return Observable.of(true);
+
+     return this.http.put(&quot;https://dj-sails-todo.azurewebsites.net/user/login&quot;, loginInfo, requestOptions)
+         .tap((res: Response) =&gt; {
+             if (res) {
+                 console.log(&#39;logged in&#39;);
+                 return of(true);
              }
 
-             return Observable.of(false);
-         })
-         .catch(error =&gt; {
+             console.log(&#39;not logged in&#39;);
+             return of(false);
+         }),
+         catchError((error) =&gt; {
              console.log(&#39;login error&#39;, error);
-             return Observable.of(false);
-         });
+             return of(false);
+         })
+     );
  }
 </code></pre>
 <ul>
-<li>This code setups the call to the login API and and returns back an Observable.  </li>
+<li>This code setups the call to the login API and and returns back an Observable.</li>
 <li><p>Note that this code is not called until someone subscribes to the login function which we will be doing next.</p>
 <div class="alert alert-danger" role="alert">The API is setup for username/password validation.  Make sure you do not use your real passwords as this is just a test API and not production secured.</div>
 
@@ -869,7 +879,6 @@
 </li>
 </ol>
 <div class="exercise-end"></div>
-
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Call AuthService from LoginComponent
@@ -881,7 +890,7 @@
 <pre><code class="lang-bash"> login.component.ts
 </code></pre>
 </li>
-<li><p>Import the AuthService and Router so that we can make call our LoginService and redirect upon successful login.  </p>
+<li><p>Import the AuthService and Router so that we can make call our LoginService and redirect upon successful login.</p>
 <pre><code class="lang-TypeScript"> import { AuthService } from &#39;../shared/services/auth.service&#39;;
  import { Router } from &#39;@angular/router&#39;;
 </code></pre>
@@ -892,11 +901,14 @@
 </li>
 <li><p>Next we need to update our login function to call the AuthService and redirect if it finds the user.</p>
 <pre><code class="lang-TypeScript"> login(formValues) {
+     console.log(&#39;login.component login&#39;);
+
      this.authService.login(formValues.email, formValues.password)
          .subscribe(result =&gt; {
              if (!result) {
-                 console.log(&#39;user not found&#39;);
+                 console.log(&#39;login.component user not found&#39;);
              } else {
+                 console.log(&#39;login.component logged in. redirecting to home page&#39;)
                  this.router.navigate([&#39;/&#39;]);
              }
      });
@@ -905,7 +917,7 @@
 </li>
 <li><p>Navigate to <a href="http://localhost:4200/login">http://localhost:4200/login</a> .</p>
 <ul>
-<li>If you enter an email of foo@foo.com with a password 123456 you should be redirected to the home page</li>
+<li>If you enter an email of <a href="mailto:foo@foo.com">foo@foo.com</a> with a password 123456 you should be redirected to the home page</li>
 <li>If you enter a bogus email or password, you will see a &quot;user not found&quot; message in the browser developer tools console.</li>
 </ul>
 </li>
@@ -930,11 +942,11 @@
 <pre><code class="lang-TypeScript"> this.invalidLogin = true;
 </code></pre>
 <ul>
-<li>We have to use this. to access the variable due to scoping.  </li>
+<li>We have to use this. to access the variable due to scoping.</li>
 </ul>
 </li>
 </ol>
-<p>Now we are ready to implement the UI to show the error message.  </p>
+<p>Now we are ready to implement the UI to show the error message.</p>
 <ol>
 <li><p>Open the login.component.html file</p>
 <pre><code class="lang-bash"> login.component.html
@@ -956,7 +968,7 @@
     <b>Exercise</b>: Add Required Validation
 </h4>
 
-<p>A standard requirement for html forms is to have client side validation.  In this section we are going to implement the required field validation for both email and password.  </p>
+<p>A standard requirement for html forms is to have client side validation.  In this section we are going to implement the required field validation for both email and password.</p>
 <p>Adding required validation is as easy as adding a required attribute to the input field</p>
 <ol>
 <li><p>Open the login.component.html</p>
@@ -976,7 +988,7 @@
 
 <p>Next we want to display a message to the user when they have invalid entries in the form fields.</p>
 <ol>
-<li><p>In order to refer to the email field by name when checking errors, we need to add the <code>#email=&quot;ngModel&quot;</code> attribute to the email input field to tell Angular to create a variable for the control and make the value the ngModel value for the email field.  </p>
+<li><p>In order to refer to the email field by name when checking errors, we need to add the <code>#email=&quot;ngModel&quot;</code> attribute to the email input field to tell Angular to create a variable for the control and make the value the ngModel value for the email field.</p>
 <pre><code class="lang-html"> #email=&quot;ngModel&quot;
 </code></pre>
 </li>
@@ -1016,7 +1028,7 @@
     Must be an email address
 &lt;/div&gt;
 </code></pre>
-<p>Now we are ready to test the email validation.  </p>
+<p>Now we are ready to test the email validation.</p>
 <ul>
 <li><p>The validation will trigger if you input text into the email field that is not a valid email address.</p>
 <p>  <img src="images/login-email-validation.png" alt="email validation"></p>
@@ -1041,14 +1053,13 @@
 </ol>
 <div class="exercise-end"></div>
 
-
 <h3 id="create-create-account-component">Create Create Account Component</h3>
-<p>Up to this point, we have only been able to login to an existing account.  Now we are going to create the signup page.  </p>
+<p>Up to this point, we have only been able to login to an existing account.  Now we are going to create the signup page.</p>
 <p>Creating the signup component is just like the rest of the component that we have created.  We will have an html, scss, spec, and ts file.  We will have a form that calls to a function in the component that calls to a service to process the data.</p>
 <div class="alert alert-danger" role="alert">Since the signup component creation is exactly like the login component we are just going a quick here is the code walk through</div>
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: AuthService Signup Function 
+    <b>Exercise</b>: AuthService Signup Function
 </h4>
 
 <p>We are first going to create the signup function in the AuthService.</p>
@@ -1060,18 +1071,20 @@
 <li><p>Add the following method to allow an account to be created</p>
 <pre><code class="lang-TypeScript">signup(email: string, password: string): Observable&lt;boolean | Response&gt; {
  const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
- return this.http.post(&quot;https://dj-sails-todo.azurewebsites.net/user/&quot;, loginInfo, this.options)
-   .do((res: Response) =&gt; {
-     if (res) {
-       return Observable.of(true);
-     }
+ return this.http.post(&quot;https://dj-sails-todo.azurewebsites.net/user/&quot;, loginInfo, requestOptions)
+     .pipe(
+         tap((res: Response) =&gt; {
+             if (res) {
+                 return of(true);
+             }
 
-     return Observable.of(false);
-   })
-   .catch(error =&gt; {
-     console.log(&#39;signup error&#39;, error);
-     return Observable.of(false);
-   });
+             return of(false);
+         }),
+         catchError((error) =&gt; {
+             console.log(&#39;signup error&#39;, error);
+             return of(false);
+         }),
+     );
 }
 </code></pre>
 <div class="alert alert-danger" role="alert">REMINDER: Since we have to pass the password to the API in order to create the account and we are communicating over a non-secure channel, make sure you do not use your real passwords.</div>
@@ -1111,7 +1124,7 @@
 </li>
 <li><p>You routes should look like</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
-     { path: &#39;login&#39;, children: [], component: LoginComponent },
+     { path: &#39;login&#39;, component: LoginComponent },
      { path: &#39;signup&#39;, component: SignupComponent},
  ];
 </code></pre>
@@ -1217,7 +1230,9 @@
 </code></pre>
 </li>
 <li><p>Next to the cancel button add the following HTML to give a link to the create page</p>
-<pre><code class="lang-html">&lt;span&gt;&lt;a routerLink=&quot;/signup&quot;&gt;create account&lt;/a&gt;&lt;/span&gt;
+<pre><code class="lang-html">
+&lt;span&gt;&lt;a routerLink=&quot;/signup&quot;&gt;create account&lt;/a&gt;&lt;/span&gt;
+
 </code></pre>
 </li>
 <li><p>If you go to <a href="http://localhost:4200/signup">http://localhost:4200/signup</a> you should now to be able to signup and navigate between the signup and login pages.  Once signed up,  you will be redirected to the home page and shown the todo items.</p>
@@ -1230,13 +1245,13 @@
 				<div class="chapter">
 					<h2 id="reactive-forms">Reactive Forms</h2>
 <h3 id="overview">Overview</h3>
-<p>In the previous chapter, we took a look at template based forms.  Templates are great for very simple forms that you do not want to unit test at all.  However, if you want to unit test your forms you will need to reuse reactive based forms. </p>
-<p>Reactive forms allow you to define the form fields and validation in the component instead of the template.  You can easily test the form fields and validation logic.  You can also dynamically build the form and validation in the component.</p>
+<p>In the previous chapter, we took a look at template based forms. Templates are great for very simple forms that you do not want to unit test at all. However, if you want to unit test your forms you will need to reuse reactive based forms.</p>
+<p>Reactive forms allow you to define the form fields and validation in the component instead of the template. You can easily test the form fields and validation logic. You can also dynamically build the form and validation in the component.</p>
 <p>We are going to build the form to enter our Todo items using Reactive forms.</p>
 <h3 id="goals">Goals</h3>
 <ul>
 <li>Understand reactive forms</li>
-<li>Create a reactive form </li>
+<li>Create a reactive form</li>
 <li>Implement input validation</li>
 <li>Submit form values to a service</li>
 </ul>
@@ -1245,11 +1260,11 @@
 
 <p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip</a> </li>
+<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -1258,7 +1273,7 @@
 </li>
 <li>In Visual Studio Code, go under the File menu, select Open folder and navigate to the folder that you unzipped the files into</li>
 <li>If you have ng serve running in a different editor, make sure to stop it from running.</li>
-<li><p>Open the Integrated Terminal in Visual Studio Code (ctrl + `)  and run ng serve</p>
+<li><p>Open the Integrated Terminal in Visual Studio Code (ctrl + `) and run ng serve</p>
 <pre><code class="lang-bash"> ng serve
 </code></pre>
 </li>
@@ -1267,7 +1282,7 @@
 
 <h3 id="create-todo-component">Create Todo Component</h3>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Create Todo Component 
+    <b>Exercise</b>: Create Todo Component
 </h4>
 
 <ol>
@@ -1276,7 +1291,7 @@
 <pre><code class="lang-bash"> ng generate component todo
 </code></pre>
 </li>
-<li><p>The generate command will create 4 files: </p>
+<li><p>The generate command will create 4 files:</p>
 <p> <img src="images/todo-generate.png" alt="output of generate"></p>
 <ul>
 <li>scss (styles)</li>
@@ -1291,7 +1306,7 @@
 
 <h3 id="add-route">Add Route</h3>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Todo Routing 
+    <b>Exercise</b>: Todo Routing
 </h4>
 
 <p>Before we can view our todo component, we need to tell Angular how to route to the page</p>
@@ -1304,10 +1319,9 @@
 <pre><code class="lang-TypeScript"> import { TodoComponent } from &#39;./todo/todo.component&#39;;
 </code></pre>
 </li>
-<li><p>We want to make the Todo component the home page.  We can do this by creating a <code>path: &#39;&#39;</code> route and making it go to the TodoComponent</p>
+<li><p>We want to make the Todo component the home page. We can do this by creating a <code>path: &#39;&#39;</code> route and making it go to the TodoComponent</p>
 <pre><code class="lang-TypeScript"> {
      path: &#39;&#39;,
-     children: [],
      component: TodoComponent
  },
 </code></pre>
@@ -1316,37 +1330,34 @@
 <pre><code class="lang-TypeScript"> const routes: Routes = [
      {
          path: &#39;&#39;,
-         children: [],
          component: TodoComponent
      },
-     { path: &#39;login&#39;, children: [], component: LoginComponent },
+     { path: &#39;login&#39;, component: LoginComponent },
      { path: &#39;signup&#39;, component: SignupComponent},
  ];
 </code></pre>
 </li>
-<li><p>The todo page should display when you to the home, <a href="http://http://localhost:4200/">http://http://localhost:4200/</a></p>
-<p> <img src="images/todo-initial-view.png" alt="todo initial view"></p>
- <div class="alert alert-info" role="alert"><strong>Note:</strong> When you navigate to the home page, the TodoComponent is loaded into the <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> in the html in  src\app\app.component.html.  The router-outlet tag is how Angular knows where to put the rendered content for the route.</div>
-
-</li>
 </ol>
+<p>The todo page should display when you to the home, <a href="http://http://localhost:4200/">http://http://localhost:4200/</a></p>
+<p><img src="images/todo-initial-view.png" alt="todo initial view"></p>
+<div class="alert alert-info" role="alert"><strong>Note:</strong> When you navigate to the home page, the TodoComponent is loaded into the <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> in the html in  src\app\app.component.html.  The router-outlet tag is how Angular knows where to put the rendered content for the route.</div>
+
 <div class="exercise-end"></div>
 
-
 <h3 id="create-form">Create Form</h3>
-<p>Next we are going to create the form without any validation logic at all.  Our form will have 1 input field for the todo item and an add button.</p>
+<p>Next we are going to create the form without any validation logic at all. Our form will have 1 input field for the todo item and an add button.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Import ReactiveFormsModule
 </h4>
 
-<p>With reactive forms, we are going to setup the form in your components TypeScript file.  </p>
+<p>With reactive forms, we are going to setup the form in your components TypeScript file.</p>
 <p>We need to import the ReactiveFormsModule into our AppModule before we can use it.</p>
 <ol>
-<li><p>Open the src\app\app.module.ts </p>
+<li><p>Open the src\app\app.module.ts</p>
 <pre><code class="lang-bash"> app.module.ts
 </code></pre>
 </li>
-<li><p>Add the ReactiveFormsModule to the existing  @angular/forms import so that it looks like </p>
+<li><p>Add the ReactiveFormsModule to the existing @angular/forms import so that it looks like</p>
 <pre><code class="lang-TypeScript"> import { FormsModule, ReactiveFormsModule } from &#39;@angular/forms&#39;;
 </code></pre>
 </li>
@@ -1367,7 +1378,7 @@
     <b>Exercise</b>: Form setup
 </h4>
 
-<p>Now we are ready to add all of the functionality to the component for the UI to interface with. For the todo component it is the src\app\todo\todo.component.ts file.  We need to add the Form.</p>
+<p>Now we are ready to add all of the functionality to the component for the UI to interface with. For the todo component it is the src\app\todo\todo.component.ts file. We need to add the Form.</p>
 <ol>
 <li><p>Open the todo\todo.component.ts file</p>
 <pre><code class="lang-bash"> todo.component.ts
@@ -1381,11 +1392,11 @@
 <pre><code class="lang-TypeScript"> constructor(private formBuilder: FormBuilder) {}
 </code></pre>
 </li>
-<li><p>Before creating our form, we need to define the addForm variable to hold the configuration.  Inside of the TodoComponent class above the constructor, add the following variable</p>
+<li><p>Before creating our form, we need to define the addForm variable to hold the configuration. Inside of the TodoComponent class above the constructor, add the following variable</p>
 <pre><code class="lang-TypeScript"> addForm: FormGroup;
 </code></pre>
 </li>
-<li><p>To configure the form we will use the ngOnInit lifecycle event.  The ngOnInit lifecycle event will run before the component has rendered.  Inside the ngOnit function we need to tell Angular that the addForm is a formBuilder group with 1 field called item with an empty default value.</p>
+<li><p>To configure the form we will use the ngOnInit lifecycle event. The ngOnInit lifecycle event will run before the component has rendered. Inside the ngOnit function we need to tell Angular that the addForm is a formBuilder group with 1 field called item with an empty default value.</p>
 <pre><code class="lang-TypeScript"> this.addForm = this.formBuilder.group({
      &#39;item&#39;: &#39;&#39;
  });
@@ -1395,12 +1406,12 @@
 <div class="exercise-end"></div>
 
 <h4 class="exercise-start">
-    <b>Exercise</b>:  Creating the Todo UI 
+    <b>Exercise</b>:  Creating the Todo UI
 </h4>
 
-<p>We are now ready to create our UI. </p>
+<p>We are now ready to create our UI.</p>
 <ol>
-<li><p>Open src\app\todo\todo.component.html </p>
+<li><p>Open src\app\todo\todo.component.html</p>
 <pre><code class="lang-bash"> todo.component.html
 </code></pre>
 </li>
@@ -1448,7 +1459,7 @@
              &lt;tr&gt;
                  &lt;td&gt;Errors&lt;/td&gt;
                  &lt;td&gt;N/A&lt;/td&gt;
-                  &lt;td&gt;&lt;pre&gt;{{ addForm.get(&#39;item&#39;).errors | json }}&lt;/pre&gt;&lt;/td&gt;
+                 &lt;td&gt;&lt;pre&gt;{{ addForm.get(&#39;item&#39;).errors | json }}&lt;/pre&gt;&lt;/td&gt;
              &lt;/tr&gt;
              &lt;tr&gt;
                  &lt;td&gt;Form Field Values&lt;/td&gt;
@@ -1467,7 +1478,7 @@
 <li>As you type into the item field, the form status info value section will update</li>
 </ul>
 </li>
-<li><p>The add button is set as disabled until validation passes. </p>
+<li><p>The add button is set as disabled until validation passes.</p>
 <div class="alert alert-info" role="alert">If you completed the previous chapter on Template Forms, you will notice that we did not setup any ngModel tags or pass in the form to the save method.  With Reactive Forms, the formGroup provides the data binding for us.</div>
 
 </li>
@@ -1484,20 +1495,19 @@
 
 <ol>
 <li><p>Open src\app\todo\todo.component.html file</p>
-<pre><code> ```bash
- todo.component.html
-     ```
-</code></pre></li>
-<li><p>On the <code>&lt;form&gt;</code> tag add the <code>(ngSubmit)=&quot;&quot;</code> attribute and have it call the save function </p>
+<pre><code class="lang-bash"> todo.component.html
+</code></pre>
+</li>
+<li><p>On the <code>&lt;form&gt;</code> tag add the <code>(ngSubmit)=&quot;&quot;</code> attribute and have it call the save function</p>
 <pre><code class="lang-html"> (ngSubmit)=&quot;save()&quot;
 </code></pre>
 </li>
-<li><p>Open the src\app\todo\todo.component.ts file </p>
+<li><p>Open the src\app\todo\todo.component.ts file</p>
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Add a function called save that returns a void.  Inside of the save function  add a console log that outputs the addForm field value property.</p>
-<pre><code class="lang-TypeScript"> save() : void {
+<li><p>Add a function called save that returns a void. Inside of the save function add a console log that outputs the addForm field value property.</p>
+<pre><code class="lang-TypeScript"> save(): void {
      console.log(&#39;form values: &#39;, this.addForm.value);
  }
 </code></pre>
@@ -1509,9 +1519,8 @@
 </ol>
 <div class="exercise-end"></div>
 
-
 <h3 id="validators">Validators</h3>
-<p>Right now we do not have any validation being done on the form.  To setup validation, we need to modify our formBuilder item field setup.</p>
+<p>Right now we do not have any validation being done on the form. To setup validation, we need to modify our formBuilder item field setup.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>:  Add Validators for required and min length
 </h4>
@@ -1528,18 +1537,18 @@
 <li>note that order of the modules in not important</li>
 </ul>
 </li>
-<li><p>In the ngOnInit function we need add the Validators required and minLength to the item field that we defined earlier.  In order to add the validators, we need to turn the item field value into an array with the 1st position being the default value and the 2nd position as an array of validators.  For the minLength, we are going to require at least 3 characters.</p>
-<pre><code class="lang-TypeScript"> &#39;item&#39;: [&#39;&#39;, [Validators.required, Validators.minLength(3)]]
+<li><p>In the ngOnInit function we need add the Validators required and minLength to the item field that we defined earlier. In order to add the validators, we need to turn the item field value into an array with the 1st position being the default value and the 2nd position as an array of validators. For the minLength, we are going to require at least 3 characters.</p>
+<pre><code class="lang-TypeScript"> item: [&#39;&#39;, [Validators.required, Validators.minLength(3)]]
 </code></pre>
 </li>
 </ol>
-<p>Now that we have validators setup, we need to output an error message to user when the validation fails.  For now, we are going to do it in the html but later we will make it more generic and add it to the component file instead.  </p>
+<p>Now that we have validators setup, we need to output an error message to user when the validation fails. For now, we are going to do it in the html but later we will make it more generic and add it to the component file instead.</p>
 <ol>
 <li><p>Open the todo.component.html file</p>
 <pre><code class="lang-bash"> todo.component.html
 </code></pre>
 </li>
-<li><p>After the closing form tag in the todo.component.html file add the following </p>
+<li><p>After the closing form tag in the todo.component.html file add the following</p>
 <pre><code class="lang-html"> &lt;div class=&quot;alert alert-danger&quot; *ngIf=&quot;addForm.get(&#39;item&#39;).errors &amp;&amp; (addForm.get(&#39;item&#39;).dirty || addForm.get(&#39;item&#39;).touched)&quot;&gt;
      &lt;span *ngIf=&quot;addForm.get(&#39;item&#39;).errors.required&quot;&gt;
          Item is required
@@ -1555,34 +1564,34 @@
 <li>For each of the messages, we can look at the individual validators to see which one failed and only display that message.</li>
 </ul>
 </li>
-<li><p>If you go to <a href="http://localhost:4200/">http://localhost:4200/</a> click on the field and then click off it the required validator will fire.  If you enter less than 3 characters the minLength validator will fire.  </p>
+<li><p>If you go to <a href="http://localhost:4200">http://localhost:4200</a> click on the field and then click off it the required validator will fire. If you enter less than 3 characters the minLength validator will fire.</p>
 </li>
 </ol>
 <div class="exercise-end"></div>
 
 <h3 id="easier-validation-messages">Easier Validation Messages</h3>
-<p>Having the validation messages in the html template gets old really fast.  It is a lot of code to maintain.  With the Reactive Forms, we can create a generic error checker for the whole form and set a value for each of the form fields.</p>
+<p>Having the validation messages in the html template gets old really fast. It is a lot of code to maintain. With the Reactive Forms, we can create a generic error checker for the whole form and set a value for each of the form fields.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>:  Watching for Changes
 </h4>
 
-<p>We are going to create a function that will be called each time the form values change.  Within the function we will loop through all of the fields and check if they are dirty and not valid.  Then we will look up the validation message to use for the form field and validator that failed.</p>
+<p>We are going to create a function that will be called each time the form values change. Within the function we will loop through all of the fields and check if they are dirty and not valid. Then we will look up the validation message to use for the form field and validator that failed.</p>
 <ol>
 <li><p>Open the src\app\todo\todo.component.ts file</p>
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item.  We are going to call the variable formErrors.  The default value for the error message is a blank string.  This list will also be used to determine which form fields to inspect for validation errors.</p>
+<li><p>We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item. We are going to call the variable formErrors. The default value for the error message is a blank string. This list will also be used to determine which form fields to inspect for validation errors.</p>
 <pre><code class="lang-TypeScript"> formErrors = {
-     &#39;item&#39;: &#39;&#39;
+     item: &#39;&#39;
  };
 </code></pre>
 </li>
-<li><p>Next we need to create a variable to hold the validation messages for each of the form fields.  The name of the validation message must match the name of the validation.</p>
+<li><p>Next we need to create a variable to hold the validation messages for each of the form fields. The name of the validation message must match the name of the validation.</p>
 <pre><code class="lang-TypeScript"> validationMessages = {
-     &#39;item&#39;: {
-     &#39;required&#39;: &#39;Item is required.&#39;,
-     &#39;minlength&#39;: &#39;Item must be at least 3 characters&#39;
+     item: {
+         required: &#39;Item is required.&#39;,
+         minlength: &#39;Item must be at least 3 characters&#39;
      }
  };
 </code></pre>
@@ -1600,9 +1609,9 @@
 
              if (control &amp;&amp; control.dirty &amp;&amp; !control.valid) {
                  const messages = this.validationMessages[field];
-                 for (const key in control.errors) {
-                     if (control.errors.hasOwnProperty(key)) {
-                         this.formErrors[field] += messages[key] + &#39; &#39;;
+                  for (const key in messages) {
+                     if (messages.hasOwnProperty(key) &amp;&amp; control.hasError(key)) {
+                         this.formErrors[field] += `${messages[key]} `;
                      }
                  }
              }
@@ -1616,7 +1625,7 @@
 <li>If the form field is invalid, then we look up the validation message for the form field and validator that failed and set the formError for that field.</li>
 </ul>
 </li>
-<li><p>Next we need to subscribe to the addForm valueChanges event and call the onValueChanged function we just created.  We are going to setup the subscribe in the ngOnInit function</p>
+<li><p>Next we need to subscribe to the addForm valueChanges event and call the onValueChanged function we just created. We are going to setup the subscribe in the ngOnInit function</p>
 <pre><code class="lang-TypeScript"> this.addForm.valueChanges.subscribe(data =&gt; this.onValueChanged(data));
 </code></pre>
 </li>
@@ -1631,7 +1640,7 @@
     <b>Exercise</b>: Show Error Message in UI
 </h4>
 
-<p>The last thing we need to do is up the UI to display the form error messages.    </p>
+<p>The last thing we need to do is up the UI to display the form error messages.</p>
 <ol>
 <li><p>Open the todo.component.html file</p>
 <pre><code class="lang-bash"> todo.component.html
@@ -1643,7 +1652,7 @@
  &lt;/div&gt;
 </code></pre>
 </li>
-<li><p>If you navigate to <a href="http://localhost:4200">http://localhost:4200</a>, click on the item form field and enter 1 character it will trigger the minLength validator and will show the minLength validation message.  If you then blank out the field you will see the required message.</p>
+<li><p>If you navigate to <a href="http://localhost:4200">http://localhost:4200</a>, click on the item form field and enter 1 character it will trigger the minLength validator and will show the minLength validation message. If you then blank out the field you will see the required message.</p>
 </li>
 </ol>
 <div class="exercise-end"></div>
@@ -1652,21 +1661,21 @@
     <b>Exercise</b>: Add Border On Invalid
 </h4>
 
-<p>You can also add a border around the Bootstrap form-group for the item form field by adding the is-valid css class when the formErrors.item has a value.</p>
+<p>You can also add a border around the Bootstrap form-group for the item form field by adding the has-danger Bootstrap css class when the formErrors.item has a value.</p>
 <ol>
 <li><p>Open the todo.component.html file</p>
 <pre><code class="lang-html"> todo.component.html
 </code></pre>
 </li>
-<li><p>To the input field, add an <code>[ngClass]</code> attribute that checks that formErrors.item has a value and if so then adds the has-danger css to the div tag</p>
-<pre><code class="lang-html"> [ngClass]=&quot;{&#39;is-invalid&#39;: formErrors.item}&quot;
+<li><p>To the form-group div tag, add an <code>[ngClass]</code> attribute that checks that formErrors.item has a value and if so then adds the has-danger css to the div tag.</p>
+<pre><code class="lang-html"> [ngClass]=&quot;{&#39;has-danger&#39;: formErrors.item}&quot;
 </code></pre>
 </li>
 </ol>
 <div class="exercise-end"></div>
 
 <h3 id="wait-before-validation-messages">Wait Before Validation Messages</h3>
-<p>You might have notice after implementing the previous logic to check the field values in the TypeScript file, that the validation errors are immediately shown which can be annoying to users while they type.  Instead it would be better to wait for a given amount of time after the last keystroke before checking.  This is called debounce.  </p>
+<p>You might have notice after implementing the previous logic to check the field values in the TypeScript file, that the validation errors are immediately shown which can be annoying to users while they type. Instead it would be better to wait for a given amount of time after the last keystroke before checking. This is called debounce.</p>
 <p>Angular makes it very easy to implement what they call debounce to wait for the user to stop typing before running validation on our item input field.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>:  Implement Debounce
@@ -1685,29 +1694,27 @@
 <pre><code class="lang-TypeScript"> this.addForm.valueChanges.debounceTime(1000).subscribe(data =&gt; this.onValueChanged(data));
 </code></pre>
 </li>
-<li><p>Now if you test the UI at <a href="http://localhost:4200">http://localhost:4200</a>, it will wait 1 second after the last keystroke before checking the input field validation.  You can change the time it waits by increasing or decreasing the value that is passed into the debounceTime function.</p>
+<li><p>Now if you test the UI at <a href="http://localhost:4200">http://localhost:4200</a>, it will wait 1 second after the last keystroke before checking the input field validation. You can change the time it waits by increasing or decreasing the value that is passed into the debounceTime function.</p>
 </li>
 </ol>
 <div class="exercise-end"></div>
 
 <h3 id="saving-todo-items">Saving Todo Items</h3>
-<p>We are at the point, where we are ready to create a service to save the todo item.  Right now, we are just output the add form values to the console.</p>
+<p>We are at the point, where we are ready to create a service to save the todo item. Right now, we are just output the add form values to the console.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Class to Hold Todo item
 </h4>
 
-<p>Since TypeScript is a strongly typed language it is best practice to create a class to hold our Todo items.  This way we can get the type support for the different fields.</p>
+<p>Since TypeScript is a strongly typed language it is best practice to create a class to hold our Todo items. This way we can get the type support for the different fields.</p>
 <ol>
 <li>Within VS Code, open up the integrated terminal (ctrl+`) or view menu and then &quot;Integrated Terminal&quot;</li>
 <li><p>Run the ng generate command below to create the todo component</p>
 <pre><code class="lang-bash"> ng generate class shared/classes/Todo
 </code></pre>
 </li>
-<li><p>This will create 1 files: </p>
+<li><p>This will create 1 files:</p>
 <p> <img src="images/todo-generate-class.png" alt="generate output"></p>
 </li>
-</ol>
-<ol>
 <li><p>Open src/app/shared/classes/todo.ts</p>
 <pre><code class="lang-TypeScript"> todo.ts
 </code></pre>
@@ -1763,18 +1770,18 @@
  user: string;
 </code></pre>
 </li>
-<li><p>To make it easier to create new todo Items and implement unit testing, we are going to add a constructor to initialize the fields.  Item will required while id, completed and createdAt will be optional. The optional fields must be after all of the required fields.</p>
+<li><p>To make it easier to create new todo Items and implement unit testing, we are going to add a constructor to initialize the fields. Item will required while id, completed and createdAt will be optional. The optional fields must be after all of the required fields.</p>
 <pre><code class="lang-TypeScript"> constructor(
-     item: string, 
+     item: string,
      id?: string,
      completed?: boolean,
      createdAt?: Date,
      updatedAt?: Date) {
      this.id = id;
      this.item = item;
-     this.completed = completed ? completed: false;
-     this.createdAt = createdAt ? createdAt: new Date();
-     this.updatedAt = updatedAt ? updatedAt: new Date();
+     this.completed = completed ? completed : false;
+     this.createdAt = createdAt ? createdAt : new Date();
+     this.updatedAt = updatedAt ? updatedAt : new Date();
  }
 </code></pre>
 </li>
@@ -1807,38 +1814,34 @@
 
 <p>Now that we have the Todo service file created, we need to add our save method that calls our json-server api server and then update the Todo component to call the service.</p>
 <ol>
-<li><p>Open src\app\shared\services\todo.service.ts </p>
+<li><p>Open src\app\shared\services\todo.service.ts</p>
 <pre><code class="lang-bash"> todo.service.ts
 </code></pre>
 </li>
-<li><p>Import the following so that we can make our HTTP calls and get a response back.  </p>
-<pre><code class="lang-TypeScript"> import { Http, Response, RequestOptions } from &#39;@angular/http&#39;;
- import { Observable } from &#39;rxjs/Rx&#39;;
+<li><p>Import the following so that we can make our HTTP calls and get a response back.</p>
+<pre><code class="lang-TypeScript"> import { HttpClient } from &#39;@angular/common/http&#39;;
 </code></pre>
 </li>
 <li><p>In order to use the HTTP module, we need to inject it into our constructor</p>
-<pre><code class="lang-TypeScript"> constructor(private http: Http) { }
+<pre><code class="lang-TypeScript"> constructor(private http: HttpClient) { }
 </code></pre>
 </li>
-<li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in.  Add this varaible to the TodoService class.</p>
-<pre><code class="lang-TypeScript"> private options = new RequestOptions({ withCredentials: true });
+<li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in. Add this variable above the @Injectable for the TodoService.</p>
+<pre><code class="lang-TypeScript"> const requestOptions = { withCredentials: true };
 </code></pre>
- <div class="alert alert-info" role="alert">You will need to pass in this.options as the last parameter for all of our http calls.</div>
+ <div class="alert alert-info" role="alert">You will need to pass in requestOptions as the last parameter for all of our http calls.</div>
 </li>
-<li><p>Before we create our save method we need to import the Todo class so that our data is typed when we pass it from the service the component. </p>
+<li><p>Before we create our save method we need to import the Todo class so that our data is typed when we pass it from the service the component.</p>
 <pre><code class="lang-TypeScript"> import { Todo } from &#39;../classes/todo&#39;;
 </code></pre>
 </li>
-<li><p>Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.  </p>
-<pre><code class="lang-TypeScript"> save(item: string): Observable&lt;Todo | {}&gt; {
-     return this.http.post(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, new Todo(item), this.options)
-     .map((res: Response) =&gt; {
-         return &lt;Todo&gt;res.json();
-     })
-     .catch(error =&gt; {
-         console.log(&#39;save error&#39;, error)
-         return error;
-     });
+<li><p>We want to return Observables of type Todo back from our Http calls we need to import Observable from rsjs.</p>
+<pre><code class="lang-TypeScript"> import { Observable } from &#39;rxjs/Observable&#39;;
+</code></pre>
+</li>
+<li><p>Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.</p>
+<pre><code class="lang-TypeScript"> save(item: string): Observable&lt;Todo&gt; {
+     return this.http.post&lt;Todo&gt;(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, new Todo(item), requestOptions);
  }
 </code></pre>
 </li>
@@ -1859,53 +1862,75 @@
 <pre><code class="lang-TypeScript"> import { TodoService } from &#39;../shared/services/todo.service&#39;;
 </code></pre>
 </li>
-<li><p>Now that we have the TodoService import we need to inject it into the constructor to make it avaiable to the component.  </p>
+<li><p>Now that we have the TodoService import we need to inject it into the constructor to make it avaiable to the component.</p>
 <pre><code class="lang-TypeScript"> constructor(private formBuilder: FormBuilder, private todoService: TodoService) { }
+</code></pre>
+</li>
+<li><p>We also need to import the Todo class since the TodoService returns back a Todo class.</p>
+<pre><code class="lang-TypeScript"> import { Todo } from &#39;../shared/classes/todo&#39;;
 </code></pre>
 </li>
 <li><p>Update the save method with the following code to call the <code>TodoService.save</code> function and output the result to the console</p>
 <pre><code class="lang-TypeScript"> this.todoService.save(this.addForm.value.item)
  .subscribe(result =&gt; {
      console.log(&#39;save result&#39;, result);
- },
- error =&gt; {
-     this.errorMessage = &lt;any&gt;error;
- });
+ };
+</code></pre>
+</li>
+</ol>
+<p>Right now our solution does not handle any errors from the TodoService save call.  Lets add in some error checking.</p>
+<ol>
+<li><p>We need to import the HttpErrorResponse class so that we can get at the Http error.</p>
+<pre><code class="lang-TypeScript"> import { HttpErrorResponse } from &#39;@angular/common/http&#39;;
 </code></pre>
 </li>
 <li><p>We now need to create the errorMessage variable that is of type string in the Todocomponent class</p>
 <pre><code class="lang-TypeScript"> errorMessage: string;
 </code></pre>
 </li>
+<li><p>Inside of the subscribe that the call to todoService.save, we need to add our error check.</p>
+<pre><code class="lang-TypeScript">     ,
+     (error: HttpErrorResponse) =&gt; {
+         this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+     }
+</code></pre>
+<p> You save method should now look like</p>
+<pre><code class="lang-TypeScript"> save(): void {
+     console.log(&#39;form values: &#39;, this.addForm.value);
+     this.todoService.save(this.addForm.value.item)
+     .subscribe((result: Todo) =&gt; {
+             console.log(&#39;save result&#39;, result);
+         },
+         (error: HttpErrorResponse) =&gt; {
+             this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+         }
+     );
+ }
+</code></pre>
+</li>
 <li><p>Open the todo.component.html file so that we can add the display of the save error message.</p>
 <pre><code class="lang-bash"> todo.component.html
 </code></pre>
 </li>
-<li><p>Now we need to add an alert section to our todo.component.html to display the error message.  After the <code>&lt;/form&gt;</code> tag, add the following code</p>
+<li><p>Now we need to add an alert section to our todo.component.html to display the error message. After the <code>&lt;/form&gt;</code> tag, add the following code</p>
 <pre><code class="lang-TypeScript"> &lt;div *ngIf=&quot;errorMessage&quot; class=&quot;alert alert-danger&quot; role=&quot;alert&quot;&gt;
      &lt;h3&gt;Error Saving&lt;/h3&gt;
      {{ errorMessage }}
  &lt;/div&gt;
 </code></pre>
 </li>
-<li><p>Testing the error message display requires that we temporary set a value for the errorMessage.  We are going to do this in the ngOnInit just to verify that the error message will display:</p>
-<pre><code class="lang-TypeScript"> this.errorMessage = &#39;testing&#39;
-</code></pre>
-</li>
-<li><p>Now if you go to <a href="http://localhost:4200">http://localhost:4200</a> you will see the following display</p>
+<li><p>Now if you go to <a href="http://localhost:4200">http://localhost:4200</a> and try to save a todo item, you will see the following error message.</p>
 <p> <img src="images/error-messages-display.png" alt="error message display"></p>
-</li>
-<li><p>We can remove the temporary value that we set for the errorMessage.</p>
+ <div class="alert alert-danger" role="alert">The reason for this error is that for now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully save a todo item since they are associated to a user.  After you have logged in, you can save as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+
 </li>
 </ol>
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully save a todo item since they are associated to a user.  After you have logged in, you can save as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
-
 <div class="exercise-end"></div>
 
 <h3 id="displaying-items">Displaying Items</h3>
 <p>Now that we have the ability to save our items, we need to be able to display the current list</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Get Todo Items 
+    <b>Exercise</b>: Get Todo Items
 </h4>
 
 <p>First thing we need to do is add a function to the todo service to get the list of todo items.</p>
@@ -1915,16 +1940,8 @@
 </code></pre>
 </li>
 <li><p>Add the following function to make an http get call to our Todo API and return back an array of Todo items.</p>
-<pre><code class="lang-TypeScript"> getAll(): Observable&lt;Array&lt;Todo&gt; | {}&gt;{
-     let url = &quot;https://dj-sails-todo.azurewebsites.net/todo&quot;;
-     return this.http.get(url, this.options)
-     .map((res: Response) =&gt; {
-         return &lt;Array&lt;Todo&gt;&gt;res.json();
-     })
-     .catch(error =&gt; {
-         console.log(&#39;get error&#39;, error);
-         return error;
-     });
+<pre><code class="lang-TypeScript">     getAll(): Observable&lt;Todo[]&gt; {
+     return this.http.get&lt;Todo[]&gt;(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, requestOptions);
  }
 </code></pre>
 </li>
@@ -1935,31 +1952,27 @@
     <b>Exercise</b>: Display Todo Items in the UI
 </h4>
 
-<p>Now that we have the TodoService.getAll function created, we are ready to call the function from our TodoComponent.  We will make this call in the ngOnInit function so that it will display the list on component render.</p>
+<p>Now that we have the TodoService.getAll function created, we are ready to call the function from our TodoComponent. We will make this call in the ngOnInit function so that it will display the list on component render.</p>
 <ol>
 <li><p>Open the src\app\todo\todo.component.ts file</p>
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Import the todo class </p>
-<pre><code class="lang-TypeScript"> import { Todo } from &#39;../shared/classes/todo&#39;;
-</code></pre>
-</li>
 <li><p>Create a variable in the TodoComponent class called todoList that is an array of Todo and intialize to an empty array</p>
-<pre><code class="lang-TypeScript"> todoList: Array&lt;Todo&gt; = [];
+<pre><code class="lang-TypeScript"> todoList: Todo[] = [];
 </code></pre>
 </li>
 <li><p>Create the getTodoListAll function that will return void, call the TodoService.getAll function and set a todoList variable at the Todocomponent class level.</p>
 <pre><code class="lang-TypeScript"> getTodoListAll(): void {
- this.todoService.getAll()
-   .subscribe(
-   data =&gt; {
-     this.todoList = data;
-   },
-   error =&gt; {
-     this.errorMessage = &lt;any&gt;error;
-   }
-   );
+     this.todoService.getAll()
+     .subscribe(
+         (data: Todo[]) =&gt; {
+             this.todoList = data;
+         },
+         (error: HttpErrorResponse) =&gt; {
+           this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+         }
+     );
  }
 </code></pre>
 </li>
@@ -1982,26 +1995,27 @@
 <li><p>Since we have our form working, remove the form status table.</p>
 </li>
 <li><p>After the error message alert, add the following html to display the list of todo items</p>
-<pre><code class="lang-html"> &lt;div class=&quot;row&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
+<pre><code class="lang-html"> &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
    &lt;div class=&quot;col-12 done-{{todoItem.completed}}&quot;&gt;
-     {{todoItem.item}} &lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;
+     {{todoItem.item}}&lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;
    &lt;/div&gt;
  &lt;/div&gt;
 </code></pre>
 <ul>
-<li>the *ngFor will loop through all of the items in the todoList variable that we will be creating next.  </li>
+<li>the *ngFor will loop through all of the items in the todoList variable that we will be creating next.</li>
 <li>For the date, we are using the built-in date pipe to convert it to a short date that strips out the time part of the date</li>
-<li>We are also setup to have a different style when an item is completed.  We will add the styling in a bit.    </li>
+<li><p>We are also setup to have a different style when an item is completed. We will add the styling in a bit.</p>
+<div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully pull the list of todo items since they are associated to a user.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+
+</li>
 </ul>
 </li>
 </ol>
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully pull the list of todo items since they are associated to a user.  In the next chapter we will implement a login check that will redirect you to login first.</div>
-
 <div class="exercise-end"></div>
 
 <h3 id="update-list-on-save">Update List on Save</h3>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Updating Todo list on save 
+    <b>Exercise</b>: Updating Todo list on save
 </h4>
 
 <p>Now that we have the Todo list being stored in the todoList variable, when we save a new todo item, we can add it to the todoList array and the todo list will automatically update with the change.</p>
@@ -2010,7 +2024,7 @@
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>In the todo.component.ts file, we need to update the save function to push the save result into the todoList array. We need to add this code into the subscribe of the <code>TodoService.save</code> call. </p>
+<li><p>In the todo.component.ts file, we need to update the save function to push the save result into the todoList array. We need to add this code into the subscribe of the <code>TodoService.save</code> call.</p>
 <pre><code class="lang-TypeScript"> this.todoList.push(result);
 </code></pre>
 </li>
@@ -2020,7 +2034,7 @@
 <div class="exercise-end"></div>
 
 <h3 id="complete-todo">Complete Todo</h3>
-<p>Right now the todo list is just a read only view.  However, we need to have the ability to complete a todo item.  We are going to add an icon to the todo list that will toggle the completed state and save the todo item.</p>
+<p>Right now the todo list is just a read only view. However, we need to have the ability to complete a todo item. We are going to add an icon to the todo list that will toggle the completed state and save the todo item.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Save Updated Todo Item
 </h4>
@@ -2030,20 +2044,15 @@
 <pre><code class="lang-bash"> todo.service.ts
 </code></pre>
 </li>
-<li><p>We are going to create an update method that will take in a Todo item and make an  http put call to our API to update the one record with the new completion state.</p>
-<pre><code class="lang-TypeScript"> updateTodo(todo: Todo): Observable&lt;Todo | {}&gt; {
-     let url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+<li><p>We are going to create an update method that will take in a Todo item and make an http put call to our API to update the one record with the new completion state.</p>
+<pre><code class="lang-TypeScript"> updateTodo(todo: Todo): Observable&lt;Todo&gt; {
+     const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
 
-     return this.http.put(url, todo, this.options)
-     .map((res: Response) =&gt; &lt;Todo&gt;res.json())
-     .catch(error =&gt; {
-         console.log(&#39;update error&#39;, error);
-         return error;
-     });
+     return this.http.put&lt;Todo&gt;(url, todo, requestOptions);
  }
 </code></pre>
 <ul>
-<li>For the url we are using string interpolation to create the url.  This is done with the &#96;&#96; tags and the ${}</li>
+<li>For the url we are using string interpolation to create the url. This is done with the &#96;&#96; tags and the ${}</li>
 <li>An HTTP PUT call is used to update a record and requires an ID as part of the URL to figure out which record you are updating</li>
 </ul>
 </li>
@@ -2051,7 +2060,7 @@
 <div class="exercise-end"></div>
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Enable Toggle in UI and Save
+    <b>Exercise</b>: Enable Completed Toggle in UI
 </h4>
 
 <p>Now we need to call the updateTodo function that we just created in the TodoService from our UI component.</p>
@@ -2060,23 +2069,24 @@
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Create the completeTodo method that the UI will call </p>
+<li><p>Create the completeTodo method that the UI will call</p>
 <pre><code class="lang-TypeScript"> completeTodo(todo: Todo): void {
      todo.completed = !todo.completed;
      this.todoService.updateTodo(todo)
-     .subscribe(
-         data =&gt; {
-             // do nothing
-         },
-         error =&gt; {
-             todo.completed = !todo.completed;
-             this.errorMessage = &lt;any&gt;error;
-             console.log(&#39;complete error&#39;, this.errorMessage);
-         });
+         .subscribe(
+             (data: Todo) =&gt; {
+                 // do nothing
+                console.log(&#39;updated todo&#39;, todo);
+             },
+             (error: HttpErrorResponse) =&gt; {
+                 todo.completed = !todo.completed;
+                 this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+             }
+         );
  }
 </code></pre>
 <ul>
-<li>For now we are not going to do anything with the returned result.  In the future you could call a sort function or update an open todo item counter.</li>
+<li>For now we are not going to do anything with the returned result. In the future you could call a sort function or update an open todo item counter.</li>
 </ul>
 </li>
 </ol>
@@ -2090,8 +2100,8 @@
 <pre><code class="lang-html">   &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;i [className]=&quot;todoItem.completed ? &#39;fa fa-check-square-o&#39; : &#39;fa fa-square-o&#39;&quot;&gt;&lt;/i&gt;&lt;/div&gt;
 </code></pre>
 <ul>
-<li>We are passing in the todo item that we are wanting to update to the completedTodo function.  This will pass in the whole object so we have access to all of the fields.</li>
-<li>We are updating the icon used based on the completed field state.  If completed we are using fa-check-square-o.  If not completed, we are using fa-square-o</li>
+<li>We are passing in the todo item that we are wanting to update to the completedTodo function. This will pass in the whole object so we have access to all of the fields.</li>
+<li>We are updating the icon used based on the completed field state. If completed we are using fa-check-square-o. If not completed, we are using fa-square-o</li>
 </ul>
 </li>
 <li><p>With Bootstrap it is a 12 column grid, so we need to reduce the size of the existing div from col-12 to col-11 in order to fit in the complete checkbox</p>
@@ -2103,10 +2113,10 @@
      &lt;div class=&quot;col-11 done-{{todoItem.completed}}&quot;&gt;{{todoItem.item}} &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;&lt;/div&gt;
  &lt;/div&gt;
 </code></pre>
+ <div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully update a todo item since they are associated to a user.  After you have logged in, you can update as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+
 </li>
 </ol>
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully update a todo item since they are associated to a user.  After you have logged in, you can update as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
-
 <div class="exercise-end"></div>
 
 <h3 id="delete-todo">Delete Todo</h3>
@@ -2114,25 +2124,21 @@
     <b>Exercise</b>: Delete Todo Item from Data Store
 </h4>
 
-<p>In addition to being able to complete a todo item, we also need to be able to delete one.  We need to add an icon to the todo list that will call a delete function in the component and delete the todo item from our database.</p>
+<p>In addition to being able to complete a todo item, we also need to be able to delete one. We need to add an icon to the todo list that will call a delete function in the component and delete the todo item from our database.</p>
 <ol>
 <li><p>Open the src\app\shared\services\todo.service.ts file</p>
 <pre><code class="lang-bash"> todo.service.ts
 </code></pre>
 </li>
 <li><p>We need to create a delete method that will call our API using http.delete</p>
-<pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;Response | {}&gt; {
-     let url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
-     return this.http.delete(url, this.options)
-     .catch(error =&gt; {
-         console.log(&#39;delete error&#39;, error);
-         return error;
-     });
+<pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;Todo&gt; {
+     const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+     return this.http.delete&lt;Todo&gt;(url, requestOptions);
  }
 </code></pre>
 <ul>
 <li>We are passing in the todo item id that we are wanting to delete.</li>
-<li>We are not doing any kind of mapping of the return results since there is none.  It is either successful or not.</li>
+<li>We are not doing any kind of mapping of the return results since there is none. It is either successful or not.</li>
 </ul>
 </li>
 </ol>
@@ -2152,18 +2158,17 @@
 <pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): void {
      this.todoService.deleteTodo(todo)
      .subscribe(
-     data =&gt; {
-         let index = this.todoList.indexOf(todo);
-         this.todoList.splice(index, 1);
-     },
-     error =&gt; {
-         todo.completed = !todo.completed;
-         this.errorMessage = &lt;any&gt;error;
-         console.log(&#39;complete error&#39;, this.errorMessage);
-     });
+         (data: Todo) =&gt; {
+             const index = this.todoList.indexOf(todo);
+             this.todoList.splice(index, 1);
+         },
+         (error: HttpErrorResponse) =&gt; {
+             this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+         }
+     );
  }
 </code></pre>
- <div class="alert alert-info" role="alert">Note: We could have also just called the TodoService.getAll function but since we already have all of the items and the items are specific to a single user, there is no need to make the extra database call.</div>
+ <div class="alert alert-info" role="alert">Note: We could have also just called the TodoService.getAll function but since we already have all of the items and the items are specific to a single user, there is no need to make the extra API and Database call.</div>
 
 </li>
 </ol>
@@ -2173,7 +2178,7 @@
 <pre><code class="lang-bash"> todo.component.html
 </code></pre>
 </li>
-<li><p>After the div that displays the todo item and date but still inside of the ngFor div, we need to add a div that will hold the delete icon.  We will be using the fa-trash icon.  When the icon is clicked it will call the TodoComponent.deleteTodo function.  The icon is going to take up 1 column of space in the grid.</p>
+<li><p>After the div that displays the todo item and date but still inside of the ngFor div, we need to add a div that will hold the delete icon. We will be using the fa-trash icon. When the icon is clicked it will call the TodoComponent.deleteTodo function. The icon is going to take up 1 column of space in the grid.</p>
 <pre><code class="lang-TypeScript"> &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;&lt;i class=&quot;fa fa-trash&quot;&gt;&lt;/i&gt;&lt;/div&gt;
 </code></pre>
 </li>
@@ -2190,7 +2195,7 @@
  &lt;/div&gt;
 </code></pre>
 </li>
-<li><p>You can now test the delete functionality.  Warning that it will not ask if you want to delete the item.  It will just delete it.</p>
+<li><p>You can now test the delete functionality. Warning that it will not ask if you want to delete the item. It will just delete it.</p>
  <div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully delete a todo item since they are associated to a user.  After you have logged in, you can delete as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
 
 </li>
@@ -2202,46 +2207,45 @@
     <b>Exercise</b>: Making the Todo list look nicer
 </h4>
 
-<p>Right now the UI looks decent but with a few tweaks it could look much better.  </p>
+<p>Right now the UI looks ok but with a few tweaks it will have a much better look and feel to it.</p>
 <p><img src="images/todo-unstyled.png" alt="todo unstyled"></p>
-<p>If we added some padding around each row, a bottom border, made the date smaller and gray, increased the size of each icon and made the completed items gray with a strike-through, the UI would pop.</p>
-<p>The first thing we need to do is add in our styles to the Todo component.  Since these styles are strictly for the Todo component we are going to add them into the todo.component.scss instead of the app&#39;s style.scss file.  </p>
+<p>Lets add some padding around each row, a bottom border, made the date smaller and gray, increased the size of each icon and made the completed items gray with a strike-through, the UI would pop.</p>
+<p>The first thing we need to do is add in our styles to the Todo component. Since these styles are strictly for the Todo component we are going to add them into the todo.component.scss instead of the app&#39;s style.scss file.</p>
 <div class="alert alert-info" role="alert">Angular enables CSS encapsulation so that the styling in each components scss file will only be applied to that component and not the rest of the site.  They do this by adding an attribute to both the html elements and css classes that are rendered. It is done on the fly for you and does not at all change the actual files.</div>
 
-
 <ol>
-<li><p>Open the src\app\todo\todo.component.scss </p>
+<li><p>Open the src\app\todo\todo.component.scss</p>
 <pre><code class="lang-bash"> todo.component.scss
 </code></pre>
 </li>
-<li><p>Add the following contents to the file.  To ensure we are following our branding, we are importing our scss color variables.</p>
-<pre><code class="lang-scss"> @import &quot;../../assets/bootstrap/variables&quot;;
+<li><p>Add the following contents to the file. To ensure we are following our branding, we are importing our scss color variables.</p>
+<pre><code class="lang-scss"> @import &#39;../../assets/bootstrap/variables&#39;;
  div.todo {
-     width: 100%;
-     padding-bottom: .2em;
-     padding-top: .2em;
-     border-bottom: 1px solid $gray-light;
-     font-size: 1.4em;
+   width: 100%;
+   padding-bottom: 0.2em;
+   padding-top: 0.2em;
+   border-bottom: 1px solid $gray-light;
+   font-size: 1.4em;
 
-     small {
-         font-size: .7em;
-         color: $gray-light;
-     }
+   small {
+     font-size: 0.7em;
+     color: $gray-light;
+   }
 
-     i {
-         width: 40px;
-         padding-right: 10px;
-         vertical-align: middle
-     }
+   i {
+     width: 40px;
+     padding-right: 10px;
+     vertical-align: middle;
+   }
 
-     .done-true {
-         text-decoration: line-through;
-         color: $gray-light;
-     }
+   .done-true {
+     text-decoration: line-through;
+     color: $gray-light;
+   }
  }
 </code></pre>
 </li>
-<li><p>Now if you view the UI it should look like below.  </p>
+<li><p>Now if you view the UI it should look like below.</p>
 <p> <img src="images/todo-styled-final.png" alt="unstyled ui"></p>
 </li>
 </ol>
@@ -2259,15 +2263,15 @@
 <li>Show the list of todo list with icons to complete and delete todo items</li>
 <li><p>We used several Angular directives to implement functionality in the UI:</p>
 <ul>
-<li>*ngIf - replacement for ng-if.  Only show section if condition is true</li>
-<li>*ngFor - replacement for ng-repeat.  Loop through a list and do something</li>
+<li>*ngIf - replacement for ng-if. Only show section if condition is true</li>
+<li>*ngFor - replacement for ng-repeat. Loop through a list and do something</li>
 <li>[(ngModel)] - two-way data binding</li>
 <li>(click) - binds to the click event</li>
 <li>[className] - replacement for ngClass and set the css class for the element</li>
 <li>(ngModelChange) - runs method when the [(ngModel)] value changes</li>
-<li>[hidden] - hides the element when condition is true </li>
-<li>(ngSubmit) - submits a form </li>
-<li>[formGroup] - used for reactive forms.  basically dynamic forms that you can control in the controller</li>
+<li>[hidden] - hides the element when condition is true</li>
+<li>(ngSubmit) - submits a form</li>
+<li>[formGroup] - used for reactive forms. basically dynamic forms that you can control in the controller</li>
 <li>[disabled] - set the element to disabled when condition is true</li>
 </ul>
 </li>
@@ -2286,11 +2290,11 @@
 				<div class="chapter">
 					<h2 id="locking-down-routes">Locking Down Routes</h2>
 <h3 id="overview">Overview</h3>
-<p>Right now in order to use our Todo list, we have to manually go to the login page first.  This is a terrible user experience.  Luckily, Angular has the ability to do checks before allowing a user into a route by implementing a guard on a route.  </p>
-<p>Guards allow you to authentication or authorization check before allowing a user to perform an action.  Common usage cases are: </p>
+<p>Right now in order to use our Todo list, we have to manually go to the login page first.  This is a terrible user experience.  Luckily, Angular has the ability to do checks before allowing a user into a route by implementing a guard on a route.</p>
+<p>Guards allow you to authentication or authorization check before allowing a user to perform an action.  Common usage cases are:</p>
 <ul>
 <li>Role checks such as admin before allowing the user into the admin section of the application</li>
-<li>Is the user logged in check before allowing them into the page the pulls or updates data </li>
+<li>Is the user logged in check before allowing them into the page the pulls or updates data</li>
 <li>Is the user logged out before allowing them to create an account</li>
 </ul>
 <p>In this chapter we are going to implement a check for if the user is logged in before allowing them to view the home page and interact with the Todo list.</p>
@@ -2304,11 +2308,11 @@
 
 <p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactive-forms.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactvive-forms.zip</a> </li>
+<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactive-forms.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactvive-forms.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -2330,7 +2334,7 @@
 </h4>
 
 <ol>
-<li><p>Open terminal and generate the guard </p>
+<li><p>Open terminal and generate the guard</p>
 <pre><code class="lang-bash">ng generate guard shared/guards/IsLoggedIn --module App
 </code></pre>
 <p><img src="images/isloggedin-generate.png" alt="generate output"></p>
@@ -2350,29 +2354,34 @@
 </code></pre>
 </li>
 <li><p>Add an isAuthenticated function to the AuthService that checks the API to make sure that the user is still logged in</p>
-<pre><code class="lang-TypeScript">isAuthenticated(): Observable&lt;boolean&gt; {
- return this.http.get(&quot;https://dj-sails-todo.azurewebsites.net/user/identity&quot;, this.options)
-   .map((res: Response) =&gt; {
-     if (res) {
-       return Observable.of(true);
-     }
+<pre><code class="lang-TypeScript">isAuthenticated(): Observable&lt;boolean | Response&gt; {
+     return this.http
+         .get(&#39;https://dj-sails-todo.azurewebsites.net/user/identity&#39;, requestOptions)
+         .pipe(
+             tap((res: Response) =&gt; {
+                 if (res) {
+                     console.log(&#39;logged in&#39;);
+                     return of(true);
+                 }
 
-     return Observable.of(false);
-   })
-   .catch((error: Response) =&gt; {
-     if (error.status !== 403) {
-       console.log(&#39;isAuthenticated error&#39;, error);
-     }
-
-     return Observable.of(false);
-   });
-}
+                 console.log(&#39;not logged in&#39;);
+                 return of(false);
+             }),
+             catchError((error: HttpErrorResponse) =&gt; {
+                 if (error.status !== 403) {
+                     console.log(&#39;isAuthenticated error&#39;, error);
+                 }
+                 console.log(&#39;login error&#39;, error);
+                 return of(false);
+             }),
+         );
+ }
 </code></pre>
 </li>
 </ol>
-<p>Next we need to add logic to the guard&#39;s canActivate function to call the AuthService.isAuthenticated function </p>
+<p>Next we need to add logic to the guard&#39;s canActivate function to call the AuthService.isAuthenticated function</p>
 <ol>
-<li><p>Open src\app\shared\guards\is-logged-in.guard.ts </p>
+<li><p>Open src\app\shared\guards\is-logged-in.guard.ts</p>
 <pre><code class="lang-bash">is-logged-in.guard.ts
 </code></pre>
 </li>
@@ -2384,12 +2393,12 @@
 <pre><code class="lang-TypeScript">import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot , Router} from &#39;@angular/router&#39;;
 </code></pre>
 </li>
-<li><p>Before we can use the AuthService and router we need to create a constructor and inject them into it </p>
+<li><p>Before we can use the AuthService and router we need to create a constructor and inject them into it</p>
 <pre><code class="lang-TypeScript">constructor(private authService: AuthService, private router: Router) { }
 </code></pre>
 </li>
 <li><p>In the canActivate function we need to replace the return true with the following logic that will call the AuthService.isAuthenticated function and  return if the user is logged in or not.  If the user is not logged in or there is an error validating if they are logged in then we will navigate them to the login route else we will let them into the route</p>
-<pre><code class="lang-TypeScript"> let isLoggedIn = new Observable&lt;boolean&gt;(observer =&gt; {
+<pre><code class="lang-TypeScript"> const isLoggedIn = new Observable&lt;boolean&gt;(observer =&gt; {
  this.authService.isAuthenticated()
    .subscribe((res: boolean) =&gt; {
    if (res) {
@@ -2413,7 +2422,6 @@
 </ol>
 <div class="exercise-end"></div>
 
-
 <h3 id="add-guard-to-route">Add Guard to Route</h3>
 <p>In order to use the Guard we need to add it to the route.  Each route has a canActivate attribute that takes an array of guards as the 3rd parameter.</p>
 <h4 class="exercise-start">
@@ -2430,25 +2438,22 @@
 </code></pre>
 </li>
 <li><p>To the default route, add the canActivate attribute with the value being an array that contains the IsLoggedInGuard</p>
-<pre><code class="lang-TypeScript">, 
+<pre><code class="lang-TypeScript">,
 canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>You route should look like</p>
 <pre><code class="lang-TypeScript">{
  path: &#39;&#39;,
- children: [],
  component: TodoComponent,
  canActivate: [IsLoggedInGuard]
 },
 </code></pre>
 </li>
-<li><p>When you try to go to <a href="http://localhost:4200">http://localhost:4200</a> if you are not already logged in it will redirect you to the login page.  </p>
+<li><p>When you try to go to <a href="http://localhost:4200">http://localhost:4200</a> if you are not already logged in it will redirect you to the login page.</p>
 </li>
 </ol>
 <div class="exercise-end"></div>
-
-
 
 				</div>
 
@@ -2456,7 +2461,7 @@ canActivate: [IsLoggedInGuard]
 				<div class="chapter">
 					<h2 id="environment-configuration">Environment Configuration</h2>
 <h3 id="overview">Overview</h3>
-<p>So far we have been hard coding our API url into our services which means we have the base url in multiple places.  Instead we should be using a configuration file that stores the API in one place and allows us to use it anywhere in the application.  Luckily, Angular comes with environment configuration files that allow us to do just that.  </p>
+<p>So far we have been hard coding our API url into our services which means we have the base url in multiple places.  Instead we should be using a configuration file that stores the API in one place and allows us to use it anywhere in the application.  Luckily, Angular comes with environment configuration files that allow us to do just that.</p>
 <p>The different environment configurations are stored in the src\environments folder.</p>
 <h3 id="goals">Goals</h3>
 <ul>
@@ -2468,11 +2473,11 @@ canActivate: [IsLoggedInGuard]
 
 <p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip</a> </li>
+<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -2500,7 +2505,7 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-bash"> environment.ts
 </code></pre>
 </li>
-<li><p>Add the environmentName and apiBaseUrl values to the environment object.  </p>
+<li><p>Add the environmentName and apiBaseUrl values to the environment object.</p>
 <pre><code class="lang-TypeScript"> environmentName: &#39;Development&#39;,
  apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
 </code></pre>
@@ -2516,9 +2521,8 @@ canActivate: [IsLoggedInGuard]
 </ol>
 <div class="exercise-end"></div>
 
-
 <h3 id="production-configuration">Production Configuration</h3>
-<p>The src\environments\environment.prod.ts file is the production configuration.  We need to add in the environmentName and apiBaseUrl that we added to the default configuration.  </p>
+<p>The src\environments\environment.prod.ts file is the production configuration.  We need to add in the environmentName and apiBaseUrl that we added to the default configuration.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Update Production Configuration
 </h4>
@@ -2528,8 +2532,8 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-bash"> environment.prod.ts
 </code></pre>
 </li>
-<li><p>Add the environmentName and apiBaseUrl values to the environment object.  </p>
-<pre><code class="lang-TypeScript"> environmentName: &#39;Development&#39;,
+<li><p>Add the environmentName and apiBaseUrl values to the environment object.</p>
+<pre><code class="lang-TypeScript"> environmentName: &#39;Production&#39;,
  apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
 </code></pre>
 </li>
@@ -2545,7 +2549,7 @@ canActivate: [IsLoggedInGuard]
 <div class="exercise-end"></div>
 
 <h3 id="local-development">Local Development</h3>
-<p>The other environment that is typically created is for local development on your machine.  For this tutorial the environment.ts and local.ts have the same values but once you go from development to production they will differ.   </p>
+<p>The other environment that is typically created is for local development on your machine.  For this tutorial the environment.ts and local.ts have the same values but once you go from development to production they will differ.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Create Local Configuration
 </h4>
@@ -2563,7 +2567,7 @@ canActivate: [IsLoggedInGuard]
  };
 </code></pre>
 </li>
-<li><p>In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the .angular-cli.json that is in the root of the project.  </p>
+<li><p>In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the .angular-cli.json that is in the root of the project.</p>
 <pre><code class="lang-bash"> .angular-cli.json
 </code></pre>
 </li>
@@ -2598,15 +2602,15 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>Create a private variable called url inside the TodoService class that gets the apiBaseUrl from the environment file and append on the /todo</p>
-<pre><code class="lang-TypeScript">   private url: string = `${environment.apiBaseUrl}/todo`;
+<pre><code class="lang-TypeScript">   private url = `${environment.apiBaseUrl}/todo`;
 </code></pre>
 </li>
-<li><p>For the save and getAll function update the hard coded url to use the class level url variable.  Don&#39;t forget due to scoping that you need to access the variable by using this.url </p>
+<li><p>For the save and getAll function update the hard coded url to use the class level url variable.  Don&#39;t forget due to scoping that you need to access the variable by using this.url</p>
 <pre><code class="lang-TypeScript"> this.url
 </code></pre>
 </li>
 <li><p>For the updateTodo and deleteTodo we need to replace the hard coded url with the class level url variable.  Since we are already using string interpolation to create the string, we need to replace the hard coded value with <code>${this.url}</code></p>
-<pre><code class="lang-TypeScript"> let url = `${this.url}/${todo.id}`;
+<pre><code class="lang-TypeScript"> const url = `${this.url}/${todo.id}`;
 </code></pre>
 </li>
 <li><p>Everything should still work to list, insert, update and delete todo items as before but now the url is no longer hard coded and can easily be changed as you move to different environments.</p>
@@ -2634,7 +2638,7 @@ canActivate: [IsLoggedInGuard]
 </li>
 </ol>
 <h4 id="local">Local</h4>
-<p>If you want to run the local configuration we need to pass in the environment command line argument.  The environment argument value is the name of the environment name in the angular-cli.json file.  Note that you can only have 1 ng serve running at a time.    </p>
+<p>If you want to run the local configuration we need to pass in the environment command line argument.  The environment argument value is the name of the environment name in the angular-cli.json file.  Note that you can only have 1 ng serve running at a time.</p>
 <ol>
 <li>Go to the terminal that is running <code>ng serve</code> and do a ctrol+c to stop it</li>
 <li><p>Run the <code>ng serve</code> command with the -e and specify the local environment</p>
@@ -2664,11 +2668,11 @@ canActivate: [IsLoggedInGuard]
 
 <p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip</a> </li>
+<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -2690,7 +2694,7 @@ canActivate: [IsLoggedInGuard]
 </h4>
 
 <ol>
-<li><p>Open the integrated terminal and generate the notFound component </p>
+<li><p>Open the integrated terminal and generate the notFound component</p>
 <pre><code class="lang-bash"> ng generate component notFound
 </code></pre>
 </li>
@@ -2701,7 +2705,7 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-bash"> app-routing.module.ts
 </code></pre>
 </li>
-<li><p>add an import statement for the NotFoundComponent </p>
+<li><p>add an import statement for the NotFoundComponent</p>
 <pre><code class="lang-TypeScript"> import { NotFoundComponent } from &#39;./not-found/not-found.component&#39;;
 </code></pre>
 </li>
@@ -2713,21 +2717,20 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-TypeScript"> const routes: Routes = [
      {
          path: &#39;&#39;,
-         children: [],
          component: TodoComponent,
          canActivate: [IsLoggedInGuard]
      },
-     { path: &#39;login&#39;, children: [], component: LoginComponent },
+     { path: &#39;login&#39;, component: LoginComponent },
      { path: &#39;signup&#39;, component: SignupComponent },
      { path: &#39;**&#39;, component: NotFoundComponent }
  ];
 </code></pre>
 </li>
-<li><p>If you now try to navigate to <a href="http://localhost:4200/unknown">http://localhost:4200/unknown</a> you will be shown the NotFoundComponent </p>
+<li><p>If you now try to navigate to <a href="http://localhost:4200/unknown">http://localhost:4200/unknown</a> you will be shown the NotFoundComponent</p>
 <p> <img src="images/view-route-unknown.png" alt="Not Found View"></p>
 </li>
 </ol>
-<p>The only thing left for you to do is to design what you want your not found page to actually say.  </p>
+<p>The only thing left for you to do is to design what you want your not found page to actually say.</p>
 
 				</div>
 
@@ -2735,23 +2738,23 @@ canActivate: [IsLoggedInGuard]
 				<div class="chapter">
 					<h2 id="header-and-footer">Header and footer</h2>
 <h3 id="overview">Overview</h3>
-<p>In most web sites we have a header and footer at the top and bottom of the page respectively with our logo, navigation, and important links.  The header will contain our logo and navigation menu while the footer will contain our copyright info. </p>
+<p>In most web sites we have a header and footer at the top and bottom of the page respectively with our logo, navigation, and important links.  The header will contain our logo and navigation menu while the footer will contain our copyright info.</p>
 <h3 id="goals">Goals</h3>
 <ul>
 <li>Understand how to create a new component</li>
 <li>Understand how to include components inside of other components</li>
-<li>Understand how to utilize Bootstrap </li>
+<li>Understand how to utilize Bootstrap</li>
 </ul>
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
 <p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-default-route.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-default-route.zip</a> </li>
+<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-default-route.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-default-route.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -2778,7 +2781,7 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-bash"> ng generate component shared/header
 </code></pre>
 </li>
-<li><p>The generate command will create 4 files: </p>
+<li><p>The generate command will create 4 files:</p>
 <p> <img src="images/header-generate.png" alt="output of generate"></p>
 <ul>
 <li>scss (styles)</li>
@@ -2792,7 +2795,7 @@ canActivate: [IsLoggedInGuard]
 <div class="exercise-end"></div>
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Add the Menu 
+    <b>Exercise</b>: Add the Menu
 </h4>
 
 <ol>
@@ -2800,7 +2803,7 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-bash"> header.component.html
 </code></pre>
 </li>
-<li><p>Replace the contents with the following. </p>
+<li><p>Replace the contents with the following.</p>
 <pre><code class="lang-html"> &lt;header&gt;
      &lt;nav class=&quot;navbar navbar-toggleable-md navbar-light bg-faded&quot;&gt;
          &lt;button class=&quot;navbar-toggler navbar-toggler-right&quot; type=&quot;button&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#navbarSupportedContent&quot;
@@ -2839,11 +2842,11 @@ canActivate: [IsLoggedInGuard]
     <b>Exercise</b>: Update Main page
 </h4>
 
-<p>Now that we have created the menu, we need to add it to the app component so that it shows on every page. </p>
-<p>One of the really cool things that we can do with components is include them inside of other components.  This makes it very easy to create reusable components.  </p>
+<p>Now that we have created the menu, we need to add it to the app component so that it shows on every page.</p>
+<p>One of the really cool things that we can do with components is include them inside of other components.  This makes it very easy to create reusable components.</p>
 <ol>
-<li><p>Open the src\app\app.component.ts file </p>
-<pre><code class="lang-bash">app.component.ts
+<li><p>Open the src\app\app.component.ts file</p>
+<pre><code class="lang-bash"> app.component.ts
 </code></pre>
 </li>
 <li><p>Import the header component.  Add the import statement on line 2 right below the existing import statement.</p>
@@ -2855,12 +2858,12 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>Add the app-header to the top of the html code</p>
-<pre><code class="lang-html">&lt;app-header&gt;&lt;/app-header&gt;
+<pre><code class="lang-html"> &lt;app-header&gt;&lt;/app-header&gt;
 </code></pre>
 </li>
 <li><p>If you view the web page you should see the header with logo, the menu and our banner.  To make it easy to navigate between the routes we have created, we added all of them to the menu.  Normally you would only add the ones that a user should directly get to by clicking on a link.</p>
-<p><img src="images/header-view.png" alt="App Component with Header View"></p>
-<div class="alert alert-info" role="alert">  To make it easy to navigate between the routes we have created, we added all of them to the menu.  Normally you would only add the ones that a user should directly get to by clicking on a link.</div>
+<p> <img src="images/header-view.png" alt="App Component with Header View"></p>
+ <div class="alert alert-info" role="alert">  To make it easy to navigate between the routes we have created, we added all of them to the menu.  Normally you would only add the ones that a user should directly get to by clicking on a link.</div>
 
 </li>
 </ol>
@@ -2876,7 +2879,7 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-bash"> header.component.ts
 </code></pre>
 </li>
-<li><p>Create a variable named isCollapsed that is a boolean and set to false.  This will be used tdo hold if the menu is collapsed or not.</p>
+<li><p>Create a variable named isCollapsed that is a boolean and set to false.  This will be used to hold if the menu is collapsed or not.</p>
 <pre><code class="lang-TypeScript"> isCollapsed: boolean = true;
 </code></pre>
 </li>
@@ -2913,13 +2916,12 @@ canActivate: [IsLoggedInGuard]
     <b>Exercise</b>: Creating the footer component
 </h4>
 
-
 <ol>
 <li><p>In the Integrated Terminal, run the ng generate command to create the header component</p>
 <pre><code class="lang-bash"> ng generate component shared/footer
 </code></pre>
 </li>
-<li><p>The generate command will create 4 files: </p>
+<li><p>The generate command will create 4 files:</p>
 <p> <img src="images/footer-generate.png" alt="Generate Output"></p>
 <ul>
 <li>scss (styles)</li>
@@ -2930,8 +2932,7 @@ canActivate: [IsLoggedInGuard]
 </ul>
 </li>
 </ol>
-<div class="exercise-end"></div>    
-
+<div class="exercise-end"></div>
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Footer UI
@@ -2943,20 +2944,21 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>Replace the contents with</p>
-<pre><code> &lt;footer&gt;
+<pre><code class="lang-html"> &lt;footer&gt;
      &lt;div class=&quot;pull-left&quot;&gt;
          &amp;copy;Angular WS
      &lt;/div&gt;
  &lt;/footer&gt;
-</code></pre></li>
+</code></pre>
+</li>
 </ol>
-<div class="exercise-end"></div>    
+<div class="exercise-end"></div>
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Styling the Footer
 </h4>
 
-<p>We want to postion the footer at bottom of the page and change the background color.  </p>
+<p>We want to postion the footer at bottom of the page and change the background color.</p>
 <ol>
 <li><p>Open src\app\footer\footer.component.scss file</p>
 <pre><code class="lang-bash"> footer.component.scss
@@ -2994,27 +2996,26 @@ canActivate: [IsLoggedInGuard]
 <p>Now we are ready to add our footer to the Main page</p>
 <ol>
 <li><p>Open the src\app\app.component.ts file</p>
-<pre><code class="lang-bash">app.component.ts
+<pre><code class="lang-bash"> app.component.ts
 </code></pre>
 </li>
 <li><p>We need to import the FooterComponent before we can use it on the Main Page which is our AppComponent</p>
-<pre><code class="lang-TypeScript">import { FooterComponent } from &#39;./shared/footer/footer.component&#39;;
+<pre><code class="lang-TypeScript"> import { FooterComponent } from &#39;./shared/footer/footer.component&#39;;
 </code></pre>
 </li>
 <li><p>Now we can add the <code>&lt;app-footer&gt;</code> tag in the src\app\app.component.html</p>
-<pre><code class="lang-bash">app.component.html
+<pre><code class="lang-bash"> app.component.html
 </code></pre>
 </li>
 <li><p>Add the <code>&lt;app-footer&gt;</code> at the bottom of the html</p>
 <pre><code class="lang-html"> &lt;app-footer&gt;&lt;/app-footer&gt;
 </code></pre>
 </li>
-<li><p>If you view the web page you should see the footer </p>
-<p><img src="images/footer-view.png" alt="App Works with Footer"></p>
+<li><p>If you view the web page you should see the footer</p>
+<p> <img src="images/footer-view.png" alt="App Works with Footer"></p>
 </li>
 </ol>
 <div class="exercise-end"></div>
-
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Fixing body height
@@ -3050,7 +3051,7 @@ canActivate: [IsLoggedInGuard]
 
 <p>Earlier we created an environment name variable in the different Angular environment files.  Wouldn&#39;t it be nice if we displayed which environment we were in within the footer.</p>
 <ol>
-<li><p>Open the src\app\shared\footer\footer.component.ts file </p>
+<li><p>Open the src\app\shared\footer\footer.component.ts file</p>
 <pre><code class="lang-bash"> footer.component.ts
 </code></pre>
 </li>
@@ -3070,21 +3071,22 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>After the &quot;Angular WS&quot; div but instead the footer tag add the following to display the env value</p>
-<pre><code> &lt;div class=&quot;pull-right&quot;&gt;
+<pre><code class="lang-html"> &lt;div class=&quot;pull-right&quot;&gt;
      env: {{ env }}
  &lt;/div&gt;
-</code></pre></li>
-<li><p>If you view the web page you should see the footer </p>
-<p><img src="images/footer-with-env.png" alt="App Works with Footer"></p>
-<div class="alert alert-warning" role="alert">Notice that the env:Local in the footer is coming from the environment.local.ts file.  If you stop <code>ng serve</code> and run it without using the <code>-e local</code> argument, the env value will change to Development
+</code></pre>
+</li>
+<li><p>If you view the web page you should see the footer</p>
+<p> <img src="images/footer-with-env.png" alt="App Works with Footer"></p>
+ <div class="alert alert-warning" role="alert">Notice that the env:Local in the footer is coming from the environment.local.ts file.  If you stop <code>ng serve</code> and run it without using the <code>-e local</code> argument, the env value will change to Development
 
-    <img src="images/footer-with-env-dev.png" alt="footer development env">
+     <img src="images/footer-with-env-dev.png" alt="footer development env">
 
-</div>
+ </div>
 
 </li>
 </ol>
-<div class="exercise-end"></div>  
+<div class="exercise-end"></div>
 
 <h3 id="review">Review</h3>
 <p>In this chapter will learned:</p>
@@ -3143,9 +3145,9 @@ Note that this will remove the dist directory before build.
 				<div class="chapter">
 					<h2 id="bonus-additional-todo-features">Bonus: Additional Todo Features</h2>
 <h3 id="overview">Overview</h3>
-<p>Right now the Todo UI is fully functional but there is some nice usability enhancements we could implement.  For example:   </p>
+<p>Right now the Todo UI is fully functional but there is some nice usability enhancements we could implement.  For example:</p>
 <ul>
-<li>The todo list is sorted by when it was created, it would be much nicer to sort alphabetically and by completion status.  </li>
+<li>The todo list is sorted by when it was created, it would be much nicer to sort alphabetically and by completion status.</li>
 <li>There is no way to see a count of how many items you have open.</li>
 <li>The add form is not cleared out on successful save.</li>
 </ul>
@@ -3160,11 +3162,11 @@ Note that this will remove the dist directory before build.
 
 <p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-header-footer.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-header-footer.zip</a> </li>
+<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-header-footer.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-header-footer.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -3181,11 +3183,11 @@ Note that this will remove the dist directory before build.
 <div class="exercise-end"></div>
 
 <h3 id="displaying-open-item-count">Displaying Open Item Count</h3>
-<p>It would be nice to know how many todo items that the user has and display that in the UI.  </p>
+<p>It would be nice to know how many todo items that the user has and display that in the UI.</p>
 <p>Requirements:</p>
 <ul>
 <li>Display a count a open todo items without querying the API</li>
-<li>Update the count when getting, updating and deleting the todo item list. </li>
+<li>Update the count when getting, updating and deleting the todo item list.</li>
 </ul>
 <h4 class="exercise-start">
     <b>Exercise</b>: Calculating Open Items
@@ -3197,7 +3199,7 @@ Note that this will remove the dist directory before build.
 </code></pre>
 </li>
 <li><p>Create a variable to hold the open count in the TodoComponent class that is of type number with a default value of 0</p>
-<pre><code class="lang-TypeScript"> openItemCount: number = 0;
+<pre><code class="lang-TypeScript"> openItemCount = 0;
 </code></pre>
 </li>
 <li><p>Create a function called calculateOpenItems that filters the todoList to only show when the completed status is false and get the length.</p>
@@ -3214,7 +3216,7 @@ Note that this will remove the dist directory before build.
 </h4>
 
 <ol>
-<li><p>In src\app\todo\todo.component.ts that we already have open, find the getTodoListAll function and add a call to the calculateOpenItems function after setting the todoList variable but still within the <code>data</code> function.  </p>
+<li><p>In src\app\todo\todo.component.ts that we already have open, find the getTodoListAll function and add a call to the calculateOpenItems function after setting the todoList variable but still within the <code>data</code> function.</p>
 <pre><code class="lang-TypeScript"> this.calculateOpenItems();
 </code></pre>
 </li>
@@ -3236,19 +3238,17 @@ Note that this will remove the dist directory before build.
 </code></pre>
 </li>
 <li><p>The UI should now look like</p>
-<p> <img src="images/todo-open-items.png" alt="open item count display">    </p>
+<p> <img src="images/todo-open-items.png" alt="open item count display"></p>
 </li>
 </ol>
 <div class="exercise-end"></div>
-
-
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Update Open Item Count on Add
 </h4>
 
 <ol>
-<li><p>Open src\app\todo\todo.component.ts </p>
+<li><p>Open src\app\todo\todo.component.ts</p>
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
@@ -3260,12 +3260,12 @@ Note that this will remove the dist directory before build.
 <div class="exercise-end"></div>
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Update Open Item on Complete 
+    <b>Exercise</b>: Update Open Item on Complete
 </h4>
 
-<p>When we toggle the completion status of a Todo item we also need to update the openItemCount value.  We want to make this update after successfully calling the TodoService.updateTodo service function.  Since it is a toggle we need to have a little bit of logic to figure out if the item was originally completed or not.  </p>
+<p>When we toggle the completion status of a Todo item we also need to update the openItemCount value.  We want to make this update after successfully calling the TodoService.updateTodo service function.  Since it is a toggle we need to have a little bit of logic to figure out if the item was originally completed or not.</p>
 <ol>
-<li><p>In the todo.component.ts file</p>
+<li><p>In the src\app\todo\todo.component.ts file</p>
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
@@ -3283,24 +3283,26 @@ Note that this will remove the dist directory before build.
 <p>The last thing we need to do is to re-calculate the openItemCount when an item is deleted.  We don&#39;t just decrement since a user can delete a completed it and there is no sense in adding in additional logic since the calculateOpenItems already has the logic.</p>
 <ol>
 <li><p>In the src\app\todo\todo.component.ts file</p>
-<pre><code class="lang-bash">todo.component.ts
+<pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
 <li><p>Find the deleteTodo function and add logic to decrement the openItemCount if the todo item being deleted was not completed.  You will want to put this call after the splice that removes the item from the todo list</p>
-<pre><code class="lang-TypeScript"> if (todo.completed === false) this.openItemCount--;
+<pre><code class="lang-TypeScript"> if (todo.completed === false) {
+     this.openItemCount--;
+ }
 </code></pre>
 </li>
 </ol>
 <div class="exercise-end"></div>
 
-<p>Now when you fetch, add, complete or delete a todo item the open item count will be updated accordingly.  </p>
+<p>Now when you fetch, add, complete or delete a todo item the open item count will be updated accordingly.</p>
 <h3 id="sort-in-the-ui">Sort in the UI</h3>
-<p>Right now the data from the API is unsorted which makes the list hard to read.  It would be better sort alphabetically with the uncompleted items at the top.  </p>
+<p>Right now the data from the API is unsorted which makes the list hard to read.  It would be better sort alphabetically with the uncompleted items at the top.</p>
 <h4 id="requirements">Requirements</h4>
 <ul>
 <li>Sort by multiple fields</li>
 <li>Sort is case insensitive</li>
-<li>Sort for text fields can be done either ascending or descending </li>
+<li>Sort for text fields can be done either ascending or descending</li>
 <li>Sort should be generic and able to be used on any array</li>
 <li>Completed items are at the bottom of the list</li>
 <li>Each item is sorted by its text after sorting by the completed status</li>
@@ -3322,7 +3324,7 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-bash"> field-sorter.ts
 </code></pre>
 </li>
-<li><p>To the FieldSorter class add the sort class below.  </p>
+<li><p>To the FieldSorter class add the sort class below.</p>
 <pre><code class="lang-TypeScript"> // made static in order to not have to new up the class to use
  public static sort(fieldNames: Array&lt;string&gt;, ignoreCase: boolean) {
      return (item1: object, item2: object) =&gt; fieldNames.map((field: string) =&gt; {
@@ -3358,8 +3360,8 @@ Note that this will remove the dist directory before build.
  }
 </code></pre>
 <ul>
-<li>We are using the map and reduce functions to accomplish our sorting task </li>
-<li>It is a static function so that you do not have to new up the class in order to use it  </li>
+<li>We are using the map and reduce functions to accomplish our sorting task</li>
+<li>It is a static function so that you do not have to new up the class in order to use it</li>
 <li>Parameters are an array of fieldNames that corresponds to a field in the array you are sorting and a boolean to decide if case is ignored</li>
 <li>If you start a field name with a minus sign if will sort it descending</li>
 </ul>
@@ -3367,35 +3369,38 @@ Note that this will remove the dist directory before build.
 </ol>
 <div class="exercise-end"></div>
 
-
 <h4 class="exercise-start">
     <b>Exercise</b>: Add Sorting to UI
 </h4>
 
-<p>Now that we have our generic sorting method, we can create a function to do the actual sorting that can be called in the save, getTodoListAll, and completedTodo.  </p>
+<p>Now that we have our generic sorting method, we can create a function to do the actual sorting that can be called in the save, getTodoListAll, and completedTodo.</p>
 <ol>
 <li><p>Open src\app\todo\todo.component.ts</p>
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Add the following function to call the FieldSorter.sort and sort first by completed status and then by name.  </p>
+<li><p>Import the FieldSorter</p>
+<pre><code class="lang-TypeScript"> import { FieldSorter } from &#39;../shared/classes/field-sorter&#39;;
+</code></pre>
+</li>
+<li><p>Add the following function to call the FieldSorter.sort and sort first by completed status and then by name.</p>
 <pre><code class="lang-TypeScript"> sortItems(): void {
      this.todoList.sort(FieldSorter.sort([&#39;completed&#39;, &#39;item&#39;], true));
  }
 </code></pre>
 </li>
 <li><p>In the save, completeTodo and getTodoListAll functions after we have updated the todoList array, call the sortItems function</p>
-<pre><code> this.sortItems();
-</code></pre></li>
+<pre><code class="lang-typescript"> this.sortItems();
+</code></pre>
+</li>
 <li><p>Now when you fetch, add, and update todo items the list will stay sorted by completed status and then by item text.  The sort is also case insensitive.
  <img src="images/todo-sorted.png" alt="sorted output"></p>
 </li>
 </ol>
 <div class="exercise-end"></div>
 
-
 <h3 id="reset-form-after-save">Reset Form After Save</h3>
-<p>Right now after you add a new todo item, the form does not clear out the input box.  This is really annoying as a user since you would not be entering the same todo item multiple times.  Since we only have 1 field we could set the field value to a blank string in the save method but that would not reset state.  Instead we want to call the reset function that is part of the FormGroup that we defined addForm as.   </p>
+<p>Right now after you add a new todo item, the form does not clear out the input box.  This is really annoying as a user since you would not be entering the same todo item multiple times.  Since we only have 1 field we could set the field value to a blank string in the save method but that would not reset state.  Instead we want to call the reset function that is part of the FormGroup that we defined addForm as.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Add Sorting to UI
 </h4>
@@ -3411,7 +3416,6 @@ Note that this will remove the dist directory before build.
 </li>
 </ol>
 <div class="exercise-end"></div>
-
 
 <h3 id="confirm-before-deleting">Confirm Before Deleting</h3>
 <p>Right now when you delete an item it does not ask you at all for a confirmation.  This is a bad user experience as they could accidentally delete something important.</p>
@@ -3448,18 +3452,18 @@ Note that this will remove the dist directory before build.
 <h3 id="goals">Goals</h3>
 <ul>
 <li>Understand how to create a cookie with user information in it</li>
-<li>Understand how to logout the user </li>
+<li>Understand how to logout the user</li>
 </ul>
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
 <p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-todo.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-todo.zip</a> </li>
+<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-todo.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-todo.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -3476,23 +3480,21 @@ Note that this will remove the dist directory before build.
 <div class="exercise-end"></div>
 
 <h3 id="caching-user">Caching User</h3>
-<p>Right now when you refresh the page the current user information in the AuthService is lost.  We can cache the data using cookies.  To implement the cookie storage we are going to use the ngx-cookie library.</p>
+<p>Right now we are not caching any user information.  It would be nice to be able to display the user information in the header.  We can cache the user data using cookies.  To implement the cookie storage we are going to use the ngx-cookie library.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Create Class
 </h4>
 
-<p>In the AuthService, in order to hold our user data and get type checking we need to create a TypeScript class with an email and id field.  We are going to leave the password field out of the class as we do not want to store this in memory at all.  </p>
+<p>In the AuthService, in order to hold our user data and get type checking we need to create a TypeScript class with an email and id field.  We are going to leave the password field out of the class as we do not want to store this in memory at all.</p>
 <ol>
 <li>Within VS Code, open up the integrated terminal (ctrl+`) or view menu and then &quot;Integrated Terminal&quot;</li>
 <li><p>Run the ng generate command below to create the Authorization service.  I like to store my services under a shared\services folder.</p>
 <pre><code class="lang-bash"> ng generate class shared/classes/User
 </code></pre>
 </li>
-<li><p>The generate command will the user.ts file in the shared/classes folder: </p>
+<li><p>The generate command will the user.ts file in the shared/classes folder:</p>
 <p> <img src="images/user-generate.png" alt="output of generate"></p>
 </li>
-</ol>
-<ol>
 <li><p>Open the src\app\shared\classes\User.ts file</p>
 <pre><code class="lang-bash"> user.ts
 </code></pre>
@@ -3508,8 +3510,8 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-TypeScript"> constructor(email: string, id?: string, createdAt?: Date, updatedAt?: Date){
      this.email = email;
      this.id = id;
-     this.createdAt = createdAt ? createdAt: new Date();
-     this.updatedAt = updatedAt ? updatedAt: new Date();
+     this.createdAt = createdAt ? createdAt : new Date();
+     this.updatedAt = updatedAt ? updatedAt : new Date();
  }
 </code></pre>
 </li>
@@ -3541,7 +3543,7 @@ Note that this will remove the dist directory before build.
 </li>
 </ol>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Add Cookie Get/Set Functions 
+    <b>Exercise</b>: Add Cookie Get/Set Functions
 </h4>
 
 <ol>
@@ -3558,11 +3560,11 @@ Note that this will remove the dist directory before build.
 </code></pre>
 </li>
 <li><p>Update the constructor to inject the CookieService</p>
-<pre><code class="lang-TypeScript"> constructor(private http: Http, private cookieService: CookieService) {}
+<pre><code class="lang-TypeScript"> constructor(private http: HttpClient, private cookieService: CookieService) {}
 </code></pre>
 </li>
 <li><p>Add a class level variable to store the name of the cookie and set it to currentUser</p>
-<pre><code class="lang-TypeScript"> private cookieKey: string = &quot;currentUser&quot;;
+<pre><code class="lang-TypeScript"> private cookieKey = &#39;currentUser&#39;;
 </code></pre>
 </li>
 <li><p>Add the following functions to get/set the cookie to the AuthService class</p>
@@ -3627,19 +3629,18 @@ Note that this will remove the dist directory before build.
  &lt;/ul&gt;
 </code></pre>
 <ul>
-<li>This code will display a Welcome along with the email if it is populated.  </li>
+<li>This code will display a Welcome along with the email if it is populated.</li>
 </ul>
 </li>
 </ol>
 <div class="exercise-end"></div>
 
-
 <h3 id="logout-user">Logout User</h3>
 <p>Before being able to signup for an account, we need the user to be logged out first.</p>
 <p>There are a number of ways that you could implement this such as giving a logout button in the header or showing user info in header with link to profile page with a logout button.</p>
-<p>We are going to implement the logout button in the header.  </p>
+<p>We are going to implement the logout button in the header.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Create AuthService Logout 
+    <b>Exercise</b>: Create AuthService Logout
 </h4>
 
 <ol>
@@ -3720,11 +3721,12 @@ Note that this will remove the dist directory before build.
 					<h3 id="completed-code">Completed Code</h3>
 <p>If you want to get the completed code you can download it from Github</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
 <ol>
-<li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-login.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-login.zip</a> </li>
+<li><p>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-login.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-login.zip</a></p>
+</li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
 <pre><code class="lang-bash"> npm install
 </code></pre>
@@ -3740,9 +3742,8 @@ Note that this will remove the dist directory before build.
 </ol>
 <div class="exercise-end"></div>
 
-
 <h2 id="thank-you">Thank you</h2>
-<p>I hope that you enjoyed going through this tutorial.  If you have any questions, please hit me up on twitter <a href="https://twitter.com/digitaldrummerj">@digitaldrummerj</a>.  </p>
+<p>I hope that you enjoyed going through this tutorial.  If you have any questions, please hit me up on twitter <a href="https://twitter.com/digitaldrummerj">@digitaldrummerj</a>.</p>
 
 				</div>
 
