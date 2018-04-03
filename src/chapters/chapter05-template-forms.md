@@ -360,8 +360,7 @@ The first thing we are going to do is create our login function
                     console.log('login error', error);
                     return of(false);
                 })
-            )
-        );
+            );
     }
     ```
 

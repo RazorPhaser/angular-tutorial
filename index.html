@@ -853,20 +853,21 @@
      const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
 
      return this.http.put(&quot;https://dj-sails-todo.azurewebsites.net/user/login&quot;, loginInfo, requestOptions)
-         .tap((res: Response) =&gt; {
-             if (res) {
-                 console.log(&#39;logged in&#39;);
-                 return of(true);
-             }
+         .pipe(
+             tap((res: Response) =&gt; {
+                 if (res) {
+                     console.log(&#39;logged in&#39;);
+                     return of(true);
+                 }
 
-             console.log(&#39;not logged in&#39;);
-             return of(false);
-         }),
-         catchError((error) =&gt; {
-             console.log(&#39;login error&#39;, error);
-             return of(false);
-         })
-     );
+                 console.log(&#39;not logged in&#39;);
+                 return of(false);
+             }),
+             catchError((error) =&gt; {
+                 console.log(&#39;login error&#39;, error);
+                 return of(false);
+             })
+         );
  }
 </code></pre>
 <ul>
