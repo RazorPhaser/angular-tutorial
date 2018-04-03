@@ -64,7 +64,7 @@ Requirements:
 1. Create a variable to hold the open count in the TodoComponent class that is of type number with a default value of 0
 
     ```TypeScript
-    openItemCount: number = 0;
+    openItemCount = 0;
     ```
 
 1. Create a function called calculateOpenItems that filters the todoList to only show when the completed status is false and get the length.
@@ -121,7 +121,7 @@ Now that we have the todo open item count being calculating on component render,
 
     ```bash
     todo.component.ts
-    ``1
+    ```
 
 1. Find the save method and increment the openItemCount after we push the new item into the todoList array
 
@@ -137,7 +137,7 @@ Now that we have the todo open item count being calculating on component render,
 
 When we toggle the completion status of a Todo item we also need to update the openItemCount value.  We want to make this update after successfully calling the TodoService.updateTodo service function.  Since it is a toggle we need to have a little bit of logic to figure out if the item was originally completed or not.
 
-1. In the todo.component.ts file
+1. In the src\app\todo\todo.component.ts file
 
     ```bash
     todo.component.ts
@@ -166,7 +166,9 @@ The last thing we need to do is to re-calculate the openItemCount when an item i
 1. Find the deleteTodo function and add logic to decrement the openItemCount if the todo item being deleted was not completed.  You will want to put this call after the splice that removes the item from the todo list
 
     ```TypeScript
-    if (todo.completed === false) this.openItemCount--;
+    if (todo.completed === false) {
+        this.openItemCount--;
+    }
     ```
 
 <div class="exercise-end"></div>
@@ -261,6 +263,12 @@ Now that we have our generic sorting method, we can create a function to do the 
 
     ```bash
     todo.component.ts
+    ```
+
+1. Import the FieldSorter
+
+    ```TypeScript
+    import { FieldSorter } from '../shared/classes/field-sorter';
     ```
 
 1. Add the following function to call the FieldSorter.sort and sort first by completed status and then by name.

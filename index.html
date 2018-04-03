@@ -31,7 +31,7 @@
 				<div class="chapter">
 					<h2 id="overview">Overview</h2>
 <p>Welcome to the Up and Running with Angular Workshop.  Angular 2 was released in September 2016 and was a full re-write of the framework.  With the re-write a lot has changed.   In this workshop, you will learn how to build an Angular UI from the ground up.</p>
-<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 4.2.3</div>
+<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 5.2.9</div>
 
 <h3 id="goal">Goal</h3>
 <p>The goal of this tutorial is to walk you through creating an application with the common features that a web application would have (headers, footers, forms, calls to API services, authentication, etc).</p>
@@ -134,7 +134,7 @@
     <b>Exercise</b>: Install Angular CLI
 </h4>
 
-<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 1.7.0</div>
+<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 1.7.3</div>
 
 <ol>
 <li><p>Open a command prompt or terminal and run the following command</p>
@@ -830,7 +830,7 @@
 <pre><code class="lang-TypeScript"> import { HttpClient,  } from &#39;@angular/common/http&#39;;
  import { Observable } from &#39;rxjs/Rx&#39;;
  import { tap, catchError } from &#39;rxjs/operators&#39;;
- import &#39;rxjs/add/observable/of&#39;;
+ import { of } from &#39;rxjs/observable/of&#39;;
 </code></pre>
 </li>
 <li><p>In order to use the HTTP module, we need to inject it into our constructor</p>
@@ -856,15 +856,15 @@
          .tap((res: Response) =&gt; {
              if (res) {
                  console.log(&#39;logged in&#39;);
-                 return Observable.of(true);
+                 return of(true);
              }
 
              console.log(&#39;not logged in&#39;);
-             return Observable.of(false);
+             return of(false);
          }),
          catchError((error) =&gt; {
              console.log(&#39;login error&#39;, error);
-             return Observable.of(false);
+             return of(false);
          })
      );
  }
@@ -1075,14 +1075,14 @@
      .pipe(
          tap((res: Response) =&gt; {
              if (res) {
-                 return Observable.of(true);
+                 return of(true);
              }
 
-             return Observable.of(false);
+             return of(false);
          }),
          catchError((error) =&gt; {
              console.log(&#39;signup error&#39;, error);
-             return Observable.of(false);
+             return of(false);
          }),
      );
 }
@@ -1829,19 +1829,19 @@
 <li><p>For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven&#39;t logged in. Add this variable above the @Injectable for the TodoService.</p>
 <pre><code class="lang-TypeScript"> const requestOptions = { withCredentials: true };
 </code></pre>
- <div class="alert alert-info" role="alert">You will need to pass in this.options as the last parameter for all of our http calls.</div>
+ <div class="alert alert-info" role="alert">You will need to pass in requestOptions as the last parameter for all of our http calls.</div>
 </li>
 <li><p>Before we create our save method we need to import the Todo class so that our data is typed when we pass it from the service the component.</p>
 <pre><code class="lang-TypeScript"> import { Todo } from &#39;../classes/todo&#39;;
 </code></pre>
 </li>
+<li><p>We want to return Observables of type Todo back from our Http calls we need to import Observable from rsjs.</p>
+<pre><code class="lang-TypeScript"> import { Observable } from &#39;rxjs/Observable&#39;;
+</code></pre>
+</li>
 <li><p>Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.</p>
 <pre><code class="lang-TypeScript"> save(item: string): Observable&lt;Todo&gt; {
-     return this.http.post(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, new Todo(item), requestOptions)
-     .catch(error =&gt; {
-         console.log(&#39;save error&#39;, error)
-         return error;
-     });
+     return this.http.post&lt;Todo&gt;(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, new Todo(item), requestOptions);
  }
 </code></pre>
 </li>
@@ -1866,18 +1866,46 @@
 <pre><code class="lang-TypeScript"> constructor(private formBuilder: FormBuilder, private todoService: TodoService) { }
 </code></pre>
 </li>
+<li><p>We also need to import the Todo class since the TodoService returns back a Todo class.</p>
+<pre><code class="lang-TypeScript"> import { Todo } from &#39;../shared/classes/todo&#39;;
+</code></pre>
+</li>
 <li><p>Update the save method with the following code to call the <code>TodoService.save</code> function and output the result to the console</p>
 <pre><code class="lang-TypeScript"> this.todoService.save(this.addForm.value.item)
  .subscribe(result =&gt; {
      console.log(&#39;save result&#39;, result);
- },
- error =&gt; {
-     this.errorMessage = &lt;any&gt;error;
- });
+ };
+</code></pre>
+</li>
+</ol>
+<p>Right now our solution does not handle any errors from the TodoService save call.  Lets add in some error checking.</p>
+<ol>
+<li><p>We need to import the HttpErrorResponse class so that we can get at the Http error.</p>
+<pre><code class="lang-TypeScript"> import { HttpErrorResponse } from &#39;@angular/common/http&#39;;
 </code></pre>
 </li>
 <li><p>We now need to create the errorMessage variable that is of type string in the Todocomponent class</p>
 <pre><code class="lang-TypeScript"> errorMessage: string;
+</code></pre>
+</li>
+<li><p>Inside of the subscribe that the call to todoService.save, we need to add our error check.</p>
+<pre><code class="lang-TypeScript">     ,
+     (error: HttpErrorResponse) =&gt; {
+         this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+     }
+</code></pre>
+<p> You save method should now look like</p>
+<pre><code class="lang-TypeScript"> save(): void {
+     console.log(&#39;form values: &#39;, this.addForm.value);
+     this.todoService.save(this.addForm.value.item)
+     .subscribe((result: Todo) =&gt; {
+             console.log(&#39;save result&#39;, result);
+         },
+         (error: HttpErrorResponse) =&gt; {
+             this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+         }
+     );
+ }
 </code></pre>
 </li>
 <li><p>Open the todo.component.html file so that we can add the display of the save error message.</p>
@@ -1891,18 +1919,12 @@
  &lt;/div&gt;
 </code></pre>
 </li>
-<li><p>Testing the error message display requires that we temporary set a value for the errorMessage. We are going to do this in the ngOnInit just to verify that the error message will display:</p>
-<pre><code class="lang-TypeScript"> this.errorMessage = &#39;testing&#39;
-</code></pre>
-</li>
-<li><p>Now if you go to <a href="http://localhost:4200">http://localhost:4200</a> you will see the following display</p>
+<li><p>Now if you go to <a href="http://localhost:4200">http://localhost:4200</a> and try to save a todo item, you will see the following error message.</p>
 <p> <img src="images/error-messages-display.png" alt="error message display"></p>
-</li>
-<li><p>We can remove the temporary value that we set for the errorMessage.</p>
+ <div class="alert alert-danger" role="alert">The reason for this error is that for now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully save a todo item since they are associated to a user.  After you have logged in, you can save as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+
 </li>
 </ol>
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully save a todo item since they are associated to a user.  After you have logged in, you can save as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
-
 <div class="exercise-end"></div>
 
 <h3 id="displaying-items">Displaying Items</h3>
@@ -1918,13 +1940,8 @@
 </code></pre>
 </li>
 <li><p>Add the following function to make an http get call to our Todo API and return back an array of Todo items.</p>
-<pre><code class="lang-TypeScript"> getAll(): Observable&lt;Array&lt;Todo&gt;&gt;{
-     let url = &quot;https://dj-sails-todo.azurewebsites.net/todo&quot;;
-     return this.http.get(url, this.options)
-     .catch(error =&gt; {
-         console.log(&#39;get error&#39;, error);
-         return error;
-     });
+<pre><code class="lang-TypeScript">     getAll(): Observable&lt;Todo[]&gt; {
+     return this.http.get&lt;Todo[]&gt;(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, requestOptions);
  }
 </code></pre>
 </li>
@@ -1941,25 +1958,21 @@
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Import the todo class</p>
-<pre><code class="lang-TypeScript"> import { Todo } from &#39;../shared/classes/todo&#39;;
-</code></pre>
-</li>
 <li><p>Create a variable in the TodoComponent class called todoList that is an array of Todo and intialize to an empty array</p>
-<pre><code class="lang-TypeScript"> todoList: Array&lt;Todo&gt; = [];
+<pre><code class="lang-TypeScript"> todoList: Todo[] = [];
 </code></pre>
 </li>
 <li><p>Create the getTodoListAll function that will return void, call the TodoService.getAll function and set a todoList variable at the Todocomponent class level.</p>
 <pre><code class="lang-TypeScript"> getTodoListAll(): void {
- this.todoService.getAll()
-   .subscribe(
-   data =&gt; {
-     this.todoList = data;
-   },
-   error =&gt; {
-     this.errorMessage = &lt;any&gt;error;
-   }
-   );
+     this.todoService.getAll()
+     .subscribe(
+         (data: Todo[]) =&gt; {
+             this.todoList = data;
+         },
+         (error: HttpErrorResponse) =&gt; {
+           this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+         }
+     );
  }
 </code></pre>
 </li>
@@ -1982,21 +1995,22 @@
 <li><p>Since we have our form working, remove the form status table.</p>
 </li>
 <li><p>After the error message alert, add the following html to display the list of todo items</p>
-<pre><code class="lang-html"> &lt;div class=&quot;row&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
+<pre><code class="lang-html"> &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
    &lt;div class=&quot;col-12 done-{{todoItem.completed}}&quot;&gt;
-     {{todoItem.item}} &lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;
+     {{todoItem.item}}&lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;
    &lt;/div&gt;
  &lt;/div&gt;
 </code></pre>
 <ul>
 <li>the *ngFor will loop through all of the items in the todoList variable that we will be creating next.</li>
 <li>For the date, we are using the built-in date pipe to convert it to a short date that strips out the time part of the date</li>
-<li>We are also setup to have a different style when an item is completed. We will add the styling in a bit.</li>
+<li><p>We are also setup to have a different style when an item is completed. We will add the styling in a bit.</p>
+<div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully pull the list of todo items since they are associated to a user.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+
+</li>
 </ul>
 </li>
 </ol>
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully pull the list of todo items since they are associated to a user.  In the next chapter we will implement a login check that will redirect you to login first.</div>
-
 <div class="exercise-end"></div>
 
 <h3 id="update-list-on-save">Update List on Save</h3>
@@ -2032,13 +2046,9 @@
 </li>
 <li><p>We are going to create an update method that will take in a Todo item and make an http put call to our API to update the one record with the new completion state.</p>
 <pre><code class="lang-TypeScript"> updateTodo(todo: Todo): Observable&lt;Todo&gt; {
-     let url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+     const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
 
-     return this.http.put(url, todo, this.options)
-     .catch(error =&gt; {
-         console.log(&#39;update error&#39;, error);
-         return error;
-     });
+     return this.http.put&lt;Todo&gt;(url, todo, requestOptions);
  }
 </code></pre>
 <ul>
@@ -2050,7 +2060,7 @@
 <div class="exercise-end"></div>
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Enable Toggle in UI and Save
+    <b>Exercise</b>: Enable Completed Toggle in UI
 </h4>
 
 <p>Now we need to call the updateTodo function that we just created in the TodoService from our UI component.</p>
@@ -2063,15 +2073,16 @@
 <pre><code class="lang-TypeScript"> completeTodo(todo: Todo): void {
      todo.completed = !todo.completed;
      this.todoService.updateTodo(todo)
-     .subscribe(
-         data =&gt; {
-             // do nothing
-         },
-         error =&gt; {
-             todo.completed = !todo.completed;
-             this.errorMessage = &lt;any&gt;error;
-             console.log(&#39;complete error&#39;, this.errorMessage);
-         });
+         .subscribe(
+             (data: Todo) =&gt; {
+                 // do nothing
+                console.log(&#39;updated todo&#39;, todo);
+             },
+             (error: HttpErrorResponse) =&gt; {
+                 todo.completed = !todo.completed;
+                 this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+             }
+         );
  }
 </code></pre>
 <ul>
@@ -2102,10 +2113,10 @@
      &lt;div class=&quot;col-11 done-{{todoItem.completed}}&quot;&gt;{{todoItem.item}} &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;&lt;/div&gt;
  &lt;/div&gt;
 </code></pre>
+ <div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully update a todo item since they are associated to a user.  After you have logged in, you can update as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+
 </li>
 </ol>
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully update a todo item since they are associated to a user.  After you have logged in, you can update as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
-
 <div class="exercise-end"></div>
 
 <h3 id="delete-todo">Delete Todo</h3>
@@ -2120,13 +2131,9 @@
 </code></pre>
 </li>
 <li><p>We need to create a delete method that will call our API using http.delete</p>
-<pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;Response&gt; {
-     let url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
-     return this.http.delete(url, this.options)
-     .catch(error =&gt; {
-         console.log(&#39;delete error&#39;, error);
-         return error;
-     });
+<pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;Todo&gt; {
+     const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+     return this.http.delete&lt;Todo&gt;(url, requestOptions);
  }
 </code></pre>
 <ul>
@@ -2151,18 +2158,17 @@
 <pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): void {
      this.todoService.deleteTodo(todo)
      .subscribe(
-     data =&gt; {
-         let index = this.todoList.indexOf(todo);
-         this.todoList.splice(index, 1);
-     },
-     error =&gt; {
-         todo.completed = !todo.completed;
-         this.errorMessage = &lt;any&gt;error;
-         console.log(&#39;complete error&#39;, this.errorMessage);
-     });
+         (data: Todo) =&gt; {
+             const index = this.todoList.indexOf(todo);
+             this.todoList.splice(index, 1);
+         },
+         (error: HttpErrorResponse) =&gt; {
+             this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+         }
+     );
  }
 </code></pre>
- <div class="alert alert-info" role="alert">Note: We could have also just called the TodoService.getAll function but since we already have all of the items and the items are specific to a single user, there is no need to make the extra database call.</div>
+ <div class="alert alert-info" role="alert">Note: We could have also just called the TodoService.getAll function but since we already have all of the items and the items are specific to a single user, there is no need to make the extra API and Database call.</div>
 
 </li>
 </ol>
@@ -2201,9 +2207,9 @@
     <b>Exercise</b>: Making the Todo list look nicer
 </h4>
 
-<p>Right now the UI looks decent but with a few tweaks it could look much better.</p>
+<p>Right now the UI looks ok but with a few tweaks it will have a much better look and feel to it.</p>
 <p><img src="images/todo-unstyled.png" alt="todo unstyled"></p>
-<p>If we added some padding around each row, a bottom border, made the date smaller and gray, increased the size of each icon and made the completed items gray with a strike-through, the UI would pop.</p>
+<p>Lets add some padding around each row, a bottom border, made the date smaller and gray, increased the size of each icon and made the completed items gray with a strike-through, the UI would pop.</p>
 <p>The first thing we need to do is add in our styles to the Todo component. Since these styles are strictly for the Todo component we are going to add them into the todo.component.scss instead of the app&#39;s style.scss file.</p>
 <div class="alert alert-info" role="alert">Angular enables CSS encapsulation so that the styling in each components scss file will only be applied to that component and not the rest of the site.  They do this by adding an attribute to both the html elements and css classes that are rendered. It is done on the fly for you and does not at all change the actual files.</div>
 
@@ -2348,23 +2354,28 @@
 </code></pre>
 </li>
 <li><p>Add an isAuthenticated function to the AuthService that checks the API to make sure that the user is still logged in</p>
-<pre><code class="lang-TypeScript">isAuthenticated(): Observable&lt;boolean&gt; {
- return this.http.get(&quot;https://dj-sails-todo.azurewebsites.net/user/identity&quot;, this.options)
-   .map((res: Response) =&gt; {
-     if (res) {
-       return Observable.of(true);
-     }
+<pre><code class="lang-TypeScript">isAuthenticated(): Observable&lt;boolean | Response&gt; {
+     return this.http
+         .get(&#39;https://dj-sails-todo.azurewebsites.net/user/identity&#39;, requestOptions)
+         .pipe(
+             tap((res: Response) =&gt; {
+                 if (res) {
+                     console.log(&#39;logged in&#39;);
+                     return of(true);
+                 }
 
-     return Observable.of(false);
-   })
-   .catch((error: Response) =&gt; {
-     if (error.status !== 403) {
-       console.log(&#39;isAuthenticated error&#39;, error);
-     }
-
-     return Observable.of(false);
-   });
-}
+                 console.log(&#39;not logged in&#39;);
+                 return of(false);
+             }),
+             catchError((error: HttpErrorResponse) =&gt; {
+                 if (error.status !== 403) {
+                     console.log(&#39;isAuthenticated error&#39;, error);
+                 }
+                 console.log(&#39;login error&#39;, error);
+                 return of(false);
+             }),
+         );
+ }
 </code></pre>
 </li>
 </ol>
@@ -2387,7 +2398,7 @@
 </code></pre>
 </li>
 <li><p>In the canActivate function we need to replace the return true with the following logic that will call the AuthService.isAuthenticated function and  return if the user is logged in or not.  If the user is not logged in or there is an error validating if they are logged in then we will navigate them to the login route else we will let them into the route</p>
-<pre><code class="lang-TypeScript"> let isLoggedIn = new Observable&lt;boolean&gt;(observer =&gt; {
+<pre><code class="lang-TypeScript"> const isLoggedIn = new Observable&lt;boolean&gt;(observer =&gt; {
  this.authService.isAuthenticated()
    .subscribe((res: boolean) =&gt; {
    if (res) {
@@ -2522,7 +2533,7 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>Add the environmentName and apiBaseUrl values to the environment object.</p>
-<pre><code class="lang-TypeScript"> environmentName: &#39;Development&#39;,
+<pre><code class="lang-TypeScript"> environmentName: &#39;Production&#39;,
  apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
 </code></pre>
 </li>
@@ -2591,7 +2602,7 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>Create a private variable called url inside the TodoService class that gets the apiBaseUrl from the environment file and append on the /todo</p>
-<pre><code class="lang-TypeScript">   private url: string = `${environment.apiBaseUrl}/todo`;
+<pre><code class="lang-TypeScript">   private url = `${environment.apiBaseUrl}/todo`;
 </code></pre>
 </li>
 <li><p>For the save and getAll function update the hard coded url to use the class level url variable.  Don&#39;t forget due to scoping that you need to access the variable by using this.url</p>
@@ -2599,7 +2610,7 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>For the updateTodo and deleteTodo we need to replace the hard coded url with the class level url variable.  Since we are already using string interpolation to create the string, we need to replace the hard coded value with <code>${this.url}</code></p>
-<pre><code class="lang-TypeScript"> let url = `${this.url}/${todo.id}`;
+<pre><code class="lang-TypeScript"> const url = `${this.url}/${todo.id}`;
 </code></pre>
 </li>
 <li><p>Everything should still work to list, insert, update and delete todo items as before but now the url is no longer hard coded and can easily be changed as you move to different environments.</p>
@@ -3188,7 +3199,7 @@ Note that this will remove the dist directory before build.
 </code></pre>
 </li>
 <li><p>Create a variable to hold the open count in the TodoComponent class that is of type number with a default value of 0</p>
-<pre><code class="lang-TypeScript"> openItemCount: number = 0;
+<pre><code class="lang-TypeScript"> openItemCount = 0;
 </code></pre>
 </li>
 <li><p>Create a function called calculateOpenItems that filters the todoList to only show when the completed status is false and get the length.</p>
@@ -3238,8 +3249,8 @@ Note that this will remove the dist directory before build.
 
 <ol>
 <li><p>Open src\app\todo\todo.component.ts</p>
-<p> <code>`bash
- todo.component.ts</code>1</p>
+<pre><code class="lang-bash"> todo.component.ts
+</code></pre>
 </li>
 <li><p>Find the save method and increment the openItemCount after we push the new item into the todoList array</p>
 <pre><code class="lang-TypeScript"> this.openItemCount++;
@@ -3254,7 +3265,7 @@ Note that this will remove the dist directory before build.
 
 <p>When we toggle the completion status of a Todo item we also need to update the openItemCount value.  We want to make this update after successfully calling the TodoService.updateTodo service function.  Since it is a toggle we need to have a little bit of logic to figure out if the item was originally completed or not.</p>
 <ol>
-<li><p>In the todo.component.ts file</p>
+<li><p>In the src\app\todo\todo.component.ts file</p>
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
@@ -3276,7 +3287,9 @@ Note that this will remove the dist directory before build.
 </code></pre>
 </li>
 <li><p>Find the deleteTodo function and add logic to decrement the openItemCount if the todo item being deleted was not completed.  You will want to put this call after the splice that removes the item from the todo list</p>
-<pre><code class="lang-TypeScript"> if (todo.completed === false) this.openItemCount--;
+<pre><code class="lang-TypeScript"> if (todo.completed === false) {
+     this.openItemCount--;
+ }
 </code></pre>
 </li>
 </ol>
@@ -3364,6 +3377,10 @@ Note that this will remove the dist directory before build.
 <ol>
 <li><p>Open src\app\todo\todo.component.ts</p>
 <pre><code class="lang-bash"> todo.component.ts
+</code></pre>
+</li>
+<li><p>Import the FieldSorter</p>
+<pre><code class="lang-TypeScript"> import { FieldSorter } from &#39;../shared/classes/field-sorter&#39;;
 </code></pre>
 </li>
 <li><p>Add the following function to call the FieldSorter.sort and sort first by completed status and then by name.</p>
@@ -3463,7 +3480,7 @@ Note that this will remove the dist directory before build.
 <div class="exercise-end"></div>
 
 <h3 id="caching-user">Caching User</h3>
-<p>Right now when you refresh the page the current user information in the AuthService is lost.  We can cache the data using cookies.  To implement the cookie storage we are going to use the ngx-cookie library.</p>
+<p>Right now we are not caching any user information.  It would be nice to be able to display the user information in the header.  We can cache the user data using cookies.  To implement the cookie storage we are going to use the ngx-cookie library.</p>
 <h4 class="exercise-start">
     <b>Exercise</b>: Create Class
 </h4>
@@ -3493,8 +3510,8 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-TypeScript"> constructor(email: string, id?: string, createdAt?: Date, updatedAt?: Date){
      this.email = email;
      this.id = id;
-     this.createdAt = createdAt ? createdAt: new Date();
-     this.updatedAt = updatedAt ? updatedAt: new Date();
+     this.createdAt = createdAt ? createdAt : new Date();
+     this.updatedAt = updatedAt ? updatedAt : new Date();
  }
 </code></pre>
 </li>
@@ -3543,11 +3560,11 @@ Note that this will remove the dist directory before build.
 </code></pre>
 </li>
 <li><p>Update the constructor to inject the CookieService</p>
-<pre><code class="lang-TypeScript"> constructor(private http: Http, private cookieService: CookieService) {}
+<pre><code class="lang-TypeScript"> constructor(private http: HttpClient, private cookieService: CookieService) {}
 </code></pre>
 </li>
 <li><p>Add a class level variable to store the name of the cookie and set it to currentUser</p>
-<pre><code class="lang-TypeScript"> private cookieKey: string = &quot;currentUser&quot;;
+<pre><code class="lang-TypeScript"> private cookieKey = &#39;currentUser&#39;;
 </code></pre>
 </li>
 <li><p>Add the following functions to get/set the cookie to the AuthService class</p>

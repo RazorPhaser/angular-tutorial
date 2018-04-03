@@ -78,23 +78,28 @@ We need to make a call to the API to check if the user is logged into the API or
 1. Add an isAuthenticated function to the AuthService that checks the API to make sure that the user is still logged in
 
   ```TypeScript
-  isAuthenticated(): Observable<boolean> {
-    return this.http.get("https://dj-sails-todo.azurewebsites.net/user/identity", this.options)
-      .map((res: Response) => {
-        if (res) {
-          return Observable.of(true);
-        }
+  isAuthenticated(): Observable<boolean | Response> {
+        return this.http
+            .get('https://dj-sails-todo.azurewebsites.net/user/identity', requestOptions)
+            .pipe(
+                tap((res: Response) => {
+                    if (res) {
+                        console.log('logged in');
+                        return of(true);
+                    }
 
-        return Observable.of(false);
-      })
-      .catch((error: Response) => {
-        if (error.status !== 403) {
-          console.log('isAuthenticated error', error);
-        }
-
-        return Observable.of(false);
-      });
-  }
+                    console.log('not logged in');
+                    return of(false);
+                }),
+                catchError((error: HttpErrorResponse) => {
+                    if (error.status !== 403) {
+                        console.log('isAuthenticated error', error);
+                    }
+                    console.log('login error', error);
+                    return of(false);
+                }),
+            );
+    }
   ```
 
 Next we need to add logic to the guard's canActivate function to call the AuthService.isAuthenticated function
@@ -126,7 +131,7 @@ Next we need to add logic to the guard's canActivate function to call the AuthSe
 1. In the canActivate function we need to replace the return true with the following logic that will call the AuthService.isAuthenticated function and  return if the user is logged in or not.  If the user is not logged in or there is an error validating if they are logged in then we will navigate them to the login route else we will let them into the route
 
   ```TypeScript
-    let isLoggedIn = new Observable<boolean>(observer => {
+    const isLoggedIn = new Observable<boolean>(observer => {
     this.authService.isAuthenticated()
       .subscribe((res: boolean) => {
       if (res) {

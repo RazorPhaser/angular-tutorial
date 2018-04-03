@@ -90,7 +90,7 @@ The src\environments\environment.prod.ts file is the production configuration.  
 1. Add the environmentName and apiBaseUrl values to the environment object.
 
     ```TypeScript
-    environmentName: 'Development',
+    environmentName: 'Production',
     apiBaseUrl: 'https://dj-sails-todo.azurewebsites.net'
     ```
 1. The environment object should look like the following
@@ -176,7 +176,7 @@ Now that we have the API url in the environments file, we need update the TodoSe
 1. Create a private variable called url inside the TodoService class that gets the apiBaseUrl from the environment file and append on the /todo
 
     ```TypeScript
-      private url: string = `${environment.apiBaseUrl}/todo`;
+      private url = `${environment.apiBaseUrl}/todo`;
     ```
 
 1. For the save and getAll function update the hard coded url to use the class level url variable.  Don't forget due to scoping that you need to access the variable by using this.url
@@ -188,7 +188,7 @@ Now that we have the API url in the environments file, we need update the TodoSe
 1. For the updateTodo and deleteTodo we need to replace the hard coded url with the class level url variable.  Since we are already using string interpolation to create the string, we need to replace the hard coded value with `${this.url}`
 
     ```TypeScript
-    let url = `${this.url}/${todo.id}`;
+    const url = `${this.url}/${todo.id}`;
     ```
 
 1. Everything should still work to list, insert, update and delete todo items as before but now the url is no longer hard coded and can easily be changed as you move to different environments.

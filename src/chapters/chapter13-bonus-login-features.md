@@ -35,7 +35,7 @@ If you have not completed the previous chapter you can get the completed code by
 
 ### Caching User
 
-Right now when you refresh the page the current user information in the AuthService is lost.  We can cache the data using cookies.  To implement the cookie storage we are going to use the ngx-cookie library.
+Right now we are not caching any user information.  It would be nice to be able to display the user information in the header.  We can cache the user data using cookies.  To implement the cookie storage we are going to use the ngx-cookie library.
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Create Class
@@ -75,8 +75,8 @@ In the AuthService, in order to hold our user data and get type checking we need
     constructor(email: string, id?: string, createdAt?: Date, updatedAt?: Date){
         this.email = email;
         this.id = id;
-        this.createdAt = createdAt ? createdAt: new Date();
-        this.updatedAt = updatedAt ? updatedAt: new Date();
+        this.createdAt = createdAt ? createdAt : new Date();
+        this.updatedAt = updatedAt ? updatedAt : new Date();
     }
     ```
 
@@ -136,13 +136,13 @@ In the AuthService, in order to hold our user data and get type checking we need
 1. Update the constructor to inject the CookieService
 
     ```TypeScript
-    constructor(private http: Http, private cookieService: CookieService) {}
+    constructor(private http: HttpClient, private cookieService: CookieService) {}
     ```
 
 1. Add a class level variable to store the name of the cookie and set it to currentUser
 
     ```TypeScript
-    private cookieKey: string = "currentUser";
+    private cookieKey = 'currentUser';
     ```
 
 1. Add the following functions to get/set the cookie to the AuthService class

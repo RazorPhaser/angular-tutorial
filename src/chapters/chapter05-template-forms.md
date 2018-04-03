@@ -317,7 +317,7 @@ The first thing we are going to do is create our login function
     import { HttpClient,  } from '@angular/common/http';
     import { Observable } from 'rxjs/Rx';
     import { tap, catchError } from 'rxjs/operators';
-    import 'rxjs/add/observable/of';
+    import { of } from 'rxjs/observable/of';
     ```
 
 1. In order to use the HTTP module, we need to inject it into our constructor
@@ -349,15 +349,15 @@ The first thing we are going to do is create our login function
             .tap((res: Response) => {
                 if (res) {
                     console.log('logged in');
-                    return Observable.of(true);
+                    return of(true);
                 }
 
                 console.log('not logged in');
-                return Observable.of(false);
+                return of(false);
             }),
             catchError((error) => {
                 console.log('login error', error);
-                return Observable.of(false);
+                return of(false);
             })
         );
     }
@@ -605,14 +605,14 @@ We are first going to create the signup function in the AuthService.
         .pipe(
             tap((res: Response) => {
                 if (res) {
-                    return Observable.of(true);
+                    return of(true);
                 }
 
-                return Observable.of(false);
+                return of(false);
             }),
             catchError((error) => {
                 console.log('signup error', error);
-                return Observable.of(false);
+                return of(false);
             }),
         );
   }

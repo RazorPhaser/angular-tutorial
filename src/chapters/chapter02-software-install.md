@@ -80,7 +80,7 @@ While you do not have to use the Angular CLI, it is highly recommended, will inc
     <b>Exercise</b>: Install Angular CLI
 </h4>
 
-<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 1.7.0</div>
+<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 1.7.3</div>
 
 1. Open a command prompt or terminal and run the following command
 
