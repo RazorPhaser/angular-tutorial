@@ -315,7 +315,7 @@ The first thing we are going to do is create our login function
 
     ```TypeScript
     import { HttpClient,  } from '@angular/common/http';
-    import { Observable } from 'rxjs/Rx';
+    import { Observable } from 'rxjs/Observable';
     import { tap, catchError } from 'rxjs/operators';
     import { of } from 'rxjs/observable/of';
     ```
