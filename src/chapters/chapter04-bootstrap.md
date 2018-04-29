@@ -18,7 +18,7 @@ For our styling we are going to use [Bootstrap 4](https://getbootstrap.com/).  T
 1. Run the npm install command for bootstrap and font-awesome
 
     ```bash
-    npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons @ng-bootstrap/ng-bootstrap
+    npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons bootstrap @ng-bootstrap/ng-bootstrap
     ```
 
     * This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.
@@ -26,6 +26,8 @@ For our styling we are going to use [Bootstrap 4](https://getbootstrap.com/).  T
 Before we can use ng-bootstrap we need to add it to the AppModule
 
 1. Open the src\app\app.module.ts
+
+    <div class="alert alert-info" role="alert">In Visual Studio Code you can quickly open a file by using ctrl+p to open the "Go To File" prompt and typing in the file name</div>
 
     ```bash
     app.module.ts
@@ -35,14 +37,14 @@ Before we can use ng-bootstrap we need to add it to the AppModule
 
     ```TypeScript
     import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-    import { AngularFontAwesomeModule } from 'angular-font-awesome';
+    import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ```
 
 1. In the @NgModule imports section add NgbModule.forRoot() and AngularFontAwesomeModule
 
     ```TypeScript
     NgbModule.forRoot(),
-    AngularFontAwesomeModule
+    FontAwesomeModule
     ```
 
 <div class="exercise-end"></div>
@@ -55,7 +57,7 @@ Before we can use ng-bootstrap we need to add it to the AppModule
 
 First we need to create our own custom Bootstrap variables files so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.
 
-1. In the app folder, create a file called **_variables.scss**
+1. In the src\app folder, create a file called **_variables.scss**
 
       <div class="alert alert-info" role="alert">You can create file right in Visual Studio Code by right-click on the src\app folder</div>
 
@@ -63,7 +65,7 @@ First we need to create our own custom Bootstrap variables files so that we can 
     _variables.scss
     ```
 
-1. Add the following to the _variables.scss file
+1. Add the following to the src\app\_variables.scss file
 
     ```scss
     // Variables
@@ -102,38 +104,19 @@ First we need to create our own custom Bootstrap variables files so that we can 
 
     <div class="alert alert-info" role="alert">To create your own theme for Bootstrap following the instructions at <a href='https://getbootstrap.com/docs/4.1/getting-started/theming/'>https://getbootstrap.com/docs/4.1/getting-started/theming/</a></div>
 
-1. In the app folder, open the file style.scss
+1. In the app folder, open the file src\app\style.scss
 
     ```bash
     style.scss
     ```
 
-1. Add the following contents to the style.scssfile.
+1. Add the following contents to the src\app\style.scss file to setup the site wide styles using our variables and the bootstrap styles
 
     ```scss
     @import "_variables";
 
     // Bootstrap and its default variables
-    @import "node_modules/bootstrap/scss/bootstrap";
-    ```
-
-Now we need to configure the angular cli to import the bootstrap libraries.
-
-1. Open the **.angular-cli.json** file that is in the root of the project.  This file  is the configuration file for our project for the Angular CLI
-
-    <div class="alert alert-info" role="alert">In Visual Studio Code you can quickly open a file by using ctrl+p to open the "Go To File" prompt and typing in the file name</div>
-
-    ```bash
-    .angular-cli.json
-    ```
-
-1. Find the apps\styles section and replace the section with:
-
-    ```json
-    "styles": [
-        "../node_modules/font-awesome/css/font-awesome.css",
-        "styles.scss"
-    ],
+    @import "~bootstrap/scss/bootstrap";
     ```
 
 <div class="exercise-end"></div>
