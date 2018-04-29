@@ -2,7 +2,7 @@
 
 ### Overview
 
-For our styling we are going to use [Bootstrap 4](https://v4-alpha.getbootstrap.com/) which is still in alpha.  The reason for picking Bootstrap 4 and not Bootstrap 3 is so that we can use [Angular Bootstrap library (ng-bootstrap)](https://ng-bootstrap.github.io).  ng2-bootstrap is written 100% in JavaScript with no need for JQuery or Bootstrap's JavaScript library to be included.
+For our styling we are going to use [Bootstrap 4](https://getbootstrap.com/).  The reason for picking Bootstrap 4 and not Bootstrap 3 is so that we can use [Angular Bootstrap library (ng-bootstrap)](https://ng-bootstrap.github.io).  ng2-bootstrap is written 100% in JavaScript with no need for JQuery or Bootstrap's JavaScript library to be included.
 
 ### Goals
 
@@ -18,10 +18,10 @@ For our styling we are going to use [Bootstrap 4](https://v4-alpha.getbootstrap.
 1. Run the npm install command for bootstrap and font-awesome
 
     ```bash
-    npm install --save bootstrap@next font-awesome @ng-bootstrap/ng-bootstrap
+    npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons @ng-bootstrap/ng-bootstrap
     ```
 
-    * This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.  
+    * This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.
 
 Before we can use ng-bootstrap we need to add it to the AppModule
 
@@ -31,18 +31,20 @@ Before we can use ng-bootstrap we need to add it to the AppModule
     app.module.ts
     ```
 
-1. Import the NgbModule from @ng-bootstrap/ng-bootstrap library
+1. Import the NgbModule from @ng-bootstrap/ng-bootstrap and AngularfontAwesomeModule from angular-font-awesome
 
     ```TypeScript
     import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+    import { AngularFontAwesomeModule } from 'angular-font-awesome';
     ```
 
-1. In the @NgModule imports section add NgbModule.forRoot()
+1. In the @NgModule imports section add NgbModule.forRoot() and AngularFontAwesomeModule
 
     ```TypeScript
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    AngularFontAwesomeModule
     ```
-    
+
 <div class="exercise-end"></div>
 
 ### Add Bootstrap to Project
@@ -51,17 +53,9 @@ Before we can use ng-bootstrap we need to add it to the AppModule
     <b>Exercise</b>: Add  Bootstrap to Project
 </h4>
 
-First we need to create our own custom Bootstrap stylesheet so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.  
+First we need to create our own custom Bootstrap stylesheet so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.
 
-1. In the src\assets folder, create a new folder named **bootstrap**
-
-      <div class="alert alert-info" role="alert">You can create folder right in Visual Studio Code by right-click on the src\assets folder</div>
-
-    ```bash
-    bootstrap
-    ```
-
-1. In the bootstrap folder, create a file called **_variables.scss**
+1. In the app folder, create a file called **_variables.scss**
 
       <div class="alert alert-info" role="alert">You can create file right in Visual Studio Code by right-click on the src\assets folder</div>
 
@@ -106,78 +100,32 @@ First we need to create our own custom Bootstrap stylesheet so that we can overr
     $brand-inverse:             $gray-dark !default;
     ```
 
-1. In the bootstrap folder, create a file called **bootstrap.scss**
+    <div class="alert alert-info" role="alert">To create your own theme for Bootstrap following the instructions at <a href='https://getbootstrap.com/docs/4.1/getting-started/theming/'>https://getbootstrap.com/docs/4.1/getting-started/theming/</a></div>
+
+1. In the app folder, open the file style.scss
 
     ```bash
-    bootstrap.scss
+    style.scss
     ```
 
-1. Add the following contents to the bootstrap.scss file. 
-
-      <div class="alert alert-info" role="alert">Note that the list of included files outside of the variables file is the same as the ones in the  node_modules\bootstrap\scss\bootstrap.scss file with a ~bootstrap/scss prefix so that the scss compiler is able to find the included file in the node_modules\bootstrap\scss directory.</div>
+1. Add the following contents to the style.scssfile.
 
     ```scss
-    @import "variables";
+    @import "_variables";
 
-    @import "~bootstrap/scss/variables";
-    @import "~bootstrap/scss/mixins";
-    @import "~bootstrap/scss/custom";
-
-    // Reset and dependencies
-    @import "~bootstrap/scss/normalize";
-    @import "~bootstrap/scss/print";
-
-    // Core CSS
-    @import "~bootstrap/scss/reboot";   
-    @import "~bootstrap/scss/type";
-    @import "~bootstrap/scss/images";
-    @import "~bootstrap/scss/code";
-    @import "~bootstrap/scss/grid";
-    @import "~bootstrap/scss/tables";
-    @import "~bootstrap/scss/forms";
-    @import "~bootstrap/scss/buttons";
-
-    // Components
-    @import "~bootstrap/scss/transitions";
-    @import "~bootstrap/scss/dropdown";
-    @import "~bootstrap/scss/button-group";
-    @import "~bootstrap/scss/input-group";
-    @import "~bootstrap/scss/custom-forms";
-    @import "~bootstrap/scss/nav";
-    @import "~bootstrap/scss/navbar";
-    @import "~bootstrap/scss/card";
-    @import "~bootstrap/scss/breadcrumb";
-    @import "~bootstrap/scss/pagination";
-    @import "~bootstrap/scss/badge";
-    @import "~bootstrap/scss/jumbotron";
-    @import "~bootstrap/scss/alert";
-    @import "~bootstrap/scss/progress";
-    @import "~bootstrap/scss/media";
-    @import "~bootstrap/scss/list-group";
-    @import "~bootstrap/scss/responsive-embed";
-    @import "~bootstrap/scss/close";
-
-    // Components w/ JavaScript
-    @import "~bootstrap/scss/modal";
-    @import "~bootstrap/scss/tooltip";
-    @import "~bootstrap/scss/popover";
-    @import "~bootstrap/scss/carousel";
-
-    // Utility classes
-    @import "~bootstrap/scss/utilities";
+    // Bootstrap and its default variables
+    @import "node_modules/bootstrap/scss/bootstrap";
 
     /*
     * Font Awesome 4.x
     */
     $fa-font-path: "~font-awesome/fonts";
     @import "~font-awesome/scss/font-awesome";
-
     ```
 
+Now we need to configure the angular cli to import the bootstrap libraries.
 
-Now we need to configure the angular cli to import the bootstrap libraries.  
-
-1. Open the **.angular-cli.json** file that is in the root of the project.  This file  is the configuration file for our project for the Angular CLI 
+1. Open the **.angular-cli.json** file that is in the root of the project.  This file  is the configuration file for our project for the Angular CLI
 
     <div class="alert alert-info" role="alert">In Visual Studio Code you can quickly open a file by using ctrl+p to open the "Go To File" prompt and typing in the file name</div>
 
@@ -185,16 +133,11 @@ Now we need to configure the angular cli to import the bootstrap libraries.
     .angular-cli.json
     ```
 
-1. Find the apps\styles section and replace the section with:  
+1. To the styles section, we need to add the font-awesome stylesheet.
 
-    ```TypeScript
-      "styles": [
-        "assets/bootstrap/bootstrap.scss",
-         "styles.scss"
-      ],
+    ```json
+    "../node_modules/font-awesome/css/font-awesome.css",
     ```
-
-      <div class="alert alert-info" role="alert">If the code alignment upon paste is off you can run the "Format Document" command to fix it.  Ctrl+Shift+P and search for "Format Document" or use Alt+Shift+F</div>
 
 <div class="exercise-end"></div>
 
@@ -209,7 +152,7 @@ Now we need to configure the angular cli to import the bootstrap libraries.
     ```bash
     app.component.html
     ```
-    
+
 1. Replace the contents with:
 
     ```html
@@ -226,11 +169,11 @@ Now we need to configure the angular cli to import the bootstrap libraries.
 2. Lets change the title to something better than "App Works!"
 
     * Open the src\app\app.component.ts file
-    
+
         ```bash
         app.component.ts
-        ``` 
-        
+        ```
+
     * On line 9, change the title variable to
 
         ```TypeScript
@@ -265,7 +208,7 @@ Now we need to configure the angular cli to import the bootstrap libraries.
 
 ### Review
 
-In this chapter we learned how to use Bootstrap for our project.  
+In this chapter we learned how to use Bootstrap for our project.
 
 Learned:
 
