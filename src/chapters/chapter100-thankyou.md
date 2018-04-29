@@ -3,10 +3,11 @@
 If you want to get the completed code you can download it from Github
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
-1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-login.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-login.zip) 
+1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-login.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-login.zip)
+
 1. After you get the code, run npm install to get all of the NPM dependencies.
 
     ```bash
@@ -24,7 +25,6 @@ If you want to get the completed code you can download it from Github
 
 <div class="exercise-end"></div>
 
-
 ## Thank you
 
-I hope that you enjoyed going through this tutorial.  If you have any questions, please hit me up on twitter [@digitaldrummerj](https://twitter.com/digitaldrummerj).  
+I hope that you enjoyed going through this tutorial.  If you have any questions, please hit me up on twitter [@digitaldrummerj](https://twitter.com/digitaldrummerj).

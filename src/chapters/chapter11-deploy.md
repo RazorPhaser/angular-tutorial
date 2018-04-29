@@ -6,9 +6,7 @@ Before deploy you will need to run an a build with the Angular CLI.  With the bu
 
 ### Goals
 
-
 * Learn how to create a build that is ready to deploy.
-
 
 ### Non-Production Build
 

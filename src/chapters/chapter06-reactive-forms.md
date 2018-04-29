@@ -2,16 +2,16 @@
 
 ### Overview
 
-In the previous chapter, we took a look at template based forms.  Templates are great for very simple forms that you do not want to unit test at all.  However, if you want to unit test your forms you will need to reuse reactive based forms. 
+In the previous chapter, we took a look at template based forms. Templates are great for very simple forms that you do not want to unit test at all. However, if you want to unit test your forms you will need to reuse reactive based forms.
 
-Reactive forms allow you to define the form fields and validation in the component instead of the template.  You can easily test the form fields and validation logic.  You can also dynamically build the form and validation in the component.
+Reactive forms allow you to define the form fields and validation in the component instead of the template. You can easily test the form fields and validation logic. You can also dynamically build the form and validation in the component.
 
 We are going to build the form to enter our Todo items using Reactive forms.
 
 ### Goals
 
 * Understand reactive forms
-* Create a reactive form 
+* Create a reactive form
 * Implement input validation
 * Submit form values to a service
 
@@ -22,10 +22,10 @@ We are going to build the form to enter our Todo items using Reactive forms.
 If you have not completed the previous chapter you can get the completed code by downloading the code from Github.
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
-1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip) 
+1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip)
 1. After you get the code, run npm install to get all of the NPM dependencies.
 
     ```bash
@@ -35,7 +35,7 @@ If you have not completed the previous chapter you can get the completed code by
 1. Open Visual Studio Code
 1. In Visual Studio Code, go under the File menu, select Open folder and navigate to the folder that you unzipped the files into
 1. If you have ng serve running in a different editor, make sure to stop it from running.
-1. Open the Integrated Terminal in Visual Studio Code (ctrl + `)  and run ng serve
+1. Open the Integrated Terminal in Visual Studio Code (ctrl + `) and run ng serve
 
     ```bash
     ng serve
@@ -46,7 +46,7 @@ If you have not completed the previous chapter you can get the completed code by
 ### Create Todo Component
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Create Todo Component 
+    <b>Exercise</b>: Create Todo Component
 </h4>
 
 1. Within VS Code, open up the integrated terminal (ctrl+`) or view menu and then "Integrated Terminal"
@@ -56,7 +56,7 @@ If you have not completed the previous chapter you can get the completed code by
     ng generate component todo
     ```
 
-1. The generate command will create 4 files: 
+1. The generate command will create 4 files:
 
     ![output of generate](images/todo-generate.png)
 
@@ -71,7 +71,7 @@ If you have not completed the previous chapter you can get the completed code by
 ### Add Route
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Todo Routing 
+    <b>Exercise</b>: Todo Routing
 </h4>
 
 Before we can view our todo component, we need to tell Angular how to route to the page
@@ -88,12 +88,11 @@ Before we can view our todo component, we need to tell Angular how to route to t
     import { TodoComponent } from './todo/todo.component';
     ```
 
-1. We want to make the Todo component the home page.  We can do this by creating a `path: ''` route and making it go to the TodoComponent
+1. We want to make the Todo component the home page. We can do this by creating a `path: ''` route and making it go to the TodoComponent
 
     ```TypeScript
     {
         path: '',
-        children: [],
         component: TodoComponent
     },
     ```
@@ -104,42 +103,40 @@ Before we can view our todo component, we need to tell Angular how to route to t
     const routes: Routes = [
         {
             path: '',
-            children: [],
             component: TodoComponent
         },
-        { path: 'login', children: [], component: LoginComponent },
+        { path: 'login', component: LoginComponent },
         { path: 'signup', component: SignupComponent},
     ];
     ```
 
-1. The todo page should display when you to the home, [http://http://localhost:4200/](http://http://localhost:4200/)
+The todo page should display when you to the home, [http://http://localhost:4200/](http://http://localhost:4200/)
 
-    ![todo initial view](images/todo-initial-view.png)
+![todo initial view](images/todo-initial-view.png)
 
-    <div class="alert alert-info" role="alert">**Note:** When you navigate to the home page, the TodoComponent is loaded into the `<router-outlet></router-outlet>` in the html in  src\app\app.component.html.  The router-outlet tag is how Angular knows where to put the rendered content for the route.</div>
+<div class="alert alert-info" role="alert">**Note:** When you navigate to the home page, the TodoComponent is loaded into the `<router-outlet></router-outlet>` in the html in  src\app\app.component.html.  The router-outlet tag is how Angular knows where to put the rendered content for the route.</div>
 
 <div class="exercise-end"></div>
 
-
 ### Create Form
 
-Next we are going to create the form without any validation logic at all.  Our form will have 1 input field for the todo item and an add button.
+Next we are going to create the form without any validation logic at all. Our form will have 1 input field for the todo item and an add button.
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Import ReactiveFormsModule
 </h4>
 
-With reactive forms, we are going to setup the form in your components TypeScript file.  
+With reactive forms, we are going to setup the form in your components TypeScript file.
 
 We need to import the ReactiveFormsModule into our AppModule before we can use it.
 
-1. Open the src\app\app.module.ts 
+1. Open the src\app\app.module.ts
 
     ```bash
     app.module.ts
     ```
 
-1. Add the ReactiveFormsModule to the existing  @angular/forms import so that it looks like 
+1. Add the ReactiveFormsModule to the existing @angular/forms import so that it looks like
 
     ```TypeScript
     import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -156,14 +153,14 @@ We need to import the ReactiveFormsModule into our AppModule before we can use i
         AppRoutingModule
     ],
     ```
-    
+
 <div class="exercise-end"></div>
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Form setup
 </h4>
 
-Now we are ready to add all of the functionality to the component for the UI to interface with. For the todo component it is the src\app\todo\todo.component.ts file.  We need to add the Form.
+Now we are ready to add all of the functionality to the component for the UI to interface with. For the todo component it is the src\app\todo\todo.component.ts file. We need to add the Form.
 
 1. Open the todo\todo.component.ts file
 
@@ -181,15 +178,15 @@ Now we are ready to add all of the functionality to the component for the UI to 
 
     ```TypeScript
     constructor(private formBuilder: FormBuilder) {}
-    ```    
+    ```
 
-1. Before creating our form, we need to define the addForm variable to hold the configuration.  Inside of the TodoComponent class above the constructor, add the following variable
+1. Before creating our form, we need to define the addForm variable to hold the configuration. Inside of the TodoComponent class above the constructor, add the following variable
 
     ```TypeScript
     addForm: FormGroup;
     ```
 
-1. To configure the form we will use the ngOnInit lifecycle event.  The ngOnInit lifecycle event will run before the component has rendered.  Inside the ngOnit function we need to tell Angular that the addForm is a formBuilder group with 1 field called item with an empty default value.
+1. To configure the form we will use the ngOnInit lifecycle event. The ngOnInit lifecycle event will run before the component has rendered. Inside the ngOnit function we need to tell Angular that the addForm is a formBuilder group with 1 field called item with an empty default value.
 
     ```TypeScript
     this.addForm = this.formBuilder.group({
@@ -200,12 +197,12 @@ Now we are ready to add all of the functionality to the component for the UI to 
 <div class="exercise-end"></div>
 
 <h4 class="exercise-start">
-    <b>Exercise</b>:  Creating the Todo UI 
+    <b>Exercise</b>:  Creating the Todo UI
 </h4>
 
-We are now ready to create our UI. 
+We are now ready to create our UI.
 
-1. Open src\app\todo\todo.component.html 
+1. Open src\app\todo\todo.component.html
 
     ```bash
     todo.component.html
@@ -257,7 +254,7 @@ We are now ready to create our UI.
                 <tr>
                     <td>Errors</td>
                     <td>N/A</td>
-         			<td><pre>{{ addForm.get('item').errors | json }}</pre></td>
+                    <td><pre>{{ addForm.get('item').errors | json }}</pre></td>
                 </tr>
                 <tr>
                     <td>Form Field Values</td>
@@ -267,17 +264,16 @@ We are now ready to create our UI.
             </table>
         </div>
     </div>
-
     ```
-    
+
     * The [formGroup] binds the addForm in the todo.component.ts to the form.
     * On the input field, the formControlName corresponds to the `item` field in the `addForm` FormGroup
-    * The form is using Bootstrap for the styling with the form-group, form-control, btn, and btn* css classes.
+    * The form is using Bootstrap for the styling with the form-group, form-control, btn, and btn\* css classes.
     * The form status info section, is debugging information for the form and the item field for us so that we can see the current state, validation errors, and the form field values.
-        * As you type into the item field, the form status info value section will update
-    * The add button is set as disabled until validation passes. 
+      * As you type into the item field, the form status info value section will update
+    * The add button is set as disabled until validation passes.
 
-	<div class="alert alert-info" role="alert">If you completed the previous chapter on Template Forms, you will notice that we did not setup any ngModel tags or pass in the form to the save method.  With Reactive Forms, the formGroup provides the data binding for us.</div>
+    <div class="alert alert-info" role="alert">If you completed the previous chapter on Template Forms, you will notice that we did not setup any ngModel tags or pass in the form to the save method.  With Reactive Forms, the formGroup provides the data binding for us.</div>
 
 <div class="exercise-end"></div>
 
@@ -290,27 +286,27 @@ In order to submit the form we need to add an `(ngSubmit)=""`
 </h4>
 
 1. Open src\app\todo\todo.component.html file
-	
-	    ```bash
-	    todo.component.html
-	        ```
-	        
-1. On the `<form>` tag add the `(ngSubmit)=""` attribute and have it call the save function 
+
+    ```bash
+    todo.component.html
+    ```
+
+1. On the `<form>` tag add the `(ngSubmit)=""` attribute and have it call the save function
 
     ```html
     (ngSubmit)="save()"
     ```
 
-1. Open the src\app\todo\todo.component.ts file 
+1. Open the src\app\todo\todo.component.ts file
 
     ```bash
     todo.component.ts
     ```
 
-1. Add a function called save that returns a void.  Inside of the save function  add a console log that outputs the addForm field value property.
+1. Add a function called save that returns a void. Inside of the save function add a console log that outputs the addForm field value property.
 
     ```TypeScript
-    save() : void {
+    save(): void {
         console.log('form values: ', this.addForm.value);
     }
     ```
@@ -321,10 +317,9 @@ In order to submit the form we need to add an `(ngSubmit)=""`
 
 <div class="exercise-end"></div>
 
-
 ### Validators
 
-Right now we do not have any validation being done on the form.  To setup validation, we need to modify our formBuilder item field setup.
+Right now we do not have any validation being done on the form. To setup validation, we need to modify our formBuilder item field setup.
 
 <h4 class="exercise-start">
     <b>Exercise</b>:  Add Validators for required and min length
@@ -341,17 +336,16 @@ Right now we do not have any validation being done on the form.  To setup valida
     ```TypeScript
     import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     ```
-    
-    *  note that order of the modules in not important
 
-1. In the ngOnInit function we need add the Validators required and minLength to the item field that we defined earlier.  In order to add the validators, we need to turn the item field value into an array with the 1st position being the default value and the 2nd position as an array of validators.  For the minLength, we are going to require at least 3 characters.
+    * note that order of the modules in not important
+
+1. In the ngOnInit function we need add the Validators required and minLength to the item field that we defined earlier. In order to add the validators, we need to turn the item field value into an array with the 1st position being the default value and the 2nd position as an array of validators. For the minLength, we are going to require at least 3 characters.
 
     ```TypeScript
-    'item': ['', [Validators.required, Validators.minLength(3)]]
+    item: ['', [Validators.required, Validators.minLength(3)]]
     ```
 
-Now that we have validators setup, we need to output an error message to user when the validation fails.  For now, we are going to do it in the html but later we will make it more generic and add it to the component file instead.  
-
+Now that we have validators setup, we need to output an error message to user when the validation fails. For now, we are going to do it in the html but later we will make it more generic and add it to the component file instead.
 
 1. Open the todo.component.html file
 
@@ -359,7 +353,7 @@ Now that we have validators setup, we need to output an error message to user wh
     todo.component.html
     ```
 
-1. After the closing form tag in the todo.component.html file add the following 
+1. After the closing form tag in the todo.component.html file add the following
 
     ```html
     <div class="alert alert-danger" *ngIf="addForm.get('item').errors && (addForm.get('item').dirty || addForm.get('item').touched)">
@@ -376,19 +370,19 @@ Now that we have validators setup, we need to output an error message to user wh
     * By looking at the errors status, we can ensure we only show the messages when there are errors
     * For each of the messages, we can look at the individual validators to see which one failed and only display that message.
 
-1. If you go to http://localhost:4200/ click on the field and then click off it the required validator will fire.  If you enter less than 3 characters the minLength validator will fire.  
+1. If you go to [http://localhost:4200](http://localhost:4200) click on the field and then click off it the required validator will fire. If you enter less than 3 characters the minLength validator will fire.
 
 <div class="exercise-end"></div>
 
 ### Easier Validation Messages
 
-Having the validation messages in the html template gets old really fast.  It is a lot of code to maintain.  With the Reactive Forms, we can create a generic error checker for the whole form and set a value for each of the form fields.
+Having the validation messages in the html template gets old really fast. It is a lot of code to maintain. With the Reactive Forms, we can create a generic error checker for the whole form and set a value for each of the form fields.
 
 <h4 class="exercise-start">
     <b>Exercise</b>:  Watching for Changes
 </h4>
 
-We are going to create a function that will be called each time the form values change.  Within the function we will loop through all of the fields and check if they are dirty and not valid.  Then we will look up the validation message to use for the form field and validator that failed.
+We are going to create a function that will be called each time the form values change. Within the function we will loop through all of the fields and check if they are dirty and not valid. Then we will look up the validation message to use for the form field and validator that failed.
 
 1. Open the src\app\todo\todo.component.ts file
 
@@ -396,21 +390,21 @@ We are going to create a function that will be called each time the form values 
     todo.component.ts
     ```
 
-1. We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item.  We are going to call the variable formErrors.  The default value for the error message is a blank string.  This list will also be used to determine which form fields to inspect for validation errors.
+1. We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item. We are going to call the variable formErrors. The default value for the error message is a blank string. This list will also be used to determine which form fields to inspect for validation errors.
 
     ```TypeScript
     formErrors = {
-        'item': ''
+        item: ''
     };
     ```
 
-1. Next we need to create a variable to hold the validation messages for each of the form fields.  The name of the validation message must match the name of the validation.
+1. Next we need to create a variable to hold the validation messages for each of the form fields. The name of the validation message must match the name of the validation.
 
     ```TypeScript
     validationMessages = {
-        'item': {
-        'required': 'Item is required.',
-        'minlength': 'Item must be at least 3 characters'
+        item: {
+            required: 'Item is required.',
+            minlength: 'Item must be at least 3 characters'
         }
     };
     ```
@@ -430,9 +424,9 @@ We are going to create a function that will be called each time the form values 
 
                 if (control && control.dirty && !control.valid) {
                     const messages = this.validationMessages[field];
-                    for (const key in control.errors) {
-                        if (control.errors.hasOwnProperty(key)) {
-                            this.formErrors[field] += messages[key] + ' ';
+                     for (const key in messages) {
+                        if (messages.hasOwnProperty(key) && control.hasError(key)) {
+                            this.formErrors[field] += `${messages[key]} `;
                         }
                     }
                 }
@@ -445,7 +439,7 @@ We are going to create a function that will be called each time the form values 
     * Then we loop through the formError variable, get the field and check if the form field is invalid
     * If the form field is invalid, then we look up the validation message for the form field and validator that failed and set the formError for that field.
 
-1. Next we need to subscribe to the addForm valueChanges event and call the onValueChanged function we just created.  We are going to setup the subscribe in the ngOnInit function
+1. Next we need to subscribe to the addForm valueChanges event and call the onValueChanged function we just created. We are going to setup the subscribe in the ngOnInit function
 
     ```TypeScript
     this.addForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -463,7 +457,7 @@ We are going to create a function that will be called each time the form values 
     <b>Exercise</b>: Show Error Message in UI
 </h4>
 
-The last thing we need to do is up the UI to display the form error messages.    
+The last thing we need to do is up the UI to display the form error messages.
 
 1. Open the todo.component.html file
 
@@ -479,7 +473,7 @@ The last thing we need to do is up the UI to display the form error messages.
     </div>
     ```
 
-1. If you navigate to [http://localhost:4200](http://localhost:4200), click on the item form field and enter 1 character it will trigger the minLength validator and will show the minLength validation message.  If you then blank out the field you will see the required message.
+1. If you navigate to [http://localhost:4200](http://localhost:4200), click on the item form field and enter 1 character it will trigger the minLength validator and will show the minLength validation message. If you then blank out the field you will see the required message.
 
 <div class="exercise-end"></div>
 
@@ -487,7 +481,7 @@ The last thing we need to do is up the UI to display the form error messages.
     <b>Exercise</b>: Add Border On Invalid
 </h4>
 
-You can also add a border around the Bootstrap form-group for the item form field by adding the has-danger css class when the formErrors.item has a value.
+You can also add a border around the Bootstrap form-group for the item form field by adding the has-danger Bootstrap css class when the formErrors.item has a value.
 
 1. Open the todo.component.html file
 
@@ -495,7 +489,7 @@ You can also add a border around the Bootstrap form-group for the item form fiel
     todo.component.html
     ```
 
-1. To the form-group div tag, add an `[ngClass]` attribute that checks that formErrors.item has a value and if so then adds the has-danger css to the div tag
+1. To the form-group div tag, add an `[ngClass]` attribute that checks that formErrors.item has a value and if so then adds the has-danger css to the div tag.
 
     ```html
     [ngClass]="{'has-danger': formErrors.item}"
@@ -505,10 +499,9 @@ You can also add a border around the Bootstrap form-group for the item form fiel
 
 ### Wait Before Validation Messages
 
-You might have notice after implementing the previous logic to check the field values in the TypeScript file, that the validation errors are immediately shown which can be annoying to users while they type.  Instead it would be better to wait for a given amount of time after the last keystroke before checking.  This is called debounce.  
+You might have notice after implementing the previous logic to check the field values in the TypeScript file, that the validation errors are immediately shown which can be annoying to users while they type. Instead it would be better to wait for a given amount of time after the last keystroke before checking. This is called debounce.
 
 Angular makes it very easy to implement what they call debounce to wait for the user to stop typing before running validation on our item input field.
-
 
 <h4 class="exercise-start">
     <b>Exercise</b>:  Implement Debounce
@@ -532,21 +525,19 @@ Angular makes it very easy to implement what they call debounce to wait for the 
     this.addForm.valueChanges.debounceTime(1000).subscribe(data => this.onValueChanged(data));
     ```
 
-1. Now if you test the UI at http://localhost:4200, it will wait 1 second after the last keystroke before checking the input field validation.  You can change the time it waits by increasing or decreasing the value that is passed into the debounceTime function.
+1. Now if you test the UI at [http://localhost:4200](http://localhost:4200), it will wait 1 second after the last keystroke before checking the input field validation. You can change the time it waits by increasing or decreasing the value that is passed into the debounceTime function.
 
 <div class="exercise-end"></div>
 
 ### Saving Todo Items
 
-We are at the point, where we are ready to create a service to save the todo item.  Right now, we are just output the add form values to the console.
-
+We are at the point, where we are ready to create a service to save the todo item. Right now, we are just output the add form values to the console.
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Class to Hold Todo item
 </h4>
 
-Since TypeScript is a strongly typed language it is best practice to create a class to hold our Todo items.  This way we can get the type support for the different fields.
-
+Since TypeScript is a strongly typed language it is best practice to create a class to hold our Todo items. This way we can get the type support for the different fields.
 
 1. Within VS Code, open up the integrated terminal (ctrl+`) or view menu and then "Integrated Terminal"
 1. Run the ng generate command below to create the todo component
@@ -555,10 +546,9 @@ Since TypeScript is a strongly typed language it is best practice to create a cl
     ng generate class shared/classes/Todo
     ```
 
-1. This will create 1 files: 
+1. This will create 1 files:
 
     ![generate output](images/todo-generate-class.png)
-
 
 1. Open src/app/shared/classes/todo.ts
 
@@ -619,22 +609,22 @@ Since TypeScript is a strongly typed language it is best practice to create a cl
     user: string;
     ```
 
-1. To make it easier to create new todo Items and implement unit testing, we are going to add a constructor to initialize the fields.  Item will required while id, completed and createdAt will be optional. The optional fields must be after all of the required fields.
+1. To make it easier to create new todo Items and implement unit testing, we are going to add a constructor to initialize the fields. Item will required while id, completed and createdAt will be optional. The optional fields must be after all of the required fields.
 
     ```TypeScript
     constructor(
-        item: string, 
+        item: string,
         id?: string,
         completed?: boolean,
         createdAt?: Date,
         updatedAt?: Date) {
         this.id = id;
         this.item = item;
-        this.completed = completed ? completed: false;
-        this.createdAt = createdAt ? createdAt: new Date();
-        this.updatedAt = updatedAt ? updatedAt: new Date();
-    }    
-    ```    
+        this.completed = completed ? completed : false;
+        this.createdAt = createdAt ? createdAt : new Date();
+        this.updatedAt = updatedAt ? updatedAt : new Date();
+    }
+    ```
 
 <div class="exercise-end"></div>
 
@@ -664,51 +654,49 @@ Since TypeScript is a strongly typed language it is best practice to create a cl
 
 Now that we have the Todo service file created, we need to add our save method that calls our json-server api server and then update the Todo component to call the service.
 
-1. Open src\app\shared\services\todo.service.ts 
+1. Open src\app\shared\services\todo.service.ts
 
     ```bash
     todo.service.ts
     ```
 
-1. Import the following so that we can make our HTTP calls and get a response back.  
+1. Import the following so that we can make our HTTP calls and get a response back.
 
     ```TypeScript
-    import { Http, Response, RequestOptions } from '@angular/http';
-    import { Observable } from 'rxjs/Rx';
+    import { HttpClient } from '@angular/common/http';
     ```
 
 1. In order to use the HTTP module, we need to inject it into our constructor
 
     ```TypeScript
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
     ```
 
-1. For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven't logged in.  Add this varaible to the TodoService class.
+1. For the API that we are using (SailsJS based), it requires that we set the HTTP option to allow credentials so that the session cookie can be passed back and forth, else it will always think you haven't logged in. Add this variable above the @Injectable for the TodoService.
 
     ```TypeScript
-    private options = new RequestOptions({ withCredentials: true });
+    const requestOptions = { withCredentials: true };
     ```
 
-    <div class="alert alert-info" role="alert">You will need to pass in this.options as the last parameter for all of our http calls.</div>
+    <div class="alert alert-info" role="alert">You will need to pass in requestOptions as the last parameter for all of our http calls.</div>
 
-1. Before we create our save method we need to import the Todo class so that our data is typed when we pass it from the service the component. 
+1. Before we create our save method we need to import the Todo class so that our data is typed when we pass it from the service the component.
 
     ```TypeScript
     import { Todo } from '../classes/todo';
     ```
 
-1. Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.  
+1. We want to return Observables of type Todo back from our Http calls we need to import Observable from rsjs.
+
+    ```TypeScript
+    import { Observable } from 'rxjs/Observable';
+    ```
+
+1. Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.
 
     ```TypeScript
     save(item: string): Observable<Todo> {
-        return this.http.post('https://dj-sails-todo.azurewebsites.net/todo', new Todo(item), this.options)
-        .map((res: Response) => {
-            return <Todo>res.json();
-        })
-        .catch(error => {
-            console.log('save error', error)
-            return error;
-        });
+        return this.http.post<Todo>('https://dj-sails-todo.azurewebsites.net/todo', new Todo(item), requestOptions);
     }
     ```
 
@@ -717,7 +705,7 @@ Now that we have the Todo service file created, we need to add our save method t
 <h4 class="exercise-start">
     <b>Exercise</b>: Display Todo Item
 </h4>
-        
+
 Now that we have our Todo service save function created, we need to call it from our Todo component so that we can save our data.
 
 1. Open the src\app\todo\todo.component.ts file
@@ -732,10 +720,16 @@ Now that we have our Todo service save function created, we need to call it from
     import { TodoService } from '../shared/services/todo.service';
     ```
 
-1. Now that we have the TodoService import we need to inject it into the constructor to make it avaiable to the component.  
+1. Now that we have the TodoService import we need to inject it into the constructor to make it avaiable to the component.
 
     ```TypeScript
     constructor(private formBuilder: FormBuilder, private todoService: TodoService) { }
+    ```
+
+1. We also need to import the Todo class since the TodoService returns back a Todo class.
+
+    ```TypeScript
+    import { Todo } from '../shared/classes/todo';
     ```
 
 1. Update the save method with the following code to call the `TodoService.save` function and output the result to the console
@@ -744,10 +738,15 @@ Now that we have our Todo service save function created, we need to call it from
     this.todoService.save(this.addForm.value.item)
     .subscribe(result => {
         console.log('save result', result);
-    },
-    error => {
-        this.errorMessage = <any>error;
-    });
+    };
+    ```
+
+Right now our solution does not handle any errors from the TodoService save call.  Lets add in some error checking.
+
+1. We need to import the HttpErrorResponse class so that we can get at the Http error.
+
+    ```TypeScript
+    import { HttpErrorResponse } from '@angular/common/http';
     ```
 
 1. We now need to create the errorMessage variable that is of type string in the Todocomponent class
@@ -756,13 +755,38 @@ Now that we have our Todo service save function created, we need to call it from
     errorMessage: string;
     ```
 
+1. Inside of the subscribe that the call to todoService.save, we need to add our error check.
+
+    ```TypeScript
+        ,
+        (error: HttpErrorResponse) => {
+            this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+        }
+    ```
+
+    You save method should now look like
+
+    ```TypeScript
+    save(): void {
+        console.log('form values: ', this.addForm.value);
+        this.todoService.save(this.addForm.value.item)
+        .subscribe((result: Todo) => {
+                console.log('save result', result);
+            },
+            (error: HttpErrorResponse) => {
+                this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+            }
+        );
+    }
+    ```
+
 1. Open the todo.component.html file so that we can add the display of the save error message.
 
     ```bash
     todo.component.html
-    ```    
+    ```
 
-1. Now we need to add an alert section to our todo.component.html to display the error message.  After the `</form>` tag, add the following code
+1. Now we need to add an alert section to our todo.component.html to display the error message. After the `</form>` tag, add the following code
 
     ```TypeScript
     <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
@@ -770,20 +794,11 @@ Now that we have our Todo service save function created, we need to call it from
         {{ errorMessage }}
     </div>
     ```
-
-1. Testing the error message display requires that we temporary set a value for the errorMessage.  We are going to do this in the ngOnInit just to verify that the error message will display:
-
-    ```TypeScript
-    this.errorMessage = 'testing'
-    ```     
-
-1. Now if you go to [http://localhost:4200](http://localhost:4200) you will see the following display
+1. Now if you go to [http://localhost:4200](http://localhost:4200) and try to save a todo item, you will see the following error message.
 
     ![error message display](images/error-messages-display.png)
 
-1. We can remove the temporary value that we set for the errorMessage.
-
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit [http://localhost:4200/login](http://localhost:4200/login) before you can successfully save a todo item since they are associated to a user.  After you have logged in, you can save as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+    <div class="alert alert-danger" role="alert">The reason for this error is that for now, you will need to 1st hit [http://localhost:4200/login](http://localhost:4200/login) before you can successfully save a todo item since they are associated to a user.  After you have logged in, you can save as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
 
 <div class="exercise-end"></div>
 
@@ -792,7 +807,7 @@ Now that we have our Todo service save function created, we need to call it from
 Now that we have the ability to save our items, we need to be able to display the current list
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Get Todo Items 
+    <b>Exercise</b>: Get Todo Items
 </h4>
 
 First thing we need to do is add a function to the todo service to get the list of todo items.
@@ -806,16 +821,8 @@ First thing we need to do is add a function to the todo service to get the list 
 1. Add the following function to make an http get call to our Todo API and return back an array of Todo items.
 
     ```TypeScript
-    getAll(): Observable<Array<Todo>>{
-        let url = "https://dj-sails-todo.azurewebsites.net/todo";
-        return this.http.get(url, this.options)
-        .map((res: Response) => {
-            return <Array<Todo>>res.json();
-        })
-        .catch(error => {
-            console.log('get error', error);
-            return error;
-        });
+        getAll(): Observable<Todo[]> {
+        return this.http.get<Todo[]>('https://dj-sails-todo.azurewebsites.net/todo', requestOptions);
     }
     ```
 
@@ -825,7 +832,7 @@ First thing we need to do is add a function to the todo service to get the list 
     <b>Exercise</b>: Display Todo Items in the UI
 </h4>
 
-Now that we have the TodoService.getAll function created, we are ready to call the function from our TodoComponent.  We will make this call in the ngOnInit function so that it will display the list on component render.
+Now that we have the TodoService.getAll function created, we are ready to call the function from our TodoComponent. We will make this call in the ngOnInit function so that it will display the list on component render.
 
 1. Open the src\app\todo\todo.component.ts file
 
@@ -833,31 +840,25 @@ Now that we have the TodoService.getAll function created, we are ready to call t
     todo.component.ts
     ```
 
-1. Import the todo class 
-
-    ```TypeScript
-    import { Todo } from '../shared/classes/todo';
-    ```
-
 1. Create a variable in the TodoComponent class called todoList that is an array of Todo and intialize to an empty array
 
     ```TypeScript
-    todoList: Array<Todo> = [];
+    todoList: Todo[] = [];
     ```
 
 1. Create the getTodoListAll function that will return void, call the TodoService.getAll function and set a todoList variable at the Todocomponent class level.
 
     ```TypeScript
     getTodoListAll(): void {
-    this.todoService.getAll()
-      .subscribe(
-      data => {
-        this.todoList = data;
-      },
-      error => {
-        this.errorMessage = <any>error;
-      }
-      );
+        this.todoService.getAll()
+        .subscribe(
+            (data: Todo[]) => {
+                this.todoList = data;
+            },
+            (error: HttpErrorResponse) => {
+              this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+            }
+        );
     }
     ```
 
@@ -883,25 +884,25 @@ Now that we have the TodoService.getAll function created, we are ready to call t
 1. After the error message alert, add the following html to display the list of todo items
 
     ```html
-    <div class="row" *ngFor="let todoItem of todoList">
+    <div class="row todo" *ngFor="let todoItem of todoList">
       <div class="col-12 done-{{todoItem.completed}}">
-        {{todoItem.item}} <small>created: {{todoItem.createdAt | date:'short'}}</small>
+        {{todoItem.item}}<br /><small>created: {{todoItem.createdAt | date:'short'}}</small>
       </div>
     </div>
     ```
 
-    * the *ngFor will loop through all of the items in the todoList variable that we will be creating next.  
+    * the \*ngFor will loop through all of the items in the todoList variable that we will be creating next.
     * For the date, we are using the built-in date pipe to convert it to a short date that strips out the time part of the date
-    * We are also setup to have a different style when an item is completed.  We will add the styling in a bit.    
+    * We are also setup to have a different style when an item is completed. We will add the styling in a bit.
 
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit [http://localhost:4200/login](http://localhost:4200/login) before you can successfully pull the list of todo items since they are associated to a user.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+    <div class="alert alert-danger" role="alert">For now, you will need to 1st hit [http://localhost:4200/login](http://localhost:4200/login) before you can successfully pull the list of todo items since they are associated to a user.  In the next chapter we will implement a login check that will redirect you to login first.</div>
 
 <div class="exercise-end"></div>
 
 ### Update List on Save
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Updating Todo list on save 
+    <b>Exercise</b>: Updating Todo list on save
 </h4>
 
 Now that we have the Todo list being stored in the todoList variable, when we save a new todo item, we can add it to the todoList array and the todo list will automatically update with the change.
@@ -912,7 +913,7 @@ Now that we have the Todo list being stored in the todoList variable, when we sa
     todo.component.ts
     ```
 
-1. In the todo.component.ts file, we need to update the save function to push the save result into the todoList array. We need to add this code into the subscribe of the `TodoService.save` call. 
+1. In the todo.component.ts file, we need to update the save function to push the save result into the todoList array. We need to add this code into the subscribe of the `TodoService.save` call.
 
     ```TypeScript
     this.todoList.push(result);
@@ -922,9 +923,9 @@ Now that we have the Todo list being stored in the todoList variable, when we sa
 
 <div class="exercise-end"></div>
 
-### Complete Todo 
+### Complete Todo
 
-Right now the todo list is just a read only view.  However, we need to have the ability to complete a todo item.  We are going to add an icon to the todo list that will toggle the completed state and save the todo item.
+Right now the todo list is just a read only view. However, we need to have the ability to complete a todo item. We are going to add an icon to the todo list that will toggle the completed state and save the todo item.
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Save Updated Todo Item
@@ -936,28 +937,23 @@ Right now the todo list is just a read only view.  However, we need to have the 
     todo.service.ts
     ```
 
-1. We are going to create an update method that will take in a Todo item and make an  http put call to our API to update the one record with the new completion state.
+1. We are going to create an update method that will take in a Todo item and make an http put call to our API to update the one record with the new completion state.
 
     ```TypeScript
     updateTodo(todo: Todo): Observable<Todo> {
-        let url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+        const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
 
-        return this.http.put(url, todo, this.options)
-        .map((res: Response) => <Todo>res.json())
-        .catch(error => {
-            console.log('update error', error);
-            return error;
-        });
+        return this.http.put<Todo>(url, todo, requestOptions);
     }
     ```
 
-    * For the url we are using string interpolation to create the url.  This is done with the &#96;&#96; tags and the ${}
+    * For the url we are using string interpolation to create the url. This is done with the &#96;&#96; tags and the ${}
     * An HTTP PUT call is used to update a record and requires an ID as part of the URL to figure out which record you are updating
 
 <div class="exercise-end"></div>
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Enable Toggle in UI and Save
+    <b>Exercise</b>: Enable Completed Toggle in UI
 </h4>
 
 Now we need to call the updateTodo function that we just created in the TodoService from our UI component.
@@ -968,25 +964,26 @@ Now we need to call the updateTodo function that we just created in the TodoServ
     todo.component.ts
     ```
 
-1. Create the completeTodo method that the UI will call 
+1. Create the completeTodo method that the UI will call
 
     ```TypeScript
     completeTodo(todo: Todo): void {
         todo.completed = !todo.completed;
         this.todoService.updateTodo(todo)
-        .subscribe(
-            data => {
-                // do nothing
-            },
-            error => {
-                todo.completed = !todo.completed;
-                this.errorMessage = <any>error;
-                console.log('complete error', this.errorMessage);
-            });
+            .subscribe(
+                (data: Todo) => {
+                    // do nothing
+                   console.log('updated todo', todo);
+                },
+                (error: HttpErrorResponse) => {
+                    todo.completed = !todo.completed;
+                    this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+                }
+            );
     }
     ```
 
-    * For now we are not going to do anything with the returned result.  In the future you could call a sort function or update an open todo item counter.
+    * For now we are not going to do anything with the returned result. In the future you could call a sort function or update an open todo item counter.
 
 The last thing we need to do it do update the UI to have a checkbox icon that will be clicked on to toggle the completion state.
 
@@ -1002,8 +999,8 @@ The last thing we need to do it do update the UI to have a checkbox icon that wi
       <div class="col-1" (click)="completeTodo(todoItem)"><i [className]="todoItem.completed ? 'fa fa-check-square-o' : 'fa fa-square-o'"></i></div>
     ```
 
-    * We are passing in the todo item that we are wanting to update to the completedTodo function.  This will pass in the whole object so we have access to all of the fields.
-    * We are updating the icon used based on the completed field state.  If completed we are using fa-check-square-o.  If not completed, we are using fa-square-o
+    * We are passing in the todo item that we are wanting to update to the completedTodo function. This will pass in the whole object so we have access to all of the fields.
+    * We are updating the icon used based on the completed field state. If completed we are using fa-check-square-o. If not completed, we are using fa-square-o
 
 1. With Bootstrap it is a 12 column grid, so we need to reduce the size of the existing div from col-12 to col-11 in order to fit in the complete checkbox
 
@@ -1018,7 +1015,7 @@ The last thing we need to do it do update the UI to have a checkbox icon that wi
     </div>
     ```
 
-<div class="alert alert-danger" role="alert">For now, you will need to 1st hit [http://localhost:4200/login](http://localhost:4200/login) before you can successfully update a todo item since they are associated to a user.  After you have logged in, you can update as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
+    <div class="alert alert-danger" role="alert">For now, you will need to 1st hit [http://localhost:4200/login](http://localhost:4200/login) before you can successfully update a todo item since they are associated to a user.  After you have logged in, you can update as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
 
 <div class="exercise-end"></div>
 
@@ -1028,8 +1025,7 @@ The last thing we need to do it do update the UI to have a checkbox icon that wi
     <b>Exercise</b>: Delete Todo Item from Data Store
 </h4>
 
-In addition to being able to complete a todo item, we also need to be able to delete one.  We need to add an icon to the todo list that will call a delete function in the component and delete the todo item from our database.
-
+In addition to being able to complete a todo item, we also need to be able to delete one. We need to add an icon to the todo list that will call a delete function in the component and delete the todo item from our database.
 
 1. Open the src\app\shared\services\todo.service.ts file
 
@@ -1040,18 +1036,14 @@ In addition to being able to complete a todo item, we also need to be able to de
 1. We need to create a delete method that will call our API using http.delete
 
     ```TypeScript
-    deleteTodo(todo: Todo): Observable<Response> {
-        let url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
-        return this.http.delete(url, this.options)
-        .catch(error => {
-            console.log('delete error', error);
-            return error;
-        });
+    deleteTodo(todo: Todo): Observable<Todo> {
+        const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+        return this.http.delete<Todo>(url, requestOptions);
     }
     ```
 
     * We are passing in the todo item id that we are wanting to delete.
-    * We are not doing any kind of mapping of the return results since there is none.  It is either successful or not.
+    * We are not doing any kind of mapping of the return results since there is none. It is either successful or not.
 
 <div class="exercise-end"></div>
 
@@ -1073,19 +1065,18 @@ Next we need to create the deleteTodo item function in the component that will c
     deleteTodo(todo: Todo): void {
         this.todoService.deleteTodo(todo)
         .subscribe(
-        data => {
-            let index = this.todoList.indexOf(todo);
-            this.todoList.splice(index, 1);
-        },
-        error => {
-            todo.completed = !todo.completed;
-            this.errorMessage = <any>error;
-            console.log('complete error', this.errorMessage);
-        });
+            (data: Todo) => {
+                const index = this.todoList.indexOf(todo);
+                this.todoList.splice(index, 1);
+            },
+            (error: HttpErrorResponse) => {
+                this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
+            }
+        );
     }
     ```
 
-    <div class="alert alert-info" role="alert">Note: We could have also just called the TodoService.getAll function but since we already have all of the items and the items are specific to a single user, there is no need to make the extra database call.</div>
+    <div class="alert alert-info" role="alert">Note: We could have also just called the TodoService.getAll function but since we already have all of the items and the items are specific to a single user, there is no need to make the extra API and Database call.</div>
 
 The last thing that we need to do is to add the delete icon to the todo list.
 
@@ -1095,7 +1086,7 @@ The last thing that we need to do is to add the delete icon to the todo list.
     todo.component.html
     ```
 
-1. After the div that displays the todo item and date but still inside of the ngFor div, we need to add a div that will hold the delete icon.  We will be using the fa-trash icon.  When the icon is clicked it will call the TodoComponent.deleteTodo function.  The icon is going to take up 1 column of space in the grid.
+1. After the div that displays the todo item and date but still inside of the ngFor div, we need to add a div that will hold the delete icon. We will be using the fa-trash icon. When the icon is clicked it will call the TodoComponent.deleteTodo function. The icon is going to take up 1 column of space in the grid.
 
     ```TypeScript
     <div class="col-1" (click)="deleteTodo(todoItem)"><i class="fa fa-trash"></i></div>
@@ -1117,7 +1108,7 @@ The last thing that we need to do is to add the delete icon to the todo list.
     </div>
     ```
 
-1. You can now test the delete functionality.  Warning that it will not ask if you want to delete the item.  It will just delete it.
+1. You can now test the delete functionality. Warning that it will not ask if you want to delete the item. It will just delete it.
 
     <div class="alert alert-danger" role="alert">For now, you will need to 1st hit [http://localhost:4200/login](http://localhost:4200/login) before you can successfully delete a todo item since they are associated to a user.  After you have logged in, you can delete as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
 
@@ -1129,57 +1120,54 @@ The last thing that we need to do is to add the delete icon to the todo list.
     <b>Exercise</b>: Making the Todo list look nicer
 </h4>
 
-Right now the UI looks decent but with a few tweaks it could look much better.  
+Right now the UI looks ok but with a few tweaks it will have a much better look and feel to it.
 
 ![todo unstyled](images/todo-unstyled.png)
 
-If we added some padding around each row, a bottom border, made the date smaller and gray, increased the size of each icon and made the completed items gray with a strike-through, the UI would pop.
+Lets add some padding around each row, a bottom border, made the date smaller and gray, increased the size of each icon and made the completed items gray with a strike-through, the UI would pop.
 
-The first thing we need to do is add in our styles to the Todo component.  Since these styles are strictly for the Todo component we are going to add them into the todo.component.scss instead of the app's style.scss file.  
+The first thing we need to do is add in our styles to the Todo component. Since these styles are strictly for the Todo component we are going to add them into the todo.component.scss instead of the app's style.scss file.
 
 <div class="alert alert-info" role="alert">Angular enables CSS encapsulation so that the styling in each components scss file will only be applied to that component and not the rest of the site.  They do this by adding an attribute to both the html elements and css classes that are rendered. It is done on the fly for you and does not at all change the actual files.</div>
 
-
-1. Open the src\app\todo\todo.component.scss 
+1. Open the src\app\todo\todo.component.scss
 
     ```bash
     todo.component.scss
     ```
 
-1. Add the following contents to the file.  To ensure we are following our branding, we are importing our scss color variables.
+1. Add the following contents to the file. To ensure we are following our branding, we are importing our scss color variables.
 
     ```scss
-    @import "../../assets/bootstrap/variables";
+    @import '../../assets/bootstrap/variables';
     div.todo {
-        width: 100%;
-        padding-bottom: .2em;
-        padding-top: .2em;
-        border-bottom: 1px solid $gray-light;
-        font-size: 1.4em;
+      width: 100%;
+      padding-bottom: 0.2em;
+      padding-top: 0.2em;
+      border-bottom: 1px solid $gray-light;
+      font-size: 1.4em;
 
-        small {
-            font-size: .7em;
-            color: $gray-light;
-        }
-        
-        i {
-            width: 40px;
-            padding-right: 10px;
-            vertical-align: middle
-        }
-        
-        .done-true {
-            text-decoration: line-through;
-            color: $gray-light;
-        }
+      small {
+        font-size: 0.7em;
+        color: $gray-light;
+      }
+
+      i {
+        width: 40px;
+        padding-right: 10px;
+        vertical-align: middle;
+      }
+
+      .done-true {
+        text-decoration: line-through;
+        color: $gray-light;
+      }
     }
-
     ```
 
-1. Now if you view the UI it should look like below.  
-    
-    ![unstyled ui](images/todo-styled-final.png)
+1. Now if you view the UI it should look like below.
 
+    ![unstyled ui](images/todo-styled-final.png)
 
 <div class="alert alert-danger" role="alert">For now, you will need to 1st hit [http://localhost:4200/login](http://localhost:4200/login) before you can successfully get the todo item since they are associated to a user.  In the next chapter we will implement a login check that will redirect you to login first.</div>
 
@@ -1196,15 +1184,15 @@ We did a lot in this chapter implementing our Reactive form
 1. Show the list of todo list with icons to complete and delete todo items
 1. We used several Angular directives to implement functionality in the UI:
 
-    * *ngIf - replacement for ng-if.  Only show section if condition is true
-    * *ngFor - replacement for ng-repeat.  Loop through a list and do something
+    * \*ngIf - replacement for ng-if. Only show section if condition is true
+    * \*ngFor - replacement for ng-repeat. Loop through a list and do something
     * [(ngModel)] - two-way data binding
     * (click) - binds to the click event
     * [className] - replacement for ngClass and set the css class for the element
     * (ngModelChange) - runs method when the [(ngModel)] value changes
-    * [hidden] - hides the element when condition is true 
-    * (ngSubmit) - submits a form 
-    * [formGroup] - used for reactive forms.  basically dynamic forms that you can control in the controller
+    * [hidden] - hides the element when condition is true
+    * (ngSubmit) - submits a form
+    * [formGroup] - used for reactive forms. basically dynamic forms that you can control in the controller
     * [disabled] - set the element to disabled when condition is true
 
 #### Possible Enhancements

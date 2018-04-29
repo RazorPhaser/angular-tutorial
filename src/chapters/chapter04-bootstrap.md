@@ -53,11 +53,11 @@ Before we can use ng-bootstrap we need to add it to the AppModule
     <b>Exercise</b>: Add  Bootstrap to Project
 </h4>
 
-First we need to create our own custom Bootstrap stylesheet so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.
+First we need to create our own custom Bootstrap variables files so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.
 
 1. In the app folder, create a file called **_variables.scss**
 
-      <div class="alert alert-info" role="alert">You can create file right in Visual Studio Code by right-click on the src\assets folder</div>
+      <div class="alert alert-info" role="alert">You can create file right in Visual Studio Code by right-click on the src\app folder</div>
 
     ```bash
     _variables.scss
@@ -115,12 +115,6 @@ First we need to create our own custom Bootstrap stylesheet so that we can overr
 
     // Bootstrap and its default variables
     @import "node_modules/bootstrap/scss/bootstrap";
-
-    /*
-    * Font Awesome 4.x
-    */
-    $fa-font-path: "~font-awesome/fonts";
-    @import "~font-awesome/scss/font-awesome";
     ```
 
 Now we need to configure the angular cli to import the bootstrap libraries.
@@ -133,10 +127,13 @@ Now we need to configure the angular cli to import the bootstrap libraries.
     .angular-cli.json
     ```
 
-1. To the styles section, we need to add the font-awesome stylesheet.
+1. Find the apps\styles section and replace the section with:
 
     ```json
-    "../node_modules/font-awesome/css/font-awesome.css",
+    "styles": [
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "styles.scss"
+    ],
     ```
 
 <div class="exercise-end"></div>
@@ -166,7 +163,7 @@ Now we need to configure the angular cli to import the bootstrap libraries.
     </div>
     ```
 
-2. Lets change the title to something better than "App Works!"
+1. Lets change the title to something better than "App Works!"
 
     * Open the src\app\app.component.ts file
 

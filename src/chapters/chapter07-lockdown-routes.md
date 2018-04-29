@@ -2,12 +2,12 @@
 
 ### Overview
 
-Right now in order to use our Todo list, we have to manually go to the login page first.  This is a terrible user experience.  Luckily, Angular has the ability to do checks before allowing a user into a route by implementing a guard on a route.  
+Right now in order to use our Todo list, we have to manually go to the login page first.  This is a terrible user experience.  Luckily, Angular has the ability to do checks before allowing a user into a route by implementing a guard on a route.
 
-Guards allow you to authentication or authorization check before allowing a user to perform an action.  Common usage cases are: 
+Guards allow you to authentication or authorization check before allowing a user to perform an action.  Common usage cases are:
 
 * Role checks such as admin before allowing the user into the admin section of the application
-* Is the user logged in check before allowing them into the page the pulls or updates data 
+* Is the user logged in check before allowing them into the page the pulls or updates data
 * Is the user logged out before allowing them to create an account
 
 In this chapter we are going to implement a check for if the user is logged in before allowing them to view the home page and interact with the Todo list.
@@ -24,10 +24,10 @@ In this chapter we are going to implement a check for if the user is logged in b
 If you have not completed the previous chapter you can get the completed code by downloading the code from Github.
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code 
+    <b>Exercise</b>: Downloading Code
 </h4>
 
-1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactvive-forms.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactive-forms.zip) 
+1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactvive-forms.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactive-forms.zip)
 1. After you get the code, run npm install to get all of the NPM dependencies.
 
     ```bash
@@ -51,7 +51,7 @@ If you have not completed the previous chapter you can get the completed code by
   <b>Exercise</b>: Check If User Is Logged In
 </h4>
 
-1. Open terminal and generate the guard 
+1. Open terminal and generate the guard
 
   ```bash
   ng generate guard shared/guards/IsLoggedIn --module App
@@ -78,28 +78,33 @@ We need to make a call to the API to check if the user is logged into the API or
 1. Add an isAuthenticated function to the AuthService that checks the API to make sure that the user is still logged in
 
   ```TypeScript
-  isAuthenticated(): Observable<boolean> {
-    return this.http.get("https://dj-sails-todo.azurewebsites.net/user/identity", this.options)
-      .map((res: Response) => {
-        if (res) {
-          return Observable.of(true);
-        }
+  isAuthenticated(): Observable<boolean | Response> {
+        return this.http
+            .get('https://dj-sails-todo.azurewebsites.net/user/identity', requestOptions)
+            .pipe(
+                tap((res: Response) => {
+                    if (res) {
+                        console.log('logged in');
+                        return of(true);
+                    }
 
-        return Observable.of(false);
-      })
-      .catch((error: Response) => {
-        if (error.status !== 403) {
-          console.log('isAuthenticated error', error);
-        }
-
-        return Observable.of(false);
-      });
-  }
+                    console.log('not logged in');
+                    return of(false);
+                }),
+                catchError((error: HttpErrorResponse) => {
+                    if (error.status !== 403) {
+                        console.log('isAuthenticated error', error);
+                    }
+                    console.log('login error', error);
+                    return of(false);
+                }),
+            );
+    }
   ```
 
-Next we need to add logic to the guard's canActivate function to call the AuthService.isAuthenticated function 
+Next we need to add logic to the guard's canActivate function to call the AuthService.isAuthenticated function
 
-1. Open src\app\shared\guards\is-logged-in.guard.ts 
+1. Open src\app\shared\guards\is-logged-in.guard.ts
 
   ```bash
   is-logged-in.guard.ts
@@ -117,8 +122,8 @@ Next we need to add logic to the guard's canActivate function to call the AuthSe
   import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot , Router} from '@angular/router';
   ```
 
-1. Before we can use the AuthService and router we need to create a constructor and inject them into it 
-    
+1. Before we can use the AuthService and router we need to create a constructor and inject them into it
+
   ```TypeScript
   constructor(private authService: AuthService, private router: Router) { }
   ```
@@ -126,7 +131,7 @@ Next we need to add logic to the guard's canActivate function to call the AuthSe
 1. In the canActivate function we need to replace the return true with the following logic that will call the AuthService.isAuthenticated function and  return if the user is logged in or not.  If the user is not logged in or there is an error validating if they are logged in then we will navigate them to the login route else we will let them into the route
 
   ```TypeScript
-    let isLoggedIn = new Observable<boolean>(observer => {
+    const isLoggedIn = new Observable<boolean>(observer => {
     this.authService.isAuthenticated()
       .subscribe((res: boolean) => {
       if (res) {
@@ -148,7 +153,6 @@ Next we need to add logic to the guard's canActivate function to call the AuthSe
   ```
 
 <div class="exercise-end"></div>
-
 
 ### Add Guard to Route
 
@@ -173,23 +177,20 @@ In order to use the Guard we need to add it to the route.  Each route has a canA
 1. To the default route, add the canActivate attribute with the value being an array that contains the IsLoggedInGuard
 
   ```TypeScript
-  , 
+  ,
   canActivate: [IsLoggedInGuard]
-  ```  
+  ```
 
 1. You route should look like
 
   ```TypeScript
   {
     path: '',
-    children: [],
     component: TodoComponent,
     canActivate: [IsLoggedInGuard]
   },
   ```
 
-1. When you try to go to http://localhost:4200 if you are not already logged in it will redirect you to the login page.  
+1. When you try to go to [http://localhost:4200](http://localhost:4200) if you are not already logged in it will redirect you to the login page.
 
 <div class="exercise-end"></div>
-
- 

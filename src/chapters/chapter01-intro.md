@@ -1,20 +1,20 @@
 ## Overview
 
-Welcome to the Up and Running with Angular Workshop.  Angular 2 was released in September 2016 and was a full re-write of the framework.  With the re-write a lot has changed.   In this workshop, you will learn how to build an Angular UI from the ground up.  
+Welcome to the Up and Running with Angular Workshop.  Angular 2 was released in September 2016 and was a full re-write of the framework.  With the re-write a lot has changed.   In this workshop, you will learn how to build an Angular UI from the ground up.
 
-<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 4.2.3</div>
+<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 5.2.9</div>
 
 ### Goal
 
-The goal of this tutorial is to walk you through creating an application with the common features that a web application would have (headers, footers, forms, calls to API services, authentication, etc).  
+The goal of this tutorial is to walk you through creating an application with the common features that a web application would have (headers, footers, forms, calls to API services, authentication, etc).
 
-The tutorial is designed to be gone through from start to finish to build the application as the chapters build on each other.  
+The tutorial is designed to be gone through from start to finish to build the application as the chapters build on each other.
 
-For each chapter there is a start and complete branch in Github that you can pull down if you need it.  
+For each chapter there is a start and complete branch in Github that you can pull down if you need it.
 
 ### New Naming Convention
 
-The first thing is what to call Angular.  Angular 1 is now referred to as AngularJS.  Angular 2 and above is referred to as just Angular.  From here on out, we will just call it Angular.  The only time to refer to Angular with a version number is when you are talking about a feature that it specific to that version.  For example, in Angular 4, they add the TitleCase Pipe and an email validator.
+The first thing is what to call Angular.  Angular 1 is now referred to as AngularJS.  Angular 2 and above is referred to as just Angular.  From here on out, we will just call it Angular.  The only time to refer to Angular with a ver sion number is when you are talking about a feature that it specific to that version.  For example, in Angular 4, they add the TitleCase Pipe and an email validator.
 
 ### Release Schedule
 
@@ -30,7 +30,7 @@ Release Schedule:
 
 ### Coming from Angular 1
 
-Third, if you are coming from an AngularJS background, it is best if you do not try to compare the concepts between AngularJS and Angular.  Just treat Angular as a whole new framework.  
+Third, if you are coming from an AngularJS background, it is best if you do not try to compare the concepts between AngularJS and Angular.  Just treat Angular as a whole new framework.
 
 ### Using This Tutorial
 
