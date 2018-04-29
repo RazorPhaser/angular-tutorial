@@ -780,7 +780,7 @@
 
      const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
 
-     return this.http.put(&quot;https://dj-sails-todo.azurewebsites.net/user/login&quot;, loginInfo, requestOptions)
+     return this.http.put(&#39;https://dj-sails-todo.azurewebsites.net/user/login&#39;, loginInfo, requestOptions)
          .pipe(
              tap((res: Response) =&gt; {
                  if (res) {
@@ -867,12 +867,16 @@
 <pre><code class="lang-TypeScript"> invalidLogin = false;
 </code></pre>
 </li>
-<li><p>Now in the login method replace the console.log line and set the invalidLogin variable to true.  Make sure in the else statement that you set the invalidLogin to false.</p>
+<li><p>Within the login method, set invalidLogin to true if there is no result</p>
 <pre><code class="lang-TypeScript"> this.invalidLogin = true;
 </code></pre>
 <ul>
 <li>We have to use this. to access the variable due to scoping.</li>
 </ul>
+</li>
+<li><p>Now within the login method we need to set the invalidLogin to false in the else in the login method.  This will prevent the invalid login display from showing before redirecting to the home page</p>
+<pre><code class="lang-TypeScript"> this.invalidLogin = false;
+</code></pre>
 </li>
 </ol>
 <p>Now we are ready to implement the UI to show the error message.</p>
@@ -952,7 +956,7 @@
 <p>With the Angular 4 release, they added an email validator.  To add the validator to our email field, we just need to add an <code>email</code> attribute like we did for the <code>required</code> attribute.</p>
 <pre><code class="lang-html">email
 </code></pre>
-<p>Next we need to add a message like we did for the required validator for when the email validation triggers on an invalid email.  Add the following code below the required message but within the <code>&lt;div&gt;</code> that checks if there are errors.</p>
+<p>Next we need to add a message like we did for the required validator for when the email validation triggers on an invalid email.  Add the following code below the required message but within the <code>&lt;div&gt;</code> that checks if there are errors.  We only want the validator to show when they have typed something in which means that the required validator has not triggered.</p>
 <pre><code class="lang-html">&lt;div [hidden]=&quot;email.errors.required || !email.errors.email&quot;&gt;
     Must be an email address
 &lt;/div&gt;
@@ -1082,7 +1086,7 @@
          &lt;div [hidden]=&quot;!email.errors.required&quot;&gt;
              Email is required
          &lt;/div&gt;
-         &lt;div [hidden]=&quot;email.errors.required || !email.errors.email&quot;&gt;
+         &lt;div [hidden]=&quot;!email.errors.email&quot;&gt;
              Must be an email address
          &lt;/div&gt;
      &lt;/div&gt;
@@ -1139,6 +1143,7 @@
              if (!result) {
                  this.loginInvalid = true;
              } else {
+                 this.loginInvalid = false;
                  this.router.navigate([&#39;/&#39;]);
              }
          });

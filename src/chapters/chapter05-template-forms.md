@@ -345,7 +345,7 @@ The first thing we are going to do is create our login function
 
         const loginInfo = { 'email': email, 'password': password };
 
-        return this.http.put("https://dj-sails-todo.azurewebsites.net/user/login", loginInfo, requestOptions)
+        return this.http.put('https://dj-sails-todo.azurewebsites.net/user/login', loginInfo, requestOptions)
             .pipe(
                 tap((res: Response) => {
                     if (res) {
@@ -439,13 +439,19 @@ Up to this point, we have been using the console to output when the login failed
     invalidLogin = false;
     ```
 
-1. Now in the login method replace the console.log line and set the invalidLogin variable to true.  Make sure in the else statement that you set the invalidLogin to false.
+1. Within the login method, set invalidLogin to true if there is no result
 
     ```TypeScript
     this.invalidLogin = true;
     ```
 
     * We have to use this. to access the variable due to scoping.
+
+1. Now within the login method we need to set the invalidLogin to false in the else in the login method.  This will prevent the invalid login display from showing before redirecting to the home page
+
+    ```TypeScript
+    this.invalidLogin = false;
+    ```
 
 Now we are ready to implement the UI to show the error message.
 
@@ -541,7 +547,7 @@ With the Angular 4 release, they added an email validator.  To add the validator
 email
 ```
 
-Next we need to add a message like we did for the required validator for when the email validation triggers on an invalid email.  Add the following code below the required message but within the `<div>` that checks if there are errors.
+Next we need to add a message like we did for the required validator for when the email validation triggers on an invalid email.  Add the following code below the required message but within the `<div>` that checks if there are errors.  We only want the validator to show when they have typed something in which means that the required validator has not triggered.
 
 ```html
 <div [hidden]="email.errors.required || !email.errors.email">
@@ -692,7 +698,7 @@ We are first going to create the signup function in the AuthService.
             <div [hidden]="!email.errors.required">
                 Email is required
             </div>
-            <div [hidden]="email.errors.required || !email.errors.email">
+            <div [hidden]="!email.errors.email">
                 Must be an email address
             </div>
         </div>
@@ -753,6 +759,7 @@ We are first going to create the signup function in the AuthService.
                 if (!result) {
                     this.loginInvalid = true;
                 } else {
+                    this.loginInvalid = false;
                     this.router.navigate(['/']);
                 }
             });
