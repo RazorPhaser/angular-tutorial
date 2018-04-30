@@ -289,7 +289,7 @@ Before we can make HTTP calls in our AuthService, we need to import the HttpClie
     import { HttpClientModule } from '@angular/common/http';
     ```
 
-1. In the @NgModule imports array add the HttpModule
+1. In the @NgModule imports array add the HttpClientModule
 
     ```TypeScript
     HttpClientModule,
