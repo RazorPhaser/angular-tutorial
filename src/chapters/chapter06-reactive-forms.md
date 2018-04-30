@@ -149,7 +149,7 @@ We need to import the ReactiveFormsModule into our AppModule before we can use i
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule,
+        HttpClientModule,
         AppRoutingModule
     ],
     ```
@@ -481,7 +481,7 @@ The last thing we need to do is up the UI to display the form error messages.
     <b>Exercise</b>: Add Border On Invalid
 </h4>
 
-You can also add a border around the Bootstrap form-group for the item form field by adding the has-danger Bootstrap css class when the formErrors.item has a value.
+You can also add a border around the Bootstrap form-group for the item form field by adding the is-invalid Bootstrap css class when the formErrors.item has a value.
 
 1. Open the todo.component.html file
 
@@ -489,10 +489,10 @@ You can also add a border around the Bootstrap form-group for the item form fiel
     todo.component.html
     ```
 
-1. To the form-group div tag, add an `[ngClass]` attribute that checks that formErrors.item has a value and if so then adds the has-danger css to the div tag.
+1. To the input control for the todo item, add an `[ngClass]` attribute that checks that formErrors.item has a value and if so then adds the is-invalid css to the input control.
 
     ```html
-    [ngClass]="{'has-danger': formErrors.item}"
+    [ngClass]="{'is-invalid': formErrors.item}"
     ```
 
 <div class="exercise-end"></div>
@@ -579,13 +579,13 @@ Since TypeScript is a strongly typed language it is best practice to create a cl
         </tr>
         <tr>
             <td>createdAt</td>
-            <td>Date</td>
-            <td>date added</td>
+            <td>Number</td>
+            <td>timestamp of date added</td>
         </tr>
         <tr>
             <td>updatedAt</td>
-            <td>Date</td>
-            <td>date last updated</td>
+            <td>Number</td>
+            <td>timestamp of date last updated</td>
         </tr>
         <tr>
             <td>completed</td>
@@ -604,8 +604,8 @@ Since TypeScript is a strongly typed language it is best practice to create a cl
     id: string;
     item: string;
     completed: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Number;
+    updatedAt: Number;
     user: string;
     ```
 
@@ -621,8 +621,8 @@ Since TypeScript is a strongly typed language it is best practice to create a cl
         this.id = id;
         this.item = item;
         this.completed = completed ? completed : false;
-        this.createdAt = createdAt ? createdAt : new Date();
-        this.updatedAt = updatedAt ? updatedAt : new Date();
+        this.createdAt = createdAt ? createdAt.getTime() : new Date().getTime();
+        this.updatedAt = updatedAt ? updatedAt.getTime() : new Date().getTime();
     }
     ```
 
@@ -743,10 +743,10 @@ Now that we have our Todo service save function created, we need to call it from
 
 Right now our solution does not handle any errors from the TodoService save call.  Lets add in some error checking.
 
-1. We need to import the HttpErrorResponse class so that we can get at the Http error.
+1. We need to add the import for HttpErrorResponse class to the @angular/common/http import
 
     ```TypeScript
-    import { HttpErrorResponse } from '@angular/common/http';
+    import { HttpClient, HttpErrorResponse } from '@angular/common/http';
     ```
 
 1. We now need to create the errorMessage variable that is of type string in the Todocomponent class
@@ -821,7 +821,7 @@ First thing we need to do is add a function to the todo service to get the list 
 1. Add the following function to make an http get call to our Todo API and return back an array of Todo items.
 
     ```TypeScript
-        getAll(): Observable<Todo[]> {
+    getAll(): Observable<Todo[]> {
         return this.http.get<Todo[]>('https://dj-sails-todo.azurewebsites.net/todo', requestOptions);
     }
     ```
@@ -987,20 +987,49 @@ Now we need to call the updateTodo function that we just created in the TodoServ
 
 The last thing we need to do it do update the UI to have a checkbox icon that will be clicked on to toggle the completion state.
 
-1. Open the todo.component.html file
+Since we are using the Angular Fontawesome module, we need to specify the icons that we want to use so that the Angular tree shaking only keeps the icons we are using (e.g. reduce compiled size).
+
+1. Open the src\app\app.module.ts file
+
+    ```bash
+    app.module.ts
+    ```
+
+1. Import the library from @fortawesome/fontawesome-svg-core
+
+    ```TypeScript
+    import { library } from '@fortawesome/fontawesome-svg-core';
+    ```
+
+1. Import the icons that we want to.  Completed = check-square and Not completed = square
+
+    ```TypeScript
+    import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
+    ```
+
+1. Above the @NgModule statement add the icons to the library
+
+    ```TypeScript
+    library.add(faCheckSquare, faSquare);
+    ```
+
+Now we are ready to use the checkbox icons
+
+1. Open the src\app\todo\todo.component.html file
 
     ```bash
     todo.component.html
     ```
 
-1. Inside the ngFor loop, above the existing div that is displaying the individual item, add the following icon that uses the Font Awesome library for the icon and is set to take up 1 column of space
+1. Inside the ngFor loop, above the existing div that is displaying the individual item, add the following div to display the Font Awesome icon and is set to take up 1 column of space.  The Angular FontAwesome library uses the fa-icon directive.
 
     ```html
-      <div class="col-1" (click)="completeTodo(todoItem)"><i [className]="todoItem.completed ? 'fa fa-check-square-o' : 'fa fa-square-o'"></i></div>
+      <div class="col-1" (click)="completeTodo(todoItem)"><fa-icon [icon]="['far', todoItem.completed  ? 'check-square' : 'square']"></fa-icon></div>
+</div>
     ```
 
     * We are passing in the todo item that we are wanting to update to the completedTodo function. This will pass in the whole object so we have access to all of the fields.
-    * We are updating the icon used based on the completed field state. If completed we are using fa-check-square-o. If not completed, we are using fa-square-o
+    * We are updating the icon used based on the completed field state.
 
 1. With Bootstrap it is a 12 column grid, so we need to reduce the size of the existing div from col-12 to col-11 in order to fit in the complete checkbox
 
@@ -1010,7 +1039,7 @@ The last thing we need to do it do update the UI to have a checkbox icon that wi
 
     ```html
     <div class="row todo" *ngFor="let todoItem of todoList">
-        <div class="col-1" (click)="completeTodo(todoItem)"><i [className]="todoItem.completed  ? 'fa fa-check-square-o' : 'fa fa-square-o'"></i></div>
+        <div class="col-1" (click)="completeTodo(todoItem)"><fa-icon [icon]="['far', todoItem.completed  ? 'check-square' : 'square']"></fa-icon></div>
         <div class="col-11 done-{{todoItem.completed}}">{{todoItem.item}} <br /><small>created: {{todoItem.createdAt | date:'short'}}</small></div>
     </div>
     ```
@@ -1070,6 +1099,7 @@ Next we need to create the deleteTodo item function in the component that will c
                 this.todoList.splice(index, 1);
             },
             (error: HttpErrorResponse) => {
+                todo.completed = !todo.completed;
                 this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
             }
         );
@@ -1079,6 +1109,24 @@ Next we need to create the deleteTodo item function in the component that will c
     <div class="alert alert-info" role="alert">Note: We could have also just called the TodoService.getAll function but since we already have all of the items and the items are specific to a single user, there is no need to make the extra API and Database call.</div>
 
 The last thing that we need to do is to add the delete icon to the todo list.
+
+1. We need to add the trash icon to the existing list of library icons that we set in the src\app\app.module.ts file for the checkbox icons.  We will be using the faTrashAlt icon.
+
+    ```bash
+    app.module.ts
+    ```
+
+1. Add the faTrashAlt icon to the list of imported icons
+
+    ```TypeScript
+    import { faTrashAlt, faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
+    ```
+
+1. Add the faTrashAlt icon to the library.add call
+
+    ```TypeScript
+    library.add(faTrashAlt, faCheckSquare, faSquare);
+    ```
 
 1. Open the todo.component.html file
 
@@ -1094,17 +1142,15 @@ The last thing that we need to do is to add the delete icon to the todo list.
 
 1. Since the Bootstrap grid is 12 columns wide, we need to reduce the text div from col-11 to col-10 to be able to fit in the delete icon.
 
-    <div class="alert alert-info" role="alert">The reason that we used the Bootstrap grid is so that everything wrapped correctly with longer todo items and when the screen was smaller.  The Bootstrap grid provides this functionality automatically for you.</div>
-
 1. The html for the display of the Todo list should look like the following:
 
     ```html
     <div class="row todo" *ngFor="let todoItem of todoList">
-        <div class="col-1" (click)="completeTodo(todoItem)"><i [className]="todoItem.completed  ? 'fa fa-check-square-o' : 'fa fa-square-o'"></i></div>
+        <div class="col-1" (click)="completeTodo(todoItem)"><fa-icon [icon]="['far', 'trash-alt']"></fa-icon></div>
 
         <div class="col-10 done-{{todoItem.completed}}">{{todoItem.item}} <br /><small>created: {{todoItem.createdAt | date:'short'}}</small></div>
 
-        <div class="col-1" (click)="deleteTodo(todoItem)"><i class="fa fa-trash"></i></div>
+        <div class="col-1" (click)="deleteTodo(todoItem)"><i class="far fa-trash-alt"></i></div>
     </div>
     ```
 
@@ -1139,7 +1185,7 @@ The first thing we need to do is add in our styles to the Todo component. Since 
 1. Add the following contents to the file. To ensure we are following our branding, we are importing our scss color variables.
 
     ```scss
-    @import '../../assets/bootstrap/variables';
+    @import '../../variables';
     div.todo {
       width: 100%;
       padding-bottom: 0.2em;
