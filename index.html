@@ -736,7 +736,7 @@
 <pre><code class="lang-TypeScript"> import { HttpClientModule } from &#39;@angular/common/http&#39;;
 </code></pre>
 </li>
-<li><p>In the @NgModule imports array add the HttpModule</p>
+<li><p>In the @NgModule imports array add the HttpClientModule</p>
 <pre><code class="lang-TypeScript"> HttpClientModule,
 </code></pre>
 </li>
@@ -1300,7 +1300,7 @@
      BrowserModule,
      FormsModule,
      ReactiveFormsModule,
-     HttpModule,
+     HttpClientModule,
      AppRoutingModule
  ],
 </code></pre>
@@ -1595,14 +1595,14 @@
     <b>Exercise</b>: Add Border On Invalid
 </h4>
 
-<p>You can also add a border around the Bootstrap form-group for the item form field by adding the has-danger Bootstrap css class when the formErrors.item has a value.</p>
+<p>You can also add a border around the Bootstrap form-group for the item form field by adding the is-invalid Bootstrap css class when the formErrors.item has a value.</p>
 <ol>
 <li><p>Open the todo.component.html file</p>
 <pre><code class="lang-html"> todo.component.html
 </code></pre>
 </li>
-<li><p>To the form-group div tag, add an <code>[ngClass]</code> attribute that checks that formErrors.item has a value and if so then adds the has-danger css to the div tag.</p>
-<pre><code class="lang-html"> [ngClass]=&quot;{&#39;has-danger&#39;: formErrors.item}&quot;
+<li><p>To the input control for the todo item, add an <code>[ngClass]</code> attribute that checks that formErrors.item has a value and if so then adds the is-invalid css to the input control.</p>
+<pre><code class="lang-html"> [ngClass]=&quot;{&#39;is-invalid&#39;: formErrors.item}&quot;
 </code></pre>
 </li>
 </ol>
@@ -1675,13 +1675,13 @@
      </tr>
      <tr>
          <td>createdAt</td>
-         <td>Date</td>
-         <td>date added</td>
+         <td>Number</td>
+         <td>timestamp of date added</td>
      </tr>
      <tr>
          <td>updatedAt</td>
-         <td>Date</td>
-         <td>date last updated</td>
+         <td>Number</td>
+         <td>timestamp of date last updated</td>
      </tr>
      <tr>
          <td>completed</td>
@@ -1699,8 +1699,8 @@
 <pre><code class="lang-TypeScript"> id: string;
  item: string;
  completed: boolean;
- createdAt: Date;
- updatedAt: Date;
+ createdAt: Number;
+ updatedAt: Number;
  user: string;
 </code></pre>
 </li>
@@ -1714,8 +1714,8 @@
      this.id = id;
      this.item = item;
      this.completed = completed ? completed : false;
-     this.createdAt = createdAt ? createdAt : new Date();
-     this.updatedAt = updatedAt ? updatedAt : new Date();
+     this.createdAt = createdAt ? createdAt.getTime() : new Date().getTime();
+     this.updatedAt = updatedAt ? updatedAt.getTime() : new Date().getTime();
  }
 </code></pre>
 </li>
@@ -1814,8 +1814,8 @@
 </ol>
 <p>Right now our solution does not handle any errors from the TodoService save call.  Lets add in some error checking.</p>
 <ol>
-<li><p>We need to import the HttpErrorResponse class so that we can get at the Http error.</p>
-<pre><code class="lang-TypeScript"> import { HttpErrorResponse } from &#39;@angular/common/http&#39;;
+<li><p>We need to add the import for HttpErrorResponse class to the @angular/common/http import</p>
+<pre><code class="lang-TypeScript"> import { HttpClient, HttpErrorResponse } from &#39;@angular/common/http&#39;;
 </code></pre>
 </li>
 <li><p>We now need to create the errorMessage variable that is of type string in the Todocomponent class</p>
@@ -1874,7 +1874,7 @@
 </code></pre>
 </li>
 <li><p>Add the following function to make an http get call to our Todo API and return back an array of Todo items.</p>
-<pre><code class="lang-TypeScript">     getAll(): Observable&lt;Todo[]&gt; {
+<pre><code class="lang-TypeScript"> getAll(): Observable&lt;Todo[]&gt; {
      return this.http.get&lt;Todo[]&gt;(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, requestOptions);
  }
 </code></pre>
@@ -2025,17 +2025,38 @@
 </li>
 </ol>
 <p>The last thing we need to do it do update the UI to have a checkbox icon that will be clicked on to toggle the completion state.</p>
+<p>Since we are using the Angular Fontawesome module, we need to specify the icons that we want to use so that the Angular tree shaking only keeps the icons we are using (e.g. reduce compiled size).</p>
 <ol>
-<li><p>Open the todo.component.html file</p>
+<li><p>Open the src\app\app.module.ts file</p>
+<pre><code class="lang-bash"> app.module.ts
+</code></pre>
+</li>
+<li><p>Import the library from @fortawesome/fontawesome-svg-core</p>
+<pre><code class="lang-TypeScript"> import { library } from &#39;@fortawesome/fontawesome-svg-core&#39;;
+</code></pre>
+</li>
+<li><p>Import the icons that we want to.  Completed = check-square and Not completed = square</p>
+<pre><code class="lang-TypeScript"> import { faSquare, faCheckSquare } from &#39;@fortawesome/free-regular-svg-icons&#39;;
+</code></pre>
+</li>
+<li><p>Above the @NgModule statement add the icons to the library</p>
+<pre><code class="lang-TypeScript"> library.add(faCheckSquare, faSquare);
+</code></pre>
+</li>
+</ol>
+<p>Now we are ready to use the checkbox icons</p>
+<ol>
+<li><p>Open the src\app\todo\todo.component.html file</p>
 <pre><code class="lang-bash"> todo.component.html
 </code></pre>
 </li>
-<li><p>Inside the ngFor loop, above the existing div that is displaying the individual item, add the following icon that uses the Font Awesome library for the icon and is set to take up 1 column of space</p>
-<pre><code class="lang-html">   &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;i [className]=&quot;todoItem.completed ? &#39;fa fa-check-square-o&#39; : &#39;fa fa-square-o&#39;&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+<li><p>Inside the ngFor loop, above the existing div that is displaying the individual item, add the following div to display the Font Awesome icon and is set to take up 1 column of space.  The Angular FontAwesome library uses the fa-icon directive.</p>
+<pre><code class="lang-html">   &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;fa-icon [icon]=&quot;[&#39;far&#39;, todoItem.completed  ? &#39;check-square&#39; : &#39;square&#39;]&quot;&gt;&lt;/fa-icon&gt;&lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 <ul>
 <li>We are passing in the todo item that we are wanting to update to the completedTodo function. This will pass in the whole object so we have access to all of the fields.</li>
-<li>We are updating the icon used based on the completed field state. If completed we are using fa-check-square-o. If not completed, we are using fa-square-o</li>
+<li>We are updating the icon used based on the completed field state.</li>
 </ul>
 </li>
 <li><p>With Bootstrap it is a 12 column grid, so we need to reduce the size of the existing div from col-12 to col-11 in order to fit in the complete checkbox</p>
@@ -2043,7 +2064,7 @@
 </li>
 <li><p>The html for the display of the Todo list should look like the following:</p>
 <pre><code class="lang-html"> &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
-     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;i [className]=&quot;todoItem.completed  ? &#39;fa fa-check-square-o&#39; : &#39;fa fa-square-o&#39;&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;fa-icon [icon]=&quot;[&#39;far&#39;, todoItem.completed  ? &#39;check-square&#39; : &#39;square&#39;]&quot;&gt;&lt;/fa-icon&gt;&lt;/div&gt;
      &lt;div class=&quot;col-11 done-{{todoItem.completed}}&quot;&gt;{{todoItem.item}} &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;&lt;/div&gt;
  &lt;/div&gt;
 </code></pre>
@@ -2097,6 +2118,7 @@
              this.todoList.splice(index, 1);
          },
          (error: HttpErrorResponse) =&gt; {
+             todo.completed = !todo.completed;
              this.errorMessage = `${error.status} ${error.statusText}. ${error.message}`;
          }
      );
@@ -2108,6 +2130,18 @@
 </ol>
 <p>The last thing that we need to do is to add the delete icon to the todo list.</p>
 <ol>
+<li><p>We need to add the trash icon to the existing list of library icons that we set in the src\app\app.module.ts file for the checkbox icons.  We will be using the faTrashAlt icon.</p>
+<pre><code class="lang-bash"> app.module.ts
+</code></pre>
+</li>
+<li><p>Add the faTrashAlt icon to the list of imported icons</p>
+<pre><code class="lang-TypeScript"> import { faTrashAlt, faSquare, faCheckSquare } from &#39;@fortawesome/free-regular-svg-icons&#39;;
+</code></pre>
+</li>
+<li><p>Add the faTrashAlt icon to the library.add call</p>
+<pre><code class="lang-TypeScript"> library.add(faTrashAlt, faCheckSquare, faSquare);
+</code></pre>
+</li>
 <li><p>Open the todo.component.html file</p>
 <pre><code class="lang-bash"> todo.component.html
 </code></pre>
@@ -2117,15 +2151,14 @@
 </code></pre>
 </li>
 <li><p>Since the Bootstrap grid is 12 columns wide, we need to reduce the text div from col-11 to col-10 to be able to fit in the delete icon.</p>
- <div class="alert alert-info" role="alert">The reason that we used the Bootstrap grid is so that everything wrapped correctly with longer todo items and when the screen was smaller.  The Bootstrap grid provides this functionality automatically for you.</div>
 </li>
 <li><p>The html for the display of the Todo list should look like the following:</p>
 <pre><code class="lang-html"> &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
-     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;i [className]=&quot;todoItem.completed  ? &#39;fa fa-check-square-o&#39; : &#39;fa fa-square-o&#39;&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;&lt;/div&gt;
 
      &lt;div class=&quot;col-10 done-{{todoItem.completed}}&quot;&gt;{{todoItem.item}} &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;&lt;/div&gt;
 
-     &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;&lt;i class=&quot;fa fa-trash&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+     &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;&lt;i class=&quot;far fa-trash-alt&quot;&gt;&lt;/i&gt;&lt;/div&gt;
  &lt;/div&gt;
 </code></pre>
 </li>
@@ -2153,7 +2186,7 @@
 </code></pre>
 </li>
 <li><p>Add the following contents to the file. To ensure we are following our branding, we are importing our scss color variables.</p>
-<pre><code class="lang-scss"> @import &#39;../../assets/bootstrap/variables&#39;;
+<pre><code class="lang-scss"> @import &#39;../../variables&#39;;
  div.todo {
    width: 100%;
    padding-bottom: 0.2em;
@@ -2305,11 +2338,15 @@
                  if (error.status !== 403) {
                      console.log(&#39;isAuthenticated error&#39;, error);
                  }
-                 console.log(&#39;login error&#39;, error);
+                 console.log(&#39;not logged in&#39;, error);
                  return of(false);
              }),
          );
  }
+</code></pre>
+</li>
+<li><p>Add HttpErrorResponse to the import for @angular/common/http</p>
+<pre><code class="lang-TypeScript">import { HttpClient, HttpErrorResponse } from &#39;@angular/common/http&#39;;
 </code></pre>
 </li>
 </ol>
@@ -2335,14 +2372,14 @@
 <pre><code class="lang-TypeScript"> const isLoggedIn = new Observable&lt;boolean&gt;(observer =&gt; {
  this.authService.isAuthenticated()
    .subscribe((res: boolean) =&gt; {
-   if (res) {
-     observer.next(true);
-     observer.complete();
-   } else {
-     this.router.navigate([&#39;/login&#39;]);
-     observer.next(false);
-     observer.complete();
-   }
+     if (res) {
+       observer.next(true);
+       observer.complete();
+     } else {
+       this.router.navigate([&#39;/login&#39;]);
+       observer.next(false);
+       observer.complete();
+     }
    }, error =&gt; {
      this.router.navigate([&#39;/login&#39;]);
      observer.next(false);
@@ -2813,8 +2850,8 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-bash"> header.component.ts
 </code></pre>
 </li>
-<li><p>Create a variable named isCollapsed that is a boolean and set to false.  This will be used to hold if the menu is collapsed or not.</p>
-<pre><code class="lang-TypeScript"> isCollapsed: boolean = true;
+<li><p>Create a variable named isCollapsed that is a boolean and set to true.  This will be used to hold if the menu is collapsed or not.  We want it to be true so that when the site needs the hamburger menu, it will collapse initially.</p>
+<pre><code class="lang-TypeScript"> isCollapsed = true;
 </code></pre>
 </li>
 <li><p>Create a function to toggle the menu named toggleMenu that sets isCollapsed set to the opposite of its current value</p>
@@ -2879,7 +2916,7 @@ canActivate: [IsLoggedInGuard]
 </li>
 <li><p>Replace the contents with</p>
 <pre><code class="lang-html"> &lt;footer&gt;
-     &lt;div class=&quot;pull-left&quot;&gt;
+     &lt;div class=&quot;float-left&quot;&gt;
          &amp;copy;Angular WS
      &lt;/div&gt;
  &lt;/footer&gt;
@@ -2899,7 +2936,7 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>Add the following to make the footer at the bottom of the page with a height of 50px, a gray background and some padding around the div</p>
-<pre><code class="lang-scss"> @import &quot;../../../assets/bootstrap/variables.scss&quot;;
+<pre><code class="lang-scss"> @import &quot;../../../_variables&quot;;
 
  footer {
      position: fixed;
@@ -3005,7 +3042,7 @@ canActivate: [IsLoggedInGuard]
 </code></pre>
 </li>
 <li><p>After the &quot;Angular WS&quot; div but instead the footer tag add the following to display the env value</p>
-<pre><code class="lang-html"> &lt;div class=&quot;pull-right&quot;&gt;
+<pre><code class="lang-html"> &lt;div class=&quot;float-right&quot;&gt;
      env: {{ env }}
  &lt;/div&gt;
 </code></pre>
@@ -3071,6 +3108,7 @@ Note that this will remove the dist directory before build.
 <p>Run the following command to run a build that uses the environment.prod.ts file and is a production build.   The environment name must match the file name for it to be valid.</p>
 <pre><code class="lang-bash">ng build --target=production --environment=prod
 </code></pre>
+<p>You will now have a production ready deploy in the the dist folder.</p>
 <div class="exercise-end"></div>
 
 				</div>
@@ -3150,7 +3188,7 @@ Note that this will remove the dist directory before build.
 </h4>
 
 <ol>
-<li><p>In src\app\todo\todo.component.ts that we already have open, find the getTodoListAll function and add a call to the calculateOpenItems function after setting the todoList variable but still within the <code>data</code> function.</p>
+<li><p>In src\app\todo\todo.component.ts that we already have open, find the <code>getTodoListAll</code> function and add a call to the calculateOpenItems function after setting the todoList variable but still within the <code>data</code> function.</p>
 <pre><code class="lang-TypeScript"> this.calculateOpenItems();
 </code></pre>
 </li>
@@ -3186,7 +3224,7 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Find the save method and increment the openItemCount after we push the new item into the todoList array</p>
+<li><p>Find the <code>save</code> method and increment the openItemCount after we push the new item into the todoList array</p>
 <pre><code class="lang-TypeScript"> this.openItemCount++;
 </code></pre>
 </li>
@@ -3203,7 +3241,7 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Find the completeTodo function and add the logic below in the subscribe data.  This logics reads if the todo item is completed then decrement the openItemCount else increment the openItemCount;</p>
+<li><p>Find the <code></code>completeTodo` function and add the logic below in the subscribe data.  This logics reads if the todo item is completed then decrement the openItemCount else increment the openItemCount;</p>
 <pre><code class="lang-TypeScript"> todo.completed ? this.openItemCount-- : this.openItemCount++;
 </code></pre>
 </li>
@@ -3220,7 +3258,7 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Find the deleteTodo function and add logic to decrement the openItemCount if the todo item being deleted was not completed.  You will want to put this call after the splice that removes the item from the todo list</p>
+<li><p>Find the <code>deleteTodo</code> function and add logic to decrement the openItemCount if the todo item being deleted was not completed.  You will want to put this call after the splice that removes the item from the todo list</p>
 <pre><code class="lang-TypeScript"> if (todo.completed === false) {
      this.openItemCount--;
  }
@@ -3436,16 +3474,16 @@ Note that this will remove the dist directory before build.
 <li><p>Within the User class, add the following fields.  Note that the  createdAt and updatedAt are automatically added by the API.</p>
 <pre><code class="lang-TypeScript"> email: string;
  id: string;
- createdAt: Date;
- updatedAt: Date;
+ createdAt: Number;
+ updatedAt: Number;
 </code></pre>
 </li>
-<li><p>Within the User class and before the fields we just added, create a constructor that requires an email and make an id field optional (hint: the <code>?</code> makes the parameter optional)</p>
-<pre><code class="lang-TypeScript"> constructor(email: string, id?: string, createdAt?: Date, updatedAt?: Date){
+<li><p>Within the User class and after the fields we just added, create a constructor that requires an email and make an id field optional (hint: the <code>?</code> makes the parameter optional)</p>
+<pre><code class="lang-TypeScript">constructor(email: string, id?: string, createdAt?: Date, updatedAt?: Date) {
      this.email = email;
      this.id = id;
-     this.createdAt = createdAt ? createdAt : new Date();
-     this.updatedAt = updatedAt ? updatedAt : new Date();
+     this.createdAt = createdAt ? createdAt.getTime() : new Date().getTime();
+     this.updatedAt = updatedAt ? updatedAt.getTime() : new Date().getTime();
  }
 </code></pre>
 </li>
@@ -3522,9 +3560,40 @@ Note that this will remove the dist directory before build.
     <b>Exercise</b>: Setting Cookie
 </h4>
 
+<p>In the auth.service.ts file, we need to change the return type for login, signup, isAuthenticated, to type `<Boolean | User></p>
 <ol>
-<li><p>In the auth.service.ts file, in the login, signup, and isAuthenticated functions, add a call to setUser before the return Observable.of(true) statement</p>
-<pre><code class="lang-TypeScript"> this.setUser(&lt;User&gt;res.json());
+<li><p>Change the return type of the methods to be either Boolean or User.</p>
+<pre><code class="lang-TypeScript"> &lt;Boolean | User&gt;
+</code></pre>
+</li>
+<li><p>Update the http calls to specify the return types.  The format of the call is <code>this.http.verb&lt;type&gt;</code>.  For example <code>this.http.put&lt;User&gt;</code></p>
+<ul>
+<li><p>Get Example (isAuthenticated)</p>
+<pre><code class="lang-TypeScript">  return this.http.get&lt;User&gt;(`${this.url}/identity`, requestOptions).pipe(
+      tap((user: User) =&gt; {
+      .......
+  }
+</code></pre>
+</li>
+<li><p>Put Example (Login)</p>
+<pre><code class="lang-TypeScript">  return this.http.put&lt;User&gt;(`${this.url}/login`, loginInfo, requestOptions).pipe(
+        tap((user: User) =&gt; {
+        ............
+  }
+</code></pre>
+</li>
+<li><p>POST Example (signup)</p>
+<pre><code class="lang-TypeScript">  return this.http.post&lt;User&gt;(this.url, loginInfo, requestOptions).pipe(
+      tap((user: User) =&gt; {
+      .......
+      }
+  }
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>In the login, signup, and isAuthenticated functions, add a call to setUser before the return Observable.of(true) statement</p>
+<pre><code class="lang-TypeScript"> this.setUser(user);
 </code></pre>
 </li>
 <li><p>In the login and isAuthenticated functions, before the Observable.of(false) in both the result and catch section add to clearUser since the login was invalid and we want to clear out any existing user cookie</p>
@@ -3551,15 +3620,17 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-TypeScript"> constructor(private authService: AuthService) { }
 </code></pre>
 </li>
+<li><p>Add a variable to hold the logged in user</p>
+<pre><code class="lang-TypeScript"> loggedInUser = this.authService.getUser();
+</code></pre>
+</li>
 <li><p>Open the src\app\shared\header\header.component.html</p>
 <pre><code class="lang-bash"> header.component.html
 </code></pre>
 </li>
 <li><p>Inside of the <code>&lt;div class=&quot;collapse navbar-collapse&quot;....</code> tag add the following after the closing <code>&lt;/ul&gt;</code></p>
-<pre><code class="lang-html"> &lt;ul class=&quot;nav navbar-nav&quot;&gt;
-     &lt;li class=&quot;nav-item&quot;&gt;
-         &lt;span class=&quot;nav-link&quot;&gt;Welcome {{(authService.getUser())?.email}}&lt;/span&gt;
-     &lt;/li&gt;
+<pre><code class="lang-html"> &lt;ul class=&quot;navbar-nav navbar-light navbar-expand-md&quot;&gt;
+     &lt;li class=&quot;nav-item nav-link&quot;&gt;Welcome {{ loggedInUser?.email }}&lt;/li&gt;
  &lt;/ul&gt;
 </code></pre>
 <ul>
@@ -3583,23 +3654,25 @@ Note that this will remove the dist directory before build.
 </code></pre>
 </li>
 <li><p>Add the logout function below that will call the API logout function and clear out the cookie</p>
-<pre><code class="lang-TypeScript"> logout(): Observable&lt;boolean&gt; {
-     return this.http.get(`${this.url}/logout`, this.options)
-     .map((res: Response) =&gt; {
-       this.clearUser();
+<pre><code class="lang-TypeScript"> logout(): Observable&lt;boolean | Response&gt; {
+     return this.http
+     .get(`${this.url}/logout`, requestOptions)
+     .pipe(
+         tap((res: Response) =&gt; {
+             this.clearUser();
+             if (res.ok) {
+                 return Observable.of(true);
+             }
 
-       if (res.ok) {
-         return Observable.of(true);
-       }
-
-       return Observable.of(false);
-     })
-     .catch(error =&gt; {
-         console.log(&#39;logout error&#39;, error)
-         this.clearUser();
-         return Observable.of(false);
-      });
+             return Observable.of(false);
+        }),
+         catchError((error: HttpErrorResponse) =&gt; {
+             this.clearUser();
+             return of(false);
+         })
+     );
  }
+`
 </code></pre>
 </li>
 </ol>
@@ -3612,8 +3685,10 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-bash"> header.component.html
 </code></pre>
 </li>
-<li><p>After the &quot;Welcome&quot; span tag add the following link tag to call the logout service.  Also, only show the button if the user is logged in.</p>
-<pre><code class="lang-html"> &lt;a [hidden]=&quot;!authService.getUser()&quot; (click)=&quot;logout()&quot;&gt; | Logout&lt;/a&gt;
+<li><p>After the &quot;Welcome&quot; tag add the following link tag to call the logout service.  Also, only show the button if the user is logged in.</p>
+<pre><code class="lang-html"> &lt;li class=&quot;nav-item&quot;&gt;
+     &lt;a class=&quot;nav-link&quot; [hidden]=&quot;!loggedInUser&quot; (click)=&quot;logout()&quot;&gt;logout&lt;/a&gt;
+ &lt;/li&gt;
 </code></pre>
 </li>
 </ol>
@@ -3632,6 +3707,8 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-TypeScript"> import { Router } from &#39;@angular/router&#39;;
 </code></pre>
 </li>
+</ol>
+<ol>
 <li><p>Add the Router to the constructor</p>
 <pre><code class="lang-TypeScript"> constructor(private authService: AuthService, private router: Router) { }
 </code></pre>

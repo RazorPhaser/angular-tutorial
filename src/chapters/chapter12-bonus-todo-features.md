@@ -81,7 +81,7 @@ Requirements:
     <b>Exercise</b>: Calculate Item Count When Pulling Items
 </h4>
 
-1. In src\app\todo\todo.component.ts that we already have open, find the getTodoListAll function and add a call to the calculateOpenItems function after setting the todoList variable but still within the `data` function.
+1. In src\app\todo\todo.component.ts that we already have open, find the `getTodoListAll` function and add a call to the calculateOpenItems function after setting the todoList variable but still within the `data` function.
 
     ```TypeScript
     this.calculateOpenItems();
@@ -123,7 +123,7 @@ Now that we have the todo open item count being calculating on component render,
     todo.component.ts
     ```
 
-1. Find the save method and increment the openItemCount after we push the new item into the todoList array
+1. Find the `save` method and increment the openItemCount after we push the new item into the todoList array
 
     ```TypeScript
     this.openItemCount++;
@@ -143,7 +143,7 @@ When we toggle the completion status of a Todo item we also need to update the o
     todo.component.ts
     ```
 
-1. Find the completeTodo function and add the logic below in the subscribe data.  This logics reads if the todo item is completed then decrement the openItemCount else increment the openItemCount;
+1. Find the ``completeTodo` function and add the logic below in the subscribe data.  This logics reads if the todo item is completed then decrement the openItemCount else increment the openItemCount;
 
     ```TypeScript
     todo.completed ? this.openItemCount-- : this.openItemCount++;
@@ -163,7 +163,7 @@ The last thing we need to do is to re-calculate the openItemCount when an item i
     todo.component.ts
     ```
 
-1. Find the deleteTodo function and add logic to decrement the openItemCount if the todo item being deleted was not completed.  You will want to put this call after the splice that removes the item from the todo list
+1. Find the `deleteTodo` function and add logic to decrement the openItemCount if the todo item being deleted was not completed.  You will want to put this call after the splice that removes the item from the todo list
 
     ```TypeScript
     if (todo.completed === false) {

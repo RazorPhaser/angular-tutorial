@@ -164,10 +164,10 @@ Since we are not including JQuery in our application, when the Bootstrap menu th
     header.component.ts
     ```
 
-1. Create a variable named isCollapsed that is a boolean and set to false.  This will be used to hold if the menu is collapsed or not.
+1. Create a variable named isCollapsed that is a boolean and set to true.  This will be used to hold if the menu is collapsed or not.  We want it to be true so that when the site needs the hamburger menu, it will collapse initially.
 
     ```TypeScript
-    isCollapsed: boolean = true;
+    isCollapsed = true;
     ```
 
 1. Create a function to toggle the menu named toggleMenu that sets isCollapsed set to the opposite of its current value
@@ -246,7 +246,7 @@ Creating the footer is very similar to creating the header.  The biggest differe
 
     ```html
     <footer>
-        <div class="pull-left">
+        <div class="float-left">
             &copy;Angular WS
         </div>
     </footer>
@@ -269,7 +269,7 @@ We want to postion the footer at bottom of the page and change the background co
 1. Add the following to make the footer at the bottom of the page with a height of 50px, a gray background and some padding around the div
 
     ```scss
-    @import "../../../assets/bootstrap/variables.scss";
+    @import "../../../_variables";
 
     footer {
         position: fixed;
@@ -396,7 +396,7 @@ Now we can display the env variable in our footer's html
 1. After the "Angular WS" div but instead the footer tag add the following to display the env value
 
     ```html
-    <div class="pull-right">
+    <div class="float-right">
         env: {{ env }}
     </div>
     ```

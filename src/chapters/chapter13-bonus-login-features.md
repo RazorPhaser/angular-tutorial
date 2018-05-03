@@ -65,18 +65,18 @@ In the AuthService, in order to hold our user data and get type checking we need
     ```TypeScript
     email: string;
     id: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Number;
+    updatedAt: Number;
     ```
 
-1. Within the User class and before the fields we just added, create a constructor that requires an email and make an id field optional (hint: the `?` makes the parameter optional)
+1. Within the User class and after the fields we just added, create a constructor that requires an email and make an id field optional (hint: the `?` makes the parameter optional)
 
     ```TypeScript
-    constructor(email: string, id?: string, createdAt?: Date, updatedAt?: Date){
+   constructor(email: string, id?: string, createdAt?: Date, updatedAt?: Date) {
         this.email = email;
         this.id = id;
-        this.createdAt = createdAt ? createdAt : new Date();
-        this.updatedAt = updatedAt ? updatedAt : new Date();
+        this.createdAt = createdAt ? createdAt.getTime() : new Date().getTime();
+        this.updatedAt = updatedAt ? updatedAt.getTime() : new Date().getTime();
     }
     ```
 
@@ -167,10 +167,48 @@ In the AuthService, in order to hold our user data and get type checking we need
     <b>Exercise</b>: Setting Cookie
 </h4>
 
-1. In the auth.service.ts file, in the login, signup, and isAuthenticated functions, add a call to setUser before the return Observable.of(true) statement
+In the auth.service.ts file, we need to change the return type for login, signup, isAuthenticated, to type `<Boolean | User>
+
+1. Change the return type of the methods to be either Boolean or User.
 
     ```TypeScript
-    this.setUser(<User>res.json());
+    <Boolean | User>
+    ```
+
+1. Update the http calls to specify the return types.  The format of the call is `this.http.verb<type>`.  For example `this.http.put<User>`
+
+    * Get Example (isAuthenticated)
+
+        ```TypeScript
+        return this.http.get<User>(`${this.url}/identity`, requestOptions).pipe(
+            tap((user: User) => {
+            .......
+        }
+        ```
+
+    * Put Example (Login)
+
+        ```TypeScript
+        return this.http.put<User>(`${this.url}/login`, loginInfo, requestOptions).pipe(
+              tap((user: User) => {
+              ............
+        }
+        ```
+
+    * POST Example (signup)
+
+        ```TypeScript
+        return this.http.post<User>(this.url, loginInfo, requestOptions).pipe(
+            tap((user: User) => {
+            .......
+            }
+        }
+        ```
+
+1. In the login, signup, and isAuthenticated functions, add a call to setUser before the return Observable.of(true) statement
+
+    ```TypeScript
+    this.setUser(user);
     ```
 
 1. In the login and isAuthenticated functions, before the Observable.of(false) in both the result and catch section add to clearUser since the login was invalid and we want to clear out any existing user cookie
@@ -203,6 +241,12 @@ In the AuthService, in order to hold our user data and get type checking we need
     constructor(private authService: AuthService) { }
     ```
 
+1. Add a variable to hold the logged in user
+
+    ```TypeScript
+    loggedInUser = this.authService.getUser();
+    ```
+
 1. Open the src\app\shared\header\header.component.html
 
     ```bash
@@ -212,10 +256,8 @@ In the AuthService, in order to hold our user data and get type checking we need
 1. Inside of the `<div class="collapse navbar-collapse"....` tag add the following after the closing `</ul>`
 
     ```html
-    <ul class="nav navbar-nav">
-        <li class="nav-item">
-            <span class="nav-link">Welcome {{(authService.getUser())?.email}}</span>
-        </li>
+    <ul class="navbar-nav navbar-light navbar-expand-md">
+        <li class="nav-item nav-link">Welcome {{ loggedInUser?.email }}</li>
     </ul>
     ```
 
@@ -243,25 +285,26 @@ We are going to implement the logout button in the header.
 
 1. Add the logout function below that will call the API logout function and clear out the cookie
 
-  ```TypeScript
-    logout(): Observable<boolean> {
-        return this.http.get(`${this.url}/logout`, this.options)
-        .map((res: Response) => {
-          this.clearUser();
+    ```TypeScript
+    logout(): Observable<boolean | Response> {
+        return this.http
+        .get(`${this.url}/logout`, requestOptions)
+        .pipe(
+            tap((res: Response) => {
+                this.clearUser();
+                if (res.ok) {
+                    return Observable.of(true);
+                }
 
-          if (res.ok) {
-            return Observable.of(true);
-          }
-
-          return Observable.of(false);
-        })
-        .catch(error => {
-            console.log('logout error', error)
-            this.clearUser();
-            return Observable.of(false);
-         });
+                return Observable.of(false);
+           }),
+            catchError((error: HttpErrorResponse) => {
+                this.clearUser();
+                return of(false);
+            })
+        );
     }
-  ```
+`  ```
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Add Logout Button
@@ -273,10 +316,12 @@ We are going to implement the logout button in the header.
     header.component.html
     ```
 
-1. After the "Welcome" span tag add the following link tag to call the logout service.  Also, only show the button if the user is logged in.
+1. After the "Welcome" tag add the following link tag to call the logout service.  Also, only show the button if the user is logged in.
 
     ```html
-    <a [hidden]="!authService.getUser()" (click)="logout()"> | Logout</a>
+    <li class="nav-item">
+        <a class="nav-link" [hidden]="!loggedInUser" (click)="logout()">logout</a>
+    </li>
     ```
 
 <div class="exercise-end"></div>
@@ -297,8 +342,8 @@ We are going to implement the logout button in the header.
     import { Router } from '@angular/router';
     ```
 
-1. Add the Router to the constructor
 
+1. Add the Router to the constructor
     ```TypeScript
     constructor(private authService: AuthService, private router: Router) { }
     ```

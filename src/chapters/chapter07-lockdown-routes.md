@@ -95,11 +95,17 @@ We need to make a call to the API to check if the user is logged into the API or
                     if (error.status !== 403) {
                         console.log('isAuthenticated error', error);
                     }
-                    console.log('login error', error);
+                    console.log('not logged in', error);
                     return of(false);
                 }),
             );
     }
+  ```
+
+1. Add HttpErrorResponse to the import for @angular/common/http
+
+  ```TypeScript
+  import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   ```
 
 Next we need to add logic to the guard's canActivate function to call the AuthService.isAuthenticated function
@@ -134,14 +140,14 @@ Next we need to add logic to the guard's canActivate function to call the AuthSe
     const isLoggedIn = new Observable<boolean>(observer => {
     this.authService.isAuthenticated()
       .subscribe((res: boolean) => {
-      if (res) {
-        observer.next(true);
-        observer.complete();
-      } else {
-        this.router.navigate(['/login']);
-        observer.next(false);
-        observer.complete();
-      }
+        if (res) {
+          observer.next(true);
+          observer.complete();
+        } else {
+          this.router.navigate(['/login']);
+          observer.next(false);
+          observer.complete();
+        }
       }, error => {
         this.router.navigate(['/login']);
         observer.next(false);

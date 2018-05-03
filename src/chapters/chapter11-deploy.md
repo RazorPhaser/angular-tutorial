@@ -44,4 +44,6 @@ Run the following command to run a build that uses the environment.prod.ts file 
 ng build --target=production --environment=prod
 ```
 
+You will now have a production ready deploy in the the dist folder.
+
 <div class="exercise-end"></div>
