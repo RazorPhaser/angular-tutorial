@@ -18,10 +18,12 @@ For our styling we are going to use [Bootstrap 4](https://getbootstrap.com/).  T
 1. Run the npm install command for bootstrap and font-awesome
 
     ```bash
-    npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons bootstrap @ng-bootstrap/ng-bootstrap
+    npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons bootstrap @ng-bootstrap/ng-bootstrap rxjs-compat
     ```
 
     * This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.
+
+    > rxjs-compat is required until ngx-bootstrap updates to rxjs 6.0
 
 Before we can use ng-bootstrap we need to add it to the AppModule
 
@@ -160,26 +162,6 @@ First we need to create our own custom Bootstrap variables files so that we can 
         title = 'Our Awesome Todo App!';
         ```
 
-<div class="exercise-end"></div>
-
-### View Changes
-
-<div class="alert alert-danger" role="alert">Since we already had ng serve running, it picked up the html changes but you will notice that there is no styling.  This is because whenever you change the .angular-cli.json file, you need to restart ng serve before they take effect.</div>
-
-<h4 class="exercise-start">
-    <b>Exercise</b>: Restart ng serve
-</h4>
-
-1. Go to the integrated terminal in Visual Studio Code that is running the `ng serve` command and do a ctrl+c to stop it.
-
-    > There is a dropdown on the right side of the Visual Studio Code integrated terminal that allows you to change to the other terminals that are currently open for your project
-
-1. Run the `ng serve` command again.
-
-    ```bash
-    ng serve
-    ```
-
 1. The web page should now look like
 
     ![App Works with Bootstrap](images/bootstrap-jumbotron.png)
@@ -192,9 +174,7 @@ In this chapter we learned how to use Bootstrap for our project.
 
 Learned:
 
-1. How to install Bootstrap 4 and font-awesome
-1. How to integrate it into the Angular CLI in the .angular-cli.json file
+1. How to install Bootstrap 4 and font-awesome 5
 1. How to create our own custom Bootstrap SCSS variables to override the built-in styles of Bootstrap with our own colors
 1. How to create a banner at the top of the page
 1. How to change the text that appears in the banner using our TypeScript title variable
-1. Learned that when you modify the .angular-cli.json file that you have to restart `ng serve` for the changes to take effect
