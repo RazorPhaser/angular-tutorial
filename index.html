@@ -324,10 +324,14 @@
 <ol>
 <li>In the VS Code Integrated Terminal, click the + to open a 2nd terminal</li>
 <li><p>Run the npm install command for bootstrap and font-awesome</p>
-<pre><code class="lang-bash"> npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons bootstrap @ng-bootstrap/ng-bootstrap
+<pre><code class="lang-bash"> npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons bootstrap @ng-bootstrap/ng-bootstrap rxjs-compat
 </code></pre>
 <ul>
-<li>This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.</li>
+<li><p>This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.</p>
+<blockquote>
+<p>rxjs-compat is required until ngx-bootstrap updates to rxjs 6.0</p>
+</blockquote>
+</li>
 </ul>
 </li>
 </ol>
@@ -448,26 +452,6 @@
 </li>
 </ul>
 </li>
-</ol>
-<div class="exercise-end"></div>
-
-<h3 id="view-changes">View Changes</h3>
-<div class="alert alert-danger" role="alert">Since we already had ng serve running, it picked up the html changes but you will notice that there is no styling.  This is because whenever you change the .angular-cli.json file, you need to restart ng serve before they take effect.</div>
-
-<h4 class="exercise-start">
-    <b>Exercise</b>: Restart ng serve
-</h4>
-
-<ol>
-<li><p>Go to the integrated terminal in Visual Studio Code that is running the <code>ng serve</code> command and do a ctrl+c to stop it.</p>
-<blockquote>
-<p>There is a dropdown on the right side of the Visual Studio Code integrated terminal that allows you to change to the other terminals that are currently open for your project</p>
-</blockquote>
-</li>
-<li><p>Run the <code>ng serve</code> command again.</p>
-<pre><code class="lang-bash"> ng serve
-</code></pre>
-</li>
 <li><p>The web page should now look like</p>
 <p> <img src="images/bootstrap-jumbotron.png" alt="App Works with Bootstrap"></p>
 </li>
@@ -478,12 +462,10 @@
 <p>In this chapter we learned how to use Bootstrap for our project.</p>
 <p>Learned:</p>
 <ol>
-<li>How to install Bootstrap 4 and font-awesome</li>
-<li>How to integrate it into the Angular CLI in the .angular-cli.json file</li>
+<li>How to install Bootstrap 4 and font-awesome 5</li>
 <li>How to create our own custom Bootstrap SCSS variables to override the built-in styles of Bootstrap with our own colors</li>
 <li>How to create a banner at the top of the page</li>
 <li>How to change the text that appears in the banner using our TypeScript title variable</li>
-<li>Learned that when you modify the .angular-cli.json file that you have to restart <code>ng serve</code> for the changes to take effect</li>
 </ol>
 
 				</div>
