@@ -345,7 +345,7 @@ The first thing we are going to do is create our login function
 
         const loginInfo = { 'email': email, 'password': password };
 
-        return this.http.put('https://dj-sails-todo.azurewebsites.net/user/login', loginInfo, requestOptions)
+        return this.http.put('https://sails-ws.herokuapp.com/user/login', loginInfo, requestOptions)
             .pipe(
                 tap((res: Response) => {
                     if (res) {
@@ -608,7 +608,7 @@ We are first going to create the signup function in the AuthService.
   ```TypeScript
   signup(email: string, password: string): Observable<boolean | Response> {
     const loginInfo = { 'email': email, 'password': password };
-    return this.http.post("https://dj-sails-todo.azurewebsites.net/user/", loginInfo, requestOptions)
+    return this.http.post("https://sails-ws.herokuapp.com/user/", loginInfo, requestOptions)
         .pipe(
             tap((res: Response) => {
                 if (res) {

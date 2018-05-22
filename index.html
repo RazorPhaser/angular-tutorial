@@ -31,7 +31,7 @@
 				<div class="chapter">
 					<h2 id="overview">Overview</h2>
 <p>Welcome to the Up and Running with Angular Workshop.  Angular 2 was released in September 2016 and was a full re-write of the framework.  With the re-write a lot has changed.   In this workshop, you will learn how to build an Angular UI from the ground up.</p>
-<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 5.2.9</div>
+<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 6.0.0</div>
 
 <h3 id="goal">Goal</h3>
 <p>The goal of this tutorial is to walk you through creating an application with the common features that a web application would have (headers, footers, forms, calls to API services, authentication, etc).</p>
@@ -107,10 +107,71 @@
 
 <h3 id="visual-studio-code">Visual Studio Code</h3>
 <p>Visual Studio Code is Microsoft lightweight cross platform IDE.</p>
+<h4 class="exercise-start">
+    <b>VSCode Setup</b>
+</h4>
+
 <ol>
 <li>Download Visual Studio Code at <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
 <li>Once the download finishes, launch the installer except all of the defaults.</li>
+<li><p>Here are the extensions that I have installed:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2">Angular v6 Snippets</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=infinity1207.angular2-switcher">Angular 2 Switcher</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=Angular.ng-template">Angular Language Service</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense">Path Intellisense</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer">Bracket Pair Colorizer</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig">Editor Config</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=eg2.tslint">TSLint</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync">Setting Sync</a></li>
+</ul>
+</li>
+<li><p>Here are my Visual Studio Code Settings</p>
+<pre><code class="lang-json"> {
+     &quot;editor.minimap.enabled&quot;: false,
+     &quot;editor.renderWhitespace&quot;: &quot;none&quot;,
+     &quot;editor.renderIndentGuides&quot;: true,
+     &quot;editor.tabCompletion&quot;: true,
+     &quot;editor.wordWrap&quot;: &quot;on&quot;,
+     &quot;editor.tabSize&quot;: 2,
+     &quot;editor.wrappingIndent&quot;: &quot;same&quot;,
+     &quot;explorer.confirmDragAndDrop&quot;: false,
+     &quot;explorer.openEditors.visible&quot;: 0,
+     &quot;files.autoSave&quot;: &quot;off&quot;,
+     &quot;files.exclude&quot;: {
+         &quot;**/.git&quot;: true,
+         &quot;**/.svn&quot;: true,
+         &quot;**/.hg&quot;: true,
+         &quot;**/CVS&quot;: true,
+         &quot;**/.DS_Store&quot;: true,
+         &quot;**/.npm&quot;: true,
+         &quot;**/*.js&quot;: {
+         &quot;when&quot;: &quot;$(basename).ts&quot;
+         },
+         &quot;**/*.js.map&quot;: {
+         &quot;when&quot;: &quot;$(basename)&quot;
+         }
+     },
+     &quot;files.hotExit&quot;: &quot;onExit&quot;,
+     &quot;files.trimTrailingWhitespace&quot;: true,
+     &quot;prettier.printWidth&quot;: 100,
+     &quot;prettier.singleQuote&quot;: true,
+     &quot;prettier.bracketSpacing&quot;: true,
+     &quot;prettier.trailingComma&quot;: &quot;es5&quot;,
+     &quot;search.exclude&quot;: {
+         &quot;**/node_modules&quot;: true,
+         &quot;**/bower_components&quot;: true,
+         &quot;**/jspm_packages&quot;: true
+     }
+ }
+</code></pre>
+</li>
 </ol>
+<div class="exercise-end"></div>
+
+
 <h3 id="node-js">Node.js</h3>
 <p>NodeJS is used to power the Angular CLI as well as install all of our dependencies. The Angular CLI requires Node version 8.</p>
 <ol>
@@ -134,7 +195,7 @@
     <b>Exercise</b>: Install Angular CLI
 </h4>
 
-<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 1.7.3</div>
+<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 6.0.0</div>
 
 <ol>
 <li><p>Open a command prompt or terminal and run the following command</p>
@@ -762,7 +823,7 @@
 
      const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
 
-     return this.http.put(&#39;https://dj-sails-todo.azurewebsites.net/user/login&#39;, loginInfo, requestOptions)
+     return this.http.put(&#39;https://sails-ws.herokuapp.com/user/login&#39;, loginInfo, requestOptions)
          .pipe(
              tap((res: Response) =&gt; {
                  if (res) {
@@ -986,7 +1047,7 @@
 <li><p>Add the following method to allow an account to be created</p>
 <pre><code class="lang-TypeScript">signup(email: string, password: string): Observable&lt;boolean | Response&gt; {
  const loginInfo = { &#39;email&#39;: email, &#39;password&#39;: password };
- return this.http.post(&quot;https://dj-sails-todo.azurewebsites.net/user/&quot;, loginInfo, requestOptions)
+ return this.http.post(&quot;https://sails-ws.herokuapp.com/user/&quot;, loginInfo, requestOptions)
      .pipe(
          tap((res: Response) =&gt; {
              if (res) {
@@ -1757,7 +1818,7 @@
 </li>
 <li><p>Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.</p>
 <pre><code class="lang-TypeScript"> save(item: string): Observable&lt;Todo&gt; {
-     return this.http.post&lt;Todo&gt;(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, new Todo(item), requestOptions);
+     return this.http.post&lt;Todo&gt;(&#39;https://sails-ws.herokuapp.com/todo&#39;, new Todo(item), requestOptions);
  }
 </code></pre>
 </li>
@@ -1857,7 +1918,7 @@
 </li>
 <li><p>Add the following function to make an http get call to our Todo API and return back an array of Todo items.</p>
 <pre><code class="lang-TypeScript"> getAll(): Observable&lt;Todo[]&gt; {
-     return this.http.get&lt;Todo[]&gt;(&#39;https://dj-sails-todo.azurewebsites.net/todo&#39;, requestOptions);
+     return this.http.get&lt;Todo[]&gt;(&#39;https://sails-ws.herokuapp.com/todo&#39;, requestOptions);
  }
 </code></pre>
 </li>
@@ -1962,7 +2023,7 @@
 </li>
 <li><p>We are going to create an update method that will take in a Todo item and make an http put call to our API to update the one record with the new completion state.</p>
 <pre><code class="lang-TypeScript"> updateTodo(todo: Todo): Observable&lt;Todo&gt; {
-     const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+     const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
 
      return this.http.put&lt;Todo&gt;(url, todo, requestOptions);
  }
@@ -2069,7 +2130,7 @@
 </li>
 <li><p>We need to create a delete method that will call our API using http.delete</p>
 <pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;Todo&gt; {
-     const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+     const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
      return this.http.delete&lt;Todo&gt;(url, requestOptions);
  }
 </code></pre>
@@ -2305,7 +2366,7 @@
 <li><p>Add an isAuthenticated function to the AuthService that checks the API to make sure that the user is still logged in</p>
 <pre><code class="lang-TypeScript">isAuthenticated(): Observable&lt;boolean | Response&gt; {
      return this.http
-         .get(&#39;https://dj-sails-todo.azurewebsites.net/user/identity&#39;, requestOptions)
+         .get(&#39;https://sails-ws.herokuapp.com/user/identity&#39;, requestOptions)
          .pipe(
              tap((res: Response) =&gt; {
                  if (res) {

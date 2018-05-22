@@ -47,8 +47,69 @@ Once the "Folder Options" dialog is open:
 
 Visual Studio Code is Microsoft lightweight cross platform IDE.
 
+<h4 class="exercise-start">
+    <b>VSCode Setup</b>
+</h4>
+
 1. Download Visual Studio Code at [https://code.visualstudio.com/](https://code.visualstudio.com/)
 1. Once the download finishes, launch the installer except all of the defaults.
+1. Here are the extensions that I have installed:
+
+    * [Angular v6 Snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)
+    * [Angular 2 Switcher](https://marketplace.visualstudio.com/items?itemName=infinity1207.angular2-switcher)
+    * [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)
+    * [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+    * [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+    * [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
+    * [Editor Config](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+    * [TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)
+    * [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+    * [Setting Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
+
+1. Here are my Visual Studio Code Settings
+
+    ```json
+    {
+        "editor.minimap.enabled": false,
+        "editor.renderWhitespace": "none",
+        "editor.renderIndentGuides": true,
+        "editor.tabCompletion": true,
+        "editor.wordWrap": "on",
+        "editor.tabSize": 2,
+        "editor.wrappingIndent": "same",
+        "explorer.confirmDragAndDrop": false,
+        "explorer.openEditors.visible": 0,
+        "files.autoSave": "off",
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/.npm": true,
+            "**/*.js": {
+            "when": "$(basename).ts"
+            },
+            "**/*.js.map": {
+            "when": "$(basename)"
+            }
+        },
+        "files.hotExit": "onExit",
+        "files.trimTrailingWhitespace": true,
+        "prettier.printWidth": 100,
+        "prettier.singleQuote": true,
+        "prettier.bracketSpacing": true,
+        "prettier.trailingComma": "es5",
+        "search.exclude": {
+            "**/node_modules": true,
+            "**/bower_components": true,
+            "**/jspm_packages": true
+        }
+    }
+    ```
+
+<div class="exercise-end"></div>
+
 
 ### Node.js
 
@@ -80,7 +141,7 @@ While you do not have to use the Angular CLI, it is highly recommended, will inc
     <b>Exercise</b>: Install Angular CLI
 </h4>
 
-<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 1.7.3</div>
+<div class="alert alert-info" role="alert">This workshop has been tested against Angular CLI 6.0.0</div>
 
 1. Open a command prompt or terminal and run the following command
 

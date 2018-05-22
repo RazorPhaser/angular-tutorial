@@ -2,7 +2,7 @@
 
 Welcome to the Up and Running with Angular Workshop.  Angular 2 was released in September 2016 and was a full re-write of the framework.  With the re-write a lot has changed.   In this workshop, you will learn how to build an Angular UI from the ground up.
 
-<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 5.2.9</div>
+<div class="alert alert-danger" role="alert">This workshop has been tested against Angular 6.0.0</div>
 
 ### Goal
 

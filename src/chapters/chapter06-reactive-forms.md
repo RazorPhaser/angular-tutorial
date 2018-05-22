@@ -696,7 +696,7 @@ Now that we have the Todo service file created, we need to add our save method t
 
     ```TypeScript
     save(item: string): Observable<Todo> {
-        return this.http.post<Todo>('https://dj-sails-todo.azurewebsites.net/todo', new Todo(item), requestOptions);
+        return this.http.post<Todo>('https://sails-ws.herokuapp.com/todo', new Todo(item), requestOptions);
     }
     ```
 
@@ -822,7 +822,7 @@ First thing we need to do is add a function to the todo service to get the list 
 
     ```TypeScript
     getAll(): Observable<Todo[]> {
-        return this.http.get<Todo[]>('https://dj-sails-todo.azurewebsites.net/todo', requestOptions);
+        return this.http.get<Todo[]>('https://sails-ws.herokuapp.com/todo', requestOptions);
     }
     ```
 
@@ -941,7 +941,7 @@ Right now the todo list is just a read only view. However, we need to have the a
 
     ```TypeScript
     updateTodo(todo: Todo): Observable<Todo> {
-        const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+        const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
 
         return this.http.put<Todo>(url, todo, requestOptions);
     }
@@ -1066,7 +1066,7 @@ In addition to being able to complete a todo item, we also need to be able to de
 
     ```TypeScript
     deleteTodo(todo: Todo): Observable<Todo> {
-        const url = `https://dj-sails-todo.azurewebsites.net/todo/${todo.id}`;
+        const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
         return this.http.delete<Todo>(url, requestOptions);
     }
     ```
