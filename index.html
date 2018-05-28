@@ -78,6 +78,10 @@
 <ul>
 <li>Setup your machine for the Workshop</li>
 </ul>
+<h3 id="stackblitz-online-ide">StackBlitz Online IDE</h3>
+<p>If you would prefer to not install anything on your computer and want to develop 100% in the browser with a Visual Studio Code like editor, you can use StackBlitz.  Each lab has a link to StackBlitz for a starting point for that lab.</p>
+<div class="alert alert-danger" role="alert">Skip to <a href='#chapter3'>creating the project</a> if you are using StackBlitz</div>
+
 <h3 id="windows-showing-file-extensions">Windows Showing File Extensions</h3>
 <div class="alert alert-danger" role="alert">
 <strong>Windows Only</strong>
@@ -128,44 +132,19 @@
 <li><a href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync">Setting Sync</a></li>
 </ul>
 </li>
-<li><p>Here are my Visual Studio Code Settings</p>
-<pre><code class="lang-json"> {
-     &quot;editor.minimap.enabled&quot;: false,
-     &quot;editor.renderWhitespace&quot;: &quot;none&quot;,
-     &quot;editor.renderIndentGuides&quot;: true,
-     &quot;editor.tabCompletion&quot;: true,
-     &quot;editor.wordWrap&quot;: &quot;on&quot;,
-     &quot;editor.tabSize&quot;: 2,
-     &quot;editor.wrappingIndent&quot;: &quot;same&quot;,
-     &quot;explorer.confirmDragAndDrop&quot;: false,
-     &quot;explorer.openEditors.visible&quot;: 0,
-     &quot;files.autoSave&quot;: &quot;off&quot;,
-     &quot;files.exclude&quot;: {
-         &quot;**/.git&quot;: true,
-         &quot;**/.svn&quot;: true,
-         &quot;**/.hg&quot;: true,
-         &quot;**/CVS&quot;: true,
-         &quot;**/.DS_Store&quot;: true,
-         &quot;**/.npm&quot;: true,
-         &quot;**/*.js&quot;: {
-         &quot;when&quot;: &quot;$(basename).ts&quot;
-         },
-         &quot;**/*.js.map&quot;: {
-         &quot;when&quot;: &quot;$(basename)&quot;
-         }
-     },
-     &quot;files.hotExit&quot;: &quot;onExit&quot;,
-     &quot;files.trimTrailingWhitespace&quot;: true,
-     &quot;prettier.printWidth&quot;: 100,
-     &quot;prettier.singleQuote&quot;: true,
-     &quot;prettier.bracketSpacing&quot;: true,
-     &quot;prettier.trailingComma&quot;: &quot;es5&quot;,
-     &quot;search.exclude&quot;: {
-         &quot;**/node_modules&quot;: true,
-         &quot;**/bower_components&quot;: true,
-         &quot;**/jspm_packages&quot;: true
-     }
- }
+<li><p>To hide the mini map go into the Preferences -&gt; Settings (File -&gt; Preferences -&gt; Settings on Windows) and add the following setting</p>
+<pre><code class="lang-bash"> &quot;editor.minimap.enabled&quot;: false,
+</code></pre>
+</li>
+<li><p>I also like to always have word wrap turned on.  You can turn this on in the same preferences file as you used for turning off the mini map above.</p>
+<pre><code class="lang-bash"> &quot;editor.wrappingIndent&quot;: &quot;same&quot;,
+</code></pre>
+</li>
+<li><p>Prettier settings that take effect when formatting the document</p>
+<pre><code class="lang-json"> &quot;prettier.printWidth&quot;: 100,
+ &quot;prettier.singleQuote&quot;: true,
+ &quot;prettier.bracketSpacing&quot;: true,
+ &quot;prettier.trailingComma&quot;: &quot;es5&quot;,
 </code></pre>
 </li>
 </ol>
@@ -223,6 +202,10 @@
 <li>Understand the project layout</li>
 <li>Understand how to run the project</li>
 </ul>
+<h3 id="stackblitz-online-ide">StackBlitz Online IDE</h3>
+<p>The generated project is available for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-project-created">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-project-created</a>.</p>
+<div class="alert alert-danger" role="alert">Skip to <a href='#chapter3.4'>project layout</a> if you are using StackBlitz</div>
+
 <h3 id="generate-new-project">Generate New Project</h3>
 <p>The project that the Angular CLI create for you follows all of the suggested standards and has webpack for bundling built-in to it.</p>
 <h4 class="exercise-start">
@@ -278,17 +261,17 @@
     <b>Exercise</b>: Run the project
 </h4>
 
-<p>The Angular CLI has a built-in command for starting up a web server for your project called <code>ng serve</code> which will run webpack to bundle up your code, start the web server, rebuild on file changes (watch) and refresh connected browsers (live reload).</p>
+<p>The Angular CLI has a built-in command for starting up a development web server for your project called <code>ng serve</code> which will run webpack to bundle up your code, start the development web server, rebuild on file changes (watch) and refresh connected browsers (live reload).</p>
 <ol>
 <li>Visual Studio Code has a built-in terminal that we can use to run our commands.  On Windows, this is a powershell prompt.  To open the Integrated Terminal go under the View Menu and click on the Integrate Terminal or press Ctrl+`<ul>
 <li>You are free to use the regular command prompt outside of Visual Studio Code if you would like</li>
 </ul>
 </li>
-<li><p>Run</p>
-<pre><code class="lang-bash"> ng serve
+<li><p>Will be using the package.json shortcut scripts to run our commands.  Personally, I like to setup my package.json scripts to run all of my commands like linting, testing, build, and running.  Out of the box, the package.json scripts are setup for these.  Later, we will modify them to add additional functionality for running continuous integration scripts.</p>
+<pre><code class="lang-bash"> npm run start
 </code></pre>
 <p> <img src="images/ng-serve.png" alt="ng serve output"></p>
- <div class="alert alert-info" role="alert">The ng serve command will stay running in order to provide live reloading functionality.  If you need to stop ng serve, press ctrl+c</div>
+ <div class="alert alert-info" role="alert">The npm run start (ng serve) command will stay running in order to provide live reloading functionality.  If you need to stop the process, press ctrl+c</div>
 </li>
 <li><p>If you launch your browser and navigate to <a href="http://localhost:4200">http://localhost:4200</a>, you will see a page that looks like</p>
 <p> <img src="images/appworks.png" alt="app works"></p>
@@ -334,29 +317,13 @@
 <td>Format Document</td>
 <td>ctrl+alt+f</td>
 </tr>
+<tr>
+<td>Save All</td>
+<td>ctrl+shift+s</td>
+</tr>
 </tbody>
 </table>
 <div class="alert alert-info" role="alert"> I also split my screen in half with the tutorial on one side and the editor on the other side.  On Windows you can do this by using the win key + left arrow for the one you want on the left and then select the other for the right when windows prompts you.  You can also use win key + right arrow to make a Windows use half the screen on the right.</div>
-
-<h3 id="visual-studio-settings">Visual Studio Settings</h3>
-<p>In Visual Studio Code, you will notice that there is a map looking thing showing in the upper right corner.  This is called the mini map and it is a layout of your source code file.  I typically hide the mini map to give myself more editing space.</p>
-<h4 class="exercise-start">
-  <b>Exercise</b>: Hide Mini Map
-</h4>
-
-<p>To hide the mini map go into the Preferences -&gt; Settings (File -&gt; Preferences -&gt; Settings on Windows) and add the following setting</p>
-<pre><code class="lang-bash">&quot;editor.minimap.enabled&quot;: false,
-</code></pre>
-<div class="exercise-end"></div>
-
-<h4 class="exercise-start">
-  <b>Exercise</b>: Turn On Word Wrap
-</h4>
-
-<p>I also like to always have word wrap turned on.  You can turn this on in the same preferences file as you used for turning off the mini map above.</p>
-<pre><code class="lang-bash">&quot;editor.wrappingIndent&quot;: &quot;same&quot;,
-</code></pre>
-<div class="exercise-end"></div>
 
 <h3 id="review">Review</h3>
 <p>In this chapter we learned 3 things</p>
@@ -377,11 +344,16 @@
 <ul>
 <li>Understand how to include Bootstrap 4 into your project</li>
 </ul>
-<h3 id="install-bootstrap">Install Bootstrap</h3>
+<h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
+<div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter on your local computer or in StackBlitz</div>
+
 <h4 class="exercise-start">
-    <b>Exercise</b>: Install Bootstrap
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="using-stackblitz-online-ide">Using StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-project-created">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-project-created</a>.</p>
+<h3 id="install-bootstrap">Install Bootstrap</h3>
 <ol>
 <li>In the VS Code Integrated Terminal, click the + to open a 2nd terminal</li>
 <li><p>Run the npm install command for bootstrap and font-awesome</p>
@@ -430,7 +402,7 @@
 <pre><code class="lang-bash"> _variables.scss
 </code></pre>
 </li>
-<li><p>Add the following to the src\app_variables.scss file</p>
+<li><p>Add the following to the src_variables.scss file</p>
 <pre><code class="lang-scss"> // Variables
  // Colors
  //
@@ -548,11 +520,14 @@
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
+<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="stackblitz-online-ide">StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-bootstrap">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-bootstrap</a>.</p>
+<h4 id="downloading-code-from-github">Downloading Code from Github</h4>
 <ol>
 <li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-bootstrap.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-bootstrap.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
@@ -617,6 +592,10 @@
 </li>
 <li><p>Your routes should look like the following</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
+     {
+         path: &#39;&#39;,
+         children: []
+     },
      { path: &#39;login&#39;, component: LoginComponent },
  ];
 </code></pre>
@@ -799,9 +778,8 @@
 </li>
 <li><p>Import the following so that we can make our HTTP calls and get a response back.</p>
 <pre><code class="lang-TypeScript"> import { HttpClient,  } from &#39;@angular/common/http&#39;;
- import { Observable } from &#39;rxjs/Observable&#39;;
+ import { Observable, of } from &#39;rxjs&#39;;
  import { tap, catchError } from &#39;rxjs/operators&#39;;
- import { of } from &#39;rxjs/observable/of&#39;;
 </code></pre>
 </li>
 <li><p>In order to use the HTTP module, we need to inject it into our constructor</p>
@@ -1100,6 +1078,10 @@
 </li>
 <li><p>You routes should look like</p>
 <pre><code class="lang-TypeScript"> const routes: Routes = [
+     {
+         path: &#39;&#39;,
+         children: []
+     },
      { path: &#39;login&#39;, component: LoginComponent },
      { path: &#39;signup&#39;, component: SignupComponent},
  ];
@@ -1235,11 +1217,14 @@
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
+<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="stackblitz-online-ide">StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-template-forms">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-template-forms</a>.</p>
+<h4 id="downloading-code-from-github">Downloading Code from Github</h4>
 <ol>
 <li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
@@ -1296,7 +1281,7 @@
 <pre><code class="lang-TypeScript"> import { TodoComponent } from &#39;./todo/todo.component&#39;;
 </code></pre>
 </li>
-<li><p>We want to make the Todo component the home page. We can do this by creating a <code>path: &#39;&#39;</code> route and making it go to the TodoComponent</p>
+<li><p>We want to make the Todo component the home page by updating the <code>path: &#39;&#39;</code> route and making it go to the TodoComponent</p>
 <pre><code class="lang-TypeScript"> {
      path: &#39;&#39;,
      component: TodoComponent
@@ -1344,7 +1329,9 @@
      FormsModule,
      ReactiveFormsModule,
      HttpClientModule,
-     AppRoutingModule
+     AppRoutingModule,
+     NgbModule.forRoot(),
+     FontAwesomeModule
  ],
 </code></pre>
 </li>
@@ -1574,7 +1561,7 @@
 </code></pre>
 </li>
 <li><p>Now that we the look up for the validation error messages and a place to store the form field error we are ready to create our generic function to determine the actual error message.</p>
-<pre><code class="lang-TypeScript"> onValueChanged(data?: any) {
+<pre><code class="lang-TypeScript"> onStatusChanged(data?: any) {
      if (!this.addForm) { return; }
      const form = this.addForm;
 
@@ -1602,12 +1589,12 @@
 <li>If the form field is invalid, then we look up the validation message for the form field and validator that failed and set the formError for that field.</li>
 </ul>
 </li>
-<li><p>Next we need to subscribe to the addForm valueChanges event and call the onValueChanged function we just created. We are going to setup the subscribe in the ngOnInit function</p>
-<pre><code class="lang-TypeScript"> this.addForm.valueChanges.subscribe(data =&gt; this.onValueChanged(data));
+<li><p>Next we need to subscribe to the addForm statusChanges event and call the onStatusChanged we just created. We are going to setup the subscribe in the ngOnInit function</p>
+<pre><code class="lang-TypeScript"> this.addForm.statusChanges.subscribe(data =&gt; this.onStatusChanged(data));
 </code></pre>
 </li>
-<li><p>The last thing we are going to is call the onValueChanged function in the ngOnInit function to reset any formErrors back to blank</p>
-<pre><code class="lang-TypeScript"> this.onValueChanged();
+<li><p>The last thing we are going to is call the onStatusChanged function in the ngOnInit function to reset any formErrors back to blank</p>
+<pre><code class="lang-TypeScript"> this.onStatusChanged();
 </code></pre>
 </li>
 </ol>
@@ -1647,31 +1634,6 @@
 <li><p>To the input control for the todo item, add an <code>[ngClass]</code> attribute that checks that formErrors.item has a value and if so then adds the is-invalid css to the input control.</p>
 <pre><code class="lang-html"> [ngClass]=&quot;{&#39;is-invalid&#39;: formErrors.item}&quot;
 </code></pre>
-</li>
-</ol>
-<div class="exercise-end"></div>
-
-<h3 id="wait-before-validation-messages">Wait Before Validation Messages</h3>
-<p>You might have notice after implementing the previous logic to check the field values in the TypeScript file, that the validation errors are immediately shown which can be annoying to users while they type. Instead it would be better to wait for a given amount of time after the last keystroke before checking. This is called debounce.</p>
-<p>Angular makes it very easy to implement what they call debounce to wait for the user to stop typing before running validation on our item input field.</p>
-<h4 class="exercise-start">
-    <b>Exercise</b>:  Implement Debounce
-</h4>
-
-<ol>
-<li><p>Open todo.component.ts file</p>
-<pre><code class="lang-TypeScript"> todo.component.ts
-</code></pre>
-</li>
-<li><p>Import the rxjs debounceTime</p>
-<pre><code class="lang-TypeScript"> import &#39;rxjs/add/operator/debounceTime&#39;;
-</code></pre>
-</li>
-<li><p>On the line that you added the <code>itemControl.valueChanges.subscribe</code> add the <code>debounceTime</code> statement between valueChanges and subscribe like so</p>
-<pre><code class="lang-TypeScript"> this.addForm.valueChanges.debounceTime(1000).subscribe(data =&gt; this.onValueChanged(data));
-</code></pre>
-</li>
-<li><p>Now if you test the UI at <a href="http://localhost:4200">http://localhost:4200</a>, it will wait 1 second after the last keystroke before checking the input field validation. You can change the time it waits by increasing or decreasing the value that is passed into the debounceTime function.</p>
 </li>
 </ol>
 <div class="exercise-end"></div>
@@ -1813,7 +1775,7 @@
 </code></pre>
 </li>
 <li><p>We want to return Observables of type Todo back from our Http calls we need to import Observable from rsjs.</p>
-<pre><code class="lang-TypeScript"> import { Observable } from &#39;rxjs/Observable&#39;;
+<pre><code class="lang-TypeScript"> import { Observable } from &#39;rxjs&#39;;
 </code></pre>
 </li>
 <li><p>Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.</p>
@@ -1851,14 +1813,14 @@
 <pre><code class="lang-TypeScript"> this.todoService.save(this.addForm.value.item)
  .subscribe(result =&gt; {
      console.log(&#39;save result&#39;, result);
- };
+ });
 </code></pre>
 </li>
 </ol>
 <p>Right now our solution does not handle any errors from the TodoService save call.  Lets add in some error checking.</p>
 <ol>
 <li><p>We need to add the import for HttpErrorResponse class to the @angular/common/http import</p>
-<pre><code class="lang-TypeScript"> import { HttpClient, HttpErrorResponse } from &#39;@angular/common/http&#39;;
+<pre><code class="lang-TypeScript"> import { HttpErrorResponse } from &#39;@angular/common/http&#39;;
 </code></pre>
 </li>
 <li><p>We now need to create the errorMessage variable that is of type string in the Todocomponent class</p>
@@ -2022,11 +1984,14 @@
 </code></pre>
 </li>
 <li><p>We are going to create an update method that will take in a Todo item and make an http put call to our API to update the one record with the new completion state.</p>
-<pre><code class="lang-TypeScript"> updateTodo(todo: Todo): Observable&lt;Todo&gt; {
+<pre><code class="lang-TypeScript"> updateTodo(todo: Todo): Observable&lt;string&gt; {
      const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
 
-     return this.http.put&lt;Todo&gt;(url, todo, requestOptions);
- }
+     return this.http.patch(url, todo, {
+     withCredentials: true,
+     responseType: &#39;text&#39;,
+     });
+ }x
 </code></pre>
 <ul>
 <li>For the url we are using string interpolation to create the url. This is done with the &#96;&#96; tags and the ${}</li>
@@ -2051,9 +2016,9 @@
      todo.completed = !todo.completed;
      this.todoService.updateTodo(todo)
          .subscribe(
-             (data: Todo) =&gt; {
+             (data: string) =&gt; {
                  // do nothing
-                console.log(&#39;updated todo&#39;, todo);
+                console.log(&#39;updated todo&#39;, data, todo);
              },
              (error: HttpErrorResponse) =&gt; {
                  todo.completed = !todo.completed;
@@ -2107,8 +2072,15 @@
 </li>
 <li><p>The html for the display of the Todo list should look like the following:</p>
 <pre><code class="lang-html"> &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
-     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;fa-icon [icon]=&quot;[&#39;far&#39;, todoItem.completed  ? &#39;check-square&#39; : &#39;square&#39;]&quot;&gt;&lt;/fa-icon&gt;&lt;/div&gt;
-     &lt;div class=&quot;col-11 done-{{todoItem.completed}}&quot;&gt;{{todoItem.item}} &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;&lt;/div&gt;
+     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;
+         &lt;fa-icon
+             [icon]=&quot;[&#39;far&#39;, todoItem.completed  ? &#39;check-square&#39; : &#39;square&#39;]&quot;&gt;
+         &lt;/fa-icon&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;col-11 done-{{todoItem.completed}}&quot;&gt;
+         {{todoItem.item}}
+         &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;
+     &lt;/div&gt;
  &lt;/div&gt;
 </code></pre>
  <div class="alert alert-danger" role="alert">For now, you will need to 1st hit <a href="http://localhost:4200/login">http://localhost:4200/login</a> before you can successfully update a todo item since they are associated to a user.  After you have logged in, you can update as many items as you would like without hitting login again.  In the next chapter we will implement a login check that will redirect you to login first.</div>
@@ -2129,9 +2101,13 @@
 </code></pre>
 </li>
 <li><p>We need to create a delete method that will call our API using http.delete</p>
-<pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;Todo&gt; {
-     const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
-     return this.http.delete&lt;Todo&gt;(url, requestOptions);
+<pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): Observable&lt;string&gt; {
+ const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
+
+ return this.http.delete(url, {
+         withCredentials: true,
+         responseType: &#39;text&#39;,
+     });
  }
 </code></pre>
 <ul>
@@ -2156,7 +2132,8 @@
 <pre><code class="lang-TypeScript"> deleteTodo(todo: Todo): void {
      this.todoService.deleteTodo(todo)
      .subscribe(
-         (data: Todo) =&gt; {
+         (data: string) =&gt; {
+             console.log(&#39;deleteTodo response&#39;, data, todo);
              const index = this.todoList.indexOf(todo);
              this.todoList.splice(index, 1);
          },
@@ -2190,19 +2167,39 @@
 </code></pre>
 </li>
 <li><p>After the div that displays the todo item and date but still inside of the ngFor div, we need to add a div that will hold the delete icon. We will be using the fa-trash icon. When the icon is clicked it will call the TodoComponent.deleteTodo function. The icon is going to take up 1 column of space in the grid.</p>
-<pre><code class="lang-TypeScript"> &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;&lt;i class=&quot;fa fa-trash&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+<pre><code class="lang-TypeScript"> &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;
+   &lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;
+ &lt;/div&gt;
 </code></pre>
 </li>
 <li><p>Since the Bootstrap grid is 12 columns wide, we need to reduce the text div from col-11 to col-10 to be able to fit in the delete icon.</p>
 </li>
 <li><p>The html for the display of the Todo list should look like the following:</p>
 <pre><code class="lang-html"> &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
-     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;&lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;&lt;/div&gt;
-
-     &lt;div class=&quot;col-10 done-{{todoItem.completed}}&quot;&gt;{{todoItem.item}} &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;&lt;/div&gt;
-
-     &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;&lt;i class=&quot;far fa-trash-alt&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;
+         &lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;col-10 done-{{todoItem.completed}}&quot;&gt;
+         {{todoItem.item}} &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;
+       &lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;
+     &lt;/div&gt;
  &lt;/div&gt;
+ &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
+     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;
+         &lt;fa-icon [icon]=&quot;[&#39;far&#39;, todoItem.completed  ? &#39;check-square&#39; : &#39;square&#39;]&quot;&gt;&lt;/fa-icon&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;col-10 done-{{todoItem.completed}}&quot;&gt;
+         {{todoItem.item}}
+         &lt;br /&gt;
+         &lt;small&gt;created: {{ todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;
+         &lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;
+     &lt;/div&gt;
+ &lt;/div&gt;
+
 </code></pre>
 </li>
 <li><p>You can now test the delete functionality. Warning that it will not ask if you want to delete the item. It will just delete it.</p>
@@ -2316,11 +2313,14 @@
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
+<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="stackblitz-online-ide">StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-reactive-forms">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-reactive-forms</a>.</p>
+<h4 id="downloading-code-from-github">Downloading Code from Github</h4>
 <ol>
 <li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactive-forms.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-reactvive-forms.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
@@ -2485,11 +2485,14 @@ canActivate: [IsLoggedInGuard]
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
+<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="stackblitz-online-ide">StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-lock-down-routes">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-lock-down-routes</a>.</p>
+<h4 id="downloading-code-from-github">Downloading Code from Github</h4>
 <ol>
 <li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
@@ -2680,11 +2683,14 @@ canActivate: [IsLoggedInGuard]
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
+<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="stackblitz-online-ide">StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-env-config">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-env-config</a>.</p>
+<h4 id="downloading-code-from-github">Downloading Code from Github</h4>
 <ol>
 <li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-env-config.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
@@ -2762,11 +2768,14 @@ canActivate: [IsLoggedInGuard]
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
+<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="stackblitz-online-ide">StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-default-route">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-default-route</a>.</p>
+<h4 id="downloading-code-from-github">Downloading Code from Github</h4>
 <ol>
 <li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-default-route.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-default-route.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
@@ -3175,11 +3184,14 @@ Note that this will remove the dist directory before build.
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
+<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="stackblitz-online-ide">StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-header-footer">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-header-footer</a>.</p>
+<h4 id="downloading-code-from-github">Downloading Code from Github</h4>
 <ol>
 <li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-header-footer.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-header-footer.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
@@ -3284,7 +3296,7 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Find the <code></code>completeTodo` function and add the logic below in the subscribe data.  This logics reads if the todo item is completed then decrement the openItemCount else increment the openItemCount;</p>
+<li><p>Find the <code>completeTodo</code> function and add the logic below in the subscribe data.  This logics reads if the todo item is completed then decrement the openItemCount else increment the openItemCount;</p>
 <pre><code class="lang-TypeScript"> todo.completed ? this.openItemCount-- : this.openItemCount++;
 </code></pre>
 </li>
@@ -3404,7 +3416,7 @@ Note that this will remove the dist directory before build.
  }
 </code></pre>
 </li>
-<li><p>In the save, completeTodo and getTodoListAll functions after we have updated the todoList array, call the sortItems function</p>
+<li><p>In the <code>save</code>, <code>completeTodo</code> and <code>getTodoListAll</code> functions after we have updated the todoList array, call the sortItems function</p>
 <pre><code class="lang-typescript"> this.sortItems();
 </code></pre>
 </li>
@@ -3425,7 +3437,7 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Find the save function and in the result section add the form reset call</p>
+<li><p>Find the <code>save</code> function and in the result section add the form reset call</p>
 <pre><code class="lang-TypeScript"> this.addForm.reset();
 </code></pre>
 </li>
@@ -3450,7 +3462,7 @@ Note that this will remove the dist directory before build.
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>Find the deleteTodo function and wrap the contents of the function in the confirm call below.  Since TypeScript is just a super set of JavaScript we are able to use the confirm JavaScript syntax.</p>
+<li><p>Find the <code>deleteTodo</code> function and wrap the contents of the function in the confirm call below.  Since TypeScript is just a super set of JavaScript we are able to use the confirm JavaScript syntax.</p>
 <pre><code class="lang-TypeScript"> if (confirm(&quot;Are you sure you want to delete?&quot;)) {
      // delete call goes here
  }
@@ -3472,11 +3484,14 @@ Note that this will remove the dist directory before build.
 <h3 id="code-from-previous-chapter">Code from Previous Chapter</h3>
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github.</p>
+<p>If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.</p>
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
 
+<h4 id="stackblitz-online-ide">StackBlitz Online IDE</h4>
+<p>If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at <a href="https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-additional-todo">https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-additional-todo</a>.</p>
+<h4 id="downloading-code-from-github">Downloading Code from Github</h4>
 <ol>
 <li>Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at <a href="https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-todo.zip">https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-additional-todo.zip</a></li>
 <li><p>After you get the code, run npm install to get all of the NPM dependencies.</p>
@@ -3704,10 +3719,10 @@ Note that this will remove the dist directory before build.
          tap((res: Response) =&gt; {
              this.clearUser();
              if (res.ok) {
-                 return Observable.of(true);
+                 return of(true);
              }
 
-             return Observable.of(false);
+             return of(false);
         }),
          catchError((error: HttpErrorResponse) =&gt; {
              this.clearUser();

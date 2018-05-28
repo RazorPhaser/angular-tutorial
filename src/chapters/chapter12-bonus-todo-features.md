@@ -18,11 +18,17 @@ Right now the Todo UI is fully functional but there is some nice usability enhan
 
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-If you have not completed the previous chapter you can get the completed code by downloading the code from Github.
+If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
+
+#### StackBlitz Online IDE
+
+If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at [https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-header-footer](https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-header-footer).
+
+#### Downloading Code from Github
 
 1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-header-footer.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-header-footer.zip)
 1. After you get the code, run npm install to get all of the NPM dependencies.
@@ -143,7 +149,7 @@ When we toggle the completion status of a Todo item we also need to update the o
     todo.component.ts
     ```
 
-1. Find the ``completeTodo` function and add the logic below in the subscribe data.  This logics reads if the todo item is completed then decrement the openItemCount else increment the openItemCount;
+1. Find the `completeTodo` function and add the logic below in the subscribe data.  This logics reads if the todo item is completed then decrement the openItemCount else increment the openItemCount;
 
     ```TypeScript
     todo.completed ? this.openItemCount-- : this.openItemCount++;
@@ -279,7 +285,7 @@ Now that we have our generic sorting method, we can create a function to do the 
     }
     ```
 
-1. In the save, completeTodo and getTodoListAll functions after we have updated the todoList array, call the sortItems function
+1. In the `save`, `completeTodo` and `getTodoListAll` functions after we have updated the todoList array, call the sortItems function
 
     ```typescript
     this.sortItems();
@@ -304,7 +310,7 @@ Right now after you add a new todo item, the form does not clear out the input b
     todo.component.ts
     ```
 
-1. Find the save function and in the result section add the form reset call
+1. Find the `save` function and in the result section add the form reset call
 
     ```TypeScript
     this.addForm.reset();
@@ -334,7 +340,7 @@ For the sake of this workshop, we are going to go with option #3.
     todo.component.ts
     ```
 
-2. Find the deleteTodo function and wrap the contents of the function in the confirm call below.  Since TypeScript is just a super set of JavaScript we are able to use the confirm JavaScript syntax.
+2. Find the `deleteTodo` function and wrap the contents of the function in the confirm call below.  Since TypeScript is just a super set of JavaScript we are able to use the confirm JavaScript syntax.
 
     ```TypeScript
     if (confirm("Are you sure you want to delete?")) {

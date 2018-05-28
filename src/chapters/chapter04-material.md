@@ -1,65 +1,105 @@
-## Bootstrap
+## Angular Material
 
 ### Overview
 
-For our styling we are going to use [Bootstrap 4](https://getbootstrap.com/).  The reason for picking Bootstrap 4 and not Bootstrap 3 is so that we can use [Angular Bootstrap library (ng-bootstrap)](https://ng-bootstrap.github.io).  ng2-bootstrap is written 100% in JavaScript with no need for JQuery or Bootstrap's JavaScript library to be included.
+For our styling we are going to use [Angular Material](https://material.angular.io/).
 
 ### Goals
 
-* Understand how to include Bootstrap 4 into your project
+* Understand how to include Material into our project
 
-### Code from Previous Chapter
-
-<div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter on your local computer or in StackBlitz</div>
+### Install Material
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Get Previous Code
+    <b>Exercise</b>: Install Material
 </h4>
 
-#### Using StackBlitz Online IDE
-
-If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at [https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-project-created](https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-project-created).
-
-### Install Bootstrap
-
 1. In the VS Code Integrated Terminal, click the + to open a 2nd terminal
-1. Run the npm install command for bootstrap and font-awesome
+1. Run the Angular CLI command to add Material
 
     ```bash
-    npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons bootstrap @ng-bootstrap/ng-bootstrap rxjs-compat
+     ng add @angular/material
+     ```
+
+Before we can use Material we need to add it to the AppModule.  The suggested way to do this is to create a module just for Material
+
+1. In the terminal window, run the following command to create a new module called in material in the shared folder
+
+    ```bash
+    ng generate module shared/material --flat --spec false
     ```
 
-    * This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.
-
-    > rxjs-compat is required until ngx-bootstrap updates to rxjs 6.0
-
-Before we can use ng-bootstrap we need to add it to the AppModule
-
-1. Open the src\app\app.module.ts
+1. Open the src\app\shared/material.module.ts
 
     <div class="alert alert-info" role="alert">In Visual Studio Code you can quickly open a file by using ctrl+p to open the "Go To File" prompt and typing in the file name</div>
+
+    ```bash
+    material.module.ts
+    ```
+
+1. Import the Material components at the top of the file
+
+    ```TypeScript
+    import {
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule,
+    MatTooltipModule,
+    } from '@angular/material';
+    ```
+
+1. In the @NgModule imports section add the Material modules
+
+    ```TypeScript
+    CommonModule,
+    MatButtonModule,
+    MatInputModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatTooltipModule,
+    ```
+
+1. In the @NgModule, we need to add an exports section and include the Material modules that we imported
+
+    ```TypeScript
+    exports: [
+        MatButtonModule,
+        MatInputModule,
+        MatListModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ],
+    ```
+
+Now we need to add the Material module to the App Module
+
+1. Open the src/app/app.module.ts file
 
     ```bash
     app.module.ts
     ```
 
-1. Import the NgbModule from @ng-bootstrap/ng-bootstrap and AngularfontAwesomeModule from angular-font-awesome
+1. In the @NgModule imports section add the Material module
 
     ```TypeScript
-    import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-    import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+    MaterialModule
     ```
 
-1. In the @NgModule imports section add NgbModule.forRoot() and AngularFontAwesomeModule
-
-    ```TypeScript
-    NgbModule.forRoot(),
-    FontAwesomeModule
-    ```
+1. Visual Studio Code will complain that is does not know what the MaterialModule is.  To fix this, put your cursor on the text MaterialModule and click ctrl+. to bring up the lightbulb help and select add MaterialModule
 
 <div class="exercise-end"></div>
 
-### Add Bootstrap to Project
+### Add Material Theme
 
 <h4 class="exercise-start">
     <b>Exercise</b>: Add  Bootstrap to Project
@@ -75,7 +115,7 @@ First we need to create our own custom Bootstrap variables files so that we can 
     _variables.scss
     ```
 
-1. Add the following to the src\_variables.scss file
+1. Add the following to the src\app\_variables.scss file
 
     ```scss
     // Variables

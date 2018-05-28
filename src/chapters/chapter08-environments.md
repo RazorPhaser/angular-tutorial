@@ -15,11 +15,17 @@ The different environment configurations are stored in the src\environments fold
 
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-If you have not completed the previous chapter you can get the completed code by downloading the code from Github.
+If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
+
+#### StackBlitz Online IDE
+
+If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at [https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-lock-down-routes](https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-lock-down-routes).
+
+#### Downloading Code from Github
 
 1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-lock-down-routes.zip)
 1. After you get the code, run npm install to get all of the NPM dependencies.

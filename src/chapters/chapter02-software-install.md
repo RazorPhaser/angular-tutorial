@@ -14,6 +14,12 @@ To get started, we need to install and configure the following software first.
 
 * Setup your machine for the Workshop
 
+### StackBlitz Online IDE
+
+If you would prefer to not install anything on your computer and want to develop 100% in the browser with a Visual Studio Code like editor, you can use StackBlitz.  Each lab has a link to StackBlitz for a starting point for that lab.
+
+<div class="alert alert-danger" role="alert">Skip to <a href='#chapter3'>creating the project</a> if you are using StackBlitz</div>
+
 ### Windows Showing File Extensions
 
 <div class="alert alert-danger" role="alert">
@@ -66,46 +72,25 @@ Visual Studio Code is Microsoft lightweight cross platform IDE.
     * [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
     * [Setting Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
 
-1. Here are my Visual Studio Code Settings
+1. To hide the mini map go into the Preferences -> Settings (File -> Preferences -> Settings on Windows) and add the following setting
+
+    ```bash
+    "editor.minimap.enabled": false,
+    ```
+
+1. I also like to always have word wrap turned on.  You can turn this on in the same preferences file as you used for turning off the mini map above.
+
+    ```bash
+    "editor.wrappingIndent": "same",
+    ```
+
+1. Prettier settings that take effect when formatting the document
 
     ```json
-    {
-        "editor.minimap.enabled": false,
-        "editor.renderWhitespace": "none",
-        "editor.renderIndentGuides": true,
-        "editor.tabCompletion": true,
-        "editor.wordWrap": "on",
-        "editor.tabSize": 2,
-        "editor.wrappingIndent": "same",
-        "explorer.confirmDragAndDrop": false,
-        "explorer.openEditors.visible": 0,
-        "files.autoSave": "off",
-        "files.exclude": {
-            "**/.git": true,
-            "**/.svn": true,
-            "**/.hg": true,
-            "**/CVS": true,
-            "**/.DS_Store": true,
-            "**/.npm": true,
-            "**/*.js": {
-            "when": "$(basename).ts"
-            },
-            "**/*.js.map": {
-            "when": "$(basename)"
-            }
-        },
-        "files.hotExit": "onExit",
-        "files.trimTrailingWhitespace": true,
-        "prettier.printWidth": 100,
-        "prettier.singleQuote": true,
-        "prettier.bracketSpacing": true,
-        "prettier.trailingComma": "es5",
-        "search.exclude": {
-            "**/node_modules": true,
-            "**/bower_components": true,
-            "**/jspm_packages": true
-        }
-    }
+    "prettier.printWidth": 100,
+    "prettier.singleQuote": true,
+    "prettier.bracketSpacing": true,
+    "prettier.trailingComma": "es5",
     ```
 
 <div class="exercise-end"></div>

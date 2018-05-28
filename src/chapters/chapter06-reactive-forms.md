@@ -19,11 +19,17 @@ We are going to build the form to enter our Todo items using Reactive forms.
 
 <div class="alert alert-danger" role="alert">Skip this section if you completed the previous chapter</div>
 
-If you have not completed the previous chapter you can get the completed code by downloading the code from Github.
+If you have not completed the previous chapter you can get the completed code by downloading the code from Github or open it in StackBlitz.
 
 <h4 class="exercise-start">
-    <b>Exercise</b>: Downloading Code
+    <b>Exercise</b>: Get Previous Code
 </h4>
+
+#### StackBlitz Online IDE
+
+If you are using StackBlitz the previous chapter code is avavilable for StackBlitz at [https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-template-forms](https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-template-forms).
+
+#### Downloading Code from Github
 
 1. Downloading and extracting the zip file into your projects folder (c:\projects or ~/projects) at [https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip](https://github.com/digitaldrummerj/angular-tutorial-code/archive/chapter-template-forms.zip)
 1. After you get the code, run npm install to get all of the NPM dependencies.
@@ -88,7 +94,7 @@ Before we can view our todo component, we need to tell Angular how to route to t
     import { TodoComponent } from './todo/todo.component';
     ```
 
-1. We want to make the Todo component the home page. We can do this by creating a `path: ''` route and making it go to the TodoComponent
+1. We want to make the Todo component the home page by updating the `path: ''` route and making it go to the TodoComponent
 
     ```TypeScript
     {
@@ -150,7 +156,9 @@ We need to import the ReactiveFormsModule into our AppModule before we can use i
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgbModule.forRoot(),
+        FontAwesomeModule
     ],
     ```
 
@@ -412,7 +420,7 @@ We are going to create a function that will be called each time the form values 
 1. Now that we the look up for the validation error messages and a place to store the form field error we are ready to create our generic function to determine the actual error message.
 
     ```TypeScript
-    onValueChanged(data?: any) {
+    onStatusChanged(data?: any) {
         if (!this.addForm) { return; }
         const form = this.addForm;
 
@@ -439,16 +447,16 @@ We are going to create a function that will be called each time the form values 
     * Then we loop through the formError variable, get the field and check if the form field is invalid
     * If the form field is invalid, then we look up the validation message for the form field and validator that failed and set the formError for that field.
 
-1. Next we need to subscribe to the addForm valueChanges event and call the onValueChanged function we just created. We are going to setup the subscribe in the ngOnInit function
+1. Next we need to subscribe to the addForm statusChanges event and call the onStatusChanged we just created. We are going to setup the subscribe in the ngOnInit function
 
     ```TypeScript
-    this.addForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.addForm.statusChanges.subscribe(data => this.onStatusChanged(data));
     ```
 
-1. The last thing we are going to is call the onValueChanged function in the ngOnInit function to reset any formErrors back to blank
+1. The last thing we are going to is call the onStatusChanged function in the ngOnInit function to reset any formErrors back to blank
 
     ```TypeScript
-    this.onValueChanged();
+    this.onStatusChanged();
     ```
 
 <div class="exercise-end"></div>
@@ -494,38 +502,6 @@ You can also add a border around the Bootstrap form-group for the item form fiel
     ```html
     [ngClass]="{'is-invalid': formErrors.item}"
     ```
-
-<div class="exercise-end"></div>
-
-### Wait Before Validation Messages
-
-You might have notice after implementing the previous logic to check the field values in the TypeScript file, that the validation errors are immediately shown which can be annoying to users while they type. Instead it would be better to wait for a given amount of time after the last keystroke before checking. This is called debounce.
-
-Angular makes it very easy to implement what they call debounce to wait for the user to stop typing before running validation on our item input field.
-
-<h4 class="exercise-start">
-    <b>Exercise</b>:  Implement Debounce
-</h4>
-
-1. Open todo.component.ts file
-
-    ```TypeScript
-    todo.component.ts
-    ```
-
-1. Import the rxjs debounceTime
-
-    ```TypeScript
-    import 'rxjs/add/operator/debounceTime';
-    ```
-
-1. On the line that you added the `itemControl.valueChanges.subscribe` add the `debounceTime` statement between valueChanges and subscribe like so
-
-    ```TypeScript
-    this.addForm.valueChanges.debounceTime(1000).subscribe(data => this.onValueChanged(data));
-    ```
-
-1. Now if you test the UI at [http://localhost:4200](http://localhost:4200), it will wait 1 second after the last keystroke before checking the input field validation. You can change the time it waits by increasing or decreasing the value that is passed into the debounceTime function.
 
 <div class="exercise-end"></div>
 
@@ -689,7 +665,7 @@ Now that we have the Todo service file created, we need to add our save method t
 1. We want to return Observables of type Todo back from our Http calls we need to import Observable from rsjs.
 
     ```TypeScript
-    import { Observable } from 'rxjs/Observable';
+    import { Observable } from 'rxjs';
     ```
 
 1. Next we need to create our save function that will call our API, pass in our TodoItem, and return back the results to the component.
@@ -738,7 +714,7 @@ Now that we have our Todo service save function created, we need to call it from
     this.todoService.save(this.addForm.value.item)
     .subscribe(result => {
         console.log('save result', result);
-    };
+    });
     ```
 
 Right now our solution does not handle any errors from the TodoService save call.  Lets add in some error checking.
@@ -746,7 +722,7 @@ Right now our solution does not handle any errors from the TodoService save call
 1. We need to add the import for HttpErrorResponse class to the @angular/common/http import
 
     ```TypeScript
-    import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+    import { HttpErrorResponse } from '@angular/common/http';
     ```
 
 1. We now need to create the errorMessage variable that is of type string in the Todocomponent class
@@ -940,11 +916,14 @@ Right now the todo list is just a read only view. However, we need to have the a
 1. We are going to create an update method that will take in a Todo item and make an http put call to our API to update the one record with the new completion state.
 
     ```TypeScript
-    updateTodo(todo: Todo): Observable<Todo> {
+    updateTodo(todo: Todo): Observable<string> {
         const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
 
-        return this.http.put<Todo>(url, todo, requestOptions);
-    }
+        return this.http.patch(url, todo, {
+        withCredentials: true,
+        responseType: 'text',
+        });
+    }x
     ```
 
     * For the url we are using string interpolation to create the url. This is done with the &#96;&#96; tags and the ${}
@@ -971,9 +950,9 @@ Now we need to call the updateTodo function that we just created in the TodoServ
         todo.completed = !todo.completed;
         this.todoService.updateTodo(todo)
             .subscribe(
-                (data: Todo) => {
+                (data: string) => {
                     // do nothing
-                   console.log('updated todo', todo);
+                   console.log('updated todo', data, todo);
                 },
                 (error: HttpErrorResponse) => {
                     todo.completed = !todo.completed;
@@ -1039,8 +1018,15 @@ Now we are ready to use the checkbox icons
 
     ```html
     <div class="row todo" *ngFor="let todoItem of todoList">
-        <div class="col-1" (click)="completeTodo(todoItem)"><fa-icon [icon]="['far', todoItem.completed  ? 'check-square' : 'square']"></fa-icon></div>
-        <div class="col-11 done-{{todoItem.completed}}">{{todoItem.item}} <br /><small>created: {{todoItem.createdAt | date:'short'}}</small></div>
+        <div class="col-1" (click)="completeTodo(todoItem)">
+            <fa-icon
+                [icon]="['far', todoItem.completed  ? 'check-square' : 'square']">
+            </fa-icon>
+        </div>
+        <div class="col-11 done-{{todoItem.completed}}">
+            {{todoItem.item}}
+            <br /><small>created: {{todoItem.createdAt | date:'short'}}</small>
+        </div>
     </div>
     ```
 
@@ -1065,9 +1051,13 @@ In addition to being able to complete a todo item, we also need to be able to de
 1. We need to create a delete method that will call our API using http.delete
 
     ```TypeScript
-    deleteTodo(todo: Todo): Observable<Todo> {
-        const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
-        return this.http.delete<Todo>(url, requestOptions);
+    deleteTodo(todo: Todo): Observable<string> {
+    const url = `https://sails-ws.herokuapp.com/todo/${todo.id}`;
+
+    return this.http.delete(url, {
+            withCredentials: true,
+            responseType: 'text',
+        });
     }
     ```
 
@@ -1094,7 +1084,8 @@ Next we need to create the deleteTodo item function in the component that will c
     deleteTodo(todo: Todo): void {
         this.todoService.deleteTodo(todo)
         .subscribe(
-            (data: Todo) => {
+            (data: string) => {
+                console.log('deleteTodo response', data, todo);
                 const index = this.todoList.indexOf(todo);
                 this.todoList.splice(index, 1);
             },
@@ -1137,7 +1128,9 @@ The last thing that we need to do is to add the delete icon to the todo list.
 1. After the div that displays the todo item and date but still inside of the ngFor div, we need to add a div that will hold the delete icon. We will be using the fa-trash icon. When the icon is clicked it will call the TodoComponent.deleteTodo function. The icon is going to take up 1 column of space in the grid.
 
     ```TypeScript
-    <div class="col-1" (click)="deleteTodo(todoItem)"><i class="fa fa-trash"></i></div>
+    <div class="col-1" (click)="deleteTodo(todoItem)">
+      <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+    </div>
     ```
 
 1. Since the Bootstrap grid is 12 columns wide, we need to reduce the text div from col-11 to col-10 to be able to fit in the delete icon.
@@ -1146,12 +1139,30 @@ The last thing that we need to do is to add the delete icon to the todo list.
 
     ```html
     <div class="row todo" *ngFor="let todoItem of todoList">
-        <div class="col-1" (click)="completeTodo(todoItem)"><fa-icon [icon]="['far', 'trash-alt']"></fa-icon></div>
-
-        <div class="col-10 done-{{todoItem.completed}}">{{todoItem.item}} <br /><small>created: {{todoItem.createdAt | date:'short'}}</small></div>
-
-        <div class="col-1" (click)="deleteTodo(todoItem)"><i class="far fa-trash-alt"></i></div>
+        <div class="col-1" (click)="completeTodo(todoItem)">
+            <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+        </div>
+        <div class="col-10 done-{{todoItem.completed}}">
+            {{todoItem.item}} <br /><small>created: {{todoItem.createdAt | date:'short'}}</small>
+        </div>
+        <div class="col-1" (click)="deleteTodo(todoItem)">
+          <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+        </div>
     </div>
+    <div class="row todo" *ngFor="let todoItem of todoList">
+        <div class="col-1" (click)="completeTodo(todoItem)">
+            <fa-icon [icon]="['far', todoItem.completed  ? 'check-square' : 'square']"></fa-icon>
+        </div>
+        <div class="col-10 done-{{todoItem.completed}}">
+            {{todoItem.item}}
+            <br />
+            <small>created: {{ todoItem.createdAt | date:'short'}}</small>
+        </div>
+        <div class="col-1" (click)="deleteTodo(todoItem)">
+            <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+        </div>
+    </div>
+
     ```
 
 1. You can now test the delete functionality. Warning that it will not ask if you want to delete the item. It will just delete it.

@@ -11,6 +11,12 @@ In this chapter we will be creating our project with the Angular CLI.  We will u
 * Understand the project layout
 * Understand how to run the project
 
+### StackBlitz Online IDE
+
+The generated project is available for StackBlitz at [https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-project-created](https://stackblitz.com/github/digitaldrummerj/angular-tutorial-code/tree/chapter-project-created).
+
+<div class="alert alert-danger" role="alert">Skip to <a href='#chapter3.4'>project layout</a> if you are using StackBlitz</div>
+
 ### Generate New Project
 
 The project that the Angular CLI create for you follows all of the suggested standards and has webpack for bundling built-in to it.
@@ -77,19 +83,19 @@ The project that the Angular CLI create for you follows all of the suggested sta
     <b>Exercise</b>: Run the project
 </h4>
 
-The Angular CLI has a built-in command for starting up a web server for your project called `ng serve` which will run webpack to bundle up your code, start the web server, rebuild on file changes (watch) and refresh connected browsers (live reload).
+The Angular CLI has a built-in command for starting up a development web server for your project called `ng serve` which will run webpack to bundle up your code, start the development web server, rebuild on file changes (watch) and refresh connected browsers (live reload).
 
 1. Visual Studio Code has a built-in terminal that we can use to run our commands.  On Windows, this is a powershell prompt.  To open the Integrated Terminal go under the View Menu and click on the Integrate Terminal or press Ctrl+`
     * You are free to use the regular command prompt outside of Visual Studio Code if you would like
-1. Run
+1. Will be using the package.json shortcut scripts to run our commands.  Personally, I like to setup my package.json scripts to run all of my commands like linting, testing, build, and running.  Out of the box, the package.json scripts are setup for these.  Later, we will modify them to add additional functionality for running continuous integration scripts.
 
     ```bash
-    ng serve
+    npm run start
     ```
 
     ![ng serve output](images/ng-serve.png)
 
-    <div class="alert alert-info" role="alert">The ng serve command will stay running in order to provide live reloading functionality.  If you need to stop ng serve, press ctrl+c</div>
+    <div class="alert alert-info" role="alert">The npm run start (ng serve) command will stay running in order to provide live reloading functionality.  If you need to stop the process, press ctrl+c</div>
 
 1. If you launch your browser and navigate to [http://localhost:4200](http://localhost:4200), you will see a page that looks like
 
@@ -110,36 +116,9 @@ Being able to effectively use your editor is key to being a super productive dev
 | Hide Side Menu | ctrl+b |
 | Toggle Word Wrap for File  | alt+z |
 | Format Document | ctrl+alt+f |
+| Save All | ctrl+shift+s |
 
 <div class="alert alert-info" role="alert"> I also split my screen in half with the tutorial on one side and the editor on the other side.  On Windows you can do this by using the win key + left arrow for the one you want on the left and then select the other for the right when windows prompts you.  You can also use win key + right arrow to make a Windows use half the screen on the right.</div>
-
-### Visual Studio Settings
-
-In Visual Studio Code, you will notice that there is a map looking thing showing in the upper right corner.  This is called the mini map and it is a layout of your source code file.  I typically hide the mini map to give myself more editing space.
-
-<h4 class="exercise-start">
-  <b>Exercise</b>: Hide Mini Map
-</h4>
-
-To hide the mini map go into the Preferences -> Settings (File -> Preferences -> Settings on Windows) and add the following setting
-
-```bash
-"editor.minimap.enabled": false,
-```
-
-<div class="exercise-end"></div>
-
-<h4 class="exercise-start">
-  <b>Exercise</b>: Turn On Word Wrap
-</h4>
-
-I also like to always have word wrap turned on.  You can turn this on in the same preferences file as you used for turning off the mini map above.
-
-```bash
-"editor.wrappingIndent": "same",
-```
-
-<div class="exercise-end"></div>
 
 ### Review
 
