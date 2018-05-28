@@ -50,4 +50,4 @@ If you are going through this tutorial online by yourself, click on the github i
 
 ### Slack Channel for Questions
 
-I have created a slack channel for you to be able to ask your Angular questions.  You can join the channel at [https://scs-ng-workshop-slack.herokuapp.com/](https://scs-ng-workshop-slack.herokuapp.com.  I wil also post any updates to the workshop or slides on the slack channel as well.
+I have created a slack channel for you to be able to ask your Angular questions.  You can join the channel at [https://scs-ng-workshop-slack.herokuapp.com/](https://scs-ng-workshop-slack.herokuapp.com).  I will also post any updates to the workshop or slides on the slack channel as well.
