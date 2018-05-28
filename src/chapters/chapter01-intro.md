@@ -46,4 +46,8 @@ Every code snippet has a copy button on the right side of the snippet that will 
 
 If we are doing this tutorial in person as part of a class or workshop, please flag me down and let me know.
 
-If you are going through this tutorial online by yourself, click on the github icon in the header (right icon) and log an issue so that I can take a look at it.
+If you are going through this tutorial online by yourself, click on the github icon in the header (right icon) and log an issue so that I can take a look at it or join the Slack channel below.
+
+### Slack Channel for Questions
+
+I have created a slack channel for you to be able to ask your Angular questions.  You can join the channel at [https://scs-ng-workshop-slack.herokuapp.com/](https://scs-ng-workshop-slack.herokuapp.com.  I wil also post any updates to the workshop or slides on the slack channel as well.
