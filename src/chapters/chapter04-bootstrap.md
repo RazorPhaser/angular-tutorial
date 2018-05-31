@@ -67,7 +67,7 @@ Before we can use ng-bootstrap we need to add it to the AppModule
 
 First we need to create our own custom Bootstrap variables files so that we can override the Bootstrap scss variables to create our own colors and styles using the existing Bootstrap scss variables.
 
-1. In the src\app folder, create a file called **_variables.scss**
+1. In the src folder, create a file called **_variables.scss**
 
       <div class="alert alert-info" role="alert">You can create file right in Visual Studio Code by right-click on the src folder</div>
 
@@ -120,7 +120,7 @@ First we need to create our own custom Bootstrap variables files so that we can 
     style.scss
     ```
 
-1. Add the following contents to the src\app\style.scss file to setup the site wide styles using our variables and the bootstrap styles
+1. Add the following contents to the src\style.scss file to setup the site wide styles using our variables and the bootstrap styles
 
     ```scss
     @import "_variables";
