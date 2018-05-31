@@ -69,7 +69,7 @@ First we need to create our own custom Bootstrap variables files so that we can 
 
 1. In the src\app folder, create a file called **_variables.scss**
 
-      <div class="alert alert-info" role="alert">You can create file right in Visual Studio Code by right-click on the src\app folder</div>
+      <div class="alert alert-info" role="alert">You can create file right in Visual Studio Code by right-click on the src folder</div>
 
     ```bash
     _variables.scss
@@ -114,7 +114,7 @@ First we need to create our own custom Bootstrap variables files so that we can 
 
     <div class="alert alert-info" role="alert">To create your own theme for Bootstrap following the instructions at <a href='https://getbootstrap.com/docs/4.1/getting-started/theming/'>https://getbootstrap.com/docs/4.1/getting-started/theming/</a></div>
 
-1. In the app folder, open the file src\app\style.scss
+1. In the app folder, open the file src\style.scss
 
     ```bash
     style.scss
