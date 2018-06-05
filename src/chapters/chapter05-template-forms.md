@@ -199,7 +199,8 @@ Before we can interact with our form using Angular, we need to import the FormsM
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        FontAwesomeModule
     ],
 
     ```
