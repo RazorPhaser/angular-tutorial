@@ -2544,14 +2544,14 @@ canActivate: [IsLoggedInGuard]
 </li>
 <li><p>Add the environmentName and apiBaseUrl values to the environment object.</p>
 <pre><code class="lang-TypeScript"> environmentName: &#39;Development&#39;,
- apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+ apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
 </code></pre>
 </li>
 <li><p>The environment object should look like the following</p>
 <pre><code class="lang-TypeScript"> export const environment = {
      production: false,
      environmentName: &#39;Development&#39;,
-     apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+     apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
  };
 </code></pre>
 </li>
@@ -2571,14 +2571,14 @@ canActivate: [IsLoggedInGuard]
 </li>
 <li><p>Add the environmentName and apiBaseUrl values to the environment object.</p>
 <pre><code class="lang-TypeScript"> environmentName: &#39;Production&#39;,
- apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+ apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
 </code></pre>
 </li>
 <li><p>The environment object should look like the following</p>
 <pre><code class="lang-TypeScript"> export const environment = {
      production: true,
      environmentName: &#39;Production&#39;,
-     apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+     apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
  };
 </code></pre>
 </li>
@@ -2600,7 +2600,7 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-TypeScript"> export const environment = {
      production: false,
      environmentName: &#39;Local&#39;,
-     apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+     apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
  };
 </code></pre>
 </li>
@@ -2608,17 +2608,62 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-bash"> angular.json
 </code></pre>
 </li>
-<li><p>Find the apps\environments section and add the local configuration to the at the top of the list of environments)</p>
-<pre><code class="lang-json"> &quot;local&quot;: &quot;environments/environment.local.ts&quot;,
+<li><p>Find the architect -&gt; build -&gt; configurations section and add the local configuration within the configurations object</p>
+<pre><code class="lang-json"> &quot;local&quot;: {
+     &quot;fileReplacements&quot;: [
+     {
+         &quot;replace&quot;: &quot;src/environments/environment.ts&quot;,
+         &quot;with&quot;: &quot;src/environments/environment.local.ts&quot;
+     }
+     ]
+ },
 </code></pre>
- <div class="alert alert-info" role="alert">Note that the order of the environments is not important</div>
+ <div class="alert alert-info" role="alert">Note that the order of the configurations is not important</div>
 </li>
 <li><p>The environments section should look like</p>
-<pre><code class="lang-TypeScript">   &quot;environments&quot;: {
-     &quot;local&quot;: &quot;environments/environment.local.ts&quot;,
-     &quot;dev&quot;: &quot;environments/environment.ts&quot;,
-     &quot;prod&quot;: &quot;environments/environment.prod.ts&quot;
-   }
+<pre><code class="lang-json"> &quot;configurations&quot;: {
+     &quot;local&quot;: {
+         &quot;fileReplacements&quot;: [
+         {
+             &quot;replace&quot;: &quot;src/environments/environment.ts&quot;,
+             &quot;with&quot;: &quot;src/environments/environment.local.ts&quot;
+         }
+         ]
+     },
+     &quot;production&quot;: {
+         &quot;optimization&quot;: true,
+         &quot;outputHashing&quot;: &quot;all&quot;,
+         &quot;sourceMap&quot;: false,
+         &quot;extractCss&quot;: true,
+         &quot;namedChunks&quot;: false,
+         &quot;aot&quot;: true,
+         &quot;extractLicenses&quot;: true,
+         &quot;vendorChunk&quot;: false,
+         &quot;buildOptimizer&quot;: true,
+         &quot;fileReplacements&quot;: [
+         {
+             &quot;replace&quot;: &quot;src/environments/environment.ts&quot;,
+             &quot;with&quot;: &quot;src/environments/environment.prod.ts&quot;
+         }
+         ]
+     }
+ }
+</code></pre>
+</li>
+</ol>
+<p>Next we need to add a configurations section to the serve section</p>
+<ol>
+<li><p>Find the &quot;serve&quot; section within angular.json</p>
+<pre><code class="lang-bash"> angular.json
+</code></pre>
+</li>
+<li><p>Within the configurations for ng serve we need to add a local configuration</p>
+<pre><code class="lang-json"> &quot;configurations&quot;: {
+     &quot;local&quot;:
+      {
+         &quot;browserTarget&quot;: &quot;ngws:build:local&quot;
+     },
+ }
 </code></pre>
 </li>
 </ol>
@@ -2678,8 +2723,8 @@ canActivate: [IsLoggedInGuard]
 <p>If you want to run the local configuration we need to pass in the environment command line argument.  The environment argument value is the name of the environment name in the angular-cli.json file.  Note that you can only have 1 ng serve running at a time.</p>
 <ol>
 <li>Go to the terminal that is running <code>ng serve</code> and do a ctrol+c to stop it</li>
-<li><p>Run the <code>ng serve</code> command with the -e and specify the local environment</p>
-<pre><code class="lang-bash"> ng serve -e local
+<li><p>Run the <code>ng serve</code> command with the --configuration and specify the local environment</p>
+<pre><code class="lang-bash"> ng serve --configuration local
 </code></pre>
 </li>
 <li><p>If the Angular compile was successful, you will now be using the local environment configuration. Since our API urls are the same between files you will not see any difference at this time.  In the Header and Footer chapter we will add a footer that displays the environment name.</p>

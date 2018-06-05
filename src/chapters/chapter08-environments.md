@@ -65,7 +65,7 @@ In the environment.ts we need to add the environmentName and apiBaseUrl values. 
 
     ```TypeScript
     environmentName: 'Development',
-    apiBaseUrl: 'https://dj-sails-todo.azurewebsites.net'
+    apiBaseUrl: 'https://sails-ws.herokuapp.com'
     ```
 1. The environment object should look like the following
 
@@ -73,7 +73,7 @@ In the environment.ts we need to add the environmentName and apiBaseUrl values. 
     export const environment = {
         production: false,
         environmentName: 'Development',
-        apiBaseUrl: 'https://dj-sails-todo.azurewebsites.net'
+        apiBaseUrl: 'https://sails-ws.herokuapp.com'
     };
     ```
 
@@ -97,7 +97,7 @@ The src\environments\environment.prod.ts file is the production configuration.  
 
     ```TypeScript
     environmentName: 'Production',
-    apiBaseUrl: 'https://dj-sails-todo.azurewebsites.net'
+    apiBaseUrl: 'https://sails-ws.herokuapp.com'
     ```
 1. The environment object should look like the following
 
@@ -105,7 +105,7 @@ The src\environments\environment.prod.ts file is the production configuration.  
     export const environment = {
         production: true,
         environmentName: 'Production',
-        apiBaseUrl: 'https://dj-sails-todo.azurewebsites.net'
+        apiBaseUrl: 'https://sails-ws.herokuapp.com'
     };
     ```
 
@@ -131,33 +131,82 @@ The other environment that is typically created is for local development on your
     export const environment = {
         production: false,
         environmentName: 'Local',
-        apiBaseUrl: 'https://dj-sails-todo.azurewebsites.net'
+        apiBaseUrl: 'https://sails-ws.herokuapp.com'
     };
     ```
 
-1. In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the .angular-cli.json that is in the root of the project.
+1. In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the angular.json that is in the root of the project.
 
     ```bash
-    .angular-cli.json
+    angular.json
     ```
 
-1. Find the apps\environments section and add the local configuration to the at the top of the list of environments)
+1. Find the architect -> build -> configurations section and add the local configuration within the configurations object
 
     ```json
-    "local": "environments/environment.local.ts",
+    "local": {
+        "fileReplacements": [
+        {
+            "replace": "src/environments/environment.ts",
+            "with": "src/environments/environment.local.ts"
+        }
+        ]
+    },
     ```
 
-    <div class="alert alert-info" role="alert">Note that the order of the environments is not important</div>
+    <div class="alert alert-info" role="alert">Note that the order of the configurations is not important</div>
 
 1. The environments section should look like
 
-    ```TypeScript
-      "environments": {
-        "local": "environments/environment.local.ts",
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
+    ```json
+    "configurations": {
+        "local": {
+            "fileReplacements": [
+            {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.local.ts"
+            }
+            ]
+        },
+        "production": {
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "aot": true,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true,
+            "fileReplacements": [
+            {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+            }
+            ]
+        }
+    }
       ```
+
+Next we need to add a configurations section to the serve section
+
+1. Find the "serve" section within angular.json
+
+    ```bash
+    angular.json
+    ```
+
+1. Within the configurations for ng serve we need to add a local configuration
+
+    ```json
+    "configurations": {
+        "local":
+         {
+            "browserTarget": "ngws:build:local"
+        },
+    }
+    ```
+
 
 <div class="exercise-end"></div>
 
@@ -229,10 +278,10 @@ If an environment is not passed into the ng serve command, then it will default 
 If you want to run the local configuration we need to pass in the environment command line argument.  The environment argument value is the name of the environment name in the angular-cli.json file.  Note that you can only have 1 ng serve running at a time.
 
 1. Go to the terminal that is running `ng serve` and do a ctrol+c to stop it
-1. Run the `ng serve` command with the -e and specify the local environment
+1. Run the `ng serve` command with the --configuration and specify the local environment
 
     ```bash
-    ng serve -e local
+    ng serve --configuration local
     ```
 
 1. If the Angular compile was successful, you will now be using the local environment configuration. Since our API urls are the same between files you will not see any difference at this time.  In the Header and Footer chapter we will add a footer that displays the environment name.
