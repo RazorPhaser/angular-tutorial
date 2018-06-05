@@ -368,7 +368,8 @@
 <pre><code class="lang-bash"> npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons bootstrap @ng-bootstrap/ng-bootstrap rxjs-compat
 </code></pre>
 <ul>
-<li><p>This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.</p>
+<li>This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.</li>
+<li><p>Yes, it really is called @fortawesome and not @fontawesome</p>
 <blockquote>
 <p>rxjs-compat is required until ngx-bootstrap updates to rxjs 6.0</p>
 </blockquote>
@@ -384,12 +385,12 @@
 <pre><code class="lang-bash"> app.module.ts
 </code></pre>
 </li>
-<li><p>Import the NgbModule from @ng-bootstrap/ng-bootstrap and AngularfontAwesomeModule from angular-font-awesome</p>
+<li><p>Import the NgbModule from @ng-bootstrap/ng-bootstrap and FontAwesomeModule from @fortawesome/angular-fontawesome</p>
 <pre><code class="lang-TypeScript"> import {NgbModule} from &#39;@ng-bootstrap/ng-bootstrap&#39;;
  import { FontAwesomeModule } from &#39;@fortawesome/angular-fontawesome&#39;;
 </code></pre>
 </li>
-<li><p>In the @NgModule imports section add NgbModule.forRoot() and AngularFontAwesomeModule</p>
+<li><p>In the @NgModule imports section add NgbModule.forRoot() and FontAwesomeModule</p>
 <pre><code class="lang-TypeScript"> NgbModule.forRoot(),
  FontAwesomeModule
 </code></pre>
@@ -866,7 +867,7 @@
              if (!result) {
                  console.log(&#39;login.component user not found&#39;);
              } else {
-                 console.log(&#39;login.component logged in. redirecting to home page&#39;)
+                 console.log(&#39;login.component logged in. redirecting to home page&#39;);
                  this.router.navigate([&#39;/&#39;]);
              }
      });

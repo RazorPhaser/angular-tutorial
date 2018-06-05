@@ -30,6 +30,7 @@ If you are using StackBlitz the previous chapter code is avavilable for StackBli
     ```
 
     * This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.
+    * Yes, it really is called @fortawesome and not @fontawesome
 
     > rxjs-compat is required until ngx-bootstrap updates to rxjs 6.0
 
@@ -43,14 +44,14 @@ Before we can use ng-bootstrap we need to add it to the AppModule
     app.module.ts
     ```
 
-1. Import the NgbModule from @ng-bootstrap/ng-bootstrap and AngularfontAwesomeModule from angular-font-awesome
+1. Import the NgbModule from @ng-bootstrap/ng-bootstrap and FontAwesomeModule from @fortawesome/angular-fontawesome
 
     ```TypeScript
     import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ```
 
-1. In the @NgModule imports section add NgbModule.forRoot() and AngularFontAwesomeModule
+1. In the @NgModule imports section add NgbModule.forRoot() and FontAwesomeModule
 
     ```TypeScript
     NgbModule.forRoot(),
