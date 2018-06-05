@@ -589,7 +589,7 @@ The last thing we want to do is to disable the login button until the form is va
     [disabled]="loginForm.invalid"
     ```
 
-1. Now when either field is invalid the login button will be disabled and a lighter share of blue
+1. Now when either field is invalid the login button will be disabled
 
     ![required validation](images/login-submit-disabled.png)
 
