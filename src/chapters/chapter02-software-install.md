@@ -93,6 +93,12 @@ Visual Studio Code is Microsoft lightweight cross platform IDE.
     "prettier.trailingComma": "es5",
     ```
 
+1. Some people also like to have VSCode auto save the file for them.  Below is will save the file anytime that you switch to a different file or different program.  You can also do `ctrl+s` at anytime to save the file as well
+
+    ```json
+    "files.autoSave": "onFocusChange"
+    ```
+
 <div class="exercise-end"></div>
 
 
