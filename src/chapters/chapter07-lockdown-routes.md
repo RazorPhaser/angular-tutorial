@@ -205,4 +205,12 @@ In order to use the Guard we need to add it to the route.  Each route has a canA
 
 1. When you try to go to [http://localhost:4200](http://localhost:4200) if you are not already logged in it will redirect you to the login page.
 
+1. If you are already logged in and want to test the guard, you can use the Chrome Dev Tools to clear your cookies for the site
+
+    1. Click on Application Tab
+    1. In the left menu, click on Clear Storage
+    1. At the bottom, click on Clear site data
+
+  ![clear dev tools storage](images/clear-cookies.png)
+
 <div class="exercise-end"></div>
