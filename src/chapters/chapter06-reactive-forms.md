@@ -361,7 +361,7 @@ Now that we have validators setup, we need to output an error message to user wh
     todo.component.html
     ```
 
-1. After the closing form tag in the todo.component.html file add the following
+1. After the closing form tag (i.e. outside the form) in the todo.component.html file add the following
 
     ```html
     <div class="alert alert-danger" *ngIf="addForm.get('item').errors && (addForm.get('item').dirty || addForm.get('item').touched)">

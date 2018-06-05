@@ -1145,7 +1145,7 @@
          &lt;button type=&quot;submit&quot; [disabled]=&quot;signupForm.invalid&quot; class=&quot;btn btn-primary&quot;&gt;Sign Up&lt;/button&gt;
      &lt;/span&gt;
      &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Cancel&lt;/button&gt;
-     &lt;span&gt;&lt;a routerLink=&quot;/login&quot;&gt;login to existing account&lt;/a&gt;&lt;/span&gt;
+     &lt;span&gt;&lt;a routerLink=&quot;/login&quot; class=&quot;btn btn-link&quot;&gt;login to existing account&lt;/a&gt;&lt;/span&gt;
 
  &lt;/form&gt;
  &lt;br /&gt;
@@ -1202,7 +1202,7 @@
 </li>
 <li><p>Next to the cancel button add the following HTML to give a link to the create page</p>
 <pre><code class="lang-html">
-&lt;span&gt;&lt;a routerLink=&quot;/signup&quot;&gt;create account&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a routerLink=&quot;/signup&quot; class=&quot;btn btn-link&quot;&gt;create account&lt;/a&gt;&lt;/span&gt;
 
 </code></pre>
 </li>
@@ -1524,7 +1524,7 @@
 <pre><code class="lang-bash"> todo.component.html
 </code></pre>
 </li>
-<li><p>After the closing form tag in the todo.component.html file add the following</p>
+<li><p>After the closing form tag (i.e. outside the form) in the todo.component.html file add the following</p>
 <pre><code class="lang-html"> &lt;div class=&quot;alert alert-danger&quot; *ngIf=&quot;addForm.get(&#39;item&#39;).errors &amp;&amp; (addForm.get(&#39;item&#39;).dirty || addForm.get(&#39;item&#39;).touched)&quot;&gt;
      &lt;span *ngIf=&quot;addForm.get(&#39;item&#39;).errors.required&quot;&gt;
          Item is required
