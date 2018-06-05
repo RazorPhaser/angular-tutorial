@@ -736,7 +736,7 @@ We are first going to create the signup function in the AuthService.
             <button type="submit" [disabled]="signupForm.invalid" class="btn btn-primary">Sign Up</button>
         </span>
         <button type="button" class="btn btn-default">Cancel</button>
-        <span><a routerLink="/login">login to existing account</a></span>
+        <span><a routerLink="/login" class="btn btn-link">login to existing account</a></span>
 
     </form>
     <br />
@@ -799,7 +799,7 @@ We are first going to create the signup function in the AuthService.
 
   ```html
 
-  <span><a routerLink="/signup">create account</a></span>
+  <span><a routerLink="/signup" class="btn btn-link">create account</a></span>
 
     ```
 
