@@ -612,7 +612,7 @@ Since TypeScript is a strongly typed language it is best practice to create a cl
 1. Run the ng generate command below to create the todo component
 
     ```bash
-    ng generate service shared/services/Todo --module App
+    ng generate service shared/services/Todo
     ```
 
 1. This will create 2 files and update the app.module to add the TodoService into the providers list
