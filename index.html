@@ -1557,13 +1557,13 @@
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item. We are going to call the variable formErrors. The default value for the error message is a blank string. This list will also be used to determine which form fields to inspect for validation errors.</p>
+<li><p>We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item. We are going to call the variable formErrors. The default value for the error message is a blank string. This list will also be used to determine which form fields to inspect for validation errors.  Within the TodoComponent class create a local variable called formErrors.</p>
 <pre><code class="lang-TypeScript"> formErrors = {
      item: &#39;&#39;
  };
 </code></pre>
 </li>
-<li><p>Next we need to create a variable to hold the validation messages for each of the form fields. The name of the validation message must match the name of the validation.</p>
+<li><p>Next we need to create a variable to hold the validation messages for each of the form fields. The name of the validation message must match the name of the validation.  Within the TodoComponent class create a local variable called validationMessages.</p>
 <pre><code class="lang-TypeScript"> validationMessages = {
      item: {
          required: &#39;Item is required.&#39;,

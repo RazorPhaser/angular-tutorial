@@ -398,7 +398,7 @@ We are going to create a function that will be called each time the form values 
     todo.component.ts
     ```
 
-1. We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item. We are going to call the variable formErrors. The default value for the error message is a blank string. This list will also be used to determine which form fields to inspect for validation errors.
+1. We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item. We are going to call the variable formErrors. The default value for the error message is a blank string. This list will also be used to determine which form fields to inspect for validation errors.  Within the TodoComponent class create a local variable called formErrors.
 
     ```TypeScript
     formErrors = {
@@ -406,7 +406,7 @@ We are going to create a function that will be called each time the form values 
     };
     ```
 
-1. Next we need to create a variable to hold the validation messages for each of the form fields. The name of the validation message must match the name of the validation.
+1. Next we need to create a variable to hold the validation messages for each of the form fields. The name of the validation message must match the name of the validation.  Within the TodoComponent class create a local variable called validationMessages.
 
     ```TypeScript
     validationMessages = {
