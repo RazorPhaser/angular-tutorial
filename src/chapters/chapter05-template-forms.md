@@ -416,7 +416,7 @@ Now that we have our AuthService completed, we need to call it from our LoginCom
                 if (!result) {
                     console.log('login.component user not found');
                 } else {
-                    console.log('login.component logged in. redirecting to home page')
+                    console.log('login.component logged in. redirecting to home page');
                     this.router.navigate(['/']);
                 }
         });
