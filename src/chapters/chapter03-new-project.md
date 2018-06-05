@@ -95,7 +95,9 @@ The Angular CLI has a built-in command for starting up a development web server 
 
     ![ng serve output](images/ng-serve.png)
 
-    <div class="alert alert-info" role="alert">The npm run start (ng serve) command will stay running in order to provide live reloading functionality.  If you need to stop the process, press ctrl+c</div>
+    <div class="alert alert-info" role="alert">The npm run start (ng serve) command will stay running in order to provide live reloading functionality.</div>
+
+    <div class="alert alert-danger" role="alert">Sometimes ng serve gets into a state where it complains that something is wrong but you swear your code it right.  If this happens, the first troubleshooting step is to stop npm run start by using ctrl+c and then execute npm run start again.  If it still errors out, then there is something wrong with your code.</div>
 
 1. If you launch your browser and navigate to [http://localhost:4200](http://localhost:4200), you will see a page that looks like
 
@@ -105,7 +107,7 @@ The Angular CLI has a built-in command for starting up a development web server 
 
 ### Navigating around Visual Studio Code
 
-Being able to effectively use your editor is key to being a super productive developer.  With Visual Studio Code, there are several shortcut keys that will help you out.
+Being able to effectively use your edit or is key to being a super productive developer.  With Visual Studio Code, there are several shortcut keys that will help you out.
 
 | Purpose | Key |
 | ---- | ---- |
