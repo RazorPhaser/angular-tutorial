@@ -803,6 +803,6 @@ We are first going to create the signup function in the AuthService.
 
     ```
 
-1. If you go to [http://localhost:4200/signup](http://localhost:4200/signup) you should now to be able to signup and navigate between the signup and login pages.  Once signed up,  you will be redirected to the home page and shown the todo items.
+1. If you go to [http://localhost:4200/signup](http://localhost:4200/signup) you should now to be able to signup and navigate between the signup and login pages.  Once signed up,  you will be redirected to the home page.
 
 <div class="exercise-end"></div>
