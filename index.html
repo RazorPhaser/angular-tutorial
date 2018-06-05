@@ -149,6 +149,10 @@
  &quot;prettier.trailingComma&quot;: &quot;es5&quot;,
 </code></pre>
 </li>
+<li><p>Some people also like to have VSCode auto save the file for them.  Below is will save the file anytime that you switch to a different file or different program.  You can also do <code>ctrl+s</code> at anytime to save the file as well</p>
+<pre><code class="lang-json"> &quot;files.autoSave&quot;: &quot;onFocusChange&quot;
+</code></pre>
+</li>
 </ol>
 <div class="exercise-end"></div>
 
@@ -273,7 +277,9 @@
 <pre><code class="lang-bash"> npm run start
 </code></pre>
 <p> <img src="images/ng-serve.png" alt="ng serve output"></p>
- <div class="alert alert-info" role="alert">The npm run start (ng serve) command will stay running in order to provide live reloading functionality.  If you need to stop the process, press ctrl+c</div>
+ <div class="alert alert-info" role="alert">The npm run start (ng serve) command will stay running in order to provide live reloading functionality.</div>
+
+ <div class="alert alert-danger" role="alert">Sometimes ng serve gets into a state where it complains that something is wrong but you swear your code it right.  If this happens, the first troubleshooting step is to stop npm run start by using ctrl+c and then execute npm run start again.  If it still errors out, then there is something wrong with your code.</div>
 </li>
 <li><p>If you launch your browser and navigate to <a href="http://localhost:4200">http://localhost:4200</a>, you will see a page that looks like</p>
 <p> <img src="images/appworks.png" alt="app works"></p>
@@ -282,7 +288,7 @@
 <div class="exercise-end"></div>
 
 <h3 id="navigating-around-visual-studio-code">Navigating around Visual Studio Code</h3>
-<p>Being able to effectively use your editor is key to being a super productive developer.  With Visual Studio Code, there are several shortcut keys that will help you out.</p>
+<p>Being able to effectively use your edit or is key to being a super productive developer.  With Visual Studio Code, there are several shortcut keys that will help you out.</p>
 <table>
 <thead>
 <tr>
@@ -984,6 +990,9 @@
     Must be an email address
 &lt;/div&gt;
 </code></pre>
+<div class="alert alert-info" role="alert">VSCode and the Angular language service will flag the email.errors.required as not containing a member called required.  If the required validator is invalid it will put the error message on the email.errors.required object.</div>
+
+
 <p>Now we are ready to test the email validation.</p>
 <ul>
 <li><p>The validation will trigger if you input text into the email field that is not a valid email address.</p>

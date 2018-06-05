@@ -564,6 +564,9 @@ Next we need to add a message like we did for the required validator for when th
 </div>
 ```
 
+<div class="alert alert-info" role="alert">VSCode and the Angular language service will flag the email.errors.required as not containing a member called required.  If the required validator is invalid it will put the error message on the email.errors.required object.</div>
+
+
 Now we are ready to test the email validation.
 
 * The validation will trigger if you input text into the email field that is not a valid email address.
