@@ -275,7 +275,7 @@ Now that we have our form done, we are going to implement our login service.
 1. Run the ng generate command below to create the Authorization service.  I like to store my services under a shared\services folder.
 
     ```bash
-    ng generate service shared/services/auth --module app
+    ng generate service shared/services/auth
     ```
 
 1. The generate command will create 2 files and update app.module.ts:
@@ -284,7 +284,6 @@ Now that we have our form done, we are going to implement our login service.
 
     * spec file (test)
     * typescript (service)
-    * updated app.module.ts to add LoginService as a provider
 
 Before we can make HTTP calls in our AuthService, we need to import the HttpClientModule into your AppModule
 

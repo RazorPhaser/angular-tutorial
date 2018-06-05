@@ -746,7 +746,7 @@
 <ol>
 <li>Within VS Code, open up the integrated terminal (ctrl+`) or view menu and then &quot;Integrated Terminal&quot;</li>
 <li><p>Run the ng generate command below to create the Authorization service.  I like to store my services under a shared\services folder.</p>
-<pre><code class="lang-bash"> ng generate service shared/services/auth --module app
+<pre><code class="lang-bash"> ng generate service shared/services/auth
 </code></pre>
 </li>
 <li><p>The generate command will create 2 files and update app.module.ts:</p>
@@ -754,7 +754,6 @@
 <ul>
 <li>spec file (test)</li>
 <li>typescript (service)</li>
-<li>updated app.module.ts to add LoginService as a provider</li>
 </ul>
 </li>
 </ol>
@@ -2358,7 +2357,7 @@
 
 <ol>
 <li><p>Open terminal and generate the guard</p>
-<pre><code class="lang-bash">ng generate guard shared/guards/IsLoggedIn --module App
+<pre><code class="lang-bash">ng generate guard shared/guards/IsLoggedIn
 </code></pre>
 <p><img src="images/isloggedin-generate.png" alt="generate output"></p>
 </li>

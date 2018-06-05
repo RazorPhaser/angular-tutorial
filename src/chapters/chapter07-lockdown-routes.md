@@ -60,7 +60,7 @@ If you are using StackBlitz the previous chapter code is avavilable for StackBli
 1. Open terminal and generate the guard
 
   ```bash
-  ng generate guard shared/guards/IsLoggedIn --module App
+  ng generate guard shared/guards/IsLoggedIn
   ```
 
   ![generate output](images/isloggedin-generate.png)
