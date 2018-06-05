@@ -76,7 +76,7 @@ First we need to create our own custom Bootstrap variables files so that we can 
     _variables.scss
     ```
 
-1. Add the following to the src\\_variables.scss file
+1. Add the following to the _variables.scss file
 
     ```scss
     // Variables

@@ -411,7 +411,7 @@
 <pre><code class="lang-bash"> _variables.scss
 </code></pre>
 </li>
-<li><p>Add the following to the src\_variables.scss file</p>
+<li><p>Add the following to the _variables.scss file</p>
 <pre><code class="lang-scss"> // Variables
  // Colors
  //
@@ -2604,8 +2604,8 @@ canActivate: [IsLoggedInGuard]
  };
 </code></pre>
 </li>
-<li><p>In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the .angular-cli.json that is in the root of the project.</p>
-<pre><code class="lang-bash"> .angular-cli.json
+<li><p>In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the angular.json that is in the root of the project.</p>
+<pre><code class="lang-bash"> angular.json
 </code></pre>
 </li>
 <li><p>Find the apps\environments section and add the local configuration to the at the top of the list of environments)</p>
