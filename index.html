@@ -1037,6 +1037,28 @@
 </li>
 <li><p>On the login button, you will want to remove the disabled check since there will be no validation for the password field until you go to the next field which would be the login button</p>
 </li>
+<li><p>In the login function, you will want to pass in the loginForm instead of loginForm.value so that you can check if the form is valid or not.</p>
+<pre><code class="lang-html"> (ngSubmit)=&quot;login(loginForm)&quot;
+</code></pre>
+<pre><code class="lang-typescript"> login(formValues: NgForm) {
+     if (formValues.valid) {
+         this.invalidLogin = false;
+         this.authService
+             .login(formValues.value.email, formValues.value.password)
+             .subscribe(result =&gt; {
+                 if (!result) {
+                     console.log(&#39;login.component user not found&#39;);
+                     this.invalidLogin = true;
+                 } else {
+                     console.log(&#39;login.component logged in. redirecting to home page&#39;);
+                     this.invalidLogin = false;
+                     this.router.navigate([&#39;/&#39;]);
+                 }
+             });
+     }
+ }
+</code></pre>
+</li>
 <li><p>Now the validation will only happen when you go to the next form field</p>
 </li>
 </ol>
@@ -1057,6 +1079,28 @@
 </code></pre>
 </li>
 <li><p>On the login button, you will want to remove the disabled check since there will be no validation until they click the button</p>
+</li>
+<li><p>If you didn&#39;t change the ngSubmit to pass in the form above, on ngSubmit you will want to pass in the loginForm instead of loginForm.value so that you can check if the form is valid or not.</p>
+<pre><code class="lang-html"> (ngSubmit)=&quot;login(loginForm)&quot;
+</code></pre>
+<pre><code class="lang-typescript"> login(formValues: NgForm) {
+     if (formValues.valid) {
+         this.invalidLogin = false;
+         this.authService
+             .login(formValues.value.email, formValues.value.password)
+             .subscribe(result =&gt; {
+                 if (!result) {
+                     console.log(&#39;login.component user not found&#39;);
+                     this.invalidLogin = true;
+                 } else {
+                     console.log(&#39;login.component logged in. redirecting to home page&#39;);
+                     this.invalidLogin = false;
+                     this.router.navigate([&#39;/&#39;]);
+                 }
+             });
+     }
+ }
+</code></pre>
 </li>
 <li><p>Now the validation will only happen when you submit the form</p>
 </li>
@@ -1710,6 +1754,15 @@
 <pre><code class="lang-typescript"> this.addForm = new FormGroup({
    item: new FormControl(&#39;&#39;, [Validators.required, Validators.minLength(3)]),
  }, { updateOn: &#39;blur&#39; });
+</code></pre>
+</li>
+<li><p>You will also need to add the FormControl to the @angular/form import</p>
+<pre><code class="lang-typescript"> import {
+     FormGroup,
+     FormBuilder,
+     FormControl
+ }
+ from &#39;@angular/forms&#39;;
 </code></pre>
 </li>
 <li><p>On the Add button, you will want to remove the disabled check since there will be no validation for the item field until you go to the next field which would be the add button</p>
