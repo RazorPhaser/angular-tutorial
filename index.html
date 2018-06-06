@@ -3298,12 +3298,100 @@ canActivate: [IsLoggedInGuard]
 <ul>
 <li>Learn how to create a build that is ready to deploy.</li>
 </ul>
-<h3 id="non-production-build">Non-Production Build</h3>
+<h3 id="building-steps">Building Steps</h3>
+<p>In order to deploy you should run through unit test, linting, end to end testing, and building for the environment.</p>
+<h3 id="linting">Linting</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: Linting The Code
+</h4>
+
+<p>I am using TeamCity for my CI which means that I need to be able to report out the linting report.</p>
+<ol>
+<li>Open a terminal and navigate to your Angular project</li>
+<li><p>Install the tslint teamcity reporter package</p>
+<pre><code class="lang-bash">npm install --save-dev tslint-teamcity-reporter
+</code></pre>
+</li>
+<li><p>To run linting in a CI environment, run</p>
+<pre><code class="lang-bash">ng lint --format tslint-teamcity-reporter
+</code></pre>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
+<h3 id="testing">Testing</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: Unit Testing the Code
+</h4>
+
+<div class="alert alert-danger" role="alert">This step will fail as we have not been updating the unit tests. In your own projects outside the workshop, you would want to keep the unit tests updated as you go </div>
+
+<ol>
+<li>Open a terminal and navigate to your Angular project</li>
+<li><p>Run the following command to run unit testing with code coverage using the Chrome Headless browser</p>
+<pre><code class="lang-bash">ng test --single-run --code-coverage=true --browsers ChromeHeadless
+</code></pre>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
+<h3 id="end-to-end-testing">End to End Testing</h3>
+<h4 class="exercise-start">
+  <b>Exercise</b>: End to End Testing Your Code
+</h4>
+
+<p>Before we can run our end to end test, we need to create a configuration file to ensure that we run using the Chrome headless browser and set the browser resolution to use.</p>
+<ol>
+<li><p>In the root directory of the project, create a file called protractor.conf.ci.js</p>
+<pre><code class="lang-bash">protractor.conf.ci.js
+</code></pre>
+</li>
+<li><p>Set the contents of the <code>protractor.conf.ci.js</code> to the following.  The difference between this file and the protractor.conf.js file is that chromeOptions section.</p>
+<pre><code class="lang-javascript">// Protractor configuration file, see link for more information
+// https://github.com/angular/protractor/blob/master/lib/config.ts
+
+const { SpecReporter } = require(&#39;jasmine-spec-reporter&#39;);
+
+exports.config = {
+ allScriptsTimeout: 11000,
+ specs: [&#39;./e2e/**/*.e2e-spec.ts&#39;],
+ capabilities: {
+   browserName: &#39;chrome&#39;,
+   chromeOptions: {
+     args: [&#39;--headless&#39;, &#39;--disable-gpu&#39;, &#39;--window-size=1280,768&#39;],
+   },
+ },
+ directConnect: true,
+ baseUrl: &#39;http://localhost:4200/&#39;,
+ framework: &#39;jasmine&#39;,
+ jasmineNodeOpts: {
+   showColors: true,
+   defaultTimeoutInterval: 30000,
+   print: function() {},
+ },
+ onPrepare() {
+   require(&#39;ts-node&#39;).register({
+     project: &#39;e2e/tsconfig.e2e.json&#39;,
+   });
+   jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+ },
+};
+</code></pre>
+</li>
+<li><p>Open a terminal and navigate to your Angular project</p>
+</li>
+<li><p>To run end to end tests in a CI environment, run</p>
+<pre><code class="lang-bash">ng e2e -c protractor.conf.ci.js
+</code></pre>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
+<h3 id="creating-non-production-build">Creating Non-Production Build</h3>
 <div class="alert alert-info" role="alert">
 Note the build create a dist folder to hold the output.   This directory is removed before each build
 </div>
 
-<p>Select which type of build you want to run:  Non-Production or Production</p>
 <h4 class="exercise-start">
   <b>Exercise</b>: Running Non-Production Build
 </h4>
@@ -3313,7 +3401,7 @@ Note the build create a dist folder to hold the output.   This directory is remo
 </code></pre>
 <div class="exercise-end"></div>
 
-<h3 id="production-build">Production Build</h3>
+<h3 id="creating-production-build">Creating Production Build</h3>
 <h4 class="exercise-start">
   <b>Exercise</b>: Running a Production Build
 </h4>
@@ -3322,11 +3410,40 @@ Note the build create a dist folder to hold the output.   This directory is remo
 Note that this will remove the dist directory before build.
 </div>
 
-<p>Run the following command to run a build that uses the environment.prod.ts file and is a production build.   The environment name must match the file name for it to be valid.</p>
-<pre><code class="lang-bash">ng build --target=production --environment=prod
+<p>Run the following command to run a build that uses the environment.prod.ts file and is a production build.</p>
+<pre><code class="lang-bash">ng build --prod
 </code></pre>
 <p>You will now have a production ready deploy in the the dist folder.</p>
 <div class="exercise-end"></div>
+
+<h3 id="make-it-easy-to-remember-commands">Make It Easy to Remember Commands</h3>
+<p>It can be a pain to remember all of these commands.  I like to update the package.json scripts section to have a script for each of the sections.</p>
+<ol>
+<li><p>Open the package.json file</p>
+<pre><code class="lang-bash">package.json
+</code></pre>
+</li>
+<li><p>Find the scripts section and replace it with the following section</p>
+<pre><code class="lang-json">&quot;scripts&quot;: {
+   &quot;ng&quot;: &quot;ng&quot;,
+   &quot;start&quot;: &quot;ng serve&quot;,
+   &quot;build&quot;: &quot;ng build&quot;,
+   &quot;build:prod&quot;: &quot;ng build --prod&quot;,
+   &quot;test&quot;: &quot;ng test&quot;,
+   &quot;test:ci&quot;: &quot;ng test --single-run --code-coverage=true --browsers ChromeHeadless&quot;,
+   &quot;lint&quot;: &quot;ng lint -t stylish&quot;,
+   &quot;lint:ci&quot;: &quot;ng lint --format tslint-teamcity-reporter&quot;,
+   &quot;e2e&quot;: &quot;ng e2e&quot;,
+   &quot;e2e:ci&quot;: &quot;ng e2e -c protractor.conf.ci.js&quot;,
+   &quot;ci&quot;: &quot;npm run lint:ci &amp;&amp; npm run test:ci &amp;&amp; npm run e2e:ci &amp;&amp; npm run build:prod&quot;
+ },
+</code></pre>
+</li>
+<li><p>To run any of these commands you run <code>npm run</code> and then the name of the script.  For example, below we are running the lint:ci script.</p>
+<pre><code class="lang-bash">npm run lint:ci
+</code></pre>
+</li>
+</ol>
 
 				</div>
 
