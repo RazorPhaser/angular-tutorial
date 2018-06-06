@@ -1004,7 +1004,7 @@ Right now the todo list is just a read only view. However, we need to have the a
         withCredentials: true,
         responseType: 'text',
         });
-    }x
+    }
     ```
 
     * For the url we are using string interpolation to create the url. This is done with the &#96;&#96; tags and the ${}
