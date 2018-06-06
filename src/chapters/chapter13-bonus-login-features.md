@@ -173,7 +173,7 @@ In the AuthService, in order to hold our user data and get type checking we need
     <b>Exercise</b>: Setting Cookie
 </h4>
 
-In the auth.service.ts file, we need to change the return type for login, signup, isAuthenticated, to type `<Boolean | User>
+In the auth.service.ts file, we need to change the return type for login, signup, isAuthenticated, to type `<Boolean | User>`
 
 1. Change the return type of the methods to be either Boolean or User.
 
