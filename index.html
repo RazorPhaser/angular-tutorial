@@ -149,6 +149,10 @@
  &quot;prettier.trailingComma&quot;: &quot;es5&quot;,
 </code></pre>
 </li>
+<li><p>Some people also like to have VSCode auto save the file for them.  Below is will save the file anytime that you switch to a different file or different program.  You can also do <code>ctrl+s</code> at anytime to save the file as well</p>
+<pre><code class="lang-json"> &quot;files.autoSave&quot;: &quot;onFocusChange&quot;
+</code></pre>
+</li>
 </ol>
 <div class="exercise-end"></div>
 
@@ -273,7 +277,9 @@
 <pre><code class="lang-bash"> npm run start
 </code></pre>
 <p> <img src="images/ng-serve.png" alt="ng serve output"></p>
- <div class="alert alert-info" role="alert">The npm run start (ng serve) command will stay running in order to provide live reloading functionality.  If you need to stop the process, press ctrl+c</div>
+ <div class="alert alert-info" role="alert">The npm run start (ng serve) command will stay running in order to provide live reloading functionality.</div>
+
+ <div class="alert alert-danger" role="alert">Sometimes ng serve gets into a state where it complains that something is wrong but you swear your code it right.  If this happens, the first troubleshooting step is to stop npm run start by using ctrl+c and then execute npm run start again.  If it still errors out, then there is something wrong with your code.</div>
 </li>
 <li><p>If you launch your browser and navigate to <a href="http://localhost:4200">http://localhost:4200</a>, you will see a page that looks like</p>
 <p> <img src="images/appworks.png" alt="app works"></p>
@@ -282,7 +288,7 @@
 <div class="exercise-end"></div>
 
 <h3 id="navigating-around-visual-studio-code">Navigating around Visual Studio Code</h3>
-<p>Being able to effectively use your editor is key to being a super productive developer.  With Visual Studio Code, there are several shortcut keys that will help you out.</p>
+<p>Being able to effectively use your edit or is key to being a super productive developer.  With Visual Studio Code, there are several shortcut keys that will help you out.</p>
 <table>
 <thead>
 <tr>
@@ -362,7 +368,8 @@
 <pre><code class="lang-bash"> npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/angular-fontawesome @fortawesome/free-regular-svg-icons bootstrap @ng-bootstrap/ng-bootstrap rxjs-compat
 </code></pre>
 <ul>
-<li><p>This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.</p>
+<li>This will install ng-bootstrap along with bootstrap and font-awesome.  Bootstrap is still required for ng-bootstrap to work.</li>
+<li><p>Yes, it really is called @fortawesome and not @fontawesome</p>
 <blockquote>
 <p>rxjs-compat is required until ngx-bootstrap updates to rxjs 6.0</p>
 </blockquote>
@@ -378,12 +385,12 @@
 <pre><code class="lang-bash"> app.module.ts
 </code></pre>
 </li>
-<li><p>Import the NgbModule from @ng-bootstrap/ng-bootstrap and AngularfontAwesomeModule from angular-font-awesome</p>
+<li><p>Import the NgbModule from @ng-bootstrap/ng-bootstrap and FontAwesomeModule from @fortawesome/angular-fontawesome</p>
 <pre><code class="lang-TypeScript"> import {NgbModule} from &#39;@ng-bootstrap/ng-bootstrap&#39;;
  import { FontAwesomeModule } from &#39;@fortawesome/angular-fontawesome&#39;;
 </code></pre>
 </li>
-<li><p>In the @NgModule imports section add NgbModule.forRoot() and AngularFontAwesomeModule</p>
+<li><p>In the @NgModule imports section add NgbModule.forRoot() and FontAwesomeModule</p>
 <pre><code class="lang-TypeScript"> NgbModule.forRoot(),
  FontAwesomeModule
 </code></pre>
@@ -404,7 +411,7 @@
 <pre><code class="lang-bash"> _variables.scss
 </code></pre>
 </li>
-<li><p>Add the following to the src\_variables.scss file</p>
+<li><p>Add the following to the _variables.scss file</p>
 <pre><code class="lang-scss"> // Variables
  // Colors
  //
@@ -672,7 +679,8 @@
      BrowserModule,
      FormsModule,
      AppRoutingModule,
-     NgbModule.forRoot()
+     NgbModule.forRoot(),
+     FontAwesomeModule
  ],
 
 </code></pre>
@@ -738,7 +746,7 @@
 <ol>
 <li>Within VS Code, open up the integrated terminal (ctrl+`) or view menu and then &quot;Integrated Terminal&quot;</li>
 <li><p>Run the ng generate command below to create the Authorization service.  I like to store my services under a shared\services folder.</p>
-<pre><code class="lang-bash"> ng generate service shared/services/auth --module app
+<pre><code class="lang-bash"> ng generate service shared/services/auth
 </code></pre>
 </li>
 <li><p>The generate command will create 2 files and update app.module.ts:</p>
@@ -746,7 +754,6 @@
 <ul>
 <li>spec file (test)</li>
 <li>typescript (service)</li>
-<li>updated app.module.ts to add LoginService as a provider</li>
 </ul>
 </li>
 </ol>
@@ -822,7 +829,7 @@
  }
 </code></pre>
 <ul>
-<li>This code setups the call to the login API and and returns back an Observable.</li>
+<li>This code sets up the call to the login API and returns back an Observable.</li>
 <li><p>Note that this code is not called until someone subscribes to the login function which we will be doing next.</p>
 <div class="alert alert-danger" role="alert">The API is setup for username/password validation.  Make sure you do not use your real passwords as this is just a test API and not production secured.</div>
 
@@ -860,7 +867,7 @@
              if (!result) {
                  console.log(&#39;login.component user not found&#39;);
              } else {
-                 console.log(&#39;login.component logged in. redirecting to home page&#39;)
+                 console.log(&#39;login.component logged in. redirecting to home page&#39;);
                  this.router.navigate([&#39;/&#39;]);
              }
      });
@@ -984,6 +991,9 @@
     Must be an email address
 &lt;/div&gt;
 </code></pre>
+<div class="alert alert-info" role="alert">VSCode and the Angular language service will flag the email.errors.required as not containing a member called required.  If the required validator is invalid it will put the error message on the email.errors.required object.</div>
+
+
 <p>Now we are ready to test the email validation.</p>
 <ul>
 <li><p>The validation will trigger if you input text into the email field that is not a valid email address.</p>
@@ -1003,8 +1013,52 @@
 <pre><code class="lang-html"> [disabled]=&quot;loginForm.invalid&quot;
 </code></pre>
 </li>
-<li><p>Now when either field is invalid the login button will be disabled and a lighter share of blue</p>
+<li><p>Now when either field is invalid the login button will be disabled</p>
 <p> <img src="images/login-submit-disabled.png" alt="required validation"></p>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
+<h3 id="other-validation-options">Other Validation Options</h3>
+<p>By default the validation happens immediately which causes flashing in the UI sometimes.  Starting with Angular 5, you can now set the validation to happen on blur (the form field loses focus) or when you submit the form.</p>
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnBlur valiation (OPTIONAL)
+</h4>
+
+<p>If you want to enable onblur validation run through this section.</p>
+<ol>
+<li><p>Open the src\app\login\login.component.html file</p>
+<pre><code class="lang-bash"> login.component.html
+</code></pre>
+</li>
+<li><p>On each of the input fields, add the following attribute</p>
+<pre><code class="lang-html"> [ngModelOptions]=&quot;{ updateOn: &#39;blur&#39; }&quot;
+</code></pre>
+</li>
+<li><p>On the login button, you will want to remove the disabled check since there will be no validation for the password field until you go to the next field which would be the login button</p>
+</li>
+<li><p>Now the validation will only happen when you go to the next form field</p>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnSubmit valiation (OPTIONAL)
+</h4>
+
+<p>If you want to enable onsubmit validation run through this section.</p>
+<ol>
+<li><p>Open the src\app\login\login.component.html file</p>
+<pre><code class="lang-bash"> login.component.html
+</code></pre>
+</li>
+<li><p>On the form tag add the following attribute</p>
+<pre><code class="lang-html"> [ngFormOptions]=&quot;{ updateOn: &#39;submit&#39; }&quot;
+</code></pre>
+</li>
+<li><p>On the login button, you will want to remove the disabled check since there will be no validation until they click the button</p>
+</li>
+<li><p>Now the validation will only happen when you submit the form</p>
 </li>
 </ol>
 <div class="exercise-end"></div>
@@ -1135,7 +1189,7 @@
          &lt;button type=&quot;submit&quot; [disabled]=&quot;signupForm.invalid&quot; class=&quot;btn btn-primary&quot;&gt;Sign Up&lt;/button&gt;
      &lt;/span&gt;
      &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Cancel&lt;/button&gt;
-     &lt;span&gt;&lt;a routerLink=&quot;/login&quot;&gt;login to existing account&lt;/a&gt;&lt;/span&gt;
+     &lt;span&gt;&lt;a routerLink=&quot;/login&quot; class=&quot;btn btn-link&quot;&gt;login to existing account&lt;/a&gt;&lt;/span&gt;
 
  &lt;/form&gt;
  &lt;br /&gt;
@@ -1192,11 +1246,11 @@
 </li>
 <li><p>Next to the cancel button add the following HTML to give a link to the create page</p>
 <pre><code class="lang-html">
-&lt;span&gt;&lt;a routerLink=&quot;/signup&quot;&gt;create account&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a routerLink=&quot;/signup&quot; class=&quot;btn btn-link&quot;&gt;create account&lt;/a&gt;&lt;/span&gt;
 
 </code></pre>
 </li>
-<li><p>If you go to <a href="http://localhost:4200/signup">http://localhost:4200/signup</a> you should now to be able to signup and navigate between the signup and login pages.  Once signed up,  you will be redirected to the home page and shown the todo items.</p>
+<li><p>If you go to <a href="http://localhost:4200/signup">http://localhost:4200/signup</a> you should now to be able to signup and navigate between the signup and login pages.  Once signed up,  you will be redirected to the home page.</p>
 </li>
 </ol>
 <div class="exercise-end"></div>
@@ -1514,7 +1568,7 @@
 <pre><code class="lang-bash"> todo.component.html
 </code></pre>
 </li>
-<li><p>After the closing form tag in the todo.component.html file add the following</p>
+<li><p>After the closing form tag (i.e. outside the form) in the todo.component.html file add the following</p>
 <pre><code class="lang-html"> &lt;div class=&quot;alert alert-danger&quot; *ngIf=&quot;addForm.get(&#39;item&#39;).errors &amp;&amp; (addForm.get(&#39;item&#39;).dirty || addForm.get(&#39;item&#39;).touched)&quot;&gt;
      &lt;span *ngIf=&quot;addForm.get(&#39;item&#39;).errors.required&quot;&gt;
          Item is required
@@ -1547,13 +1601,13 @@
 <pre><code class="lang-bash"> todo.component.ts
 </code></pre>
 </li>
-<li><p>We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item. We are going to call the variable formErrors. The default value for the error message is a blank string. This list will also be used to determine which form fields to inspect for validation errors.</p>
+<li><p>We need to create a variable to hold the error message for each of the form fields. In this case we only have 1 form field called item. We are going to call the variable formErrors. The default value for the error message is a blank string. This list will also be used to determine which form fields to inspect for validation errors.  Within the TodoComponent class create a local variable called formErrors.</p>
 <pre><code class="lang-TypeScript"> formErrors = {
      item: &#39;&#39;
  };
 </code></pre>
 </li>
-<li><p>Next we need to create a variable to hold the validation messages for each of the form fields. The name of the validation message must match the name of the validation.</p>
+<li><p>Next we need to create a variable to hold the validation messages for each of the form fields. The name of the validation message must match the name of the validation.  Within the TodoComponent class create a local variable called validationMessages.</p>
 <pre><code class="lang-TypeScript"> validationMessages = {
      item: {
          required: &#39;Item is required.&#39;,
@@ -1637,6 +1691,63 @@
 <pre><code class="lang-html"> [ngClass]=&quot;{&#39;is-invalid&#39;: formErrors.item}&quot;
 </code></pre>
 </li>
+</ol>
+<div class="exercise-end"></div>
+
+<h3 id="other-validation-options">Other Validation Options</h3>
+<p>Just like template forms, reactive forms also fires the validation immediately.  Starting with Angular 5, you can now set the validation to happen on blur (the form field loses focus) or when you submit the form.</p>
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnBlur valiation (OPTIONAL)
+</h4>
+
+<p>If you want to enable onblur validation run through this section.</p>
+<ol>
+<li><p>Open the src\app\todo\todo.component.ts file</p>
+<pre><code class="lang-bash"> todo.component.ts
+</code></pre>
+</li>
+<li><p>Right now there is a bug in Angular that prevents us from using a FormBuilder with the updateOn options.  Instead we need to change the FormBuild to be a new FormGroup.  Replace the existing addForm definition with the following</p>
+<pre><code class="lang-typescript"> this.addForm = new FormGroup({
+   item: new FormControl(&#39;&#39;, [Validators.required, Validators.minLength(3)]),
+ }, { updateOn: &#39;blur&#39; });
+</code></pre>
+</li>
+<li><p>On the Add button, you will want to remove the disabled check since there will be no validation for the item field until you go to the next field which would be the add button</p>
+</li>
+<li><p>You will also want to add a check around the existing code within the save method to make sure that the addForm is valid.</p>
+<pre><code class="lang-typescript"> if (this.addForm.valid) {
+ }
+</code></pre>
+</li>
+<li><p>Now the validation will only happen when you go to the next form field which is the add button</p>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnSubmit valiation (OPTIONAL)
+</h4>
+
+<p>If you want to enable onsubmit validation run through this section.</p>
+<ol>
+<li><p>Open the src\app\todo\todo.component.ts file</p>
+<pre><code class="lang-bash"> todo.component.ts
+</code></pre>
+</li>
+<li><p>Right now there is a bug in Angular that prevents us from using a FormBuilder with the updateOn options.  Instead we need to change the FormBuild to be a new FormGroup.  Replace the existing addForm definition with the following</p>
+<pre><code class="lang-typescript"> this.addForm = new FormGroup({
+   item: new FormControl(&#39;&#39;, [Validators.required, Validators.minLength(3)]),
+ }, { updateOn: &#39;submit&#39; });
+</code></pre>
+</li>
+<li><p>On the Add button, you will want to remove the disabled check since there will be no validation for the item field until you go to the next field which would be the add button</p>
+</li>
+<li><p>You will also want to add a check around the existing code within the save method to make sure that the addForm is valid.</p>
+<pre><code class="lang-typescript"> if (this.addForm.valid) {
+ }
+</code></pre>
+</li>
+<li>Now the validation will only happen when you go to the next form field which is the add button</li>
 </ol>
 <div class="exercise-end"></div>
 
@@ -1736,7 +1847,7 @@
 <ol>
 <li>Within VS Code, open up the integrated terminal (ctrl+`) or view menu and then &quot;Integrated Terminal&quot;</li>
 <li><p>Run the ng generate command below to create the todo component</p>
-<pre><code class="lang-bash"> ng generate service shared/services/Todo --module App
+<pre><code class="lang-bash"> ng generate service shared/services/Todo
 </code></pre>
 </li>
 <li><p>This will create 2 files and update the app.module to add the TodoService into the providers list</p>
@@ -2267,8 +2378,7 @@
 <ol>
 <li>Created a form using the FormBuilder</li>
 <li>Added validation to the FormBuilder</li>
-<li>Created a value change observable to set the field validation messages</li>
-<li>Added debounce to wait for a second after the user stops typing before checking the field validation</li>
+<li>Created a status change observable to set the field validation messages</li>
 <li>Show the list of todo list with icons to complete and delete todo items</li>
 <li><p>We used several Angular directives to implement functionality in the UI:</p>
 <ul>
@@ -2347,7 +2457,7 @@
 
 <ol>
 <li><p>Open terminal and generate the guard</p>
-<pre><code class="lang-bash">ng generate guard shared/guards/IsLoggedIn --module App
+<pre><code class="lang-bash">ng generate guard shared/guards/IsLoggedIn
 </code></pre>
 <p><img src="images/isloggedin-generate.png" alt="generate output"></p>
 </li>
@@ -2468,6 +2578,14 @@ canActivate: [IsLoggedInGuard]
 </li>
 <li><p>When you try to go to <a href="http://localhost:4200">http://localhost:4200</a> if you are not already logged in it will redirect you to the login page.</p>
 </li>
+<li><p>If you are already logged in and want to test the guard, you can use the Chrome Dev Tools to clear your cookies for the site</p>
+<ol>
+<li>Click on Application Tab</li>
+<li>In the left menu, click on Clear Storage</li>
+<li>At the bottom, click on Clear site data</li>
+</ol>
+<p><img src="images/clear-cookies.png" alt="clear dev tools storage"></p>
+</li>
 </ol>
 <div class="exercise-end"></div>
 
@@ -2526,14 +2644,14 @@ canActivate: [IsLoggedInGuard]
 </li>
 <li><p>Add the environmentName and apiBaseUrl values to the environment object.</p>
 <pre><code class="lang-TypeScript"> environmentName: &#39;Development&#39;,
- apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+ apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
 </code></pre>
 </li>
 <li><p>The environment object should look like the following</p>
 <pre><code class="lang-TypeScript"> export const environment = {
      production: false,
      environmentName: &#39;Development&#39;,
-     apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+     apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
  };
 </code></pre>
 </li>
@@ -2553,14 +2671,14 @@ canActivate: [IsLoggedInGuard]
 </li>
 <li><p>Add the environmentName and apiBaseUrl values to the environment object.</p>
 <pre><code class="lang-TypeScript"> environmentName: &#39;Production&#39;,
- apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+ apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
 </code></pre>
 </li>
 <li><p>The environment object should look like the following</p>
 <pre><code class="lang-TypeScript"> export const environment = {
      production: true,
      environmentName: &#39;Production&#39;,
-     apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+     apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
  };
 </code></pre>
 </li>
@@ -2582,25 +2700,70 @@ canActivate: [IsLoggedInGuard]
 <pre><code class="lang-TypeScript"> export const environment = {
      production: false,
      environmentName: &#39;Local&#39;,
-     apiBaseUrl: &#39;https://dj-sails-todo.azurewebsites.net&#39;
+     apiBaseUrl: &#39;https://sails-ws.herokuapp.com&#39;
  };
 </code></pre>
 </li>
-<li><p>In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the .angular-cli.json that is in the root of the project.</p>
-<pre><code class="lang-bash"> .angular-cli.json
+<li><p>In order to use the environment.local.ts file we need to tell the Angular CLI that it exist by adding it to the environments section of the angular.json that is in the root of the project.</p>
+<pre><code class="lang-bash"> angular.json
 </code></pre>
 </li>
-<li><p>Find the apps\environments section and add the local configuration to the at the top of the list of environments)</p>
-<pre><code class="lang-json"> &quot;local&quot;: &quot;environments/environment.local.ts&quot;,
+<li><p>Find the architect -&gt; build -&gt; configurations section and add the local configuration within the configurations object</p>
+<pre><code class="lang-json"> &quot;local&quot;: {
+     &quot;fileReplacements&quot;: [
+     {
+         &quot;replace&quot;: &quot;src/environments/environment.ts&quot;,
+         &quot;with&quot;: &quot;src/environments/environment.local.ts&quot;
+     }
+     ]
+ },
 </code></pre>
- <div class="alert alert-info" role="alert">Note that the order of the environments is not important</div>
+ <div class="alert alert-info" role="alert">Note that the order of the configurations is not important</div>
 </li>
 <li><p>The environments section should look like</p>
-<pre><code class="lang-TypeScript">   &quot;environments&quot;: {
-     &quot;local&quot;: &quot;environments/environment.local.ts&quot;,
-     &quot;dev&quot;: &quot;environments/environment.ts&quot;,
-     &quot;prod&quot;: &quot;environments/environment.prod.ts&quot;
-   }
+<pre><code class="lang-json"> &quot;configurations&quot;: {
+     &quot;local&quot;: {
+         &quot;fileReplacements&quot;: [
+         {
+             &quot;replace&quot;: &quot;src/environments/environment.ts&quot;,
+             &quot;with&quot;: &quot;src/environments/environment.local.ts&quot;
+         }
+         ]
+     },
+     &quot;production&quot;: {
+         &quot;optimization&quot;: true,
+         &quot;outputHashing&quot;: &quot;all&quot;,
+         &quot;sourceMap&quot;: false,
+         &quot;extractCss&quot;: true,
+         &quot;namedChunks&quot;: false,
+         &quot;aot&quot;: true,
+         &quot;extractLicenses&quot;: true,
+         &quot;vendorChunk&quot;: false,
+         &quot;buildOptimizer&quot;: true,
+         &quot;fileReplacements&quot;: [
+         {
+             &quot;replace&quot;: &quot;src/environments/environment.ts&quot;,
+             &quot;with&quot;: &quot;src/environments/environment.prod.ts&quot;
+         }
+         ]
+     }
+ }
+</code></pre>
+</li>
+</ol>
+<p>Next we need to add a configurations section to the serve section</p>
+<ol>
+<li><p>Find the &quot;serve&quot; section within angular.json</p>
+<pre><code class="lang-bash"> angular.json
+</code></pre>
+</li>
+<li><p>Within the configurations for ng serve we need to add a local configuration</p>
+<pre><code class="lang-json"> &quot;configurations&quot;: {
+     &quot;local&quot;:
+      {
+         &quot;browserTarget&quot;: &quot;ngws:build:local&quot;
+     },
+ }
 </code></pre>
 </li>
 </ol>
@@ -2660,8 +2823,8 @@ canActivate: [IsLoggedInGuard]
 <p>If you want to run the local configuration we need to pass in the environment command line argument.  The environment argument value is the name of the environment name in the angular-cli.json file.  Note that you can only have 1 ng serve running at a time.</p>
 <ol>
 <li>Go to the terminal that is running <code>ng serve</code> and do a ctrol+c to stop it</li>
-<li><p>Run the <code>ng serve</code> command with the -e and specify the local environment</p>
-<pre><code class="lang-bash"> ng serve -e local
+<li><p>Run the <code>ng serve</code> command with the --configuration and specify the local environment</p>
+<pre><code class="lang-bash"> ng serve --configuration local
 </code></pre>
 </li>
 <li><p>If the Angular compile was successful, you will now be using the local environment configuration. Since our API urls are the same between files you will not see any difference at this time.  In the Header and Footer chapter we will add a footer that displays the environment name.</p>
@@ -3620,7 +3783,7 @@ Note that this will remove the dist directory before build.
     <b>Exercise</b>: Setting Cookie
 </h4>
 
-<p>In the auth.service.ts file, we need to change the return type for login, signup, isAuthenticated, to type `<Boolean | User></p>
+<p>In the auth.service.ts file, we need to change the return type for login, signup, isAuthenticated, to type <code>&lt;Boolean | User&gt;</code></p>
 <ol>
 <li><p>Change the return type of the methods to be either Boolean or User.</p>
 <pre><code class="lang-TypeScript"> &lt;Boolean | User&gt;
