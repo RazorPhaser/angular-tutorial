@@ -505,6 +505,75 @@ You can also add a border around the Bootstrap form-group for the item form fiel
 
 <div class="exercise-end"></div>
 
+### Other Validation Options
+
+Just like template forms, reactive forms also fires the validation immediately.  Starting with Angular 5, you can now set the validation to happen on blur (the form field loses focus) or when you submit the form.
+
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnBlur valiation (OPTIONAL)
+</h4>
+
+If you want to enable onblur validation run through this section.
+
+1. Open the src\app\todo\todo.component.ts file
+
+    ```bash
+    todo.component.ts
+    ```
+
+1. Right now there is a bug in Angular that prevents us from using a FormBuilder with the updateOn options.  Instead we need to change the FormBuild to be a new FormGroup.  Replace the existing addForm definition with the following
+
+    ```typescript
+    this.addForm = new FormGroup({
+      item: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    }, { updateOn: 'blur' });
+    ```
+
+1. On the Add button, you will want to remove the disabled check since there will be no validation for the item field until you go to the next field which would be the add button
+
+1. You will also want to add a check around the existing code within the save method to make sure that the addForm is valid.
+
+    ```typescript
+    if (this.addForm.valid) {
+    }
+    ```
+
+1. Now the validation will only happen when you go to the next form field which is the add button
+
+<div class="exercise-end"></div>
+
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnSubmit valiation (OPTIONAL)
+</h4>
+
+If you want to enable onsubmit validation run through this section.
+
+1. Open the src\app\todo\todo.component.ts file
+
+    ```bash
+    todo.component.ts
+    ```
+
+1. Right now there is a bug in Angular that prevents us from using a FormBuilder with the updateOn options.  Instead we need to change the FormBuild to be a new FormGroup.  Replace the existing addForm definition with the following
+
+    ```typescript
+    this.addForm = new FormGroup({
+      item: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    }, { updateOn: 'submit' });
+    ```
+
+1. On the Add button, you will want to remove the disabled check since there will be no validation for the item field until you go to the next field which would be the add button
+
+1. You will also want to add a check around the existing code within the save method to make sure that the addForm is valid.
+
+    ```typescript
+    if (this.addForm.valid) {
+    }
+    ```
+1. Now the validation will only happen when you go to the next form field which is the add button
+
+<div class="exercise-end"></div>
+
 ### Saving Todo Items
 
 We are at the point, where we are ready to create a service to save the todo item. Right now, we are just output the add form values to the console.

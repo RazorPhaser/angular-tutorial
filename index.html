@@ -1019,6 +1019,50 @@
 </ol>
 <div class="exercise-end"></div>
 
+<h3 id="other-validation-options">Other Validation Options</h3>
+<p>By default the validation happens immediately which causes flashing in the UI sometimes.  Starting with Angular 5, you can now set the validation to happen on blur (the form field loses focus) or when you submit the form.</p>
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnBlur valiation (OPTIONAL)
+</h4>
+
+<p>If you want to enable onblur validation run through this section.</p>
+<ol>
+<li><p>Open the src\app\login\login.component.html file</p>
+<pre><code class="lang-bash"> login.component.html
+</code></pre>
+</li>
+<li><p>On each of the input fields, add the following attribute</p>
+<pre><code class="lang-html"> [ngModelOptions]=&quot;{ updateOn: &#39;blur&#39; }&quot;
+</code></pre>
+</li>
+<li><p>On the login button, you will want to remove the disabled check since there will be no validation for the password field until you go to the next field which would be the login button</p>
+</li>
+<li><p>Now the validation will only happen when you go to the next form field</p>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnSubmit valiation (OPTIONAL)
+</h4>
+
+<p>If you want to enable onsubmit validation run through this section.</p>
+<ol>
+<li><p>Open the src\app\login\login.component.html file</p>
+<pre><code class="lang-bash"> login.component.html
+</code></pre>
+</li>
+<li><p>On the form tag add the following attribute</p>
+<pre><code class="lang-html"> [ngFormOptions]=&quot;{ updateOn: &#39;submit&#39; }&quot;
+</code></pre>
+</li>
+<li><p>On the login button, you will want to remove the disabled check since there will be no validation until they click the button</p>
+</li>
+<li><p>Now the validation will only happen when you submit the form</p>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
 <h3 id="create-create-account-component">Create Create Account Component</h3>
 <p>Up to this point, we have only been able to login to an existing account.  Now we are going to create the signup page.</p>
 <p>Creating the signup component is just like the rest of the component that we have created.  We will have an html, scss, spec, and ts file.  We will have a form that calls to a function in the component that calls to a service to process the data.</p>
@@ -1647,6 +1691,63 @@
 <pre><code class="lang-html"> [ngClass]=&quot;{&#39;is-invalid&#39;: formErrors.item}&quot;
 </code></pre>
 </li>
+</ol>
+<div class="exercise-end"></div>
+
+<h3 id="other-validation-options">Other Validation Options</h3>
+<p>Just like template forms, reactive forms also fires the validation immediately.  Starting with Angular 5, you can now set the validation to happen on blur (the form field loses focus) or when you submit the form.</p>
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnBlur valiation (OPTIONAL)
+</h4>
+
+<p>If you want to enable onblur validation run through this section.</p>
+<ol>
+<li><p>Open the src\app\todo\todo.component.ts file</p>
+<pre><code class="lang-bash"> todo.component.ts
+</code></pre>
+</li>
+<li><p>Right now there is a bug in Angular that prevents us from using a FormBuilder with the updateOn options.  Instead we need to change the FormBuild to be a new FormGroup.  Replace the existing addForm definition with the following</p>
+<pre><code class="lang-typescript"> this.addForm = new FormGroup({
+   item: new FormControl(&#39;&#39;, [Validators.required, Validators.minLength(3)]),
+ }, { updateOn: &#39;blur&#39; });
+</code></pre>
+</li>
+<li><p>On the Add button, you will want to remove the disabled check since there will be no validation for the item field until you go to the next field which would be the add button</p>
+</li>
+<li><p>You will also want to add a check around the existing code within the save method to make sure that the addForm is valid.</p>
+<pre><code class="lang-typescript"> if (this.addForm.valid) {
+ }
+</code></pre>
+</li>
+<li><p>Now the validation will only happen when you go to the next form field which is the add button</p>
+</li>
+</ol>
+<div class="exercise-end"></div>
+
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnSubmit valiation (OPTIONAL)
+</h4>
+
+<p>If you want to enable onsubmit validation run through this section.</p>
+<ol>
+<li><p>Open the src\app\todo\todo.component.ts file</p>
+<pre><code class="lang-bash"> todo.component.ts
+</code></pre>
+</li>
+<li><p>Right now there is a bug in Angular that prevents us from using a FormBuilder with the updateOn options.  Instead we need to change the FormBuild to be a new FormGroup.  Replace the existing addForm definition with the following</p>
+<pre><code class="lang-typescript"> this.addForm = new FormGroup({
+   item: new FormControl(&#39;&#39;, [Validators.required, Validators.minLength(3)]),
+ }, { updateOn: &#39;submit&#39; });
+</code></pre>
+</li>
+<li><p>On the Add button, you will want to remove the disabled check since there will be no validation for the item field until you go to the next field which would be the add button</p>
+</li>
+<li><p>You will also want to add a check around the existing code within the save method to make sure that the addForm is valid.</p>
+<pre><code class="lang-typescript"> if (this.addForm.valid) {
+ }
+</code></pre>
+</li>
+<li>Now the validation will only happen when you go to the next form field which is the add button</li>
 </ol>
 <div class="exercise-end"></div>
 

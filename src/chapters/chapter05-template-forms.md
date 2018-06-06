@@ -595,6 +595,57 @@ The last thing we want to do is to disable the login button until the form is va
 
 <div class="exercise-end"></div>
 
+### Other Validation Options
+
+By default the validation happens immediately which causes flashing in the UI sometimes.  Starting with Angular 5, you can now set the validation to happen on blur (the form field loses focus) or when you submit the form.
+
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnBlur valiation (OPTIONAL)
+</h4>
+
+If you want to enable onblur validation run through this section.
+
+1. Open the src\app\login\login.component.html file
+
+    ```bash
+    login.component.html
+    ```
+
+1. On each of the input fields, add the following attribute
+
+    ```html
+    [ngModelOptions]="{ updateOn: 'blur' }"
+    ```
+1. On the login button, you will want to remove the disabled check since there will be no validation for the password field until you go to the next field which would be the login button
+
+1. Now the validation will only happen when you go to the next form field
+
+<div class="exercise-end"></div>
+
+<h4 class="exercise-start">
+    <b>Exercise</b>: OnSubmit valiation (OPTIONAL)
+</h4>
+
+If you want to enable onsubmit validation run through this section.
+
+1. Open the src\app\login\login.component.html file
+
+    ```bash
+    login.component.html
+    ```
+
+1. On the form tag add the following attribute
+
+    ```html
+    [ngFormOptions]="{ updateOn: 'submit' }"
+    ```
+
+1. On the login button, you will want to remove the disabled check since there will be no validation until they click the button
+
+1. Now the validation will only happen when you submit the form
+
+<div class="exercise-end"></div>
+
 ### Create Create Account Component
 
 Up to this point, we have only been able to login to an existing account.  Now we are going to create the signup page.
