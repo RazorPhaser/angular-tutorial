@@ -2344,17 +2344,6 @@
 <li><p>The html for the display of the Todo list should look like the following:</p>
 <pre><code class="lang-html"> &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
      &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;
-         &lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;
-     &lt;/div&gt;
-     &lt;div class=&quot;col-10 done-{{todoItem.completed}}&quot;&gt;
-         {{todoItem.item}} &lt;br /&gt;&lt;small&gt;created: {{todoItem.createdAt | date:&#39;short&#39;}}&lt;/small&gt;
-     &lt;/div&gt;
-     &lt;div class=&quot;col-1&quot; (click)=&quot;deleteTodo(todoItem)&quot;&gt;
-       &lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;
-     &lt;/div&gt;
- &lt;/div&gt;
- &lt;div class=&quot;row todo&quot; *ngFor=&quot;let todoItem of todoList&quot;&gt;
-     &lt;div class=&quot;col-1&quot; (click)=&quot;completeTodo(todoItem)&quot;&gt;
          &lt;fa-icon [icon]=&quot;[&#39;far&#39;, todoItem.completed  ? &#39;check-square&#39; : &#39;square&#39;]&quot;&gt;&lt;/fa-icon&gt;
      &lt;/div&gt;
      &lt;div class=&quot;col-10 done-{{todoItem.completed}}&quot;&gt;
@@ -2366,7 +2355,6 @@
          &lt;fa-icon [icon]=&quot;[&#39;far&#39;, &#39;trash-alt&#39;]&quot;&gt;&lt;/fa-icon&gt;
      &lt;/div&gt;
  &lt;/div&gt;
-
 </code></pre>
 </li>
 <li><p>You can now test the delete functionality. Warning that it will not ask if you want to delete the item. It will just delete it.</p>
