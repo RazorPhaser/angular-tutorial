@@ -535,7 +535,8 @@ If you want to enable onblur validation run through this section.
     import {
         FormGroup,
         FormBuilder,
-        FormControl
+        FormControl,
+        Validators
     }
     from '@angular/forms';
     ```
