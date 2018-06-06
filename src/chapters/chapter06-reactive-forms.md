@@ -529,6 +529,17 @@ If you want to enable onblur validation run through this section.
     }, { updateOn: 'blur' });
     ```
 
+1. You will also need to add the FormControl to the @angular/form import
+
+    ```typescript
+    import {
+        FormGroup,
+        FormBuilder,
+        FormControl
+    }
+    from '@angular/forms';
+    ```
+
 1. On the Add button, you will want to remove the disabled check since there will be no validation for the item field until you go to the next field which would be the add button
 
 1. You will also want to add a check around the existing code within the save method to make sure that the addForm is valid.

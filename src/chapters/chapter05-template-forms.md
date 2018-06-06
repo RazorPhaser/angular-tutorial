@@ -618,6 +618,32 @@ If you want to enable onblur validation run through this section.
     ```
 1. On the login button, you will want to remove the disabled check since there will be no validation for the password field until you go to the next field which would be the login button
 
+1. In the login function, you will want to pass in the loginForm instead of loginForm.value so that you can check if the form is valid or not.
+
+    ```html
+    (ngSubmit)="login(loginForm)"
+    ```
+
+    ```typescript
+    login(formValues: NgForm) {
+        if (formValues.valid) {
+            this.invalidLogin = false;
+            this.authService
+                .login(formValues.value.email, formValues.value.password)
+                .subscribe(result => {
+                    if (!result) {
+                        console.log('login.component user not found');
+                        this.invalidLogin = true;
+                    } else {
+                        console.log('login.component logged in. redirecting to home page');
+                        this.invalidLogin = false;
+                        this.router.navigate(['/']);
+                    }
+                });
+        }
+    }
+    ```
+
 1. Now the validation will only happen when you go to the next form field
 
 <div class="exercise-end"></div>
@@ -641,6 +667,32 @@ If you want to enable onsubmit validation run through this section.
     ```
 
 1. On the login button, you will want to remove the disabled check since there will be no validation until they click the button
+
+1. If you didn't change the ngSubmit to pass in the form above, on ngSubmit you will want to pass in the loginForm instead of loginForm.value so that you can check if the form is valid or not.
+
+    ```html
+    (ngSubmit)="login(loginForm)"
+    ```
+
+    ```typescript
+    login(formValues: NgForm) {
+        if (formValues.valid) {
+            this.invalidLogin = false;
+            this.authService
+                .login(formValues.value.email, formValues.value.password)
+                .subscribe(result => {
+                    if (!result) {
+                        console.log('login.component user not found');
+                        this.invalidLogin = true;
+                    } else {
+                        console.log('login.component logged in. redirecting to home page');
+                        this.invalidLogin = false;
+                        this.router.navigate(['/']);
+                    }
+                });
+        }
+    }
+    ```
 
 1. Now the validation will only happen when you submit the form
 
