@@ -1221,17 +1221,6 @@ The last thing that we need to do is to add the delete icon to the todo list.
     ```html
     <div class="row todo" *ngFor="let todoItem of todoList">
         <div class="col-1" (click)="completeTodo(todoItem)">
-            <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
-        </div>
-        <div class="col-10 done-{{todoItem.completed}}">
-            {{todoItem.item}} <br /><small>created: {{todoItem.createdAt | date:'short'}}</small>
-        </div>
-        <div class="col-1" (click)="deleteTodo(todoItem)">
-          <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
-        </div>
-    </div>
-    <div class="row todo" *ngFor="let todoItem of todoList">
-        <div class="col-1" (click)="completeTodo(todoItem)">
             <fa-icon [icon]="['far', todoItem.completed  ? 'check-square' : 'square']"></fa-icon>
         </div>
         <div class="col-10 done-{{todoItem.completed}}">
@@ -1243,7 +1232,6 @@ The last thing that we need to do is to add the delete icon to the todo list.
             <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
         </div>
     </div>
-
     ```
 
 1. You can now test the delete functionality. Warning that it will not ask if you want to delete the item. It will just delete it.
