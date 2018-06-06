@@ -1305,8 +1305,7 @@ We did a lot in this chapter implementing our Reactive form
 
 1. Created a form using the FormBuilder
 1. Added validation to the FormBuilder
-1. Created a value change observable to set the field validation messages
-1. Added debounce to wait for a second after the user stops typing before checking the field validation
+1. Created a status change observable to set the field validation messages
 1. Show the list of todo list with icons to complete and delete todo items
 1. We used several Angular directives to implement functionality in the UI:
 
